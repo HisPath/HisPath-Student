@@ -1,8 +1,9 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
-import { Box, Button, Container, Typography } from "@mui/material";
-import { Palette } from "@mui/icons-material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
+import userImg from "../../assets/user.png";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const data = {
   name: "김한동",
@@ -12,9 +13,9 @@ const data = {
   major2: "전자",
   grade: 3,
   semester: 6,
-  state: "1", // 1이면 재학, 0이면 휴학
   contact: "010-1234-5678",
   email: "example@handong.ac.kr",
+  // githubid: "https://github.com",
 };
 
 export default function ImageAvatars() {
@@ -22,23 +23,25 @@ export default function ImageAvatars() {
     <Box>
       <Avatar
         alt="K"
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 256, height: 256, mr: 10, mt: 5, mb: 5 }}
+        src={userImg}
+        sx={{ width: 256, height: 256, mr: 10, mt: 5, mb: 0 }}
       />
-      <Box>
+      <Button variant={"outlined"} p={10} sx={{ ml: 23 }}>
+        프로필 수정
+      </Button>
+      <Box sx={{ mt: 3 }}>
         <Typography
           mb={1}
           fontSize={"2.3rem"}
           fontWeight={900}
           fontFamily="Ubuntu"
-          color="#60748b"
-          // color={Palette.primary}
+          color="primary.light"
         >
           {data.name} {data.studentNumber}
         </Typography>
         <Typography mt={1} mb={1} fontSize={"1.3rem"} fontWeight={600}>
           {data.department} {data.grade}학년 {data.semester}학기{" "}
-          {data.state ? "재학" : "휴학"}
+          {/* {data.state ? "재학" : "휴학"} */}
         </Typography>
         <Box display={"flex"} gap={2}>
           <Typography mt={1} mb={1} fontSize={"1.2rem"} fontWeight={400}>
@@ -56,10 +59,21 @@ export default function ImageAvatars() {
         <Typography mt={1} mb={2} fontSize={"1.2rem"} fontWeight={400}>
           {data.email}
         </Typography>
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          component="label"
+        >
+          <GitHubIcon />
+        </IconButton>
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          component="label"
+        >
+          <LaunchIcon />
+        </IconButton>
       </Box>
-      <Button variant={"outlined"} p={10}>
-        프로필 수정
-      </Button>
     </Box>
   );
 }

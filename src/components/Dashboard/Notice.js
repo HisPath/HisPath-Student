@@ -9,9 +9,7 @@ import { Palette } from "@mui/icons-material";
 const style = {
   padding: 2,
   margin: 3,
-  // width: "100%",
-  // height: "100%",
-  maxWidth: 360,
+  maxWidth: "38rem",
   bgcolor: "background.paper",
 };
 
@@ -26,8 +24,8 @@ export default function Notice() {
         marginBottom={1}
         fontFamily="Ubuntu"
         textAlign="center"
-        // color={Palette.primary}
-        color="#60748b"
+        color="primary.light"
+        width="38rem"
       >
         Notice
       </Typography>

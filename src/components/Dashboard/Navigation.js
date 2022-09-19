@@ -4,7 +4,7 @@ import Notice from "./Notice.js";
 
 function Navigation() {
   return (
-    <Box sx={{ display: "flex", mt: 3, ml: "9rem" }}>
+    <Box sx={{ mt: 3, ml: "10rem" }}>
       <Notice />
       <Activity />
     </Box>
