@@ -4,6 +4,9 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import userImg from "../../assets/user.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
+import LinkIcon from "@mui/icons-material/Link";
+import BookIcon from "@mui/icons-material/Book";
+import { Link } from "react-router-dom";
 
 const data = {
   name: "김한동",
@@ -26,9 +29,11 @@ export default function ImageAvatars() {
         src={userImg}
         sx={{ width: 256, height: 256, mr: 10, mt: 5, mb: 0 }}
       />
-      <Button variant={"outlined"} p={10} sx={{ ml: 23 }}>
-        프로필 수정
-      </Button>
+      <Link to={`/edit`} style={{ textDecoration: "none" }}>
+        <Button variant={"outlined"} p={10} sx={{ ml: 23 }}>
+          프로필 수정
+        </Button>
+      </Link>
       <Box sx={{ mt: 3 }}>
         <Typography
           mb={1}
@@ -71,7 +76,7 @@ export default function ImageAvatars() {
           aria-label="upload picture"
           component="label"
         >
-          <LaunchIcon />
+          <LinkIcon />
         </IconButton>
       </Box>
     </Box>
