@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Headers from "./components/Headers";
 import Main from "./pages/Main";
 
 function Router() {
   return (
     <BrowserRouter>
+      <Headers />
       <Routes>
         <Route path="/" element={<Main />} />
       </Routes>
