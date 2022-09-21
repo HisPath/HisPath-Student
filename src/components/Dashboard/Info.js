@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import userImg from "../../assets/user.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import LaunchIcon from "@mui/icons-material/Launch";
+import LinkIcon from "@mui/icons-material/Link";
 
 const data = {
   name: "김한동",
@@ -71,7 +71,7 @@ export default function ImageAvatars() {
           aria-label="upload picture"
           component="label"
         >
-          <LaunchIcon />
+          <LinkIcon />
         </IconButton>
       </Box>
     </Box>
