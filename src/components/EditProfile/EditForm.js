@@ -1,6 +1,6 @@
 import { EventRepeatTwoTone } from "@mui/icons-material";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import LaunchIcon from "@mui/icons-material/Launch";
+import LinkIcon from "@mui/icons-material/Link";
 import {
   Box,
   Button,
@@ -128,7 +128,7 @@ export default function EditForm() {
         </Box>
         {/* blog url textfield */}
         <Box sx={{ display: "flex", alignItems: "flex-end", mt: 2 }}>
-          <LaunchIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
+          <LinkIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
           <TextField
             id="input-with-sx"
             label="Blog Url"
