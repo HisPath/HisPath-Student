@@ -5,11 +5,6 @@ import { PhotoCamera } from "@mui/icons-material";
 export default function Title() {
   return (
     <Box>
-      <Typography
-        sx={{ fontFamily: "Ubuntu", fontSize: "2rem", color: "primary.main" }}
-      >
-        Edit Profile
-      </Typography>
       <Avatar
         alt="K"
         src={userImg}
