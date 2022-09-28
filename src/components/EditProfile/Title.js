@@ -1,5 +1,5 @@
 import userImg from "../../assets/user.png";
-import { Avatar, Box, IconButton, Typography } from "@mui/material";
+import { Avatar, Box, IconButton } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 
 export default function Title() {

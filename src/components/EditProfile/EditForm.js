@@ -46,7 +46,7 @@ export default function EditForm() {
 
   return (
     <>
-      <Box sx={{ mt: 3, ml: 10 }}>
+      <Box sx={{ mt: 3, ml: 5 }}>
         <Typography
           mb={1}
           fontSize={"2.1rem"}
@@ -135,14 +135,6 @@ export default function EditForm() {
             variant="standard"
             sx={{ width: "15.4rem" }}
           />
-        </Box>
-        <Box sx={{ display: "flex" }}>
-          <Button variant={"contained"} p={10} sx={{ ml: 13, mt: 3 }}>
-            프로필 수정
-          </Button>
-          <Button variant={"outlined"} p={10} sx={{ ml: 2, mt: 3 }}>
-            취소
-          </Button>
         </Box>
       </Box>
     </>
