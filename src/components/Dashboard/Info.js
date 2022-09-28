@@ -3,6 +3,9 @@ import Avatar from "@mui/material/Avatar";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import userImg from "../../assets/user.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import LaunchIcon from "@mui/icons-material/Launch";
+import LinkIcon from "@mui/icons-material/Link";
+import BookIcon from "@mui/icons-material/Book";
 import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
 
