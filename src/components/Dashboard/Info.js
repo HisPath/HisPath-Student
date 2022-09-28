@@ -6,6 +6,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import LinkIcon from "@mui/icons-material/Link";
 import BookIcon from "@mui/icons-material/Book";
+import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
 
 const data = {
@@ -27,7 +28,7 @@ export default function ImageAvatars() {
       <Avatar
         alt="K"
         src={userImg}
-        sx={{ width: 256, height: 256, mr: 10, mt: 5, mb: 0 }}
+        sx={{ width: 256, height: 256, mr: 7, mt: 5, mb: 0 }}
       />
       <Link to={`/edit`} style={{ textDecoration: "none" }}>
         <Button variant={"outlined"} p={10} sx={{ ml: 23 }}>

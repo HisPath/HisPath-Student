@@ -4,12 +4,13 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { Box, Typography } from "@mui/material";
-import { Palette } from "@mui/icons-material";
+
+const noticeWidth = "28rem";
 
 const style = {
   padding: 2,
   margin: 3,
-  maxWidth: "38rem",
+  maxWidth: noticeWidth,
   bgcolor: "background.paper",
 };
 
@@ -25,7 +26,7 @@ export default function Notice() {
         fontFamily="Ubuntu"
         textAlign="center"
         color="primary.light"
-        width="38rem"
+        width={noticeWidth}
       >
         Notice
       </Typography>
