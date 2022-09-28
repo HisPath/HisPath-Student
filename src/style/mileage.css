@@ -1,0 +1,50 @@
+.selectBar {
+  display: inline-block;
+}
+
+.tabs {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.outline {
+  width: 97%;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 2px 6px rgb(100 100 100 / 30%);
+}
+
+.header {
+  background: transparent;
+  float: right;
+  margin: 50px 30px;
+}
+
+.selectBar {
+  background: white;
+}
+
+.apply_button {
+  position: fixed !important;
+  bottom: 50px;
+  right: 50px;
+}
+
+.mileageStatus {
+  margin-left: auto;
+  margin-right: 30px;
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.semesterLabel {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.paper {
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
