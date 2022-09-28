@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Box, Button, ButtonGroup, Grid, Typography } from "@mui/material";
-import { Palette } from "@mui/icons-material";
+import { Box, Button, ButtonGroup } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const style = {
   padding: 2,
@@ -11,43 +11,48 @@ const style = {
   bgcolor: "background.paper",
 };
 
-export default function Activity() {
+const btnWidth = "9rem";
+
+export default function Buttons() {
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "space-around",
-        mt: 8,
+        mt: 4,
       }}
     >
       <ButtonGroup
         variant="contained"
         aria-label="outlined primary button group"
       >
-        <Button
-          sx={{
-            fontWeight: "bold",
-            fontFamily: "Ubuntu",
-            width: "12rem",
-            height: "3rem",
-          }}
-        >
-          Activity
-        </Button>
+        <Link to={`/activity`} style={{ textDecoration: "none" }}>
+          <Button
+            sx={{
+              fontWeight: "bold",
+              fontFamily: "Ubuntu",
+              width: btnWidth,
+              height: "3rem",
+            }}
+          >
+            내 활동
+          </Button>
+        </Link>
+
         <Button
           sx={{
             fontWeight: "bold",
             fontFamily: "Ubuntu",
             backgroundColor: "primary.light",
-            width: "12rem",
+            width: btnWidth,
           }}
         >
-          Mileage
+          마일리지
         </Button>
         <Button
-          sx={{ fontWeight: "bold", fontFamily: "Ubuntu", width: "12rem" }}
+          sx={{ fontWeight: "bold", fontFamily: "Ubuntu", width: btnWidth }}
         >
-          Portfolio
+          포트폴리오
         </Button>
       </ButtonGroup>
     </Box>

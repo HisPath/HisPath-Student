@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
-import Activity from "./Activity.js";
+import Buttons from "./Buttons.js";
 import Notice from "./Notice.js";
 
 function Navigation() {
   return (
-    <Box sx={{ mt: 3, ml: "10rem" }}>
+    <Box sx={{ mt: 3 }}>
       <Notice />
-      <Activity />
+      <Buttons />
     </Box>
   );
 }
