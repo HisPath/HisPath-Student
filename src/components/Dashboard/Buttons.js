@@ -38,17 +38,19 @@ export default function Buttons() {
             내 활동
           </Button>
         </Link>
-
-        <Button
-          sx={{
-            fontWeight: "bold",
-            fontFamily: "Ubuntu",
-            backgroundColor: "primary.light",
-            width: btnWidth,
-          }}
-        >
-          마일리지
-        </Button>
+        <Link to={`/mileage`} style={{ textDecoration: "none" }}>
+          <Button
+            sx={{
+              fontWeight: "bold",
+              fontFamily: "Ubuntu",
+              backgroundColor: "primary.light",
+              width: btnWidth,
+              height: "3rem",
+            }}
+          >
+            마일리지
+          </Button>
+        </Link>
         <Button
           sx={{ fontWeight: "bold", fontFamily: "Ubuntu", width: btnWidth }}
         >
