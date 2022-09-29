@@ -8,6 +8,11 @@ export const theme = createTheme({
       light: "#60748b",
       dark: "#092234",
     },
+    secondary: {
+      main: "#3478F6",
+      light: "#78a6ff",
+      dark: "#004dc2",
+    },
     text: {
       primary: "#222222",
       secondary: "#808080",
