@@ -1,5 +1,6 @@
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import {
   Box,
@@ -13,21 +14,75 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  FormControl,
   RadioGroup,
   FormControlLabel,
   Radio,
+  Divider,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function ActivityAdd() {
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
+function TextInput({ name }) {
+  return (
+    <>
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+        <DeleteIcon fontSize="small" />
+      </Box>
 
+      <TextField
+        color="secondary"
+        InputProps={{ disableUnderline: true }}
+        fullWidth
+        hiddenLabel
+        variant="filled"
+        size="small"
+      />
+    </>
+  );
+}
+
+function LinkInput({ name }) {
+  return (
+    <Box display="flex" mt={1} gap={2}>
+      <Box width={160}>
+        <InputLabel>{name}</InputLabel>
+        <TextField
+          color="secondary"
+          InputProps={{ disableUnderline: true }}
+          hiddenLabel
+          variant="filled"
+          size="small"
+        />
+      </Box>
+      <Box width={275}>
+        <Box
+          display={"flex"}
+          justifyContent="space-between"
+          alignItems={"flex-start"}
+        >
+          <InputLabel>URL</InputLabel>
+          <DeleteIcon fontSize="small" />
+        </Box>
+        <TextField
+          color="secondary"
+          InputProps={{ disableUnderline: true }}
+          fullWidth
+          hiddenLabel
+          variant="filled"
+          size="small"
+        />
+      </Box>
+    </Box>
+  );
+}
+
+function ImageInput({ name }) {
   const [newImgFile, setNewImgFile] = useState(null);
   const [newImgDir, setNewImgDir] = useState(null);
-  const [dateState, setDateState] = useState(true);
-  const [open, setOpen] = React.useState(false); // dialog
 
   const onChangeChooseImg = (event) => {
     const fileReader = new FileReader();
@@ -39,6 +94,60 @@ export default function ActivityAdd() {
     if (files) fileReader.readAsDataURL(files[0]);
   };
 
+  return (
+    <>
+      <Box
+        display={"flex"}
+        justifyContent="space-between"
+        alignItems={"flex-end"}
+      >
+        <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+        <DeleteIcon fontSize="small" />
+      </Box>
+
+      <Box display="flex" mt={1}>
+        <Button
+          component="label"
+          color="secondary"
+          variant="contained"
+          sx={{ height: 36.5 }}
+        >
+          파일 선택
+          <input
+            type="file"
+            accept="image/x-png, image/gif, image/jpeg"
+            onChange={onChangeChooseImg}
+            hidden
+          />
+        </Button>
+        {newImgDir ? (
+          <Box
+            ml={2}
+            component="img"
+            alt="newImg"
+            src={typeof newImgDir === "string" ? newImgDir : undefined}
+            sx={{ width: "auto", height: 100 }}
+          />
+        ) : (
+          <Box display="inline" ml={2} mt={0.5}>
+            이미지를 선택하세요
+          </Box>
+        )}
+      </Box>
+    </>
+  );
+}
+
+export default function ActivityAdd() {
+  const [textField, setTextField] = useState([]);
+  // const [imageField, setImageField] = useState([]);
+  const [state, setState] = useState("");
+  const [name, setName] = useState("");
+  const [type, setType] = useState(0);
+
+  const [dateState, setDateState] = useState(true);
+  const [open, setOpen] = React.useState(false); // dialog
+
   // dialog
   const handleClickOpen = () => {
     setOpen(true);
@@ -47,13 +156,24 @@ export default function ActivityAdd() {
   //dialog
   const handleClose = (e) => {
     setOpen(false);
-    setName(e.target.value);
-    setType(e.target.value);
+  };
+
+  const onChangeFieldName = (e) => {
+    setName(e.currentTarget.value);
+  };
+
+  const onChangeType = (e) => {
+    setType(+e.currentTarget.value);
   };
 
   const handleSubmit = (event) => {
-    setName(event.target.name);
-    setType(event.target.type);
+    event.preventDefault();
+    console.log(type);
+    if (type === 0) setTextField((old) => [...old, <TextInput name={name} />]);
+    else if (type === 1)
+      setTextField((old) => [...old, <LinkInput name={name} />]);
+    else if (type === 2)
+      setTextField((old) => [...old, <ImageInput name={name} />]);
   };
 
   return (
@@ -91,95 +211,51 @@ export default function ActivityAdd() {
               />
             </Box>
           </Box>
-          <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
-          <TextField
-            color="secondary"
-            InputProps={{ disableUnderline: true }}
-            fullWidth
-            hiddenLabel
-            variant="filled"
-            size="small"
-          />
-          {dateState && (
-            <Box display="flex" gap={2}>
-              <Box width="50%">
-                <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
-                <TextField
-                  color="secondary"
-                  InputProps={{ disableUnderline: true }}
-                  fullWidth
-                  hiddenLabel
-                  variant="filled"
-                  size="small"
-                  type="date"
-                />
-              </Box>
-              <Box width="50%">
-                <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
-                <TextField
-                  color="secondary"
-                  InputProps={{ disableUnderline: true }}
-                  fullWidth
-                  hiddenLabel
-                  variant="filled"
-                  size="small"
-                  type="date"
-                />
-              </Box>
-            </Box>
-          )}
-
-          <InputLabel sx={{ mt: 1 }}>텍스트1 (option)</InputLabel>
-          <TextField
-            color="secondary"
-            InputProps={{ disableUnderline: true }}
-            fullWidth
-            hiddenLabel
-            variant="filled"
-            size="small"
-          />
-          <InputLabel sx={{ mt: 1 }}>텍스트2 (option)</InputLabel>
-          <TextField
-            color="secondary"
-            InputProps={{ disableUnderline: true }}
-            fullWidth
-            hiddenLabel
-            variant="filled"
-            size="small"
-            // multiline
-          />
-          <InputLabel sx={{ mt: 1 }}>이미지 (option)</InputLabel>
-          <Box display="flex" mt={1}>
-            <Button
-              component="label"
+          <Box maxHeight={450} overflow="auto" pb={1}>
+            <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
+            <TextField
               color="secondary"
-              variant="contained"
-              sx={{ height: 36.5 }}
-            >
-              파일 선택
-              <input
-                type="file"
-                accept="image/x-png, image/gif, image/jpeg"
-                onChange={onChangeChooseImg}
-                hidden
-              />
-            </Button>
-            {newImgDir ? (
-              <Box
-                ml={2}
-                component="img"
-                alt="newImg"
-                src={typeof newImgDir === "string" ? newImgDir : undefined}
-                sx={{ width: "auto", height: 100 }}
-              />
-            ) : (
-              <Box display="inline" ml={2} mt={0.5}>
-                이미지를 선택하세요
+              InputProps={{ disableUnderline: true }}
+              fullWidth
+              hiddenLabel
+              variant="filled"
+              size="small"
+            />
+            {dateState && (
+              <Box display="flex" gap={2}>
+                <Box width="50%">
+                  <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
+                  <TextField
+                    color="secondary"
+                    InputProps={{ disableUnderline: true }}
+                    fullWidth
+                    hiddenLabel
+                    variant="filled"
+                    size="small"
+                    type="date"
+                  />
+                </Box>
+                <Box width="50%">
+                  <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
+                  <TextField
+                    color="secondary"
+                    InputProps={{ disableUnderline: true }}
+                    fullWidth
+                    hiddenLabel
+                    variant="filled"
+                    size="small"
+                    type="date"
+                  />
+                </Box>
               </Box>
             )}
+            {textField.map((item, index) => (
+              <Box key={index}>{item}</Box>
+            ))}
           </Box>
         </Box>
-        <Box display="flex" justifyContent="space-between" mt={3}>
+        <Divider sx={{ mt: "auto" }} />
+        <Box display="flex" justifyContent="space-between" mt={2}>
           <Button color="secondary" sx={{ gap: 1 }} onClick={handleClickOpen}>
             <AddIcon />
             필드 추가
@@ -205,36 +281,36 @@ export default function ActivityAdd() {
                       variant="outlined"
                       size="small"
                       sx={{ width: 240 }}
+                      onChange={onChangeFieldName}
                     />
                   </Box>
                   <Box display={"flex"} alignItems={"center"} sx={{ mt: 2 }}>
                     <Typography sx={{ pr: 2.5, color: "#222222" }} value={type}>
                       필드 유형
                     </Typography>
-                    <FormControl>
-                      <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        defaultValue="text"
-                      >
-                        <FormControlLabel
-                          value="text"
-                          control={<Radio />}
-                          label="텍스트"
-                        />
-                        <FormControlLabel
-                          value="link"
-                          control={<Radio />}
-                          label="링크"
-                        />
-                        <FormControlLabel
-                          value="image"
-                          control={<Radio />}
-                          label="이미지"
-                        />
-                      </RadioGroup>
-                    </FormControl>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                      defaultValue={0}
+                      onChange={onChangeType}
+                    >
+                      <FormControlLabel
+                        value={0}
+                        control={<Radio />}
+                        label="텍스트"
+                      />
+                      <FormControlLabel
+                        value={1}
+                        control={<Radio />}
+                        label="링크"
+                      />
+                      <FormControlLabel
+                        value={2}
+                        control={<Radio />}
+                        label="이미지"
+                      />
+                    </RadioGroup>
                   </Box>
                 </DialogContentText>
               </DialogContent>
