@@ -22,16 +22,20 @@ import {
 import { Link } from "react-router-dom";
 
 function TextInput({ name }) {
+  // const onRemove = (id) => {
+  //   setTextField(users.filter((user) => user.id !== id));
+  // };
+
   return (
-    <>
-      <Box
+    <Box>
+      {/* <Box
         display={"flex"}
         justifyContent={"space-between"}
         alignItems={"center"}
-      >
-        <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
-        <DeleteIcon fontSize="small" />
-      </Box>
+      > */}
+      <InputLabel sx={{ mt: 1, width: 420 }}>{name}</InputLabel>
+      {/* <DeleteIcon fontSize="small" />
+      </Box> */}
 
       <TextField
         color="secondary"
@@ -41,14 +45,14 @@ function TextInput({ name }) {
         variant="filled"
         size="small"
       />
-    </>
+    </Box>
   );
 }
 
 function LinkInput({ name }) {
   return (
     <Box display="flex" mt={1} gap={2}>
-      <Box width={160}>
+      <Box width={150}>
         <InputLabel>{name}</InputLabel>
         <TextField
           color="secondary"
@@ -58,15 +62,8 @@ function LinkInput({ name }) {
           size="small"
         />
       </Box>
-      <Box width={275}>
-        <Box
-          display={"flex"}
-          justifyContent="space-between"
-          alignItems={"flex-start"}
-        >
-          <InputLabel>URL</InputLabel>
-          <DeleteIcon fontSize="small" />
-        </Box>
+      <Box width={260}>
+        <InputLabel>URL</InputLabel>
         <TextField
           color="secondary"
           InputProps={{ disableUnderline: true }}
@@ -96,14 +93,14 @@ function ImageInput({ name }) {
 
   return (
     <>
-      <Box
+      {/* <Box
         display={"flex"}
         justifyContent="space-between"
         alignItems={"flex-end"}
-      >
-        <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
-        <DeleteIcon fontSize="small" />
-      </Box>
+      > */}
+      <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+      {/* <DeleteIcon fontSize="small" /> */}
+      {/* </Box> */}
 
       <Box display="flex" mt={1}>
         <Button
@@ -148,6 +145,11 @@ export default function ActivityAdd() {
   const [dateState, setDateState] = useState(true);
   const [open, setOpen] = React.useState(false); // dialog
 
+  const onRemove = (event) => {
+    console.log(name);
+    setTextField(textField.filter((name) => textField.name !== name));
+  };
+
   // dialog
   const handleClickOpen = () => {
     setOpen(true);
@@ -169,11 +171,42 @@ export default function ActivityAdd() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(type);
-    if (type === 0) setTextField((old) => [...old, <TextInput name={name} />]);
+    if (type === 0)
+      setTextField((old) => [
+        ...old,
+        <Box
+          display={"flex"}
+          justifyContent="space-between"
+          alignItems={"baseline"}
+        >
+          <TextInput name={name} />
+          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+        </Box>,
+      ]);
     else if (type === 1)
-      setTextField((old) => [...old, <LinkInput name={name} />]);
+      setTextField((old) => [
+        ...old,
+        <Box
+          display={"flex"}
+          justifyContent="space-between"
+          alignItems={"baseline"}
+        >
+          <LinkInput name={name} />
+          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+        </Box>,
+      ]);
     else if (type === 2)
-      setTextField((old) => [...old, <ImageInput name={name} />]);
+      setTextField((old) => [
+        ...old,
+        <Box
+          display={"flex"}
+          justifyContent="space-between"
+          alignItems={"baseline"}
+        >
+          <ImageInput name={name} />
+          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+        </Box>,
+      ]);
   };
 
   return (
