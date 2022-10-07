@@ -5,11 +5,13 @@ import Readme from "../components/Dashboard/Readme.js";
 
 function Dashboard() {
   return (
-    <Container sx={{ display: "flex", maxWidth: "xs", ml: 11 }}>
-      <Info />
-      <Readme />
-      <Navigation />
-    </Container>
+    <>
+      <Container sx={{ display: "flex" }}>
+        <Info />
+        <Readme />
+        <Navigation />
+      </Container>
+    </>
   );
 }
 
