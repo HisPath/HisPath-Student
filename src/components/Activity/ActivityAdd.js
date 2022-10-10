@@ -177,7 +177,7 @@ export default function ActivityAdd() {
         <Box
           display={"flex"}
           justifyContent="space-between"
-          alignItems={"baseline"}
+          alignItems={"center"}
         >
           <TextInput name={name} />
           <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
@@ -189,7 +189,7 @@ export default function ActivityAdd() {
         <Box
           display={"flex"}
           justifyContent="space-between"
-          alignItems={"baseline"}
+          alignItems={"center"}
         >
           <LinkInput name={name} />
           <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
@@ -201,7 +201,7 @@ export default function ActivityAdd() {
         <Box
           display={"flex"}
           justifyContent="space-between"
-          alignItems={"baseline"}
+          alignItems={"center"}
         >
           <ImageInput name={name} />
           <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
@@ -291,7 +291,7 @@ export default function ActivityAdd() {
         <Box display="flex" justifyContent="space-between" mt={2}>
           <Button color="secondary" sx={{ gap: 1 }} onClick={handleClickOpen}>
             <AddIcon />
-            필드 추가
+            항목 추가
           </Button>
           <Dialog
             open={open}
@@ -304,7 +304,7 @@ export default function ActivityAdd() {
                 <DialogContentText id="alert-dialog-description">
                   <Box display={"flex"} alignItems={"center"}>
                     <Typography sx={{ pr: 2, color: "#222222" }}>
-                      필드 이름
+                      항목 이름
                     </Typography>
                     <TextField
                       color="secondary"
@@ -319,7 +319,7 @@ export default function ActivityAdd() {
                   </Box>
                   <Box display={"flex"} alignItems={"center"} sx={{ mt: 2 }}>
                     <Typography sx={{ pr: 2.5, color: "#222222" }} value={type}>
-                      필드 유형
+                      항목 유형
                     </Typography>
                     <RadioGroup
                       row
@@ -359,7 +359,7 @@ export default function ActivityAdd() {
                   autoFocus
                   type="submit"
                 >
-                  필드 추가
+                  항목 추가
                 </Button>
               </DialogActions>
             </form>
