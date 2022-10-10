@@ -328,11 +328,10 @@ export default function ActivityAdd() {
                     <TextField
                       color="secondary"
                       InputProps={{ disableUnderline: true }}
-                      fullWidth
                       hiddenLabel
                       variant="outlined"
                       size="small"
-                      sx={{ width: "calc(29vw)" }}
+                      sx={{ width: "calc(20vw)" }}
                       onChange={onChangeFieldName}
                     />
                   </Box>
