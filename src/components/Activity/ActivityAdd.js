@@ -27,16 +27,19 @@ function TextInput({ name }) {
   // };
 
   return (
-    <Box>
-      {/* <Box
-        display={"flex"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-      > */}
-      <InputLabel sx={{ mt: 1, width: 420 }}>{name}</InputLabel>
-      {/* <DeleteIcon fontSize="small" />
-      </Box> */}
-
+    // <Box sx={{ width: "calc(47vw)" }}>
+    //   <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+    //   <TextField
+    //     color="secondary"
+    //     InputProps={{ disableUnderline: true }}
+    //     fullWidth
+    //     hiddenLabel
+    //     variant="filled"
+    //     size="small"
+    //   />
+    // </Box>
+    <Box mt={1} width={"calc(47vw)"}>
+      <InputLabel>{name}</InputLabel>
       <TextField
         color="secondary"
         InputProps={{ disableUnderline: true }}
@@ -51,28 +54,16 @@ function TextInput({ name }) {
 
 function LinkInput({ name }) {
   return (
-    <Box display="flex" mt={1} gap={2}>
-      <Box width={150}>
-        <InputLabel>{name}</InputLabel>
-        <TextField
-          color="secondary"
-          InputProps={{ disableUnderline: true }}
-          hiddenLabel
-          variant="filled"
-          size="small"
-        />
-      </Box>
-      <Box width={260}>
-        <InputLabel>URL</InputLabel>
-        <TextField
-          color="secondary"
-          InputProps={{ disableUnderline: true }}
-          fullWidth
-          hiddenLabel
-          variant="filled"
-          size="small"
-        />
-      </Box>
+    <Box mt={1} width={"calc(47vw)"}>
+      <InputLabel>{name}</InputLabel>
+      <TextField
+        color="secondary"
+        InputProps={{ disableUnderline: true }}
+        fullWidth
+        hiddenLabel
+        variant="filled"
+        size="small"
+      />
     </Box>
   );
 }
@@ -135,6 +126,43 @@ function ImageInput({ name }) {
   );
 }
 
+function DateInput() {
+  const [dateState, setDateState] = useState(true);
+
+  return (
+    <>
+      {dateState && (
+        <Box display="flex" gap={4}>
+          <Box width="calc(20vw)">
+            <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
+            <TextField
+              color="secondary"
+              InputProps={{ disableUnderline: true }}
+              fullWidth
+              hiddenLabel
+              variant="filled"
+              size="small"
+              type="date"
+            />
+          </Box>
+          <Box width="calc(20vw)">
+            <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
+            <TextField
+              color="secondary"
+              InputProps={{ disableUnderline: true }}
+              fullWidth
+              hiddenLabel
+              variant="filled"
+              size="small"
+              type="date"
+            />
+          </Box>
+        </Box>
+      )}
+    </>
+  );
+}
+
 export default function ActivityAdd() {
   const [textField, setTextField] = useState([]);
   // const [imageField, setImageField] = useState([]);
@@ -174,25 +202,25 @@ export default function ActivityAdd() {
     if (type === 0)
       setTextField((old) => [
         ...old,
-        <Box
-          display={"flex"}
-          justifyContent="space-between"
-          alignItems={"center"}
-        >
+        <Box display={"flex"} alignItems={"center"} gap={1}>
           <TextInput name={name} />
-          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
         </Box>,
       ]);
     else if (type === 1)
       setTextField((old) => [
         ...old,
-        <Box
-          display={"flex"}
-          justifyContent="space-between"
-          alignItems={"center"}
-        >
+        <Box display={"flex"} alignItems={"center"} gap={1}>
           <LinkInput name={name} />
-          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
         </Box>,
       ]);
     else if (type === 2)
@@ -205,6 +233,22 @@ export default function ActivityAdd() {
         >
           <ImageInput name={name} />
           <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+        </Box>,
+      ]);
+    else if (type === 3)
+      setTextField((old) => [
+        ...old,
+        <Box
+          display={"flex"}
+          justifyContent="space-between"
+          alignItems={"center"}
+        >
+          <DateInput />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
         </Box>,
       ]);
   };
@@ -220,7 +264,7 @@ export default function ActivityAdd() {
     >
       <Box
         component={Paper}
-        width={500}
+        width={"calc(50vw)"}
         minHeight={600}
         p={3}
         borderRadius={3}
@@ -313,7 +357,7 @@ export default function ActivityAdd() {
                       hiddenLabel
                       variant="outlined"
                       size="small"
-                      sx={{ width: 240 }}
+                      sx={{ width: "calc(29vw)" }}
                       onChange={onChangeFieldName}
                     />
                   </Box>
@@ -342,6 +386,11 @@ export default function ActivityAdd() {
                         value={2}
                         control={<Radio />}
                         label="이미지"
+                      />
+                      <FormControlLabel
+                        value={3}
+                        control={<Radio />}
+                        label="날짜"
                       />
                     </RadioGroup>
                   </Box>
