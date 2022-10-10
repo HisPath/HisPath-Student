@@ -84,43 +84,38 @@ function ImageInput({ name }) {
 
   return (
     <>
-      {/* <Box
-        display={"flex"}
-        justifyContent="space-between"
-        alignItems={"flex-end"}
-      > */}
-      <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
-      {/* <DeleteIcon fontSize="small" /> */}
-      {/* </Box> */}
-
-      <Box display="flex" mt={1}>
-        <Button
-          component="label"
-          color="secondary"
-          variant="contained"
-          sx={{ height: 36.5 }}
-        >
-          파일 선택
-          <input
-            type="file"
-            accept="image/x-png, image/gif, image/jpeg"
-            onChange={onChangeChooseImg}
-            hidden
-          />
-        </Button>
-        {newImgDir ? (
-          <Box
-            ml={2}
-            component="img"
-            alt="newImg"
-            src={typeof newImgDir === "string" ? newImgDir : undefined}
-            sx={{ width: "auto", height: 100 }}
-          />
-        ) : (
-          <Box display="inline" ml={2} mt={0.5}>
-            이미지를 선택하세요
-          </Box>
-        )}
+      <Box display={"flex"} flexDirection={"column"} alignItems={"flex-start"}>
+        <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+        {/* <DeleteIcon fontSize="small" /> */}
+        <Box display="flex" mt={1}>
+          <Button
+            component="label"
+            color="secondary"
+            variant="contained"
+            sx={{ height: 36.5 }}
+          >
+            파일 선택
+            <input
+              type="file"
+              accept="image/x-png, image/gif, image/jpeg"
+              onChange={onChangeChooseImg}
+              hidden
+            />
+          </Button>
+          {newImgDir ? (
+            <Box
+              ml={2}
+              component="img"
+              alt="newImg"
+              src={typeof newImgDir === "string" ? newImgDir : undefined}
+              sx={{ width: "auto", height: 100 }}
+            />
+          ) : (
+            <Box display="inline" ml={2} mt={0.5}>
+              이미지를 선택하세요
+            </Box>
+          )}
+        </Box>
       </Box>
     </>
   );
@@ -226,7 +221,11 @@ export default function ActivityAdd() {
           alignItems={"center"}
         >
           <ImageInput name={name} />
-          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
         </Box>,
       ]);
     else if (type === 3)
