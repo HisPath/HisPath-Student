@@ -127,38 +127,34 @@ function ImageInput({ name }) {
 }
 
 function DateInput() {
-  const [dateState, setDateState] = useState(true);
-
   return (
     <>
-      {dateState && (
-        <Box display="flex" gap={4}>
-          <Box width="calc(20vw)">
-            <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
-            <TextField
-              color="secondary"
-              InputProps={{ disableUnderline: true }}
-              fullWidth
-              hiddenLabel
-              variant="filled"
-              size="small"
-              type="date"
-            />
-          </Box>
-          <Box width="calc(20vw)">
-            <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
-            <TextField
-              color="secondary"
-              InputProps={{ disableUnderline: true }}
-              fullWidth
-              hiddenLabel
-              variant="filled"
-              size="small"
-              type="date"
-            />
-          </Box>
+      <Box display="flex" gap={4}>
+        <Box width="calc(20vw)">
+          <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
+          <TextField
+            color="secondary"
+            InputProps={{ disableUnderline: true }}
+            fullWidth
+            hiddenLabel
+            variant="filled"
+            size="small"
+            type="date"
+          />
         </Box>
-      )}
+        <Box width="calc(20vw)">
+          <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
+          <TextField
+            color="secondary"
+            InputProps={{ disableUnderline: true }}
+            fullWidth
+            hiddenLabel
+            variant="filled"
+            size="small"
+            type="date"
+          />
+        </Box>
+      </Box>
     </>
   );
 }
@@ -169,8 +165,6 @@ export default function ActivityAdd() {
   const [state, setState] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState(0);
-
-  const [dateState, setDateState] = useState(true);
   const [open, setOpen] = React.useState(false); // dialog
 
   const onRemove = (event) => {
@@ -279,14 +273,6 @@ export default function ActivityAdd() {
             <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 3 }}>
               활동 추가
             </Typography>
-            <Box display="flex" alignItems="center">
-              <Typography variant="body2">날짜 입력</Typography>
-              <Switch
-                defaultChecked
-                color="secondary"
-                onClick={() => setDateState((old) => !old)}
-              />
-            </Box>
           </Box>
           <Box maxHeight={450} overflow="auto" pb={1}>
             <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
@@ -298,34 +284,6 @@ export default function ActivityAdd() {
               variant="filled"
               size="small"
             />
-            {dateState && (
-              <Box display="flex" gap={2}>
-                <Box width="50%">
-                  <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
-                  <TextField
-                    color="secondary"
-                    InputProps={{ disableUnderline: true }}
-                    fullWidth
-                    hiddenLabel
-                    variant="filled"
-                    size="small"
-                    type="date"
-                  />
-                </Box>
-                <Box width="50%">
-                  <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
-                  <TextField
-                    color="secondary"
-                    InputProps={{ disableUnderline: true }}
-                    fullWidth
-                    hiddenLabel
-                    variant="filled"
-                    size="small"
-                    type="date"
-                  />
-                </Box>
-              </Box>
-            )}
             {textField.map((item, index) => (
               <Box key={index}>{item}</Box>
             ))}
