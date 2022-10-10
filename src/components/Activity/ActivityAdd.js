@@ -258,7 +258,7 @@ export default function ActivityAdd() {
       <Box
         component={Paper}
         width={"calc(50vw)"}
-        minHeight={600}
+        minHeight={"calc(50vh)"}
         p={3}
         borderRadius={3}
         sx={{
@@ -275,6 +275,24 @@ export default function ActivityAdd() {
           </Box>
           <Box maxHeight={450} overflow="auto" pb={1}>
             <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
+            <TextField
+              color="secondary"
+              InputProps={{ disableUnderline: true }}
+              fullWidth
+              hiddenLabel
+              variant="filled"
+              size="small"
+            />
+            <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
+            <TextField
+              color="secondary"
+              InputProps={{ disableUnderline: true }}
+              fullWidth
+              hiddenLabel
+              variant="filled"
+              size="small"
+            />
+            <InputLabel sx={{ mt: 1 }}>비고</InputLabel>
             <TextField
               color="secondary"
               InputProps={{ disableUnderline: true }}
