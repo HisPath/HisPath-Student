@@ -133,7 +133,7 @@ const ChartTab = () => {
         <Typography
           style={{
             background: "rgb(238,242,245)",
-            padding: "8px 0 0 calc(9.8vw)",
+            padding: "14px 0 14px calc(9vw)",
             fontSize: "1.4rem",
             fontWeight: "bold",
             fontFamily: "ubuntu",
