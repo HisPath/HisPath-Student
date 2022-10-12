@@ -10,8 +10,15 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import RouteIcon from "@mui/icons-material/Route";
+import { Link } from "react-router-dom";
 
-const pages = ["공지", "내 활동", "마일리지", "포트폴리오", "로그아웃"];
+const pages = [
+  { name: "공지", link: "#" },
+  { name: "내 활동", link: "/activity" },
+  { name: "마일리지", link: "/mileage" },
+  { name: "포트폴리오", link: "#" },
+  { name: "로그아웃", link: "#" },
+];
 const settings = ["Logout"];
 
 const Headers = () => {
@@ -85,9 +92,11 @@ const Headers = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <Link to={page.link} style={{ textDecoration: "none" }}>
+                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -113,18 +122,20 @@ const Headers = () => {
           <Box flexGrow={1} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "white",
-                  display: "block",
-                  fontWeight: "bold",
-                }}
-              >
-                {page}
-              </Button>
+              <Link to={page.link} style={{ textDecoration: "none" }}>
+                <Button
+                  key={page.name}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {page.name}
+                </Button>
+              </Link>
             ))}
           </Box>
           {/* <Box flexGrow={0.05} /> header menu와 profile 사이의 여백 */}

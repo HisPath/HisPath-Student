@@ -9,28 +9,28 @@ import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import { TablePagination } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function createData(title, content, remark, start, end, detail) {
+function createData(title, content, remark, semester, detail) {
   return {
     title,
     content,
     remark,
-    start,
-    end,
+    semester,
     detail,
   };
 }
 
 const rows = [
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
-  createData("Bizflow M Contest", "최우수상", "수상", "2022.11.22", "-", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
+  createData("Bizflow M Contest", "최우수상", "수상", "2022-2", ""),
 ];
 
 export default function ActivityList() {
@@ -50,15 +50,13 @@ export default function ActivityList() {
     <>
       {/* <Paper sx={{ width: "100%", mb: 2, mt: 3 }}> */}
       <TableContainer>
-        <Table sx={{ minWidth: 750 }} aria-label="tableTitle">
+        <Table sx={{ minWidth: 650 }} aria-label="tableTitle">
           <TableHead>
             <TableRow>
+              <TableCell>학기</TableCell>
               <TableCell>제목</TableCell>
               <TableCell align="right">내용</TableCell>
               <TableCell align="right">비고</TableCell>
-              <TableCell align="right">시작일</TableCell>
-              <TableCell align="right">종료일</TableCell>
-              <TableCell align="right">자세히보기</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -69,26 +67,17 @@ export default function ActivityList() {
                   key={row.title}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
+                  <TableCell>{row.semester}</TableCell>
                   <TableCell component="th" scope="row">
-                    {row.title}
+                    <Link
+                      to={`/activity/detail`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      {row.title}
+                    </Link>
                   </TableCell>
                   <TableCell align="right">{row.content}</TableCell>
                   <TableCell align="right">{row.remark}</TableCell>
-                  <TableCell align="right">{row.start}</TableCell>
-                  <TableCell align="right">{row.end}</TableCell>
-                  <TableCell align="right">
-                    <Link
-                      to={`/activity/detail`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <OpenInFullIcon
-                        style={{
-                          color: "rgba(0, 0, 0, 0.54)",
-                          fontSize: "small",
-                        }}
-                      />
-                    </Link>
-                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
