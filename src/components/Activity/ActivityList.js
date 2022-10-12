@@ -50,7 +50,7 @@ export default function ActivityList() {
     <>
       {/* <Paper sx={{ width: "100%", mb: 2, mt: 3 }}> */}
       <TableContainer>
-        <Table sx={{ minWidth: 750 }} aria-label="tableTitle">
+        <Table sx={{ minWidth: 650 }} aria-label="tableTitle">
           <TableHead>
             <TableRow>
               <TableCell>제목</TableCell>
