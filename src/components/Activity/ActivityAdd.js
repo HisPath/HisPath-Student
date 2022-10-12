@@ -27,16 +27,19 @@ function TextInput({ name }) {
   // };
 
   return (
-    <Box>
-      {/* <Box
-        display={"flex"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-      > */}
-      <InputLabel sx={{ mt: 1, width: 420 }}>{name}</InputLabel>
-      {/* <DeleteIcon fontSize="small" />
-      </Box> */}
-
+    // <Box sx={{ width: "calc(47vw)" }}>
+    //   <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+    //   <TextField
+    //     color="secondary"
+    //     InputProps={{ disableUnderline: true }}
+    //     fullWidth
+    //     hiddenLabel
+    //     variant="filled"
+    //     size="small"
+    //   />
+    // </Box>
+    <Box mt={1} width={"calc(47vw)"}>
+      <InputLabel>{name}</InputLabel>
       <TextField
         color="secondary"
         InputProps={{ disableUnderline: true }}
@@ -51,28 +54,16 @@ function TextInput({ name }) {
 
 function LinkInput({ name }) {
   return (
-    <Box display="flex" mt={1} gap={2}>
-      <Box width={150}>
-        <InputLabel>{name}</InputLabel>
-        <TextField
-          color="secondary"
-          InputProps={{ disableUnderline: true }}
-          hiddenLabel
-          variant="filled"
-          size="small"
-        />
-      </Box>
-      <Box width={260}>
-        <InputLabel>URL</InputLabel>
-        <TextField
-          color="secondary"
-          InputProps={{ disableUnderline: true }}
-          fullWidth
-          hiddenLabel
-          variant="filled"
-          size="small"
-        />
-      </Box>
+    <Box mt={1} width={"calc(47vw)"}>
+      <InputLabel>{name}</InputLabel>
+      <TextField
+        color="secondary"
+        InputProps={{ disableUnderline: true }}
+        fullWidth
+        hiddenLabel
+        variant="filled"
+        size="small"
+      />
     </Box>
   );
 }
@@ -93,43 +84,71 @@ function ImageInput({ name }) {
 
   return (
     <>
-      {/* <Box
-        display={"flex"}
-        justifyContent="space-between"
-        alignItems={"flex-end"}
-      > */}
-      <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
-      {/* <DeleteIcon fontSize="small" /> */}
-      {/* </Box> */}
+      <Box display={"flex"} flexDirection={"column"} alignItems={"flex-start"}>
+        <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+        {/* <DeleteIcon fontSize="small" /> */}
+        <Box display="flex" mt={1}>
+          <Button
+            component="label"
+            color="secondary"
+            variant="contained"
+            sx={{ height: 36.5 }}
+          >
+            파일 선택
+            <input
+              type="file"
+              accept="image/x-png, image/gif, image/jpeg"
+              onChange={onChangeChooseImg}
+              hidden
+            />
+          </Button>
+          {newImgDir ? (
+            <Box
+              ml={2}
+              component="img"
+              alt="newImg"
+              src={typeof newImgDir === "string" ? newImgDir : undefined}
+              sx={{ width: "auto", height: 100 }}
+            />
+          ) : (
+            <Box display="inline" ml={2} mt={0.5}>
+              이미지를 선택하세요
+            </Box>
+          )}
+        </Box>
+      </Box>
+    </>
+  );
+}
 
-      <Box display="flex" mt={1}>
-        <Button
-          component="label"
-          color="secondary"
-          variant="contained"
-          sx={{ height: 36.5 }}
-        >
-          파일 선택
-          <input
-            type="file"
-            accept="image/x-png, image/gif, image/jpeg"
-            onChange={onChangeChooseImg}
-            hidden
+function DateInput() {
+  return (
+    <>
+      <Box display="flex" gap={4}>
+        <Box width="calc(20vw)">
+          <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
+          <TextField
+            color="secondary"
+            InputProps={{ disableUnderline: true }}
+            fullWidth
+            hiddenLabel
+            variant="filled"
+            size="small"
+            type="date"
           />
-        </Button>
-        {newImgDir ? (
-          <Box
-            ml={2}
-            component="img"
-            alt="newImg"
-            src={typeof newImgDir === "string" ? newImgDir : undefined}
-            sx={{ width: "auto", height: 100 }}
+        </Box>
+        <Box width="calc(20vw)">
+          <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
+          <TextField
+            color="secondary"
+            InputProps={{ disableUnderline: true }}
+            fullWidth
+            hiddenLabel
+            variant="filled"
+            size="small"
+            type="date"
           />
-        ) : (
-          <Box display="inline" ml={2} mt={0.5}>
-            이미지를 선택하세요
-          </Box>
-        )}
+        </Box>
       </Box>
     </>
   );
@@ -141,8 +160,6 @@ export default function ActivityAdd() {
   const [state, setState] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState(0);
-
-  const [dateState, setDateState] = useState(true);
   const [open, setOpen] = React.useState(false); // dialog
 
   const onRemove = (event) => {
@@ -174,25 +191,25 @@ export default function ActivityAdd() {
     if (type === 0)
       setTextField((old) => [
         ...old,
-        <Box
-          display={"flex"}
-          justifyContent="space-between"
-          alignItems={"center"}
-        >
+        <Box display={"flex"} alignItems={"center"} gap={1}>
           <TextInput name={name} />
-          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
         </Box>,
       ]);
     else if (type === 1)
       setTextField((old) => [
         ...old,
-        <Box
-          display={"flex"}
-          justifyContent="space-between"
-          alignItems={"center"}
-        >
+        <Box display={"flex"} alignItems={"center"} gap={1}>
           <LinkInput name={name} />
-          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
         </Box>,
       ]);
     else if (type === 2)
@@ -204,7 +221,27 @@ export default function ActivityAdd() {
           alignItems={"center"}
         >
           <ImageInput name={name} />
-          <DeleteIcon fontSize="small" onClick={() => onRemove(name)} />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
+        </Box>,
+      ]);
+    else if (type === 3)
+      setTextField((old) => [
+        ...old,
+        <Box
+          display={"flex"}
+          justifyContent="space-between"
+          alignItems={"center"}
+        >
+          <DateInput />
+          <DeleteIcon
+            sx={{ mt: 3 }}
+            fontSize="small"
+            onClick={() => onRemove(name)}
+          />
         </Box>,
       ]);
   };
@@ -220,8 +257,8 @@ export default function ActivityAdd() {
     >
       <Box
         component={Paper}
-        width={500}
-        minHeight={600}
+        width={"calc(50vw)"}
+        minHeight={"calc(50vh)"}
         p={3}
         borderRadius={3}
         sx={{
@@ -235,14 +272,6 @@ export default function ActivityAdd() {
             <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 3 }}>
               활동 추가
             </Typography>
-            <Box display="flex" alignItems="center">
-              <Typography variant="body2">날짜 입력</Typography>
-              <Switch
-                defaultChecked
-                color="secondary"
-                onClick={() => setDateState((old) => !old)}
-              />
-            </Box>
           </Box>
           <Box maxHeight={450} overflow="auto" pb={1}>
             <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
@@ -254,34 +283,24 @@ export default function ActivityAdd() {
               variant="filled"
               size="small"
             />
-            {dateState && (
-              <Box display="flex" gap={2}>
-                <Box width="50%">
-                  <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
-                  <TextField
-                    color="secondary"
-                    InputProps={{ disableUnderline: true }}
-                    fullWidth
-                    hiddenLabel
-                    variant="filled"
-                    size="small"
-                    type="date"
-                  />
-                </Box>
-                <Box width="50%">
-                  <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
-                  <TextField
-                    color="secondary"
-                    InputProps={{ disableUnderline: true }}
-                    fullWidth
-                    hiddenLabel
-                    variant="filled"
-                    size="small"
-                    type="date"
-                  />
-                </Box>
-              </Box>
-            )}
+            <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
+            <TextField
+              color="secondary"
+              InputProps={{ disableUnderline: true }}
+              fullWidth
+              hiddenLabel
+              variant="filled"
+              size="small"
+            />
+            <InputLabel sx={{ mt: 1 }}>비고</InputLabel>
+            <TextField
+              color="secondary"
+              InputProps={{ disableUnderline: true }}
+              fullWidth
+              hiddenLabel
+              variant="filled"
+              size="small"
+            />
             {textField.map((item, index) => (
               <Box key={index}>{item}</Box>
             ))}
@@ -309,11 +328,10 @@ export default function ActivityAdd() {
                     <TextField
                       color="secondary"
                       InputProps={{ disableUnderline: true }}
-                      fullWidth
                       hiddenLabel
                       variant="outlined"
                       size="small"
-                      sx={{ width: 240 }}
+                      sx={{ width: "calc(20vw)" }}
                       onChange={onChangeFieldName}
                     />
                   </Box>
@@ -342,6 +360,11 @@ export default function ActivityAdd() {
                         value={2}
                         control={<Radio />}
                         label="이미지"
+                      />
+                      <FormControlLabel
+                        value={3}
+                        control={<Radio />}
+                        label="날짜"
                       />
                     </RadioGroup>
                   </Box>
