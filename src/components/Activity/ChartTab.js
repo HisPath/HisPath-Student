@@ -128,88 +128,90 @@ const ChartTab = () => {
   });
 
   return (
-    <Box m={3} pb={3} display={"flex"} justifyContent={"space-evenly"}>
-      <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-        <Typography
-          style={{
-            background: "rgb(238,242,245)",
-            padding: "14px 0 14px calc(9vw)",
-            fontSize: "1.4rem",
-            fontWeight: "bold",
-            fontFamily: "ubuntu",
-          }}
-          color="primary"
-        >
-          Activity
-        </Typography>
-        <div
-          style={{
-            background: "rgb(238,242,245)",
-            padding: "20px 10px 21px 10px",
-          }}
-        >
-          <Radar
-            width={180}
-            data={chartDataActivity}
-            options={options}
-            plugins={pligins}
-          />
-        </div>
-      </Paper>
-      <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-        <Typography
-          style={{
-            background: "rgb(238,242,245)",
-            padding: "41px 0 0 calc(8.5vw)",
-            fontSize: "1.4rem",
-            fontWeight: "bold",
-            fontFamily: "ubuntu",
-          }}
-          color="primary"
-        >
-          Language
-        </Typography>
-        <div
-          style={{
-            background: "rgb(238,242,245)",
-            padding: "40px 10px 41px 10px",
-          }}
-        >
-          <Bar
-            width={180}
-            data={chartDataLanguage}
-            options={options}
-            plugins={pligins}
-          />
-        </div>
-      </Paper>
-      <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-        <Typography
-          style={{
-            background: "rgb(238,242,245)",
-            padding: "41px 0 0 calc(8.7vw)",
-            fontSize: "1.4rem",
-            fontWeight: "bold",
-            fontFamily: "ubuntu",
-          }}
-          color="primary"
-        >
-          Mileage
-        </Typography>
-        <div
-          style={{
-            background: "rgb(238,242,245)",
-            padding: "40px 10px 41px 10px",
-          }}
-        >
-          <Line
-            width={180}
-            data={chartDataMileage}
-            options={options}
-            plugins={pligins}
-          />
-        </div>
-      </Paper>
+    <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
+      <Box m={3} pb={3} display={"flex"}>
+        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+          <Typography
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "20px 0 8px calc(9vw)",
+              fontSize: "1.4rem",
+              fontWeight: "bold",
+              fontFamily: "ubuntu",
+            }}
+            color="primary"
+          >
+            Activity
+          </Typography>
+          <div
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "20px 10px 21px 10px",
+            }}
+          >
+            <Radar
+              width={180}
+              data={chartDataActivity}
+              options={options}
+              plugins={pligins}
+            />
+          </div>
+        </Paper>
+        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+          <Typography
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "41px 0 0 calc(8.5vw)",
+              fontSize: "1.4rem",
+              fontWeight: "bold",
+              fontFamily: "ubuntu",
+            }}
+            color="primary"
+          >
+            Language
+          </Typography>
+          <div
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "40px 10px 41px 10px",
+            }}
+          >
+            <Bar
+              width={180}
+              data={chartDataLanguage}
+              options={options}
+              plugins={pligins}
+            />
+          </div>
+        </Paper>
+        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+          <Typography
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "41px 0 0 calc(8.7vw)",
+              fontSize: "1.4rem",
+              fontWeight: "bold",
+              fontFamily: "ubuntu",
+            }}
+            color="primary"
+          >
+            Mileage
+          </Typography>
+          <div
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "40px 10px 41px 10px",
+            }}
+          >
+            <Line
+              width={180}
+              data={chartDataMileage}
+              options={options}
+              plugins={pligins}
+            />
+          </div>
+        </Paper>
+      </Box>
     </Box>
   );
 };
