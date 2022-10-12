@@ -129,12 +129,12 @@ const ChartTab = () => {
 
   return (
     <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
-      <Box m={3} pb={3} display={"flex"}>
+      <Box m={3} pb={3} display={"flex"} justifyContent={"space-evenly"}>
         <Paper sx={{ width: "calc(30vw)", m: 2 }}>
           <Typography
             style={{
               background: "rgb(238,242,245)",
-              padding: "20px 0 8px calc(9vw)",
+              padding: "20px 0 8px calc(12vw)",
               fontSize: "1.4rem",
               fontWeight: "bold",
               fontFamily: "ubuntu",
@@ -161,7 +161,7 @@ const ChartTab = () => {
           <Typography
             style={{
               background: "rgb(238,242,245)",
-              padding: "41px 0 0 calc(8.5vw)",
+              padding: "41px 0 0 calc(11vw)",
               fontSize: "1.4rem",
               fontWeight: "bold",
               fontFamily: "ubuntu",
@@ -184,7 +184,7 @@ const ChartTab = () => {
             />
           </div>
         </Paper>
-        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+        {/* <Paper sx={{ width: "calc(30vw)", m: 2 }}>
           <Typography
             style={{
               background: "rgb(238,242,245)",
@@ -210,7 +210,7 @@ const ChartTab = () => {
               plugins={pligins}
             />
           </div>
-        </Paper>
+        </Paper> */}
       </Box>
     </Box>
   );
