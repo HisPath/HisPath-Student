@@ -7,6 +7,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const drawerWidth = 240;
 const style = {
@@ -16,13 +17,13 @@ const style = {
 
 export default function TagMenu() {
   return (
-    <Box sx={{ display: "flex", zIndex: -1 }}>
+    <Box sx={{ display: "flex" }}>
       <Drawer
         sx={{
-          // zIndex: -1,
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
+            position: "relative",
             width: drawerWidth,
             boxSizing: "border-box",
           },
@@ -30,7 +31,9 @@ export default function TagMenu() {
         variant="permanent"
         anchor="left"
       >
-        <List sx={{ pt: "calc(11vh)" }}>
+        <List
+        // sx={{ pt: "calc(11vh)" }}
+        >
           {[
             "# 마일리지",
             "# 수상",
