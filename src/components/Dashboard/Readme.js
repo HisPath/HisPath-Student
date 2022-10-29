@@ -30,6 +30,7 @@ export default function Readme() {
           borderRadius: "6px",
           padding: 3,
           paddingBottom: 0,
+          width: "calc(25vw)",
         }}
       >
         <Typography
