@@ -4,6 +4,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { Box, Typography } from "@mui/material";
+import axios from "axios";
+import { useEffect } from "react";
 
 const noticeWidth = "28rem";
 
@@ -15,6 +17,17 @@ const style = {
 };
 
 export default function Notice() {
+  const [notices, setNotices] = React.useState([]);
+
+  const getNotices = async () => {
+    const notice = await axios.get("http://localhost:8080/api/notice");
+    setNotices(notice.data);
+  };
+
+  useEffect(() => {
+    getNotices();
+  }, []);
+
   return (
     <Box>
       <Typography
@@ -31,6 +44,13 @@ export default function Notice() {
         Notice
       </Typography>
       <List sx={style} component="nav" aria-label="mailbox folders">
+        {notices.map((notice) => (
+          <ListItem button divider>
+            <ListItemText primary={notice.title} secondary={notice.pubDate} />
+          </ListItem>
+        ))}
+      </List>
+      {/* <List sx={style} component="nav" aria-label="mailbox folders">
         <ListItem button>
           <ListItemText
             primary="[여성공학인재양성] 기자재 공용 사용 안내 (충전드릴, 비트세트)"
@@ -64,7 +84,7 @@ export default function Notice() {
             secondary="2022년 9월 7일"
           />
         </ListItem>
-      </List>
+      </List> */}
     </Box>
   );
 }

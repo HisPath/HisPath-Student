@@ -4,30 +4,39 @@ import {
   Box,
   FormControl,
   InputLabel,
-  MenuItem,
-  Select,
+  NativeSelect,
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React from "react";
-
-const data = {
-  name: "김한동",
-  studentNumber: 22000000,
-  department: "전산전자공학부",
-  major1: "전산",
-  major2: "전자",
-  grade: 3,
-  semester: 6,
-  contact: "010-1234-5678",
-  email: "example@handong.ac.kr",
-  // githubid: "https://github.com",
-};
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 export default function EditForm() {
-  const [major1, setMajor1] = React.useState("전산");
-  const [major2, setMajor2] = React.useState("전자");
-  const [contact, setContact] = React.useState("010-1234-5678");
+  const [info, setInfo] = React.useState([]);
+  const [departments, setDepartments] = React.useState([]);
+
+  const getInfo = async () => {
+    const info = await axios.get("http://localhost:8080/api/student/1");
+    setInfo(info.data);
+  };
+
+  const getDepartments = async () => {
+    const department = await axios.get("http://localhost:8080/api/departments");
+    setDepartments(department.data);
+  };
+
+  useEffect(() => {
+    getInfo();
+    getDepartments();
+  }, []);
+
+  const [major1, setMajor1] = React.useState(info.major1);
+  const [major2, setMajor2] = React.useState(info.major2);
+  const [contact, setContact] = React.useState();
+  const [github, setGithub] = React.useState();
+  const [blog, setBlog] = React.useState();
 
   const handleChangeOne = (event) => {
     setMajor1(event.target.value);
@@ -41,6 +50,14 @@ export default function EditForm() {
     setContact(event.target.value);
   };
 
+  const changeGithub = (event) => {
+    setGithub(event.target.value);
+  };
+
+  const changeBlog = (event) => {
+    setBlog(event.target.value);
+  };
+
   return (
     <>
       <Box sx={{ mt: 3, ml: 5 }}>
@@ -51,86 +68,73 @@ export default function EditForm() {
           fontFamily="Ubuntu"
           color="primary.light"
         >
-          {data.name} {data.studentNumber}
+          {info.name} {info.studentNum}
         </Typography>
         <Typography mt={1} mb={1} fontSize={"1.3rem"} fontWeight={600}>
-          {data.department} {data.grade}학년 {data.semester}학기{" "}
-          {/* {data.state ? "재학" : "휴학"} */}
+          {info.departmentName} {Math.floor(info.semester / 2)}학년{" "}
+          {info.semester}학기
         </Typography>
-        {/* email */}
         <Typography mt={2} mb={2} fontSize={"1.2rem"} fontWeight={400}>
-          {data.email}
+          {info.email}
         </Typography>
         <Box display={"flex"} gap={2}>
-          {/* 1 전공 */}
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">
+            <InputLabel id="demo-simple-select-standard-label" shrink={true}>
               1 전공
             </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={major1}
-              onChange={handleChangeOne}
-              label="Age"
-            >
-              <MenuItem value={"전산"}>전산</MenuItem>
-              <MenuItem value={"전자"}>전자</MenuItem>
-              <MenuItem value={"컴퓨터공학심화"}>컴퓨터공학심화</MenuItem>
-              <MenuItem value={"전자공학심화"}>전자공학심화</MenuItem>
-              <MenuItem value={"ICT"}>ICT</MenuItem>
-            </Select>
+            <NativeSelect defaultValue={info.major1} onChange={handleChangeOne}>
+              {departments.map((department) => (
+                <option value={department.name}>{department.name}</option>
+              ))}
+            </NativeSelect>
           </FormControl>
-          {/* 2 전공 */}
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">
+            <InputLabel id="demo-simple-select-standard-label" shrink={true}>
               2 전공
             </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={major2}
-              onChange={handleChangeTwo}
-              label="Age"
-            >
-              <MenuItem value={"전산"}>전산</MenuItem>
-              <MenuItem value={"전자"}>전자</MenuItem>
-              <MenuItem value={"컴퓨터공학심화"}>컴퓨터공학심화</MenuItem>
-              <MenuItem value={"전자공학심화"}>전자공학심화</MenuItem>
-              <MenuItem value={"ICT"}>ICT</MenuItem>
-            </Select>
+            <NativeSelect defaultValue={info.major2} onChange={handleChangeTwo}>
+              {departments.map((department) => (
+                <option value={department.name}>{department.name}</option>
+              ))}
+            </NativeSelect>
           </FormControl>
         </Box>
 
-        {/* contact */}
         <TextField
           id="standard-multiline-flexible"
           label="Contact"
           multiline
           maxRows={4}
-          value={contact}
+          defaultValue={info.phone}
           onChange={changeContact}
           variant="standard"
           sx={{ m: 1, width: "16.9rem" }}
+          focused
         />
-        {/* github id textfield */}
         <Box sx={{ display: "flex", alignItems: "flex-end" }}>
           <GitHubIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
           <TextField
             id="input-with-sx"
+            multiline
             label="Github Id"
             variant="standard"
+            defaultValue={info.githubId}
             sx={{ width: "15.4rem" }}
+            onChange={changeGithub}
+            focused
           />
         </Box>
-        {/* blog url textfield */}
         <Box sx={{ display: "flex", alignItems: "flex-end", mt: 2 }}>
           <LinkIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
           <TextField
             id="input-with-sx"
+            multiline
             label="Blog Url"
+            defaultValue={info.blog}
+            onChange={changeBlog}
             variant="standard"
             sx={{ width: "15.4rem" }}
+            focused
           />
         </Box>
       </Box>
