@@ -7,6 +7,7 @@ import MileageStudent from "./pages/MileageStudent";
 import ActivityDetail from "./components/Activity/ActivityDetail";
 import ActivityAdd from "./components/Activity/ActivityAdd";
 import ActivityEdit from "./components/Activity/ActivityEdit";
+import Resume from "./pages/Resume";
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
         <Route path="/activity/detail" element={<ActivityDetail />} />
         <Route path="/activity/add" element={<ActivityAdd />} />
         <Route path="/activity/edit" element={<ActivityEdit />} />
+        <Route path="/resume/*" element={<Resume />} />
       </Routes>
     </BrowserRouter>
   );

@@ -16,7 +16,7 @@ const pages = [
   { name: "공지", link: "#" },
   { name: "내 활동", link: "/activity" },
   { name: "마일리지", link: "/mileage" },
-  { name: "포트폴리오", link: "#" },
+  { name: "이력서", link: "/resume" },
   { name: "로그아웃", link: "#" },
 ];
 const settings = ["Logout"];
@@ -92,8 +92,12 @@ const Headers = () => {
               }}
             >
               {pages.map((page) => (
-                <Link to={page.link} style={{ textDecoration: "none" }}>
-                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                <Link
+                  key={page.name}
+                  to={page.link}
+                  style={{ textDecoration: "none" }}
+                >
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.name}</Typography>
                   </MenuItem>
                 </Link>
@@ -122,9 +126,12 @@ const Headers = () => {
           <Box flexGrow={1} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={page.link} style={{ textDecoration: "none" }}>
+              <Link
+                key={page.name}
+                to={page.link}
+                style={{ textDecoration: "none" }}
+              >
                 <Button
-                  key={page.name}
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
