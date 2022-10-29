@@ -5,6 +5,9 @@ import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { Bar } from "react-chartjs-2";
+import axios from "axios";
+import { useEffect } from "react";
+import React from "react";
 
 const options = {
   elements: {
@@ -59,6 +62,18 @@ const pligins = [
 ];
 
 const ChartTab = () => {
+  const [categories, setCategories] = React.useState([]);
+
+  const getCategories = async () => {
+    const category = await axios.get("http://localhost:8080/api/categories");
+    console.log(category.data);
+    setCategories(category.data);
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   const [chartDataActivity, setChartData] = useState({
     labels: [
       "교내 활동",

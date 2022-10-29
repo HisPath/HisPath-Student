@@ -21,7 +21,6 @@ import {
   Alert,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 function TextInput({ name }) {
   return (
@@ -73,6 +72,7 @@ function ImageInput({ name }) {
     <>
       <Box display={"flex"} flexDirection={"column"} alignItems={"flex-start"}>
         <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+        {/* <DeleteIcon fontSize="small" /> */}
         <Box display="flex" mt={1}>
           <Button
             component="label"
@@ -140,7 +140,7 @@ function DateInput() {
   );
 }
 
-export default function ActivityAdd(loadData) {
+export default function AddCert() {
   const [textField, setTextField] = useState([]);
   // const [imageField, setImageField] = useState([]);
   const [state, setState] = useState("");
@@ -251,18 +251,6 @@ export default function ActivityAdd(loadData) {
       ]);
   };
 
-  const onValid = async (data) => {
-    await axios.post(`/api/student-activity/1`, {
-      data: data.data,
-      name: data.name,
-      remark: data.remark,
-      section: data.section,
-      semester: data.semester,
-    });
-    loadData();
-    handleClose();
-  };
-
   return (
     <Box
       sx={{
@@ -287,14 +275,14 @@ export default function ActivityAdd(loadData) {
         <Box>
           <Box display="flex" justifyContent="space-between">
             <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 1 }}>
-              활동 추가
+              자격증 추가
             </Typography>
           </Box>
           <Alert severity="info" sx={{ mb: 1 }}>
-            추가하고 싶은 활동을 자유롭게 기입해주세요!
+            취득 자격증에 대한 정보를 기입해주세요!
           </Alert>
           <Box maxHeight={450} overflow="auto" pb={1}>
-            <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
+            <InputLabel sx={{ mt: 1 }}>자격 및 면허명</InputLabel>
             <TextField
               color="secondary"
               InputProps={{ disableUnderline: true }}
@@ -303,16 +291,19 @@ export default function ActivityAdd(loadData) {
               variant="filled"
               size="small"
             />
-            <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
-            <TextField
-              color="secondary"
-              InputProps={{ disableUnderline: true }}
-              fullWidth
-              hiddenLabel
-              variant="filled"
-              size="small"
-            />
-            <InputLabel sx={{ mt: 1 }}>비고</InputLabel>
+            <Box width="calc(20vw)">
+              <InputLabel sx={{ mt: 1 }}>취득일</InputLabel>
+              <TextField
+                color="secondary"
+                InputProps={{ disableUnderline: true }}
+                fullWidth
+                hiddenLabel
+                variant="filled"
+                size="small"
+                type="date"
+              />
+            </Box>
+            <InputLabel sx={{ mt: 1 }}>인정기관명</InputLabel>
             <TextField
               color="secondary"
               InputProps={{ disableUnderline: true }}
