@@ -20,8 +20,10 @@ export default function Notice() {
   const [notices, setNotices] = React.useState([]);
 
   const getNotices = async () => {
-    const notice = await axios.get("http://localhost:8080/api/notice");
-    setNotices(notice.data);
+    const notice = await axios.get(
+      "http://localhost:8080/api/student/dashboard/1"
+    );
+    setNotices(notice.data.notice);
   };
 
   useEffect(() => {

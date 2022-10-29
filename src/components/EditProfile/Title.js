@@ -4,11 +4,11 @@ import { PhotoCamera } from "@mui/icons-material";
 
 export default function Title() {
   return (
-    <Box>
+    <Box sx={{ width: 1 }}>
       <Avatar
         alt="K"
         src={userImg}
-        sx={{ width: 256, height: 256, mr: 10, mt: 9, mb: 0 }}
+        sx={{ width: 256, height: 256, mt: 9, mb: 0, mr: 0 }}
       />
       <IconButton
         sx={{ ml: 25, mt: -6 }}
