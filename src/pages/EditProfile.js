@@ -40,7 +40,7 @@ export default function EditProfile() {
   useEffect(() => {
     reset(info);
   }, [info]);
-  const onVaild = (data) => {
+  const onValid = (data) => {
     setInfo(data);
     console.log(data);
     updateInfo(data);
@@ -61,7 +61,7 @@ export default function EditProfile() {
       <MdEditor
         register={register}
         handleSubmit={handleSubmit}
-        onVaild={onVaild}
+        onValid={onValid}
       />
     </Container>
   );

@@ -24,14 +24,6 @@ export default function EditForm({ watch, register, majors }) {
     getDepartments();
   }, []);
 
-  const changeGithub = (event) => {
-    setGithub(event.target.value);
-  };
-
-  const changeBlog = (event) => {
-    setBlog(event.target.value);
-  };
-
   return (
     <Box sx={{ mt: 3, width: 1 }}>
       <Box display={"flex"} alignItems="baseline" gap={1}>
@@ -55,7 +47,7 @@ export default function EditForm({ watch, register, majors }) {
         </Typography>
       </Box>
       <Typography mt={1} mb={1} fontSize={"1.5rem"} fontWeight={600}>
-        {watch("studentNum")}{" "}
+        {watch("studentNum")}
       </Typography>
       <Typography mt={2} mb={2} fontSize={"1.2rem"} fontWeight={400}>
         {watch("email")}
@@ -110,7 +102,7 @@ export default function EditForm({ watch, register, majors }) {
           variant="standard"
           sx={{ m: 1, width: 1 }}
           focused
-        />{" "}
+        />
       </Box>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <GitHubIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
@@ -135,7 +127,6 @@ export default function EditForm({ watch, register, majors }) {
           sx={{ width: 1, mr: 1 }}
           focused
         />
-
       </Box>
     </Box>
   );

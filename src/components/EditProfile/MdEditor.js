@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-export default function MdEditor({ register, handleSubmit, onVaild }) {
+export default function MdEditor({ register, handleSubmit, onValid }) {
   return (
     <Box sx={{ mt: 4, maxWidth: "26rem", width: 1 }}>
       <TextField
@@ -20,7 +20,7 @@ export default function MdEditor({ register, handleSubmit, onVaild }) {
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           variant={"contained"}
-          onClick={handleSubmit(onVaild)}
+          onClick={handleSubmit(onValid)}
           p={10}
           sx={{ ml: 13, mt: 3 }}
         >
