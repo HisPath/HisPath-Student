@@ -40,6 +40,7 @@ export default function EditProfile() {
   useEffect(() => {
     reset(info);
   }, [info]);
+
   const onValid = (data) => {
     setInfo(data);
     console.log(data);
