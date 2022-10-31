@@ -7,15 +7,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { TablePagination, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useEffect } from "react";
 import TagIcon from "@mui/icons-material/Tag";
-import { Box, fontWeight } from "@mui/system";
+import { Box } from "@mui/system";
+import { useRecoilValue } from "recoil";
+import { activityState } from "../../store/atom";
 
 export default function ActivityList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
-  const [activities, setActivities] = React.useState([]);
+  const activities = useRecoilValue(activityState);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -26,24 +26,12 @@ export default function ActivityList() {
     setPage(0);
   };
 
-  const getActivities = async () => {
-    const activity = await axios.get(
-      "http://localhost:8080/api/student-activities/1?semester=All"
-    );
-    console.log(activity.data);
-    setActivities(activity.data);
-  };
-
-  useEffect(() => {
-    getActivities();
-  }, []);
-
   return (
     <>
       {/* <Paper sx={{ width: "100%", mb: 2, mt: 3 }}> */}
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="tableTitle">
-          <TableHead sx={{ fontweight: 600 }}>
+          <TableHead sx={{ fontWeight: 600 }}>
             <TableRow>
               <TableCell>
                 <Box display="flex" alignItems={"center"}>
@@ -71,34 +59,36 @@ export default function ActivityList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {activities.map((activity) => (
-              <TableRow
-                key={activity.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell style={{ width: "calc(5vw)" }}>
-                  {activity.section}
-                </TableCell>
-                <TableCell style={{ width: "calc(10vw)" }}>
-                  {activity.semester}
-                </TableCell>
-                <TableCell
-                  component="th"
-                  scope="row"
-                  style={{ width: "calc(35vw)" }}
+            {activities
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((activity) => (
+                <TableRow
+                  key={activity.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <Link
-                    to={`/activity/detail`}
-                    style={{ textDecoration: "none", color: "black" }}
+                  <TableCell style={{ width: "calc(5vw)" }}>
+                    {activity.section}
+                  </TableCell>
+                  <TableCell style={{ width: "calc(10vw)" }}>
+                    {activity.semester}
+                  </TableCell>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    style={{ width: "calc(35vw)" }}
                   >
-                    {activity.name}
-                  </Link>
-                </TableCell>
-                <TableCell align="right" style={{ width: "calc(15vw)" }}>
-                  {activity.remark ? activity.remark : ""}
-                </TableCell>
-              </TableRow>
-            ))}
+                    <Link
+                      to={`/activity/detail`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      {activity.name}
+                    </Link>
+                  </TableCell>
+                  <TableCell align="right" style={{ width: "calc(15vw)" }}>
+                    {activity.remark ? activity.remark : ""}
+                  </TableCell>
+                </TableRow>
+              ))}
             {/* {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
@@ -123,7 +113,7 @@ export default function ActivityList() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[{ rowsPerPage }]}
+        rowsPerPageOptions={rowsPerPage}
         component="div"
         count={activities.length}
         rowsPerPage={rowsPerPage}

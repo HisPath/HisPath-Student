@@ -21,7 +21,7 @@ export default function ActivityDetail() {
   const [activity, setActivity] = React.useState([]);
 
   const getActivity = async () => {
-    const activity = await axios.get("http://localhost:8080/api/activity/3");
+    const activity = await axios.get("http://localhost:8080/api/activity/15");
     console.log(activity.data);
     setActivity(activity.data);
   };
