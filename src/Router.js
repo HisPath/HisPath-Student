@@ -14,6 +14,7 @@ import AddBlog from "./components/Activity/Add/AddBlog";
 import AddIntern from "./components/Activity/Add/AddIntern";
 import AddCert from "./components/Activity/Add/AddCert";
 import AddLang from "./components/Activity/Add/AddLang";
+import Resume from "./pages/Resume";
 
 function Router() {
   return (
@@ -34,6 +35,7 @@ function Router() {
         <Route path="/activity/add/cert" element={<AddCert />} />
         <Route path="/activity/add/lang" element={<AddLang />} />
         <Route path="/activity/edit" element={<ActivityEdit />} />
+        <Route path="/resume/*" element={<Resume />} />
       </Routes>
     </BrowserRouter>
   );
