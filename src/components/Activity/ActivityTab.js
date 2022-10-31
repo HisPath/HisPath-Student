@@ -61,14 +61,14 @@ export default function ActivityTab() {
               aria-label="icon position tabs example"
             >
               <Tab
-                sx={{ minHeight: 3, pt: 1.5 }}
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
                 icon={<ListAltIcon />}
                 iconPosition="start"
                 label="내 활동"
                 {...a11yProps(0)}
               />
               <Tab
-                sx={{ minHeight: 3, pt: 1.5 }}
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
                 icon={<BarChartIcon />}
                 iconPosition="start"
                 label="차트"

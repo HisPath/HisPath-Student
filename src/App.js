@@ -1,4 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { SnackbarProvider } from "notistack";
 import Router from "./Router";
 import { SnackbarProvider } from "notistack";
 import { theme } from "./style/theme";
