@@ -24,14 +24,6 @@ export default function EditForm({ watch, register, majors }) {
     getDepartments();
   }, []);
 
-  const changeGithub = (event) => {
-    setGithub(event.target.value);
-  };
-
-  const changeBlog = (event) => {
-    setBlog(event.target.value);
-  };
-
   return (
     <Box sx={{ mt: 3, width: 1 }}>
       <Box display={"flex"} alignItems="baseline" gap={1}>
@@ -135,7 +127,6 @@ export default function EditForm({ watch, register, majors }) {
           sx={{ width: 1, mr: 1 }}
           focused
         />
-
       </Box>
     </Box>
   );
