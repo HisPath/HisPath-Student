@@ -190,6 +190,7 @@ export default function ActivityAdd({ getActivities }) {
     addActivity(data);
     getActivities();
     handleCloseAdd();
+    window.location.reload();
     enqueueSnackbar("추가되었습니다.", { variant: "success" });
   };
 
