@@ -47,7 +47,7 @@ export default function EditForm({ watch, register, majors }) {
         </Typography>
       </Box>
       <Typography mt={1} mb={1} fontSize={"1.5rem"} fontWeight={600}>
-        {watch("studentNum")}{" "}
+        {watch("studentNum")}
       </Typography>
       <Typography mt={2} mb={2} fontSize={"1.2rem"} fontWeight={400}>
         {watch("email")}
@@ -102,7 +102,7 @@ export default function EditForm({ watch, register, majors }) {
           variant="standard"
           sx={{ m: 1, width: 1 }}
           focused
-        />{" "}
+        />
       </Box>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <GitHubIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />

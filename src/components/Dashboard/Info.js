@@ -90,7 +90,7 @@ export default function Info() {
               color="primary"
               aria-label="upload picture"
               component="a"
-              href={info.blog}
+              href={`${info.blog}`}
               target="_blank"
             >
               <LinkIcon />
