@@ -3,13 +3,25 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useEffect } from "react";
+import axios from "axios";
 
-export default function SemesterSelect() {
+export default function SemesterSelect(props) {
   const [semester, setSemester] = React.useState("");
+  const [test, setTest] = React.useState([]);
 
+  const getSemesters = async () => {
+    const sem = await axios.get("http://localhost:8080/api/semester/1");
+    setTest(sem.data);
+  };
   const handleChange = (event) => {
     setSemester(event.target.value);
+    props.setSemesters(event.target.value);
   };
+  useEffect(() => {
+    getSemesters();
+    props.setSemesters("whole");
+  }, []);
 
   return (
     <FormControl
@@ -28,7 +40,9 @@ export default function SemesterSelect() {
       }}
       size="small"
     >
-      <InputLabel id="demo-select-small">학기</InputLabel>
+      <InputLabel id="demo-select-small" sx={{ paddingTop: 1 }}>
+        학기
+      </InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
@@ -36,14 +50,17 @@ export default function SemesterSelect() {
         label="2022-1학기"
         onChange={handleChange}
       >
-        <MenuItem value="">
-          <em>None</em>
+        <MenuItem value="whole">
+          <em>전기간</em>
         </MenuItem>
-        <MenuItem value={"2020-1"}>2020-1</MenuItem>
+        {test.map((m) => (
+          <MenuItem value={m.semester}>{m.semester}</MenuItem>
+        ))}
+        {/* <MenuItem value={"2020-1"}>2020-1</MenuItem>
         <MenuItem value={"2020-2"}>2020-2</MenuItem>
         <MenuItem value={"2021-1"}>2021-1</MenuItem>
         <MenuItem value={"2021-2"}>2021-2</MenuItem>
-        <MenuItem value={"2022-1"}>2022-1</MenuItem>
+        <MenuItem value={"2022-1"}>2022-1</MenuItem> */}
       </Select>
     </FormControl>
   );
