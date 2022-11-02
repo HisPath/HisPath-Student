@@ -4,136 +4,130 @@ import {
   Box,
   FormControl,
   InputLabel,
-  MenuItem,
-  Select,
+  NativeSelect,
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 
-const data = {
-  name: "김한동",
-  studentNumber: 22000000,
-  department: "전산전자공학부",
-  major1: "전산",
-  major2: "전자",
-  grade: 3,
-  semester: 6,
-  contact: "010-1234-5678",
-  email: "example@handong.ac.kr",
-  // githubid: "https://github.com",
-};
+export default function EditForm({ watch, register, majors }) {
+  const [departments, setDepartments] = React.useState([]);
 
-export default function EditForm() {
-  const [major1, setMajor1] = React.useState("전산");
-  const [major2, setMajor2] = React.useState("전자");
-  const [contact, setContact] = React.useState("010-1234-5678");
-
-  const handleChangeOne = (event) => {
-    setMajor1(event.target.value);
+  const getDepartments = async () => {
+    const department = await axios.get("http://localhost:8080/api/departments");
+    setDepartments(department.data);
   };
 
-  const handleChangeTwo = (event) => {
-    setMajor2(event.target.value);
-  };
-
-  const changeContact = (event) => {
-    setContact(event.target.value);
-  };
+  useEffect(() => {
+    getDepartments();
+  }, []);
 
   return (
-    <>
-      <Box sx={{ mt: 3, ml: 5 }}>
+    <Box sx={{ mt: 3, width: 1 }}>
+      <Box display={"flex"} alignItems="baseline" gap={1}>
         <Typography
-          mb={1}
           fontSize={"2.1rem"}
           fontWeight={900}
           fontFamily="Ubuntu"
-          color="primary.light"
+          color="secondary.dark"
         >
-          {data.name} {data.studentNumber}
+          {watch("name")}
         </Typography>
-        <Typography mt={1} mb={1} fontSize={"1.3rem"} fontWeight={600}>
-          {data.department} {data.grade}학년 {data.semester}학기{" "}
-          {/* {data.state ? "재학" : "휴학"} */}
-        </Typography>
-        {/* email */}
-        <Typography mt={2} mb={2} fontSize={"1.2rem"} fontWeight={400}>
-          {data.email}
-        </Typography>
-        <Box display={"flex"} gap={2}>
-          {/* 1 전공 */}
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">
-              1 전공
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={major1}
-              onChange={handleChangeOne}
-              label="Age"
-            >
-              <MenuItem value={"전산"}>전산</MenuItem>
-              <MenuItem value={"전자"}>전자</MenuItem>
-              <MenuItem value={"컴퓨터공학심화"}>컴퓨터공학심화</MenuItem>
-              <MenuItem value={"전자공학심화"}>전자공학심화</MenuItem>
-              <MenuItem value={"ICT"}>ICT</MenuItem>
-            </Select>
-          </FormControl>
-          {/* 2 전공 */}
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">
-              2 전공
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={major2}
-              onChange={handleChangeTwo}
-              label="Age"
-            >
-              <MenuItem value={"전산"}>전산</MenuItem>
-              <MenuItem value={"전자"}>전자</MenuItem>
-              <MenuItem value={"컴퓨터공학심화"}>컴퓨터공학심화</MenuItem>
-              <MenuItem value={"전자공학심화"}>전자공학심화</MenuItem>
-              <MenuItem value={"ICT"}>ICT</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
 
-        {/* contact */}
+        <Typography
+          mt={1}
+          mb={1}
+          fontSize={"1.3rem"}
+          fontWeight={600}
+          color="secondary.dark"
+        >
+          {Math.floor(watch("semester") / 2)}학년 {watch("semester")}학기
+        </Typography>
+      </Box>
+      <Typography mt={1} mb={1} fontSize={"1.5rem"} fontWeight={600}>
+        {watch("studentNum")}
+      </Typography>
+      <Typography mt={2} mb={2} fontSize={"1.2rem"} fontWeight={400}>
+        {watch("email")}
+      </Typography>
+      <Box m={1}>
+        <FormControl variant="standard" fullWidth>
+          <InputLabel id="demo-simple-select-standard-label" shrink={true}>
+            학부
+          </InputLabel>
+          <NativeSelect {...register("department")}>
+            {departments.map((department, index) => (
+              <option key={index} value={department.name}>
+                {department.name}
+              </option>
+            ))}
+          </NativeSelect>
+        </FormControl>
+      </Box>
+      <Box display={"flex"} gap={2}>
+        <FormControl variant="standard" sx={{ m: 1 }} fullWidth>
+          <InputLabel id="demo-simple-select-standard-label" shrink={true}>
+            1 전공
+          </InputLabel>
+          <NativeSelect {...register("major1Id")}>
+            {majors.map((major, index) => (
+              <option key={index} value={index + 1}>
+                {major.name}
+              </option>
+            ))}
+          </NativeSelect>
+        </FormControl>
+        <FormControl variant="standard" sx={{ m: 1 }} fullWidth>
+          <InputLabel id="demo-simple-select-standard-label" shrink={true}>
+            2 전공
+          </InputLabel>
+          <NativeSelect {...register("major2")}>
+            {majors.map((major, index) => (
+              <option key={index} value={index + 1}>
+                {major.name}
+              </option>
+            ))}
+          </NativeSelect>
+        </FormControl>
+      </Box>
+      <Box display={"flex"}>
         <TextField
           id="standard-multiline-flexible"
           label="Contact"
           multiline
           maxRows={4}
-          value={contact}
-          onChange={changeContact}
+          {...register("phone")}
           variant="standard"
-          sx={{ m: 1, width: "16.9rem" }}
+          sx={{ m: 1, width: 1 }}
+          focused
         />
-        {/* github id textfield */}
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-          <GitHubIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
-          <TextField
-            id="input-with-sx"
-            label="Github Id"
-            variant="standard"
-            sx={{ width: "15.4rem" }}
-          />
-        </Box>
-        {/* blog url textfield */}
-        <Box sx={{ display: "flex", alignItems: "flex-end", mt: 2 }}>
-          <LinkIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
-          <TextField
-            id="input-with-sx"
-            label="Blog Url"
-            variant="standard"
-            sx={{ width: "15.4rem" }}
-          />
-        </Box>
       </Box>
-    </>
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <GitHubIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
+        <TextField
+          id="input-with-sx"
+          multiline
+          label="Github Id"
+          variant="standard"
+          {...register("githubId")}
+          sx={{ width: 1, mr: 1 }}
+          focused
+        />
+      </Box>
+      <Box sx={{ display: "flex", alignItems: "flex-end", mt: 2 }}>
+        <LinkIcon sx={{ color: "primary.main", mr: 1, my: 0.5 }} />
+        <TextField
+          id="input-with-sx"
+          multiline
+          label="Blog Url"
+          {...register("blog")}
+          variant="standard"
+          sx={{ width: 1, mr: 1 }}
+          focused
+        />
+      </Box>
+    </Box>
   );
 }

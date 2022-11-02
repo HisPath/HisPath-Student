@@ -256,7 +256,7 @@ export default function ActivityAdd() {
             </form>
           </Dialog>
           <Box display="flex" gap={1.5}>
-            <Link to={`/activity`} style={{ textDecoration: "none" }}>
+            <Link to={`/activity/detail`} style={{ textDecoration: "none" }}>
               <Button variant="outlined" sx={{ fontWeight: "600" }}>
                 취소
               </Button>

@@ -1,12 +1,18 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Router from "./Router";
+import { SnackbarProvider } from "notistack";
 import { theme } from "./style/theme";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router />
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <CssBaseline />
+        <Router />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

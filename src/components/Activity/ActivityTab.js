@@ -1,4 +1,3 @@
-import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -10,6 +9,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import { Paper } from "@mui/material";
 import ChartTab from "./ChartTab";
 import { Container } from "@mui/system";
+import { useState } from "react";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,7 +41,7 @@ function a11yProps(index) {
 }
 
 export default function ActivityTab() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -61,14 +61,14 @@ export default function ActivityTab() {
               aria-label="icon position tabs example"
             >
               <Tab
-                sx={{ minHeight: 3, pt: 1.5 }}
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
                 icon={<ListAltIcon />}
                 iconPosition="start"
                 label="내 활동"
                 {...a11yProps(0)}
               />
               <Tab
-                sx={{ minHeight: 3, pt: 1.5 }}
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
                 icon={<BarChartIcon />}
                 iconPosition="start"
                 label="차트"

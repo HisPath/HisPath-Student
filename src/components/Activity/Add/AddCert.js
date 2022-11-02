@@ -6,6 +6,8 @@ import {
   Box,
   Button,
   InputLabel,
+  Switch,
+  Paper,
   TextField,
   Typography,
   Dialog,
@@ -22,10 +24,11 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { getSemesters } from "../../api/activity";
-import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
+import { getActivities, getSemesters } from "../../../api/activity";
+import { useSnackbar } from "notistack";
 
 const style = {
   position: "absolute",
@@ -89,6 +92,7 @@ function ImageInput({ name }) {
     <>
       <Box display={"flex"} flexDirection={"column"} alignItems={"flex-start"}>
         <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
+        {/* <DeleteIcon fontSize="small" /> */}
         <Box display="flex" mt={1}>
           <Button
             component="label"
@@ -156,15 +160,15 @@ function DateInput() {
   );
 }
 
-export default function ActivityAdd({ getActivities }) {
+export default function AddCert() {
   const { enqueueSnackbar } = useSnackbar();
   const [textField, setTextField] = useState([]);
-  // const [imageField, setImageField] = useState([]);
   const [state, setState] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState(0);
-  const [open, setOpen] = React.useState(false); // dialog
+  const [open, setOpen] = useState(false); // dialog
   const [semesters, setSemesters] = useState([]);
+  const [json, setJson] = useState("");
 
   useEffect(() => {
     getSemesters().then((data) => {
@@ -181,7 +185,8 @@ export default function ActivityAdd({ getActivities }) {
   const addActivity = async (data) => {
     await axios.post("http://localhost:8080/api/student-activity/1", {
       ...data,
-      section: "기타",
+      section: "자격증",
+      data: json,
     });
   };
 
@@ -190,8 +195,15 @@ export default function ActivityAdd({ getActivities }) {
     addActivity(data);
     getActivities();
     handleCloseAdd();
-    window.location.reload();
     enqueueSnackbar("추가되었습니다.", { variant: "success" });
+  };
+
+  const getDate = (event) => {
+    setJson(JSON.stringify({ date: event.target.value }));
+  };
+
+  const getAgency = (event) => {
+    setJson(JSON.stringify({ agency: event.target.value }));
   };
 
   const onRemove = (id) => {
@@ -301,83 +313,75 @@ export default function ActivityAdd({ getActivities }) {
   const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <Button
-        sx={{
-          backgroundColor: "secondary.main",
-          fontWeight: "600",
-          pl: 3,
-          pr: 3,
-        }}
-        variant="contained"
-        onClick={handleOpenAdd}
-      >
-        활동 추가
-      </Button>
+      <Box>
+        <AddIcon fontSize="sm" color="secondary" onClick={handleOpenAdd} />{" "}
+      </Box>
       <Modal open={openAdd} onClose={handleCloseAdd}>
         <Box sx={style}>
-          <Box display="flex" justifyContent="space-between">
-            <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 1 }}>
-              활동 추가
-            </Typography>
-          </Box>
-          <Alert severity="info" sx={{ mb: 1 }}>
-            추가하고 싶은 활동을 자유롭게 기입해주세요!
-          </Alert>
-          <Box maxHeight={450} overflow="auto" pb={1}>
-            <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
-            <FormControl sx={{ minWidth: 120 }} size="small">
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                {...register("semester", { required: "필수 항목입니다." })}
-                // value={}
-              >
-                {semesters.map((semester) => (
-                  <MenuItem value={semester.semester} key={semester.semester}>
-                    {semester.semester}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
-            <TextField
-              color="secondary"
-              InputProps={{ disableUnderline: true }}
-              fullWidth
-              hiddenLabel
-              variant="filled"
-              {...register("name", {
-                required: "필수 항목입니다.",
-              })}
-              size="small"
-            />
-            <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
-            <TextField
-              color="secondary"
-              InputProps={{ disableUnderline: true }}
-              fullWidth
-              hiddenLabel
-              variant="filled"
-              {...register("data", {
-                required: "필수 항목입니다.",
-              })}
-              size="small"
-            />
-            <InputLabel sx={{ mt: 1 }}>비고</InputLabel>
-            <TextField
-              color="secondary"
-              InputProps={{ disableUnderline: true }}
-              fullWidth
-              hiddenLabel
-              variant="filled"
-              {...register("remark", {
-                required: "필수 항목입니다.",
-              })}
-              size="small"
-            />
-            {textField.map((item) => (
-              <Box key={item.id}>{item.component}</Box>
-            ))}
+          <Box>
+            <Box display="flex" justifyContent="space-between">
+              <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 1 }}>
+                자격증 추가
+              </Typography>
+            </Box>
+            <Alert severity="info" sx={{ mb: 1 }}>
+              취득 자격증에 대한 정보를 기입해주세요!
+            </Alert>
+            <Box maxHeight={450} overflow="auto" pb={1}>
+              <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
+              <FormControl sx={{ minWidth: 120 }} size="small">
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  {...register("semester", { required: "필수 항목입니다." })}
+                  // value={}
+                >
+                  {semesters.map((semester) => (
+                    <MenuItem value={semester.semester} key={semester.semester}>
+                      {semester.semester}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <InputLabel sx={{ mt: 1 }}>자격 및 면허명</InputLabel>
+              <TextField
+                color="secondary"
+                InputProps={{ disableUnderline: true }}
+                fullWidth
+                hiddenLabel
+                variant="filled"
+                size="small"
+                {...register("name", {
+                  required: "필수 항목입니다.",
+                })}
+              />
+              <Box width="calc(20vw)">
+                <InputLabel sx={{ mt: 1 }}>취득일</InputLabel>
+                <TextField
+                  color="secondary"
+                  InputProps={{ disableUnderline: true }}
+                  fullWidth
+                  hiddenLabel
+                  variant="filled"
+                  size="small"
+                  type="date"
+                  onChange={getDate}
+                />
+              </Box>
+              <InputLabel sx={{ mt: 1 }}>인정기관명</InputLabel>
+              <TextField
+                color="secondary"
+                InputProps={{ disableUnderline: true }}
+                fullWidth
+                hiddenLabel
+                variant="filled"
+                size="small"
+                onChange={getAgency}
+              />
+              {textField.map((item) => (
+                <Box key={item.id}>{item.component}</Box>
+              ))}
+            </Box>
           </Box>
           <Divider sx={{ mt: "auto" }} />
           <Box display="flex" justifyContent="space-between" mt={2}>
@@ -385,103 +389,109 @@ export default function ActivityAdd({ getActivities }) {
               <AddIcon />
               항목 추가
             </Button>
-
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <form onSubmit={itemHandleSubmit}>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    <Box display={"flex"} alignItems={"center"}>
+                      <Typography sx={{ pr: 2, color: "#222222" }}>
+                        항목 이름
+                      </Typography>
+                      <TextField
+                        color="secondary"
+                        InputProps={{ disableUnderline: true }}
+                        hiddenLabel
+                        variant="outlined"
+                        size="small"
+                        sx={{ width: "calc(20vw)" }}
+                        onChange={onChangeFieldName}
+                      />
+                    </Box>
+                    <Box display={"flex"} alignItems={"center"} sx={{ mt: 2 }}>
+                      <Typography
+                        sx={{ pr: 2.5, color: "#222222" }}
+                        value={type}
+                      >
+                        항목 유형
+                      </Typography>
+                      <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        defaultValue={0}
+                        onChange={onChangeType}
+                      >
+                        <FormControlLabel
+                          value={0}
+                          control={<Radio />}
+                          label="텍스트"
+                        />
+                        <FormControlLabel
+                          value={1}
+                          control={<Radio />}
+                          label="링크"
+                        />
+                        <FormControlLabel
+                          value={2}
+                          control={<Radio />}
+                          label="이미지"
+                        />
+                        <FormControlLabel
+                          value={3}
+                          control={<Radio />}
+                          label="날짜"
+                        />
+                      </RadioGroup>
+                    </Box>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} sx={{ fontWeight: 600 }}>
+                    취소
+                  </Button>
+                  <Button
+                    onClick={handleClose}
+                    color="secondary"
+                    sx={{ fontWeight: 600 }}
+                    variant={"contained"}
+                    autoFocus
+                    type="submit"
+                  >
+                    항목 추가
+                  </Button>
+                </DialogActions>
+              </form>
+            </Dialog>
             <Box display="flex" gap={1.5}>
-              <Button
-                onClick={handleCloseAdd}
-                color="secondary"
-                variant="outlined"
-                sx={{ fontWeight: "600" }}
-              >
-                취소
-              </Button>
-              <Button
-                color="secondary"
-                variant="contained"
-                sx={{ fontWeight: "600" }}
-                onClick={handleSubmit(onValid)}
-              >
-                추가
-              </Button>
+              <Link to={`/activity`} style={{ textDecoration: "none" }}>
+                <Button
+                  color="secondary"
+                  variant="outlined"
+                  sx={{ fontWeight: "600" }}
+                  onClick={handleCloseAdd}
+                >
+                  취소
+                </Button>
+              </Link>
+              <Link to={`/activity`} style={{ textDecoration: "none" }}>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  sx={{ fontWeight: "600" }}
+                  onClick={handleSubmit(onValid)}
+                >
+                  추가
+                </Button>
+              </Link>
             </Box>
           </Box>
         </Box>
       </Modal>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <form onSubmit={itemHandleSubmit}>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              <Box display={"flex"} alignItems={"center"}>
-                <Typography sx={{ pr: 2, color: "#222222" }}>
-                  항목 이름
-                </Typography>
-                <TextField
-                  color="secondary"
-                  InputProps={{ disableUnderline: true }}
-                  hiddenLabel
-                  variant="outlined"
-                  size="small"
-                  sx={{ width: "calc(20vw)" }}
-                  onChange={onChangeFieldName}
-                />
-              </Box>
-              <Box display={"flex"} alignItems={"center"} sx={{ mt: 2 }}>
-                <Typography sx={{ pr: 2.5, color: "#222222" }} value={type}>
-                  항목 유형
-                </Typography>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  defaultValue={0}
-                  onChange={onChangeType}
-                >
-                  <FormControlLabel
-                    value={0}
-                    control={<Radio />}
-                    label="텍스트"
-                  />
-                  <FormControlLabel
-                    value={1}
-                    control={<Radio />}
-                    label="링크"
-                  />
-                  <FormControlLabel
-                    value={2}
-                    control={<Radio />}
-                    label="이미지"
-                  />
-                  <FormControlLabel
-                    value={3}
-                    control={<Radio />}
-                    label="날짜"
-                  />
-                </RadioGroup>
-              </Box>
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} sx={{ fontWeight: 600 }}>
-              취소
-            </Button>
-            <Button
-              onClick={handleClose}
-              color="secondary"
-              sx={{ fontWeight: 600 }}
-              variant={"contained"}
-              autoFocus
-              type="submit"
-            >
-              항목 추가
-            </Button>
-          </DialogActions>
-        </form>
-      </Dialog>
     </>
   );
 }

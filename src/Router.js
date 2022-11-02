@@ -7,8 +7,14 @@ import MileageStudent from './pages/MileageStudent';
 import ActivityDetail from './components/Activity/ActivityDetail';
 import ActivityAdd from './components/Activity/ActivityAdd';
 import ActivityEdit from './components/Activity/ActivityEdit';
-import Notice from './pages/Notice';
-import Post from './components/Notice/Post';
+import AddPrize from './components/Activity/Add/AddPrize';
+import AddTech from './components/Activity/Add/AddTech';
+import AddEdu from './components/Activity/Add/AddEdu';
+import AddBlog from './components/Activity/Add/AddBlog';
+import AddIntern from './components/Activity/Add/AddIntern';
+import AddCert from './components/Activity/Add/AddCert';
+import AddLang from './components/Activity/Add/AddLang';
+import Resume from './pages/Resume';
 
 function Router() {
   return (
@@ -22,8 +28,16 @@ function Router() {
         <Route path="/mileage" element={<MileageStudent />} />
         <Route path="/activity" element={<Activity />} />
         <Route path="/activity/detail" element={<ActivityDetail />} />
-        <Route path="/activity/add" element={<ActivityAdd />} />
+        <Route path="/activity/add" element={<ActißvityAdd />} />
+        <Route path="/activity/add/prize" element={<AddPrize />} />
+        <Route path="/activity/add/tech" element={<AddTech />} />
+        <Route path="/activity/add/edu" element={<AddEdu />} />
+        <Route path="/activity/add/blog" element={<AddBlog />} />
+        <Route path="/activity/add/intern" element={<AddIntern />} />
+        <Route path="/activity/add/cert" element={<AddCert />} />
+        <Route path="/activity/add/lang" element={<AddLang />} />
         <Route path="/activity/edit" element={<ActivityEdit />} />
+        <Route path="/resume/*" element={<Resume />} />
       </Routes>
     </BrowserRouter>
   );
