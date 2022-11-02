@@ -76,22 +76,26 @@ const ChartTab = () => {
 
   const [chartDataActivity, setChartData] = useState({
     labels: [
-      "교내 활동",
-      ["교외", "활동"],
-      "수상내역",
-      ["또 뭐가", "  있지  "],
+      "마일리지",
+      ["수상"],
+      "기술",
+      "과정",
+      "블로그",
+      "인턴",
+      "자격증",
+      "언어",
     ],
     datasets: [
       {
-        label: "내 활동 평균",
-        data: [1, 4, 5, 2], // 순서대로 교내, 교외, 수상, 또 뭐가 있지
+        label: "내 활동",
+        data: [5, 4, 5, 2, 4, 1, 5, 3],
         backgroundColor: "rgba(142, 202, 206, 0.2)",
         borderColor: "rgb(0, 156, 242)",
         borderWidth: 1.5,
       },
       {
         label: "학년 평균",
-        data: [5, 3, 2, 4],
+        data: [5, 3, 2, 4, 3, 2, 1, 3],
         backgroundColor: "rgba(243, 229, 185, 0.2)",
         borderColor: "rgb(255, 183, 0)",
         borderWidth: 1.5,
@@ -103,13 +107,13 @@ const ChartTab = () => {
     datasets: [
       {
         label: "나의 실력",
-        data: [8, 4, 7], // 순서대로 교내, 교외, 수상, 또 뭐가 있지
+        data: [8, 4, 7],
         backgroundColor: "rgba(142, 202, 206, 0.2)",
         borderColor: "rgb(0, 156, 242)",
         borderWidth: 1.5,
       },
       {
-        label: "학년 평균 실력",
+        label: "학년 평균",
         data: [6, 8, 9],
         backgroundColor: "rgba(243, 229, 185, 0.2)",
         borderColor: "rgb(255, 183, 0)",
