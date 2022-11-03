@@ -25,7 +25,10 @@ function Router() {
         <Route path="/edit" element={<EditProfile />} />
         <Route path="/mileage" element={<MileageStudent />} />
         <Route path="/activity" element={<Activity />} />
-        <Route path="/activity/detail" element={<ActivityDetail />} />
+        <Route
+          path="/activity/detail/:activityId"
+          element={<ActivityDetail />}
+        />
         <Route path="/activity/add" element={<ActivityAdd />} />
         <Route path="/activity/add/prize" element={<AddPrize />} />
         <Route path="/activity/add/tech" element={<AddTech />} />

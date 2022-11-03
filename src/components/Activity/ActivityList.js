@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { TablePagination, Typography } from "@mui/material";
+import { Chip, TablePagination, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import TagIcon from "@mui/icons-material/Tag";
 import { Box } from "@mui/system";
@@ -14,7 +14,7 @@ import { activityState } from "../../store/atom";
 
 export default function ActivityList() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(8);
+  const [rowsPerPage, setRowsPerPage] = React.useState(7);
   const activities = useRecoilValue(activityState);
 
   const handleChangePage = (event, newPage) => {
@@ -26,6 +26,8 @@ export default function ActivityList() {
     setPage(0);
   };
 
+  const lightGray = "#F5F5F5";
+
   return (
     <>
       {/* <Paper sx={{ width: "100%", mb: 2, mt: 3 }}> */}
@@ -33,7 +35,7 @@ export default function ActivityList() {
         <Table sx={{ minWidth: 650 }} aria-label="tableTitle">
           <TableHead sx={{ fontWeight: 600 }}>
             <TableRow>
-              <TableCell>
+              <TableCell sx={{ backgroundColor: lightGray }}>
                 <Box display="flex" alignItems={"center"}>
                   <TagIcon fontSize="small" sx={{ mr: 0.3 }} />
                   {/* <Typography sx={{ fontSize: ".875rem", fontWeight: "600" }}>
@@ -41,17 +43,17 @@ export default function ActivityList() {
                   </Typography> */}
                 </Box>
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ backgroundColor: lightGray }}>
                 <Typography sx={{ fontSize: ".875rem", fontWeight: "600" }}>
                   학기
                 </Typography>
               </TableCell>
-              <TableCell fontweight="600">
+              <TableCell fontweight="600" sx={{ backgroundColor: lightGray }}>
                 <Typography sx={{ fontSize: ".875rem", fontWeight: "600" }}>
                   제목
                 </Typography>
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="right" sx={{ backgroundColor: lightGray }}>
                 <Typography sx={{ fontSize: ".875rem", fontWeight: "600" }}>
                   비고
                 </Typography>
@@ -64,10 +66,32 @@ export default function ActivityList() {
               .map((activity) => (
                 <TableRow
                   key={activity.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    "&:nth-child(even) td, &:nth-child(even) th": {
+                      backgroundColor: lightGray,
+                    },
+                  }}
                 >
                   <TableCell style={{ width: "calc(5vw)" }}>
-                    {activity.section}
+                    {activity.section == "수상" ? (
+                      <Chip label={activity.section} color="secondary" />
+                    ) : activity.section == "기술" ? (
+                      <Chip label={activity.section} color="default" />
+                    ) : activity.section == "과정" ? (
+                      <Chip label={activity.section} color="error" />
+                    ) : activity.section == "링크" ? (
+                      <Chip label={activity.section} color="info" />
+                    ) : activity.section == "인턴" ? (
+                      <Chip label={activity.section} color="success" />
+                    ) : activity.section == "자격증" ? (
+                      <Chip label={activity.section} color="primary" />
+                    ) : activity.section == "언어" ? (
+                      <Chip label={activity.section} color="error" />
+                    ) : (
+                      <Chip label={activity.section} color="info" />
+                    )}
+                    {/* <Chip label={activity.section} color="secondary" /> */}
                   </TableCell>
                   <TableCell style={{ width: "calc(10vw)" }}>
                     {activity.semester}
@@ -78,7 +102,7 @@ export default function ActivityList() {
                     style={{ width: "calc(35vw)" }}
                   >
                     <Link
-                      to={`/activity/detail`}
+                      to={`/activity/detail/${activity.id}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       {activity.name}
@@ -89,26 +113,6 @@ export default function ActivityList() {
                   </TableCell>
                 </TableRow>
               ))}
-            {/* {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow
-                  key={row.title}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell>{row.semester}</TableCell>
-                  <TableCell component="th" scope="row">
-                    <Link
-                      to={`/activity/detail`}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      {row.title}
-                    </Link>
-                  </TableCell>
-                  <TableCell align="right">{row.content}</TableCell>
-                  <TableCell align="right">{row.remark}</TableCell>
-                </TableRow>
-              ))} */}
           </TableBody>
         </Table>
       </TableContainer>

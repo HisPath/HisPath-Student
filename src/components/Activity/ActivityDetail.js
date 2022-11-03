@@ -1,7 +1,7 @@
 import { Box, Button, InputLabel, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const data = {
   title: "활동 이름",
@@ -14,6 +14,8 @@ const data = {
 };
 
 export default function ActivityDetail() {
+  const { activityId } = useParams();
+
   const [newImgFile, setNewImgFile] = useState(data.newImgFile);
   const [newImgDir, setNewImgDir] = useState(data.newImgDir);
   const [dateState, setDateState] = useState(true);
@@ -21,8 +23,9 @@ export default function ActivityDetail() {
   const [activity, setActivity] = React.useState([]);
 
   const getActivity = async () => {
-    const activity = await axios.get("http://localhost:8080/api/activity/15");
-    console.log(activity.data);
+    const activity = await axios.get(
+      `http://localhost:8080/api/activity/${activityId}`
+    );
     setActivity(activity.data);
   };
 

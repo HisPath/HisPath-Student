@@ -48,8 +48,8 @@ export default function ActivityTab() {
   };
 
   return (
-    <Container>
-      <Paper sx={{ width: "100%", mb: 2, mt: 3 }}>
+    <>
+      <Paper sx={{ width: "100%", mb: 2, mt: 2, ml: 2 }}>
         <Box sx={{ width: "100%" }}>
           {/* <Box sx={{ borderBottom: 1, borderColor: "divider" }}> */}
           <Box>
@@ -85,6 +85,6 @@ export default function ActivityTab() {
           </TabPanel>
         </Box>
       </Paper>
-    </Container>
+    </>
   );
 }

@@ -35,7 +35,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
+  width: "calc(40vw)",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -328,11 +328,21 @@ export default function AddTech() {
               </Typography>
             </Box>
             <Alert severity="info" sx={{ mb: 1 }}>
-              기술은 다룰 줄 아는 프로그래밍 언어, 프레임워크 등을 모두
-              포함합니다!
+              기술은 다룰 줄 아는 프로그래밍 언어, 프레임워크 등을
+              <br /> 모두 포함합니다!
+            </Alert>
+            <Alert severity="success" sx={{ mb: 1 }}>
+              고급 - 대규모 프로그램 및 시스템을 참고사항(책, 인터넷) 없이
+              개발할 수 있으며, 일반적이지 않은 난해한 부분도 일부 참고를 통해
+              개발할 수 있음
               <br />
-              기술 수준은 자신이 생각하는 수준을 0에서 100사이의 값으로
-              표시하시면 됩니다!
+              <br />
+              중급 - 중간 규모 프로그램 및 시스템을 개발할 수 있으며, 주요 이슈
+              트러블슈팅을 할 수 있을 정도로 내부구조에 대해 이해하고 있음
+              <br />
+              <br />
+              초급 - 구체적으로는 잘 모르지만, 기본적인 지식과 경험은 가지고
+              있음
             </Alert>
             <Box maxHeight={450} overflow="auto" pb={1}>
               <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
@@ -366,10 +376,10 @@ export default function AddTech() {
                 defaultValue={30}
                 getAriaValueText={valuetext}
                 valueLabelDisplay="auto"
-                step={10}
+                step={1}
                 marks
                 min={0}
-                max={100}
+                max={3}
                 color="secondary"
                 {...register("remark", { required: "필수 항목입니다." })}
               />
