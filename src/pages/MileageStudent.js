@@ -1,11 +1,11 @@
 import styles from "../style/mileage.css";
 
 // import Content from "../components/mileageStudent/content";
-import Header from "../components/MileageStudent/header";
+import Header from "../components/mileageStudent/header";
 
-import Tab from "../components/MileageStudent/tab";
+import Tab from "../components/mileageStudent/tab";
 import { Box } from "@mui/material";
-import TagMenu from "../components/MileageStudent/TagMenu";
+import TagMenu from "../components/mileageStudent/TagMenu";
 
 // function MileageStudent() {
 //   return (
