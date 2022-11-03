@@ -35,7 +35,7 @@ const Card = styled("div")(({ theme }) => ({
 const style = {
   position: "absolute",
   top: "15%",
-  left: "15%",
+  left: "calc(50% - 240px)",
   width: 480,
   height: "70%",
   borderRadius: 3,

@@ -1,25 +1,25 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import RouteIcon from "@mui/icons-material/Route";
-import { Link } from "react-router-dom";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import RouteIcon from '@mui/icons-material/Route';
+import { Link } from 'react-router-dom';
 
 const pages = [
-  { name: "공지", link: "#" },
-  { name: "내 활동", link: "/activity" },
-  { name: "마일리지", link: "/mileage" },
-  { name: "이력서", link: "/resume" },
-  { name: "로그아웃", link: "#" },
+  { name: '공지', link: '/notice' },
+  { name: '내 활동', link: '/activity' },
+  { name: '마일리지', link: '/mileage' },
+  { name: '포트폴리오', link: '#' },
+  { name: '로그아웃', link: '#' },
 ];
-const settings = ["Logout"];
+const settings = ['Logout'];
 
 const Headers = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -44,7 +44,7 @@ const Headers = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <RouteIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <RouteIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -52,17 +52,17 @@ const Headers = () => {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "Ubuntu",
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'Ubuntu',
               fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
             }}
           >
             HisPath
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -77,26 +77,22 @@ const Headers = () => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: 'bottom',
+                horizontal: 'left',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
+                vertical: 'top',
+                horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: 'block', md: 'none' },
               }}
             >
               {pages.map((page) => (
-                <Link
-                  key={page.name}
-                  to={page.link}
-                  style={{ textDecoration: "none" }}
-                >
+                <Link key={page.name} to={page.link} style={{ textDecoration: 'none' }}>
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.name}</Typography>
                   </MenuItem>
@@ -104,7 +100,7 @@ const Headers = () => {
               ))}
             </Menu>
           </Box>
-          <RouteIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <RouteIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -112,32 +108,28 @@ const Headers = () => {
             href=""
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { xs: 'flex', md: 'none' },
               flexGrow: 0,
-              fontFamily: "Ubuntu",
+              fontFamily: 'Ubuntu',
               fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
             }}
           >
             HisPath
           </Typography>
           <Box flexGrow={1} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link
-                key={page.name}
-                to={page.link}
-                style={{ textDecoration: "none" }}
-              >
+              <Link key={page.name} to={page.link} style={{ textDecoration: 'none' }}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
-                    color: "white",
-                    display: "block",
-                    fontWeight: "bold",
+                    color: 'white',
+                    display: 'block',
+                    fontWeight: 'bold',
                   }}
                 >
                   {page.name}
