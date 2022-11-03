@@ -15,6 +15,7 @@ import AddIntern from './components/Activity/Add/AddIntern';
 import AddCert from './components/Activity/Add/AddCert';
 import AddLang from './components/Activity/Add/AddLang';
 import Resume from './pages/Resume';
+import DashboardNotice from './components/Dashboard/Notice';
 import Notice from './pages/Notice';
 import Post from './components/Notice/Post';
 
@@ -26,6 +27,7 @@ function Router() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/edit" element={<EditProfile />} />
         <Route path="/notice" element={<Notice />} />
+        <Route path="/dashboard/notice" element={<DashboardNotice />} />
         <Route path="/notice/:noticeId" element={<Post />} />
         <Route path="/mileage" element={<MileageStudent />} />
         <Route path="/activity" element={<Activity />} />

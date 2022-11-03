@@ -4,6 +4,8 @@ import styles from "../style/mileage.css";
 import Header from "../components/mileageStudent/header";
 
 import Tab from "../components/mileageStudent/tab";
+import { Box } from "@mui/material";
+import TagMenu from "../components/mileageStudent/TagMenu";
 
 // function MileageStudent() {
 //   return (
@@ -23,10 +25,14 @@ import Tab from "../components/mileageStudent/tab";
 
 function MileageStudent() {
   return (
-    <div className="outline">
-      {/* <Header></Header> */}
-      <Tab></Tab>
-    </div>
+    // <div className="outline">
+    //   {/* <Header></Header> */}
+    //   <Tab></Tab>
+    // </div>
+    <Box className="outline" maxWidth="xl" sx={{ display: "flex" }}>
+      <TagMenu />
+      <Tab />
+    </Box>
   );
 }
 export default MileageStudent;
