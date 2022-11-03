@@ -17,7 +17,6 @@ const pages = [
   { name: "내 활동", link: "/activity" },
   { name: "마일리지", link: "/mileage" },
   { name: "이력서", link: "/resume" },
-  { name: "포트폴리오", link: "#" },
   { name: "로그아웃", link: "#" },
 ];
 const settings = ["Logout"];
