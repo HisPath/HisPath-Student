@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { blue, red } from "@mui/material/colors";
 
-export default function DeleteButton() {
+export default function ApplyButton() {
   const [open, setOpen] = React.useState(false);
   const [apply, setApply] = React.useState(false);
 
@@ -41,8 +41,11 @@ export default function DeleteButton() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title" sx={{ fontSize: 20 }}>
-          {`신청하시겠습니까? 신청 후엔 취소하실 수 없습니다.`}
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{ fontSize: 20, width: 300, textAlign: "center" }}
+        >
+          {`신청하시겠습니까? `}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
