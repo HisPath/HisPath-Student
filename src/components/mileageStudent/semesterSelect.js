@@ -20,7 +20,7 @@ export default function SemesterSelect(props) {
   };
   useEffect(() => {
     getSemesters();
-    props.setSemesters("whole");
+    props.setSemesters("2022-2");
   }, []);
 
   return (

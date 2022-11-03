@@ -57,7 +57,7 @@ export default function MileageTables(props) {
   }, [semester]);
 
   return (
-    <>
+    <div className="root">
       <Tags></Tags>
 
       {categories.map((m) => (
@@ -204,6 +204,6 @@ export default function MileageTables(props) {
           장학금 신청
         </Fab>
       </Link>
-    </>
+    </div>
   );
 }

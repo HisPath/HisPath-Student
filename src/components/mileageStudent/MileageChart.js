@@ -133,22 +133,15 @@ const ChartTab = () => {
       // "비교과-학회활동",
     ],
     datasets: [
-      {
-        label: ["내 마일리지 총점 : 140점", "  "],
-        // data: [1, 1, 2, 4, 3, 2, 3, 5],
-        // backgroundColor: "rgba(142, 202, 206, 0.2)",
-        // borderColor: "rgb(0, 156, 242)",
-        // borderWidth: 1.5,
-      },
+      // {
+      //   // label: ["내 마일리지 총점 : 140점", "  "],
+      //   // data: [1, 1, 2, 4, 3, 2, 3, 5],
+      //   // backgroundColor: "rgba(142, 202, 206, 0.2)",
+      //   // borderColor: "rgb(0, 156, 242)",
+      //   // borderWidth: 1.5,
+      // },
       {
         label: "최고점: 200점",
-        data: [],
-        backgroundColor: "rgba(243, 229, 185, 0.2)",
-        borderColor: "rgb(255, 183, 0)",
-        borderWidth: 1.5,
-      },
-      {
-        label: "최저점: 10점",
         data: [0, 170, 200],
         backgroundColor: "rgba(243, 229, 185, 0.2)",
         borderColor: "rgb(255, 183, 0)",
@@ -158,7 +151,34 @@ const ChartTab = () => {
       },
     ],
   });
-
+  const [chartDataTimeline, setChartDataTimeline] = useState({
+    labels: [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      // "교내 활동",
+      // "전공 마일리지",
+      // "산학 마일리지 ",
+      // "비교과-연구활동",
+      // "기타",
+      // "비교과-특강참여",
+      // "비교과-행사참여",
+      // "비교과-학회활동",
+    ],
+    datasets: [
+      {
+        label: "내 마일리지 활동 개수",
+        data: [9, 5, 7, 8, 10],
+        backgroundColor: "rgba(243, 229, 185, 0.2)",
+        borderColor: "rgb(255, 183, 0)",
+        borderWidth: 1.5,
+        pointBorderWidth: 2,
+        pointRadius: 5,
+      },
+    ],
+  });
   const [activities, setActivities] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
 
@@ -180,7 +200,7 @@ const ChartTab = () => {
   }, []);
 
   return (
-    <Box overflow={"auto"}>
+    <Box>
       <Box m={3} pb={3} display={"flex"}>
         <Paper sx={{ width: "calc(30vw)", m: 2 }}>
           <Typography
@@ -236,6 +256,8 @@ const ChartTab = () => {
             />
           </div>
         </Paper>
+      </Box>
+      <Box m={3} pb={3} display={"flex"}>
         <Paper sx={{ width: "calc(30vw)", m: 2 }}>
           <Typography
             style={{
@@ -258,6 +280,33 @@ const ChartTab = () => {
             <Line
               width={180}
               data={chartDataMileage}
+              options={options}
+              plugins={pligins}
+            />
+          </div>
+        </Paper>
+        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+          <Typography
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "41px 0 0 calc(11vw)",
+              fontSize: "1.4rem",
+              fontWeight: "bold",
+              fontFamily: "ubuntu",
+            }}
+            color="primary"
+          >
+            My Timeline
+          </Typography>
+          <div
+            style={{
+              background: "rgb(238,242,245)",
+              padding: "40px 10px 41px 10px",
+            }}
+          >
+            <Line
+              width={180}
+              data={chartDataTimeline}
               options={options}
               plugins={pligins}
             />

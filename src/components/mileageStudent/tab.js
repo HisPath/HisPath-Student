@@ -7,10 +7,12 @@ import Tab from "@mui/material/Tab";
 import MileageChart from "./MileageChart";
 
 import Box from "@mui/material/Box";
-import MileageTables from "./MileageActivity";
+import MileageTables from "./mileageActivity";
 // import Button from "@mui/material/Button";
 import ActivityTables from "./Activity";
 import SemesterSelect from "./semesterSelect";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import BarChartIcon from "@mui/icons-material/BarChart";
 // import { Fab } from "@mui/material";
 // import { Link } from "react-router-dom";
 
@@ -61,11 +63,32 @@ export default function BasicTabs() {
     <div>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Tabs
+              sx={{ flexGrow: 1 }}
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                icon={<ListAltIcon />}
+                iconPosition="start"
+                label="내 마일리지"
+                {...a11yProps(0)}
+              />
+              <Tab label="내 활동" {...a11yProps(1)} />
+              <Tab
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                icon={<BarChartIcon />}
+                iconPosition="start"
+                label="차트"
+                {...a11yProps(2)}
+              />
+              {/* <span className="mileageStatus">
+              {value ? "" : "장학금 신청 완료"}
+            </span> */}
+            </Tabs>
             <SemesterSelect
               setSemesters={setSemesters}
               sx={{
@@ -74,30 +97,23 @@ export default function BasicTabs() {
                 overflow: "auto",
                 position: "sticky",
                 top: 0,
-                paddingTop: 1,
                 zIndex: "20",
                 float: "right",
               }}
-            ></SemesterSelect>
-            <Tab label="마일리지 활동조회" {...a11yProps(1)} />
-            <Tab label="마일리지 활동신청" {...a11yProps(2)} />
-            <Tab label="마일리지 활동분석" {...a11yProps(3)} />
-
-            {/* <span className="mileageStatus">
-              {value ? "" : "장학금 신청 완료"}
-            </span> */}
-          </Tabs>
+            />
+          </Box>
         </Box>
-        <TabPanel value={value} index={1}>
-          <MileageTables semester={semester}></MileageTables>
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <ActivityTables semester={semester}></ActivityTables>
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <MileageChart></MileageChart>
-        </TabPanel>
       </Box>
+      <TabPanel value={value} index={0}>
+        <MileageTables semester={semester}></MileageTables>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <ActivityTables semester={semester}></ActivityTables>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <MileageChart></MileageChart>
+      </TabPanel>
+
       {/* <Link
         href="/"
         variant="body2"
