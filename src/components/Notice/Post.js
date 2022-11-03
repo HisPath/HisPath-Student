@@ -30,11 +30,9 @@ function Article({
   pubDate,
   expDate,
 }) {
-  const StatusIcons = ({ imp }) => {
-    if (imp) {
-      return <PriorityHighIcon color="error" />;
-    }
-  };
+  function ImpChip({ imp }) {
+    if (imp) return <Chip label={'중요'} variant="outlined" color="error" />;
+  }
 
   function HtmlToString() {
     return <div dangerouslySetInnerHTML={{ __html: content }}></div>;
@@ -57,21 +55,23 @@ function Article({
           돌아가기
         </Button>
       </Header>
-      <hr />
       <Box container>
+        <br />
+        <Box container display="flex" justifyContent={'center'}>
+          <Typography variant="h3" p={1}>
+            {title}
+          </Typography>
+        </Box>
+        <br />
+        <hr />
         <Grid container alignItems="center">
-          <Grid item xs={6}>
-            <Box display="flex" justifyContent={'left'} alignItems="center">
-              <StatusIcons imp={importance} style={{ float: 'left' }} />
-              <Typography variant="h5">{title}</Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box display="flex" gap={3} justifyContent={'right'} mr={3}>
-              <Typography color="primary"> 작성자: {managerName} </Typography>
-              <Typography color="primary"> 게시일: {pubDate} </Typography>
-              <Typography color="primary"> 만료일: {expDate} </Typography>
-              <Typography color="primary"> 조회수: {viewCnt} </Typography>
+          <Grid item xs={12}>
+            <Box display="flex" gap={3} justifyContent={'center'} mr={3}>
+              <ImpChip imp={importance} label="Important Notice" />
+              <Chip label={'작성자: ' + managerName} variant="outlined" color="primary" />
+              <Chip label={'게시일: ' + pubDate} variant="outlined" color="primary" />
+              <Chip label={'만료일: ' + expDate} variant="outlined" color="primary" />
+              <Chip label={'조회수: ' + viewCnt} variant="outlined" color="success" />
             </Box>
           </Grid>
         </Grid>
