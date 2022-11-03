@@ -13,10 +13,11 @@ import RouteIcon from "@mui/icons-material/Route";
 import { Link } from "react-router-dom";
 
 const pages = [
-  { name: "공지", link: "#" },
+  { name: "공지", link: "/notice" },
   { name: "내 활동", link: "/activity" },
   { name: "마일리지", link: "/mileage" },
   { name: "이력서", link: "/resume" },
+  { name: "포트폴리오", link: "#" },
   { name: "로그아웃", link: "#" },
 ];
 const settings = ["Logout"];

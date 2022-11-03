@@ -16,7 +16,7 @@ import AddCert from "./components/Activity/Add/AddCert";
 import AddLang from "./components/Activity/Add/AddLang";
 import Resume from "./pages/Resume";
 import Notice from "./components/Dashboard/Notice";
-import Post from "./components/Resume/Post";
+import Post from "./components/Notice/Post";
 
 function Router() {
   return (
@@ -28,7 +28,7 @@ function Router() {
         <Route path="/notice" element={<Notice />} />
         <Route path="/notice/:noticeId" element={<Post />} />
         <Route path="/mileage" element={<MileageStudent />} />
-        <Route path="/activity" element={<Activity />} />
+        <Route path="/activity/*" element={<Activity />} />
         <Route path="/activity/detail" element={<ActivityDetail />} />
         <Route path="/activity/add" element={<ActivityAdd />} />
         <Route path="/activity/add/prize" element={<AddPrize />} />
