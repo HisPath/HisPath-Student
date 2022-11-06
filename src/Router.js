@@ -1,23 +1,23 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Headers from './components/Headers';
-import Activity from './pages/Activity';
-import Dashboard from './pages/Dashboard';
-import EditProfile from './pages/EditProfile';
-import MileageStudent from './pages/MileageStudent';
-import ActivityDetail from './components/Activity/ActivityDetail';
-import ActivityAdd from './components/Activity/ActivityAdd';
-import ActivityEdit from './components/Activity/ActivityEdit';
-import AddPrize from './components/Activity/Add/AddPrize';
-import AddTech from './components/Activity/Add/AddTech';
-import AddEdu from './components/Activity/Add/AddEdu';
-import AddBlog from './components/Activity/Add/AddBlog';
-import AddIntern from './components/Activity/Add/AddIntern';
-import AddCert from './components/Activity/Add/AddCert';
-import AddLang from './components/Activity/Add/AddLang';
-import Resume from './pages/Resume';
-import DashboardNotice from './components/Dashboard/Notice';
-import Notice from './pages/Notice';
-import Post from './components/Notice/Post';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Headers from "./components/Headers";
+import Activity from "./pages/Activity";
+import Dashboard from "./pages/Dashboard";
+import EditProfile from "./pages/EditProfile";
+import MileageStudent from "./pages/MileageStudent";
+import ActivityDetail from "./components/Activity/ActivityDetail";
+import ActivityAdd from "./components/Activity/ActivityAdd";
+import ActivityEdit from "./components/Activity/ActivityEdit";
+import AddPrize from "./components/Activity/Add/AddPrize";
+import AddTech from "./components/Activity/Add/AddTech";
+import AddEdu from "./components/Activity/Add/AddEdu";
+import AddBlog from "./components/Activity/Add/AddBlog";
+import AddIntern from "./components/Activity/Add/AddIntern";
+import AddCert from "./components/Activity/Add/AddCert";
+import AddLang from "./components/Activity/Add/AddLang";
+import Resume from "./pages/Resume";
+import DashboardNotice from "./components/Dashboard/Notice";
+import Notice from "./pages/Notice";
+import Post from "./components/Notice/Post";
 
 function Router() {
   return (
@@ -41,7 +41,7 @@ function Router() {
         <Route path="/activity/add/cert" element={<AddCert />} />
         <Route path="/activity/add/lang" element={<AddLang />} />
         <Route path="/activity/edit" element={<ActivityEdit />} />
-        {/* <Route path="/resume/*" element={<Resume />} /> */}
+        <Route path="/resume/*" element={<Resume />} />
       </Routes>
     </BrowserRouter>
   );
