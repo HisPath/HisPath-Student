@@ -17,6 +17,7 @@ import AddLang from "./components/Activity/Add/AddLang";
 import Resume from "./pages/Resume";
 import Notice from "./components/Dashboard/Notice";
 import Post from "./components/Notice/Post";
+import { Login } from "./components/Login/Login";
 
 function Router() {
   return (
@@ -43,6 +44,8 @@ function Router() {
         <Route path="/activity/add/lang" element={<AddLang />} />
         <Route path="/activity/edit" element={<ActivityEdit />} />
         <Route path="/resume/*" element={<Resume />} />
+
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

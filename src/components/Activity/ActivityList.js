@@ -68,25 +68,25 @@ export default function ActivityList() {
                   key={activity.name}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
-                    "&:nth-child(even) td, &:nth-child(even) th": {
+                    "&:nth-of-type(even) td, &:nth-of-type(even) th": {
                       backgroundColor: lightGray,
                     },
                   }}
                 >
                   <TableCell style={{ width: "calc(5vw)" }}>
-                    {activity.section == "수상" ? (
+                    {activity.section === "수상" ? (
                       <Chip label={activity.section} color="secondary" />
-                    ) : activity.section == "기술" ? (
+                    ) : activity.section === "기술" ? (
                       <Chip label={activity.section} color="default" />
-                    ) : activity.section == "과정" ? (
+                    ) : activity.section === "과정" ? (
                       <Chip label={activity.section} color="error" />
-                    ) : activity.section == "링크" ? (
+                    ) : activity.section === "링크" ? (
                       <Chip label={activity.section} color="info" />
-                    ) : activity.section == "인턴" ? (
+                    ) : activity.section === "인턴" ? (
                       <Chip label={activity.section} color="success" />
-                    ) : activity.section == "자격증" ? (
+                    ) : activity.section === "자격증" ? (
                       <Chip label={activity.section} color="primary" />
-                    ) : activity.section == "언어" ? (
+                    ) : activity.section === "언어" ? (
                       <Chip label={activity.section} color="error" />
                     ) : (
                       <Chip label={activity.section} color="info" />

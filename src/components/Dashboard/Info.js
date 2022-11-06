@@ -1,6 +1,6 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, Button, IconButton, Tooltip, Typography } from "@mui/material";
 import userImg from "../../assets/user.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkIcon from "@mui/icons-material/Link";
@@ -29,7 +29,7 @@ export default function Info() {
         <>
           <Avatar
             alt="K"
-            src={userImg}
+            src={info.profile}
             sx={{ width: 256, height: 256, mr: 7, mt: 5, mb: 0 }}
           />
           <Link to={`/edit`} style={{ textDecoration: "none" }}>
@@ -77,24 +77,28 @@ export default function Info() {
             <Typography mt={1} mb={2} fontSize={"1.2rem"} fontWeight={400}>
               {info.email}
             </Typography>
-            <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="a"
-              href={`https://github.com/${info.githubId}`}
-              target="_blank"
-            >
-              <GitHubIcon />
-            </IconButton>
-            <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="a"
-              href={`${info.blog}`}
-              target="_blank"
-            >
-              <LinkIcon />
-            </IconButton>
+            <Tooltip title={info.githubId}>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="a"
+                href={`https://github.com/${info.githubId}`}
+                target="_blank"
+              >
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={info.blog}>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="a"
+                href={`${info.blog}`}
+                target="_blank"
+              >
+                <LinkIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
         </>
       )}
