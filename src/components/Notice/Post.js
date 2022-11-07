@@ -31,7 +31,12 @@ function Article({
   expDate,
 }) {
   function ImpChip({ imp }) {
-    if (imp) return <Chip label={'중요'} variant="outlined" color="error" />;
+    if (imp)
+      return (
+        <Typography variant="p" color="error">
+          중요공지
+        </Typography>
+      );
   }
 
   function HtmlToString() {
@@ -68,16 +73,21 @@ function Article({
           <Grid item xs={12}>
             <Box display="flex" gap={3} justifyContent={'center'} mr={3}>
               <ImpChip imp={importance} label="Important Notice" />
-              <Chip label={'작성자: ' + managerName} variant="outlined" color="primary" />
-              <Chip label={'게시일: ' + pubDate} variant="outlined" color="primary" />
-              <Chip label={'만료일: ' + expDate} variant="outlined" color="primary" />
-              <Chip label={'조회수: ' + viewCnt} variant="outlined" color="success" />
+
+              <Typography variant="p">작성자: {managerName}</Typography>
+              <Typography variant="p">
+                게시기간: {pubDate} ~ {expDate}
+              </Typography>
+              <Typography variant="p" color="green">
+                조회수: {viewCnt}
+              </Typography>
             </Box>
           </Grid>
         </Grid>
 
         <hr />
         <HtmlToString />
+        <br />
       </Box>
     </Section>
   );
