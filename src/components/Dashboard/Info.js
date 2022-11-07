@@ -29,7 +29,7 @@ export default function Info() {
         <>
           <Avatar
             alt="K"
-            src={info.profile}
+            src={info.profile === "profile.url" ? userImg : info.profile}
             sx={{ width: 256, height: 256, mr: 7, mt: 5, mb: 0 }}
           />
           <Link to={`/edit`} style={{ textDecoration: "none" }}>
