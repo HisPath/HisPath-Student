@@ -76,13 +76,13 @@ function CategoryFieldArray({
   control,
   errors,
 }) {
-  const [expanded, setExpanded] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
   const { fields, append, remove, move } = useFieldArray({
     control,
-    name: `contents[${categoryIndex}].data`,
+    name: `content[${categoryIndex}].data`,
   });
   const onDragEnd = ({ destination, source }) => {
     if (!destination) return;
@@ -99,7 +99,10 @@ function CategoryFieldArray({
           {(provided) => (
             <Box ref={provided.innerRef} {...provided.droppableProps}>
               {fields.map((item, index) => {
-                const data = watch(`contents[${categoryIndex}].data[${index}]`);
+                const data = watch(`content[${categoryIndex}].data[${index}]`);
+                if (errors?.["content"]?.[categoryIndex]?.["data"]?.[index]) {
+                  setExpanded(index);
+                }
                 return (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(provided) => (
@@ -124,7 +127,9 @@ function CategoryFieldArray({
                               }
                             }}
                           >
-                            <Typography>{data.title || "제목 없음"}</Typography>
+                            <Typography>
+                              {data.title || "(제목 없음)"}
+                            </Typography>
                           </AccordionSummary>
                           <AccordionDetails>
                             <Box
@@ -139,7 +144,7 @@ function CategoryFieldArray({
                                   control={
                                     <Switch
                                       {...register(
-                                        `contents[${categoryIndex}].data[${index}].hasDate`
+                                        `content[${categoryIndex}].data[${index}].hasDate`
                                       )}
                                       checked={data.hasDate}
                                     />
@@ -160,7 +165,7 @@ function CategoryFieldArray({
                                     size="small"
                                     type="month"
                                     {...register(
-                                      `contents[${categoryIndex}].data[${index}].startDate`
+                                      `content[${categoryIndex}].data[${index}].startDate`
                                     )}
                                     hiddenLabel
                                   />
@@ -171,7 +176,7 @@ function CategoryFieldArray({
                                     size="small"
                                     type="month"
                                     {...register(
-                                      `contents[${categoryIndex}].data[${index}].endDate`
+                                      `content[${categoryIndex}].data[${index}].endDate`
                                     )}
                                     hiddenLabel
                                   />
@@ -184,13 +189,13 @@ function CategoryFieldArray({
                                   label="제목"
                                   size="small"
                                   {...register(
-                                    `contents[${categoryIndex}].data[${index}].title`,
+                                    `content[${categoryIndex}].data[${index}].title`,
                                     {
                                       required: "제목을 입력해 주세요.",
                                     }
                                   )}
                                   helperText={
-                                    errors?.["contents"]?.[categoryIndex]?.[
+                                    errors?.["content"]?.[categoryIndex]?.[
                                       "data"
                                     ]?.[index]?.["title"]?.["message"]
                                   }
@@ -206,13 +211,13 @@ function CategoryFieldArray({
                                   minRows={3}
                                   maxRows={10}
                                   {...register(
-                                    `contents[${categoryIndex}].data[${index}].description`,
+                                    `content[${categoryIndex}].data[${index}].description`,
                                     {
                                       required: "내용을 입력해 주세요.",
                                     }
                                   )}
                                   helperText={
-                                    errors?.["contents"]?.[categoryIndex]?.[
+                                    errors?.["content"]?.[categoryIndex]?.[
                                       "data"
                                     ]?.[index]?.["description"]?.["message"]
                                   }
