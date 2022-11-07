@@ -22,12 +22,27 @@ export default function MdEditor({ register, handleSubmit, onValid }) {
           variant={"contained"}
           onClick={handleSubmit(onValid)}
           p={10}
-          sx={{ ml: 13, mt: 3 }}
+          sx={{
+            ml: 13,
+            mt: 3,
+            borderRadius: 8,
+            backgroundColor: "secondary.main",
+          }}
         >
           프로필 수정
         </Button>
         <Link to={`/`} style={{ textDecoration: "none" }}>
-          <Button variant={"outlined"} p={10} sx={{ ml: 2, mt: 3 }}>
+          <Button
+            variant={"outlined"}
+            p={10}
+            sx={{
+              ml: 2,
+              mt: 3,
+              borderRadius: 8,
+              color: "secondary.main",
+              borderColor: "secondary.main",
+            }}
+          >
             취소
           </Button>
         </Link>

@@ -75,21 +75,77 @@ export default function ActivityList() {
                 >
                   <TableCell style={{ width: "calc(5vw)" }}>
                     {activity.section === "수상" ? (
-                      <Chip label={activity.section} color="secondary" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          backgroundColor: "#e6fa32",
+                          color: "#222",
+                          fontWeight: 900,
+                        }}
+                      />
                     ) : activity.section === "기술" ? (
-                      <Chip label={activity.section} color="default" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          background: "#9bf731",
+                          color: "#222",
+                          fontWeight: 900,
+                        }}
+                      />
                     ) : activity.section === "과정" ? (
-                      <Chip label={activity.section} color="error" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          background: "#49f558",
+                          color: "#222",
+                          fontWeight: 900,
+                        }}
+                      />
                     ) : activity.section === "링크" ? (
-                      <Chip label={activity.section} color="info" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          background: "#49f2ea",
+                          color: "#222",
+                          fontWeight: 900,
+                        }}
+                      />
                     ) : activity.section === "인턴" ? (
-                      <Chip label={activity.section} color="success" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          background: "#4be5fa",
+                          color: "#fff",
+                          fontWeight: 900,
+                        }}
+                      />
                     ) : activity.section === "자격증" ? (
-                      <Chip label={activity.section} color="primary" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          background: "#33beff",
+                          color: "#fff",
+                          fontWeight: 900,
+                        }}
+                      />
                     ) : activity.section === "언어" ? (
-                      <Chip label={activity.section} color="error" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          background: "#32a8fc",
+                          color: "#fff",
+                          fontWeight: 900,
+                        }}
+                      />
                     ) : (
-                      <Chip label={activity.section} color="info" />
+                      <Chip
+                        label={activity.section}
+                        sx={{
+                          background: "#4963f5",
+                          color: "#fff",
+                          fontWeight: 900,
+                        }}
+                      />
                     )}
                     {/* <Chip label={activity.section} color="secondary" /> */}
                   </TableCell>

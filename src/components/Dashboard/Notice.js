@@ -40,7 +40,7 @@ export default function Notice() {
         marginBottom={1}
         fontFamily="Ubuntu"
         textAlign="center"
-        color="primary.light"
+        color="secondary.dark"
         width={noticeWidth}
       >
         Notice

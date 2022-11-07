@@ -335,7 +335,8 @@ export default function ActivityAdd({ getActivities }) {
   const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <Button
+      <AddIcon fontSize="sm" color="secondary" onClick={handleOpenAdd} />
+      {/* <Button
         sx={{
           backgroundColor: "secondary.main",
           fontWeight: "600",
@@ -346,7 +347,8 @@ export default function ActivityAdd({ getActivities }) {
         onClick={handleOpenAdd}
       >
         활동 추가
-      </Button>
+      </Button> */}
+
       <Modal open={openAdd} onClose={handleCloseAdd}>
         <Box sx={style}>
           <Box display="flex" justifyContent="space-between">

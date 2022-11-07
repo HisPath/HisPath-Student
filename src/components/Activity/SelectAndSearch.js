@@ -59,9 +59,9 @@ export default function SelectAndSearch() {
           }}
         /> */}
       </Box>
-      <Box display={"flex"} alignItems="center" sx={{ mr: 1 }}>
+      {/* <Box display={"flex"} alignItems="center" sx={{ mr: 1 }}>
         <ActivityAdd getActivities={getActivities} />
-      </Box>
+      </Box> */}
     </Box>
   );
 }
