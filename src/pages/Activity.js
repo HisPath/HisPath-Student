@@ -15,10 +15,10 @@ export default function Activity() {
 
   return (
     <>
-      <Box maxWidth="xl" sx={{ display: "flex" }}>
+      <Container maxWidth="xl" sx={{ display: "flex" }}>
         <TagMenu />
         <ActivityTab />
-      </Box>
+      </Container>
     </>
   );
 }
