@@ -18,6 +18,7 @@ import Resume from './pages/Resume';
 import DashboardNotice from './components/Dashboard/Notice';
 import Notice from './pages/Notice';
 import Post from './components/Notice/Post';
+import { Login } from './components/Login/Login';
 
 function Router() {
   return (
@@ -31,7 +32,7 @@ function Router() {
         <Route path="/notice/:noticeId" element={<Post />} />
         <Route path="/mileage" element={<MileageStudent />} />
         <Route path="/activity" element={<Activity />} />
-        <Route path="/activity/detail" element={<ActivityDetail />} />
+        <Route path="/activity/detail/:activityId" element={<ActivityDetail />} />
         <Route path="/activity/add" element={<ActivityAdd />} />
         <Route path="/activity/add/prize" element={<AddPrize />} />
         <Route path="/activity/add/tech" element={<AddTech />} />
@@ -41,7 +42,10 @@ function Router() {
         <Route path="/activity/add/cert" element={<AddCert />} />
         <Route path="/activity/add/lang" element={<AddLang />} />
         <Route path="/activity/edit" element={<ActivityEdit />} />
-        {/* <Route path="/resume/*" element={<Resume />} /> */}
+
+        <Route path="/resume/*" element={<Resume />} />
+
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

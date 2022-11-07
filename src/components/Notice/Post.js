@@ -31,7 +31,6 @@ function Article({
   expDate,
 }) {
   function ImpChip({ imp }) {
-    // if (imp) return <Chip label={'중요공지'} variant="outlined" color="error" />;
     if (imp)
       return (
         <Typography variant="p" color="error">
@@ -64,7 +63,7 @@ function Article({
       <Box container>
         <br />
         <Box container display="flex" justifyContent={'center'}>
-          <Typography variant="h4" p={1}>
+          <Typography variant="h3" p={1}>
             {title}
           </Typography>
         </Box>
@@ -74,6 +73,7 @@ function Article({
           <Grid item xs={12}>
             <Box display="flex" gap={3} justifyContent={'center'} mr={3}>
               <ImpChip imp={importance} label="Important Notice" />
+
               <Typography variant="p">작성자: {managerName}</Typography>
               <Typography variant="p">
                 게시기간: {pubDate} ~ {expDate}
