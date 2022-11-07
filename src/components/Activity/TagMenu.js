@@ -18,6 +18,7 @@ import AddIntern from "./Add/AddIntern";
 import AddLang from "./Add/AddLang";
 import AddPrize from "./Add/AddPrize";
 import AddTech from "./Add/AddTech";
+import { Typography } from "@mui/material";
 
 const drawerWidth = 240;
 const style = {
@@ -45,15 +46,21 @@ export default function TagMenu() {
             position: "relative",
             width: drawerWidth,
             boxSizing: "border-box",
+            height: "auto",
           },
+          mt: 2,
         }}
         variant="permanent"
         anchor="left"
       >
-        <List
-        // sx={{ pt: "calc(11vh)" }}
-        >
-          <ListItem key={"전체"} onClick={() => changeSections()}>
+        <List sx={{ pt: "0", pb: "0" }}>
+          <ListItem
+            key={"전체"}
+            onClick={() => changeSections()}
+            sx={{
+              backgroundColor: "#fff8e1",
+            }}
+          >
             <ListItemButton>
               <TagIcon />
               <ListItemText
@@ -63,7 +70,7 @@ export default function TagMenu() {
               />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"# 마일리지"}>
+          <ListItem key={"# 마일리지"} sx={{ backgroundColor: "#fffde7" }}>
             <ListItemButton>
               <TagIcon />
               <ListItemText
@@ -74,16 +81,20 @@ export default function TagMenu() {
             </ListItemButton>
           </ListItem>
           {[
-            ["수상", "add/prize", <AddPrize />],
-            ["기술", "add/tech", <AddTech />],
-            ["과정", "add/edu", <AddEdu />],
-            ["링크", "add/blog", <AddBlog />],
-            ["인턴", "add/intern", <AddIntern />],
-            ["자격증", "add/cert", <AddCert />],
-            ["언어", "add/lang", <AddLang />],
+            ["수상", "add/prize", <AddPrize />, "#f9fbe7"],
+            ["기술", "add/tech", <AddTech />, "#f1f8e9"],
+            ["과정", "add/edu", <AddEdu />, "#e8f5e9"],
+            ["링크", "add/blog", <AddBlog />, "#e0f2f1"],
+            ["인턴", "add/intern", <AddIntern />, "#e0f7fa"],
+            ["자격증", "add/cert", <AddCert />, "#e1f5fe"],
+            ["언어", "add/lang", <AddLang />, "#e3f2fd"],
             // ["기타", "add"],
           ].map((text) => (
-            <ListItem key={text[0]} onClick={() => changeSections(text[0])}>
+            <ListItem
+              key={text[0]}
+              onClick={() => changeSections(text[0])}
+              sx={{ backgroundColor: text[3] }}
+            >
               <ListItemButton>
                 <TagIcon />
                 <ListItemText
@@ -100,33 +111,6 @@ export default function TagMenu() {
             </ListItem>
           ))}
         </List>
-        {/* <List
-        // sx={{ pt: "calc(11vh)" }}
-        >
-          {[
-            "# 마일리지",
-            "# 수상",
-            "# 기술",
-            "# 교육과정",
-            "# 블로그",
-            "# 인턴",
-            "# 자격증",
-            "# 어학사항",
-            "# 기타",
-          ].map((text, index) => (
-            <ListItem key={text}>
-              <ListItemButton>
-                <ListItemText
-                  primaryTypographyProps={{ style: style }}
-                  primary={text}
-                />
-              </ListItemButton>
-              <Link to={`/activity/add`} style={{ textDecoration: "none" }}>
-                <AddIcon fontSize="sm" color="secondary" />
-              </Link>
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
     </Box>
   );
