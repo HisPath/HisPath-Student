@@ -26,27 +26,26 @@ export default function SelectAndSearch() {
       );
   };
   return (
-    <Box display={"flex"} justifyContent="space-between">
-      <Box display={"flex"} alignItems="center">
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-filled-label">Semester</InputLabel>
-          <Select
-            labelId="demo-select-small"
-            id="demo-select-small"
-            // value={}
-            label="Semester"
-            onChange={changeSemesters}
-            displayEmpty
-          >
-            <MenuItem value="ALL">ALL</MenuItem>
-            {semesters.map((semester) => (
-              <MenuItem value={semester.semester} key={semester.semester}>
-                {semester.semester}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        {/* <TextField
+    <>
+      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <InputLabel id="demo-simple-select-filled-label">Semester</InputLabel>
+        <Select
+          labelId="demo-select-small"
+          id="demo-select-small"
+          // value={}
+          label="Semester"
+          onChange={changeSemesters}
+          displayEmpty
+        >
+          <MenuItem value="ALL">ALL</MenuItem>
+          {semesters.map((semester) => (
+            <MenuItem value={semester.semester} key={semester.semester}>
+              {semester.semester}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      {/* <TextField
           placeholder="Search"
           id="outlined-size-small"
           size="small"
@@ -58,10 +57,6 @@ export default function SelectAndSearch() {
             ),
           }}
         /> */}
-      </Box>
-      {/* <Box display={"flex"} alignItems="center" sx={{ mr: 1 }}>
-        <ActivityAdd getActivities={getActivities} />
-      </Box> */}
-    </Box>
+    </>
   );
 }
