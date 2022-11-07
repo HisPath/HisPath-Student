@@ -19,7 +19,6 @@ export default function Buttons() {
       sx={{
         display: "flex",
         justifyContent: "space-around",
-        mt: 4,
       }}
     >
       <ButtonGroup variant="text" aria-label="outlined primary button group">
