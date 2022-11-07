@@ -29,11 +29,16 @@ export default function Info() {
         <>
           <Avatar
             alt="K"
-            src={info.profile}
+            src={info.profile === "profile.url" ? userImg : info.profile}
             sx={{ width: 256, height: 256, mr: 7, mt: 5, mb: 0 }}
           />
           <Link to={`/edit`} style={{ textDecoration: "none" }}>
-            <Button variant={"outlined"} p={10} sx={{ ml: 23 }}>
+            <Button
+              variant={"contained"}
+              p={10}
+              sx={{ ml: 23, borderRadius: 8 }}
+              color={"secondary"}
+            >
               프로필 수정
             </Button>
           </Link>
@@ -79,7 +84,7 @@ export default function Info() {
             </Typography>
             <Tooltip title={info.githubId}>
               <IconButton
-                color="primary"
+                color="secondary"
                 aria-label="upload picture"
                 component="a"
                 href={`https://github.com/${info.githubId}`}
@@ -90,7 +95,7 @@ export default function Info() {
             </Tooltip>
             <Tooltip title={info.blog}>
               <IconButton
-                color="primary"
+                color="secondary"
                 aria-label="upload picture"
                 component="a"
                 href={`${info.blog}`}

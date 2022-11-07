@@ -19,6 +19,7 @@ import AddLang from "./Add/AddLang";
 import AddPrize from "./Add/AddPrize";
 import AddTech from "./Add/AddTech";
 import { Typography } from "@mui/material";
+import ActivityAdd from "./ActivityAdd";
 
 const drawerWidth = 240;
 const style = {
@@ -88,7 +89,7 @@ export default function TagMenu() {
             ["인턴", "add/intern", <AddIntern />, "#e0f7fa"],
             ["자격증", "add/cert", <AddCert />, "#e1f5fe"],
             ["언어", "add/lang", <AddLang />, "#e3f2fd"],
-            // ["기타", "add"],
+            ["기타", "add", <ActivityAdd />, "#e8eaf6"],
           ].map((text) => (
             <ListItem
               key={text[0]}

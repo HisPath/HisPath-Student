@@ -52,7 +52,7 @@ export default function ActivityTab() {
       <Paper sx={{ width: "100%", mb: 2, mt: 2, ml: 2 }}>
         <Box sx={{ width: "100%" }}>
           {/* <Box sx={{ borderBottom: 1, borderColor: "divider" }}> */}
-          <Box>
+          <Box display={"flex"} justifyContent="space-between">
             <Tabs
               value={value}
               onChange={handleChange}
@@ -65,7 +65,7 @@ export default function ActivityTab() {
                   minHeight: 3,
                   pt: 1.5,
                   fontWeight: 600,
-                  fontSize: "1.5rem",
+                  fontSize: "1.3rem",
                 }}
                 icon={<ListAltIcon />}
                 iconPosition="start"
@@ -77,7 +77,7 @@ export default function ActivityTab() {
                   minHeight: 3,
                   pt: 1.5,
                   fontWeight: 600,
-                  fontSize: "1.5rem",
+                  fontSize: "1.3rem",
                 }}
                 icon={<BarChartIcon />}
                 iconPosition="start"
@@ -85,9 +85,10 @@ export default function ActivityTab() {
                 {...a11yProps(1)}
               />
             </Tabs>
+            {value === 0 ? <SelectAndSearch /> : ""}
           </Box>
           <TabPanel value={value} index={0}>
-            <SelectAndSearch />
+            {/* <SelectAndSearch /> */}
             <ActivityList />
           </TabPanel>
           <TabPanel value={value} index={1}>

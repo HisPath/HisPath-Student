@@ -12,6 +12,8 @@ const noticeWidth = "28rem";
 const style = {
   padding: 2,
   margin: 3,
+  marginTop: 1,
+  marginBottom: 1,
   maxWidth: noticeWidth,
   bgcolor: "background.paper",
 };
@@ -37,10 +39,11 @@ export default function Notice() {
         variant="h5"
         component="div"
         m={3}
+        mt={1}
         marginBottom={1}
         fontFamily="Ubuntu"
         textAlign="center"
-        color="primary.light"
+        color="secondary.dark"
         width={noticeWidth}
       >
         Notice
