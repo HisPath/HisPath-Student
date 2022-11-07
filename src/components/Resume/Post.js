@@ -16,6 +16,7 @@ import CategoryModal from "./CategoryModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { blueGrey } from "@mui/material/colors";
 import axios from "axios";
+import { postResume } from "../../api/resume";
 
 function Post() {
   const [info, setInfo] = useState([]);
@@ -49,11 +50,10 @@ function Post() {
   } = useForm({ defaultValues: { title: "이력서" } });
   const { move } = useFieldArray({
     control,
-    name: `contents`,
+    name: `content`,
   });
   const onValid = (data) => {
-    alert(JSON.stringify(data));
-    setResume((old) => [...old, data]);
+    postResume({ ...data, content: JSON.stringify(data.content) });
     navigate("..");
   };
   const onInvalid = () => {
@@ -162,7 +162,7 @@ function Post() {
                 <Typography>{info.email}</Typography>
               </Box>
             </Box>
-            {watch("contents")?.map((item, index) => (
+            {watch("content")?.map((item, index) => (
               <Box key={index} mb={4}>
                 {item.data.length !== 0 && (
                   <>
@@ -170,7 +170,7 @@ function Post() {
                       {categories[index]}
                     </Typography>
                     <Box mb={2}>
-                      {watch(`contents[${index}].data`).map(
+                      {watch(`content[${index}].data`).map(
                         (data, dataIndex) => (
                           <Box key={dataIndex} p={1} py={0.5}>
                             <Box
