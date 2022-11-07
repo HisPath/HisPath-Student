@@ -174,7 +174,7 @@ export default function ActivityAdd({ getActivities }) {
   const [type, setType] = useState(0);
   const [open, setOpen] = useState(false); // dialog
   const [semesters, setSemesters] = useState([]);
-  const [json, setJson] = useState([]);
+  //   const [json, setJson] = useState([]);
   const [jsonData, setJsonData] = useState([]);
 
   const addData = (id, param, type, e) => {
@@ -220,7 +220,8 @@ export default function ActivityAdd({ getActivities }) {
 
     formdata.data = JSON.stringify(final);
     addActivity(formdata);
-    getActivities();
+    window.location.reload();
+    // getActivities();
     handleCloseAdd();
 
     enqueueSnackbar("추가되었습니다.", { variant: "success" });
