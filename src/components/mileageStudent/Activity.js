@@ -70,7 +70,7 @@ export default function BasicTable(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.semesters === "whole" ? (
+              {props.semesters === "ALL" ? (
                 <>
                   {activities.map((activity) =>
                     activity.personal === true ? (

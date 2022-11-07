@@ -11,21 +11,33 @@ import TagIcon from "@mui/icons-material/Tag";
 import { getActivities, getActivitiesBySec } from "../../api/activity";
 import { activityState } from "../../store/atom";
 import { useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+import axios from "axios";
+import { semesterState } from "../../store/atom";
 
 const drawerWidth = 240;
 const style = {
-  //   color: "#004dc2",
   fontWeight: "bold",
 };
 
 export default function TagMenu() {
   const setActivities = useSetRecoilState(activityState);
+  const semester = useRecoilValue(semesterState);
 
-  const changeSections = (value) => {
-    if (!value) {
+  const getActivitiesBySemCate = async (semester, category) => {
+    const response = await axios.get(
+      `http://localhost:8080/api/student-mactivities/1?semester=${category}&category=${semester}`
+    );
+    return response.data;
+  };
+
+  const changeSections = (cate) => {
+    if (!cate) {
       getActivities().then((data) => setActivities(data));
     } else {
-      getActivitiesBySec(value).then((data) => setActivities(data));
+      getActivitiesBySemCate(cate, semester).then((data) =>
+        setActivities(data)
+      );
     }
   };
   return (
@@ -72,6 +84,13 @@ export default function TagMenu() {
           <ListItem></ListItem>
           {[
             ["참여여부", "add/tech"],
+            ["전공마일리지", "add/tech"],
+            ["산학마일리지", "add/tech"],
+            ["비교과-연구활동", "add/tech"],
+            ["비교과-특강참여", "add/tech"],
+            ["비교과-행사참여", "add/tech"],
+            ["비교과-학회활동", "add/tech"],
+            ["기타", "add/tech"],
 
             // ["링크", "add/blog"],
             // ["인턴", "add/intern"],
@@ -89,7 +108,7 @@ export default function TagMenu() {
                   primary={text[0]}
                 />
               </ListItemButton>
-              {text[2]}
+
               {/* <Link to={text[1]} style={{ textDecoration: "none" }}>
                 <AddIcon fontSize="sm" color="secondary" />
               </Link> */}

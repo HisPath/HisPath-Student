@@ -53,7 +53,7 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  const [semester, setSemesters] = React.useState([]);
+  // const [semester, setSemesters] = React.useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -90,7 +90,7 @@ export default function BasicTabs() {
             </span> */}
             </Tabs>
             <SemesterSelect
-              setSemesters={setSemesters}
+              // setSemesters={setSemesters}
               sx={{
                 minWidth: 120,
                 backgroundColor: "white",
@@ -105,10 +105,10 @@ export default function BasicTabs() {
         </Box>
       </Box>
       <TabPanel value={value} index={0}>
-        <MileageTables semester={semester}></MileageTables>
+        <MileageTables></MileageTables>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ActivityTables semester={semester}></ActivityTables>
+        <ActivityTables></ActivityTables>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <MileageChart></MileageChart>

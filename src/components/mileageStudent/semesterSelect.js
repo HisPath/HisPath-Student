@@ -5,9 +5,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useEffect } from "react";
 import axios from "axios";
+import { useSetRecoilState } from "recoil";
+import { semesterState } from "../../store/atom";
 
-export default function SemesterSelect(props) {
+export default function SemesterSelect() {
   const [semester, setSemester] = React.useState("");
+  const setSemesters = useSetRecoilState(semesterState);
   const [test, setTest] = React.useState([]);
 
   const getSemesters = async () => {
@@ -16,17 +19,18 @@ export default function SemesterSelect(props) {
   };
   const handleChange = (event) => {
     setSemester(event.target.value);
-    props.setSemesters(event.target.value);
+    // props.setSemesters(event.target.value);
+    setSemesters(event.target.value);
   };
   useEffect(() => {
     getSemesters();
-    props.setSemesters("2022-2");
+    // props.setSemesters("2022-2");
+    setSemesters("2022-2");
   }, []);
 
   return (
     <FormControl
       className="selectBar"
-      // sx={{ m: 1, minWidth: 120 }}
       sx={{
         m: 1,
         minWidth: 120,
@@ -50,17 +54,12 @@ export default function SemesterSelect(props) {
         label="2022-1학기"
         onChange={handleChange}
       >
-        <MenuItem value="whole">
+        <MenuItem value="ALL">
           <em>전기간</em>
         </MenuItem>
         {test.map((m) => (
           <MenuItem value={m.semester}>{m.semester}</MenuItem>
         ))}
-        {/* <MenuItem value={"2020-1"}>2020-1</MenuItem>
-        <MenuItem value={"2020-2"}>2020-2</MenuItem>
-        <MenuItem value={"2021-1"}>2021-1</MenuItem>
-        <MenuItem value={"2021-2"}>2021-2</MenuItem>
-        <MenuItem value={"2022-1"}>2022-1</MenuItem> */}
       </Select>
     </FormControl>
   );
