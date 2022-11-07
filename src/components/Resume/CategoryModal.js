@@ -98,7 +98,7 @@ function CategoryModal({ categories, setCategories, move }) {
           </Box>
           <Box sx={{ mt: 3, height: 1 }}>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="one">
+              <Droppable droppableId="category">
                 {(provided) => (
                   <Board ref={provided.innerRef} {...provided.droppableProps}>
                     {categories.map((category, index) => (
