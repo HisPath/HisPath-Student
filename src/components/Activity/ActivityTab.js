@@ -85,7 +85,7 @@ export default function ActivityTab() {
                 {...a11yProps(1)}
               />
             </Tabs>
-            <SelectAndSearch />
+            {value === 0 ? <SelectAndSearch /> : ""}
           </Box>
           <TabPanel value={value} index={0}>
             {/* <SelectAndSearch /> */}
