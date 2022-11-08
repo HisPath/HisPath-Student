@@ -46,7 +46,7 @@ export default function EditProfile() {
     console.log(data);
     updateInfo(data);
     enqueueSnackbar("수정되었습니다.", { variant: "success" });
-    window.location.replace(`/`);
+    window.location.replace(`/dashboard`);
   };
 
   const [majors, setMajors] = useState([]);

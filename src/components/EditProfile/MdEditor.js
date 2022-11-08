@@ -31,7 +31,7 @@ export default function MdEditor({ register, handleSubmit, onValid }) {
         >
           프로필 수정
         </Button>
-        <Link to={`/`} style={{ textDecoration: "none" }}>
+        <Link to={`/dashboard`} style={{ textDecoration: "none" }}>
           <Button
             variant={"outlined"}
             p={10}
