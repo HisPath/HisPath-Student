@@ -84,7 +84,6 @@ function Article({
             </Box>
           </Grid>
         </Grid>
-
         <hr />
         <HtmlToString />
         <br />
