@@ -11,6 +11,7 @@ import TagIcon from "@mui/icons-material/Tag";
 import { Box } from "@mui/system";
 import { useRecoilValue } from "recoil";
 import { activityState } from "../../store/atom";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ActivityList() {
   const [page, setPage] = React.useState(0);
@@ -27,7 +28,6 @@ export default function ActivityList() {
   };
 
   const lightGray = "#F5F5F5";
-
   return (
     <>
       {/* <Paper sx={{ width: "100%", mb: 2, mt: 3 }}> */}
@@ -53,9 +53,14 @@ export default function ActivityList() {
                   제목
                 </Typography>
               </TableCell>
-              <TableCell align="right" sx={{ backgroundColor: lightGray }}>
+              <TableCell sx={{ backgroundColor: lightGray }}>
                 <Typography sx={{ fontSize: ".875rem", fontWeight: "600" }}>
                   비고
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ backgroundColor: lightGray }}>
+                <Typography sx={{ fontSize: ".875rem", fontWeight: "600" }}>
+                  기능
                 </Typography>
               </TableCell>
             </TableRow>
@@ -92,7 +97,7 @@ export default function ActivityList() {
                           fontWeight: 900,
                         }}
                       />
-                    ) : activity.section === "과정" ? (
+                    ) : activity.section === "학력" ? (
                       <Chip
                         label={activity.section}
                         sx={{
@@ -110,7 +115,7 @@ export default function ActivityList() {
                           fontWeight: 900,
                         }}
                       />
-                    ) : activity.section === "인턴" ? (
+                    ) : activity.section === "경력" ? (
                       <Chip
                         label={activity.section}
                         sx={{
@@ -164,8 +169,11 @@ export default function ActivityList() {
                       {activity.name}
                     </Link>
                   </TableCell>
-                  <TableCell align="right" style={{ width: "calc(15vw)" }}>
+                  <TableCell style={{ width: "calc(15vw)" }}>
                     {activity.remark ? activity.remark : ""}
+                  </TableCell>
+                  <TableCell align="right" style={{ width: "calc(15vw)" }}>
+                    <DeleteIcon />
                   </TableCell>
                 </TableRow>
               ))}
