@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Backdrop,
   Box,
+  Grid,
   Button,
   CircularProgress,
   Container,
@@ -223,37 +224,47 @@ function TT() {
   return (
     <Container>
       <Header>
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
-          공지사항
-        </Typography>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                color={card ? 'primary' : 'secondary'}
-                componentsProps={{ input: { 'aria-label': 'card mode' } }}
-                checked={card}
-                label="View Mode"
-                onChange={(event) => {
-                  setCard(event.target.checked);
-                }}
+        <Grid container alignItems="center">
+          <Grid item xs="4">
+            <Typography variant="h5" style={{ fontWeight: 'bold' }}>
+              공지사항
+            </Typography>
+          </Grid>
+          <Grid item xs="5" display="flex" justifyContent={'right'}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color={card ? 'primary' : 'secondary'}
+                    componentsProps={{ input: { 'aria-label': 'card mode' } }}
+                    checked={card}
+                    label="View Mode"
+                    onChange={(event) => {
+                      setCard(event.target.checked);
+                    }}
+                  />
+                }
+                labelPlacement="start"
+                label={`Select View Mode: ${card ? 'Card Mode' : 'Table Mode'}`}
               />
-            }
-            labelPlacement="start"
-            label={`Select View Mode: ${card ? 'Card Mode' : 'Table Mode'}`}
-          />
-        </FormGroup>
-        {/* <Switch
-          color={card ? 'primary' : 'secondary'}
-          componentsProps={{ input: { 'aria-label': 'card mode' } }}
-          checked={card}
-          label="View Mode"
-          onChange={(event) => {
-            setCard(event.target.checked);
-          }}
-        /> */}
+            </FormGroup>
+          </Grid>
+          <Grid item xs="3">
+            <Box display="flex" gap={1.5} justifyContent={'right'}>
+              <Button variant="outlined" onClick={() => setNoticeType(0)}>
+                전체 공지
+              </Button>
+              <Button variant="outlined" onClick={() => setNoticeType(1)}>
+                중요 공지
+              </Button>
+              <Button variant="outlined" onClick={() => setNoticeType(2)}>
+                지난 공지
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </Header>
-      <Box display="flex" paddingBottom={1} gap={1.5} justifyContent={'right'}>
+      {/* <Box display="flex" paddingBottom={1} gap={1.5} justifyContent={'right'}>
         <Button variant="outlined" onClick={() => setNoticeType(0)}>
           전체 공지
         </Button>
@@ -263,7 +274,7 @@ function TT() {
         <Button variant="outlined" onClick={() => setNoticeType(2)}>
           지난 공지
         </Button>
-      </Box>
+      </Box> */}
       {card ? (
         <Article>
           {init ? (
