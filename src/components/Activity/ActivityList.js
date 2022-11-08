@@ -18,6 +18,8 @@ export default function ActivityList() {
   const [rowsPerPage, setRowsPerPage] = React.useState(7);
   const activities = useRecoilValue(activityState);
 
+  console.log(activities);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -173,7 +175,27 @@ export default function ActivityList() {
                     {activity.remark ? activity.remark : ""}
                   </TableCell>
                   <TableCell align="right" style={{ width: "calc(15vw)" }}>
-                    <DeleteIcon />
+                    <Box
+                      display={"flex"}
+                      justifyContent="flex-end"
+                      alignItems={"center"}
+                      gap={2}
+                    >
+                      {activity.mileage ? (
+                        <Chip
+                          label="마일리지"
+                          variant="outlined"
+                          sx={{
+                            color: "primary.main",
+                            backgroundColor: "#fff",
+                            fontWeight: 800,
+                          }}
+                        />
+                      ) : (
+                        ""
+                      )}
+                      <DeleteIcon />{" "}
+                    </Box>
                   </TableCell>
                 </TableRow>
               ))}

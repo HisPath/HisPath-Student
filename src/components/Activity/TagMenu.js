@@ -88,7 +88,7 @@ export default function TagMenu() {
             ["링크", "add/blog", <AddBlog />, "#e0f2f1"],
             ["경력", "add/intern", <AddIntern />, "#e0f7fa"],
             ["자격증", "add/cert", <AddCert />, "#e1f5fe"],
-            ["언어", "add/lang", <AddLang />, "#e3f2fd"],
+            ["외국어", "add/lang", <AddLang />, "#e3f2fd"],
             ["기타", "add", <ActivityAdd />, "#e8eaf6"],
           ].map((text) => (
             <ListItem
