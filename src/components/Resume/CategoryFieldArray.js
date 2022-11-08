@@ -168,6 +168,10 @@ function CategoryFieldArray({
                                       `content[${categoryIndex}].data[${index}].startDate`
                                     )}
                                     hiddenLabel
+                                    InputProps={{
+                                      sx: { borderRadius: 1 },
+                                      disableUnderline: true,
+                                    }}
                                   />
                                   ~
                                   <TextField
@@ -179,6 +183,10 @@ function CategoryFieldArray({
                                       `content[${categoryIndex}].data[${index}].endDate`
                                     )}
                                     hiddenLabel
+                                    InputProps={{
+                                      sx: { borderRadius: 1 },
+                                      disableUnderline: true,
+                                    }}
                                   />
                                 </Box>
                               </Box>
@@ -199,6 +207,10 @@ function CategoryFieldArray({
                                       "data"
                                     ]?.[index]?.["title"]?.["message"]
                                   }
+                                  InputProps={{
+                                    sx: { borderRadius: 1 },
+                                    disableUnderline: true,
+                                  }}
                                 />
                               </Box>
                               <Box>
@@ -221,6 +233,10 @@ function CategoryFieldArray({
                                       "data"
                                     ]?.[index]?.["description"]?.["message"]
                                   }
+                                  InputProps={{
+                                    sx: { borderRadius: 1 },
+                                    disableUnderline: true,
+                                  }}
                                 />
                               </Box>
                             </Box>

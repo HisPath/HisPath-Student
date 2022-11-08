@@ -15,17 +15,12 @@ import CategoryFieldArray from "./CategoryFieldArray";
 import CategoryModal from "./CategoryModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { blueGrey } from "@mui/material/colors";
-import axios from "axios";
-import { postResume } from "../../api/resume";
+import { getInfo, postResume } from "../../api/resume";
 
-function Post() {
+function Post({ refresh }) {
   const [info, setInfo] = useState([]);
-  const getInfo = async () => {
-    const info = await axios.get("http://localhost:8080/api/student/1");
-    setInfo(info.data);
-  };
   useEffect(() => {
-    getInfo();
+    getInfo().then((data) => setInfo(data));
   }, []);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -39,7 +34,6 @@ function Post() {
     "링크",
     "기타",
   ]);
-  const [resume, setResume] = useState([]);
   const {
     register,
     watch,
@@ -52,9 +46,17 @@ function Post() {
     control,
     name: `content`,
   });
-  const onValid = (data) => {
-    postResume({ ...data, content: JSON.stringify(data.content) });
+  const onValid = async (data) => {
+    await postResume({
+      title: data.title,
+      content: JSON.stringify({
+        dataList: data.content,
+        categories: categories,
+      }),
+    });
+    refresh();
     navigate("..");
+    enqueueSnackbar("저장되었습니다.", { variant: "success" });
   };
   const onInvalid = () => {
     enqueueSnackbar("모든 칸을 채워 주세요.", { variant: "error" });
@@ -84,9 +86,10 @@ function Post() {
               component="form"
               onSubmit={handleSubmit(onValid, onInvalid)}
               sx={{
-                p: 2,
+                py: 2,
                 display: "flex",
                 justifyContent: "space-between",
+                gap: 1,
               }}
             >
               <Button
@@ -133,7 +136,7 @@ function Post() {
               width: 720,
               backgroundColor: "background.paper",
               height: 1,
-              borderRadius: 2,
+              borderRadius: 1,
               p: 5,
               overflow: "auto",
             }}
@@ -157,7 +160,7 @@ function Post() {
                   m: 1,
                 }}
               >
-                <Typography>{info.name}</Typography>
+                <Typography>{info.studentName}</Typography>
                 <Typography>{info.departmentName}</Typography>
                 <Typography>{info.email}</Typography>
               </Box>

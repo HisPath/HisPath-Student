@@ -84,11 +84,11 @@ export default function TagMenu() {
           {[
             ["수상", "add/prize", <AddPrize />, "#f9fbe7"],
             ["기술", "add/tech", <AddTech />, "#f1f8e9"],
-            ["과정", "add/edu", <AddEdu />, "#e8f5e9"],
+            ["학력", "add/edu", <AddEdu />, "#e8f5e9"],
             ["링크", "add/blog", <AddBlog />, "#e0f2f1"],
-            ["인턴", "add/intern", <AddIntern />, "#e0f7fa"],
+            ["경력", "add/intern", <AddIntern />, "#e0f7fa"],
             ["자격증", "add/cert", <AddCert />, "#e1f5fe"],
-            ["언어", "add/lang", <AddLang />, "#e3f2fd"],
+            ["외국어", "add/lang", <AddLang />, "#e3f2fd"],
             ["기타", "add", <ActivityAdd />, "#e8eaf6"],
           ].map((text) => (
             <ListItem

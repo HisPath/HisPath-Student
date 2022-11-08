@@ -59,7 +59,7 @@ function TextInput({ id, name, addData }) {
   );
 }
 
-function LinkInput({ name, addData }) {
+function LinkInput({ id, name, addData }) {
   return (
     <Box mt={1} width={"calc(47vw)"}>
       <InputLabel>{name}</InputLabel>
@@ -71,7 +71,7 @@ function LinkInput({ name, addData }) {
         variant="filled"
         size="small"
         onChange={(e) => {
-          addData(name, "link", e);
+          addData(id, name, "link", e);
         }}
       />
     </Box>
@@ -130,7 +130,7 @@ function ImageInput({ name, addData }) {
   );
 }
 
-function DateInput({ name, addData }) {
+function DateInput({ id, name, addData }) {
   return (
     <>
       <Box display="flex" gap={4}>
@@ -145,7 +145,7 @@ function DateInput({ name, addData }) {
             size="small"
             type="date"
             onChange={(e) => {
-              addData(name, "date", e);
+              addData(id, name, "date", e);
             }}
           />
         </Box>
@@ -174,11 +174,11 @@ export default function ActivityAdd({ getActivities }) {
   const [type, setType] = useState(0);
   const [open, setOpen] = useState(false); // dialog
   const [semesters, setSemesters] = useState([]);
-  const [json, setJson] = useState([]);
+  //   const [json, setJson] = useState([]);
   const [jsonData, setJsonData] = useState([]);
 
   const addData = (id, param, type, e) => {
-    const t = e.currentTarget.value ? e.currentTarget.value : "";
+    const fieldData = e.currentTarget.value ? e.currentTarget.value : "";
 
     setJsonData((old) => {
       return [
@@ -187,7 +187,7 @@ export default function ActivityAdd({ getActivities }) {
           id: id,
           field: param,
           type: type,
-          data: t,
+          data: fieldData,
         },
       ];
     });
@@ -212,17 +212,17 @@ export default function ActivityAdd({ getActivities }) {
     });
   };
 
-  const onValid = (formdata) => {
+  const onValid = (formData) => {
     const final = _.uniqBy(jsonData.reverse(), "id");
     final.sort((d1, d2) => {
       return d1.id - d2.id;
     });
 
-    formdata.data = JSON.stringify(final);
-    addActivity(formdata);
-    getActivities();
+    formData.data = JSON.stringify(final);
+    addActivity(formData);
+    window.location.reload();
+    // getActivities();
     handleCloseAdd();
-
     enqueueSnackbar("추가되었습니다.", { variant: "success" });
   };
 
@@ -277,7 +277,7 @@ export default function ActivityAdd({ getActivities }) {
           id,
           component: (
             <Box display={"flex"} alignItems={"center"} gap={1}>
-              <LinkInput name={name} addData={addData} />
+              <LinkInput id={id} name={name} addData={addData} />
               <DeleteIcon
                 sx={{ mt: 3 }}
                 fontSize="small"
@@ -319,7 +319,7 @@ export default function ActivityAdd({ getActivities }) {
               justifyContent="space-between"
               alignItems={"center"}
             >
-              <DateInput name={name} addData={addData} />
+              <DateInput id={id} name={name} addData={addData} />
               <DeleteIcon
                 sx={{ mt: 3 }}
                 fontSize="small"
