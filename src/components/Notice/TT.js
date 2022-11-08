@@ -36,6 +36,7 @@ const Header = styled('div')({
   justifyContent: 'space-between',
   alignItems: 'flex-end',
   paddingBottom: 10,
+  paddingTop: 10,
 });
 
 const Article = styled(Box)({
@@ -159,13 +160,7 @@ function TT() {
         const expD = new Date(data.expDate);
         return pubD <= today && expD >= today;
       });
-    }
-    if (noticeType === 1) {
-      arr = arr.filter(function (data) {
-        return data.importance;
-      });
-    }
-    if (noticeType === 2) {
+    } else if (noticeType === 2) {
       const d = new Date();
       const t = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
       const today = new Date(t);
@@ -174,6 +169,12 @@ function TT() {
         return expD < today;
       });
     }
+    if (noticeType === 1) {
+      arr = arr.filter(function (data) {
+        return data.importance;
+      });
+    }
+
     setNoticeList(arr);
   }
   const loadData = () => {

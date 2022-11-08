@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import Router from "./Router";
 import { theme } from "./style/theme";
@@ -11,6 +11,15 @@ function App() {
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
         <CssBaseline />
+        <GlobalStyles
+          styles={{
+            button: { whiteSpace: "nowrap" },
+            a: {
+              textDecoration: "none",
+              color: "inherit",
+            },
+          }}
+        />
         <Router />
       </SnackbarProvider>
     </ThemeProvider>

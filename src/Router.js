@@ -44,7 +44,6 @@ function Router() {
         <Route path="/activity/edit" element={<ActivityEdit />} />
 
         <Route path="/resume/*" element={<Resume />} />
-
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>

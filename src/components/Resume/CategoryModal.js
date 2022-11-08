@@ -74,7 +74,9 @@ function CategoryModal({ categories, setCategories, move }) {
   };
   return (
     <div>
-      <Button onClick={handleOpen}>카테고리 설정</Button>
+      <Button onClick={handleOpen} variant="outlined">
+        카테고리 설정
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
