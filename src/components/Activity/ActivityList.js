@@ -97,7 +97,7 @@ export default function ActivityList() {
                           fontWeight: 900,
                         }}
                       />
-                    ) : activity.section === "과정" ? (
+                    ) : activity.section === "학력" ? (
                       <Chip
                         label={activity.section}
                         sx={{
@@ -115,7 +115,7 @@ export default function ActivityList() {
                           fontWeight: 900,
                         }}
                       />
-                    ) : activity.section === "인턴" ? (
+                    ) : activity.section === "경력" ? (
                       <Chip
                         label={activity.section}
                         sx={{
