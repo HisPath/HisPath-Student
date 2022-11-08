@@ -19,20 +19,21 @@ export default function Buttons() {
       sx={{
         display: "flex",
         justifyContent: "space-around",
-        mt: 4,
       }}
     >
-      <ButtonGroup
-        variant="contained"
-        aria-label="outlined primary button group"
-      >
+      <ButtonGroup variant="text" aria-label="outlined primary button group">
         <Link to={`/activity`} style={{ textDecoration: "none" }}>
           <Button
             sx={{
-              fontWeight: "bold",
+              fontWeight: "400",
+              fontSize: "1rem",
               fontFamily: "Ubuntu",
+              backgroundColor: "secondary.main",
+              color: "white",
               width: btnWidth,
               height: "3rem",
+              borderRadius: 6,
+              mr: 0.5,
             }}
           >
             내 활동
@@ -40,22 +41,37 @@ export default function Buttons() {
         </Link>
         <Link to={`/mileage`} style={{ textDecoration: "none" }}>
           <Button
+            variant="outlined"
             sx={{
-              fontWeight: "bold",
+              fontWeight: "400",
+              fontSize: "1rem",
               fontFamily: "Ubuntu",
-              backgroundColor: "primary.light",
+              color: "secondary.dark",
               width: btnWidth,
               height: "3rem",
+              borderRadius: 6,
+              mr: 0.5,
             }}
           >
             마일리지
           </Button>
         </Link>
-        <Button
-          sx={{ fontWeight: "bold", fontFamily: "Ubuntu", width: btnWidth }}
-        >
-          포트폴리오
-        </Button>
+        <Link to={`/resume`} style={{ textDecoration: "none" }}>
+          <Button
+            sx={{
+              fontWeight: "400",
+              fontSize: "1rem",
+              fontFamily: "Ubuntu",
+              backgroundColor: "secondary.main",
+              color: "white",
+              width: btnWidth,
+              height: "3rem",
+              borderRadius: 6,
+            }}
+          >
+            포트폴리오
+          </Button>
+        </Link>
       </ButtonGroup>
     </Box>
   );

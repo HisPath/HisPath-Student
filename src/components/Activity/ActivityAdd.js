@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Box,
   Button,
@@ -25,7 +25,8 @@ import {
 import axios from "axios";
 import { getSemesters } from "../../api/activity";
 import { useSnackbar } from "notistack";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
+import _ from "lodash";
 
 const style = {
   position: "absolute",
@@ -39,7 +40,7 @@ const style = {
   borderRadius: 4,
 };
 
-function TextInput({ name }) {
+function TextInput({ id, name, addData }) {
   return (
     <Box mt={1} width={"calc(47vw)"}>
       <InputLabel>{name}</InputLabel>
@@ -50,12 +51,15 @@ function TextInput({ name }) {
         hiddenLabel
         variant="filled"
         size="small"
+        onChange={(e) => {
+          addData(id, name, "text", e);
+        }}
       />
     </Box>
   );
 }
 
-function LinkInput({ name }) {
+function LinkInput({ id, name, addData }) {
   return (
     <Box mt={1} width={"calc(47vw)"}>
       <InputLabel>{name}</InputLabel>
@@ -66,12 +70,15 @@ function LinkInput({ name }) {
         hiddenLabel
         variant="filled"
         size="small"
+        onChange={(e) => {
+          addData(id, name, "link", e);
+        }}
       />
     </Box>
   );
 }
 
-function ImageInput({ name }) {
+function ImageInput({ name, addData }) {
   const [newImgFile, setNewImgFile] = useState(null);
   const [newImgDir, setNewImgDir] = useState(null);
 
@@ -123,12 +130,12 @@ function ImageInput({ name }) {
   );
 }
 
-function DateInput() {
+function DateInput({ id, name, addData }) {
   return (
     <>
       <Box display="flex" gap={4}>
         <Box width="calc(20vw)">
-          <InputLabel sx={{ mt: 1 }}>시작일</InputLabel>
+          <InputLabel sx={{ mt: 1 }}>{name}</InputLabel>
           <TextField
             color="secondary"
             InputProps={{ disableUnderline: true }}
@@ -137,9 +144,12 @@ function DateInput() {
             variant="filled"
             size="small"
             type="date"
+            onChange={(e) => {
+              addData(id, name, "date", e);
+            }}
           />
         </Box>
-        <Box width="calc(20vw)">
+        {/* <Box width="calc(20vw)">
           <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
           <TextField
             color="secondary"
@@ -150,7 +160,7 @@ function DateInput() {
             size="small"
             type="date"
           />
-        </Box>
+        </Box> */}
       </Box>
     </>
   );
@@ -160,11 +170,28 @@ export default function ActivityAdd({ getActivities }) {
   const { enqueueSnackbar } = useSnackbar();
   const [textField, setTextField] = useState([]);
   // const [imageField, setImageField] = useState([]);
-  const [state, setState] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState(0);
-  const [open, setOpen] = React.useState(false); // dialog
+  const [open, setOpen] = useState(false); // dialog
   const [semesters, setSemesters] = useState([]);
+  //   const [json, setJson] = useState([]);
+  const [jsonData, setJsonData] = useState([]);
+
+  const addData = (id, param, type, e) => {
+    const fieldData = e.currentTarget.value ? e.currentTarget.value : "";
+
+    setJsonData((old) => {
+      return [
+        ...old,
+        {
+          id: id,
+          field: param,
+          type: type,
+          data: fieldData,
+        },
+      ];
+    });
+  };
 
   useEffect(() => {
     getSemesters().then((data) => {
@@ -178,24 +205,31 @@ export default function ActivityAdd({ getActivities }) {
     formState: { errors },
   } = useForm();
 
-  const addActivity = async (data) => {
+  const addActivity = async (formdata) => {
     await axios.post("http://localhost:8080/api/student-activity/1", {
-      ...data,
+      ...formdata,
       section: "기타",
     });
   };
 
-  const onValid = (data) => {
-    console.log(data);
-    addActivity(data);
-    getActivities();
-    handleCloseAdd();
+  const onValid = (formData) => {
+    const final = _.uniqBy(jsonData.reverse(), "id");
+    final.sort((d1, d2) => {
+      return d1.id - d2.id;
+    });
+
+    formData.data = JSON.stringify(final);
+    addActivity(formData);
     window.location.reload();
+    // getActivities();
+    handleCloseAdd();
     enqueueSnackbar("추가되었습니다.", { variant: "success" });
   };
 
-  const onRemove = (id) => {
-    setTextField((old) => old.filter((item) => item.id !== id));
+  const onRemove = (removeId) => {
+    setTextField((old) => old.filter((item) => item.id !== removeId));
+    const removed = _.remove(jsonData, "removeId");
+    setJsonData(removed);
   };
 
   // dialog
@@ -226,7 +260,7 @@ export default function ActivityAdd({ getActivities }) {
           id,
           component: (
             <Box display={"flex"} alignItems={"center"} gap={1}>
-              <TextInput name={name} />
+              <TextInput id={id} name={name} addData={addData} />
               <DeleteIcon
                 sx={{ mt: 3 }}
                 fontSize="small"
@@ -243,7 +277,7 @@ export default function ActivityAdd({ getActivities }) {
           id,
           component: (
             <Box display={"flex"} alignItems={"center"} gap={1}>
-              <LinkInput name={name} />
+              <LinkInput id={id} name={name} addData={addData} />
               <DeleteIcon
                 sx={{ mt: 3 }}
                 fontSize="small"
@@ -285,7 +319,7 @@ export default function ActivityAdd({ getActivities }) {
               justifyContent="space-between"
               alignItems={"center"}
             >
-              <DateInput />
+              <DateInput id={id} name={name} addData={addData} />
               <DeleteIcon
                 sx={{ mt: 3 }}
                 fontSize="small"
@@ -301,7 +335,8 @@ export default function ActivityAdd({ getActivities }) {
   const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <Button
+      <AddIcon fontSize="sm" color="secondary" onClick={handleOpenAdd} />
+      {/* <Button
         sx={{
           backgroundColor: "secondary.main",
           fontWeight: "600",
@@ -312,7 +347,8 @@ export default function ActivityAdd({ getActivities }) {
         onClick={handleOpenAdd}
       >
         활동 추가
-      </Button>
+      </Button> */}
+
       <Modal open={openAdd} onClose={handleCloseAdd}>
         <Box sx={style}>
           <Box display="flex" justifyContent="space-between">
@@ -358,9 +394,10 @@ export default function ActivityAdd({ getActivities }) {
               fullWidth
               hiddenLabel
               variant="filled"
-              {...register("data", {
-                required: "필수 항목입니다.",
-              })}
+              onChange={(e) => addData("ID내용ID", "내용", "text", e)}
+              // {...register("data", {
+              //   required: "필수 항목입니다.",
+              // })}
               size="small"
             />
             <InputLabel sx={{ mt: 1 }}>비고</InputLabel>

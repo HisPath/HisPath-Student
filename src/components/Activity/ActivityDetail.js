@@ -1,7 +1,7 @@
 import { Box, Button, InputLabel, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const data = {
   title: "활동 이름",
@@ -14,6 +14,8 @@ const data = {
 };
 
 export default function ActivityDetail() {
+  const { activityId } = useParams();
+
   const [newImgFile, setNewImgFile] = useState(data.newImgFile);
   const [newImgDir, setNewImgDir] = useState(data.newImgDir);
   const [dateState, setDateState] = useState(true);
@@ -21,7 +23,9 @@ export default function ActivityDetail() {
   const [activity, setActivity] = React.useState([]);
 
   const getActivity = async () => {
-    const activity = await axios.get("http://localhost:8080/api/activity/15");
+    const activity = await axios.get(
+      `http://localhost:8080/api/activity-detail/${activityId}`
+    );
     console.log(activity.data);
     setActivity(activity.data);
   };
@@ -70,29 +74,45 @@ export default function ActivityDetail() {
               </Box>
             </Box>
           )} */}
-
-          <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
-          <Typography sx={{ p: 2 }}>{activity.semester}</Typography>
-          <Box>
-            <InputLabel sx={{ mt: 1 }}>카테고리</InputLabel>
-            <Typography sx={{ p: 2 }}>{activity.categoryName}</Typography>
-          </Box>
-          <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
-          <Typography sx={{ p: 2 }}>{activity.name}</Typography>
-          <InputLabel sx={{ mt: 1 }}>마일리지 인정 여부</InputLabel>
+          <Box maxHeight={400} overflow="scroll">
+            <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
+            <Typography sx={{ p: 2 }}>{activity.semester}</Typography>
+            <Box>
+              <InputLabel sx={{ mt: 1 }}>카테고리</InputLabel>
+              <Typography sx={{ p: 2 }}>{activity.section}</Typography>
+            </Box>
+            <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
+            <Typography sx={{ p: 2 }}>{activity.name}</Typography>
+            {activity.data ? (
+              <>
+                <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
+                <Typography sx={{ p: 2 }}>
+                  {activity.data ? activity.data : ""}
+                </Typography>
+              </>
+            ) : (
+              ""
+            )}
+            {/* <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
           <Typography sx={{ p: 2 }}>
-            {activity.personal ? "마일리지 인정 활동" : "마일리지 미인정 활동"}
-          </Typography>
-          {activity.remark ? (
-            <>
-              <InputLabel sx={{ mt: 1 }}>비고</InputLabel>
-              <Typography sx={{ p: 2 }}>{activity.remark}</Typography>
-            </>
-          ) : (
-            <></>
-          )}
+            {activity.data ? activity.data : ""}
+          </Typography> */}
+            <InputLabel sx={{ mt: 1 }}>마일리지 인정 여부</InputLabel>
+            <Typography sx={{ p: 2 }}>
+              {activity.personal
+                ? "마일리지 인정 활동"
+                : "마일리지 미인정 활동"}
+            </Typography>
+            {activity.remark ? (
+              <>
+                <InputLabel sx={{ mt: 1 }}>비고</InputLabel>
+                <Typography sx={{ p: 2 }}>{activity.remark}</Typography>
+              </>
+            ) : (
+              <></>
+            )}
 
-          {/* <InputLabel sx={{ mt: 1 }}>이미지 (option)</InputLabel>
+            {/* <InputLabel sx={{ mt: 1 }}>이미지 (option)</InputLabel>
           <Box display="flex" mt={1}>
             {newImgDir ? (
               <Box
@@ -108,6 +128,7 @@ export default function ActivityDetail() {
               </Box>
             )}
           </Box> */}
+          </Box>
         </Box>
         <Box display="flex" justifyContent="flex-end" mt={3}>
           <Box display="flex" gap={1.5}>

@@ -48,11 +48,11 @@ export default function ActivityTab() {
   };
 
   return (
-    <Container>
-      <Paper sx={{ width: "100%", mb: 2, mt: 3 }}>
+    <>
+      <Paper sx={{ width: "100%", mb: 2, mt: 2, ml: 2 }}>
         <Box sx={{ width: "100%" }}>
           {/* <Box sx={{ borderBottom: 1, borderColor: "divider" }}> */}
-          <Box>
+          <Box display={"flex"} justifyContent="space-between">
             <Tabs
               value={value}
               onChange={handleChange}
@@ -61,23 +61,34 @@ export default function ActivityTab() {
               aria-label="icon position tabs example"
             >
               <Tab
-                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                sx={{
+                  minHeight: 3,
+                  pt: 1.5,
+                  fontWeight: 600,
+                  fontSize: "1.3rem",
+                }}
                 icon={<ListAltIcon />}
                 iconPosition="start"
                 label="내 활동"
                 {...a11yProps(0)}
               />
               <Tab
-                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                sx={{
+                  minHeight: 3,
+                  pt: 1.5,
+                  fontWeight: 600,
+                  fontSize: "1.3rem",
+                }}
                 icon={<BarChartIcon />}
                 iconPosition="start"
                 label="차트"
                 {...a11yProps(1)}
               />
             </Tabs>
+            {value === 0 ? <SelectAndSearch /> : ""}
           </Box>
           <TabPanel value={value} index={0}>
-            <SelectAndSearch />
+            {/* <SelectAndSearch /> */}
             <ActivityList />
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -85,6 +96,6 @@ export default function ActivityTab() {
           </TabPanel>
         </Box>
       </Paper>
-    </Container>
+    </>
   );
 }

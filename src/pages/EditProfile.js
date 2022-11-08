@@ -46,6 +46,7 @@ export default function EditProfile() {
     console.log(data);
     updateInfo(data);
     enqueueSnackbar("수정되었습니다.", { variant: "success" });
+    window.location.replace(`/dashboard`);
   };
 
   const [majors, setMajors] = useState([]);
@@ -57,7 +58,7 @@ export default function EditProfile() {
 
   return (
     <Container maxWidth="lg" sx={{ display: "flex", mt: 10, gap: 5 }}>
-      <Title register={register} />
+      <Title info={info} getInfo={getInfo} />
       <EditForm watch={watch} register={register} majors={majors} />
       <MdEditor
         register={register}

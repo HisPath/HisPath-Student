@@ -1,22 +1,39 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
-import { useState } from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import CategoryFieldArray from "./CategoryFieldArray";
 import CategoryModal from "./CategoryModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { blueGrey } from "@mui/material/colors";
+import { getInfo, postResume } from "../../api/resume";
 
-function Post() {
+function Post({ refresh }) {
+  const [info, setInfo] = useState([]);
+  useEffect(() => {
+    getInfo().then((data) => setInfo(data));
+  }, []);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [categories, setCategories] = useState([
-    "이력",
-    "교육",
-    "프로젝트",
-    "언어",
+    "경력",
+    "학력",
+    "기술",
+    "자격증",
+    "수상",
+    "외국어",
+    "링크",
+    "기타",
   ]);
-  const [resume, setResume] = useState([]);
   const {
     register,
     watch,
@@ -24,15 +41,22 @@ function Post() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({ defaultValues: { title: "이력서" } });
   const { move } = useFieldArray({
     control,
-    name: `contents`,
+    name: `content`,
   });
-  const onValid = (data) => {
-    alert(JSON.stringify(data));
-    setResume((old) => [...old, data]);
+  const onValid = async (data) => {
+    await postResume({
+      title: data.title,
+      content: JSON.stringify({
+        dataList: data.content,
+        categories: categories,
+      }),
+    });
+    refresh();
     navigate("..");
+    enqueueSnackbar("저장되었습니다.", { variant: "success" });
   };
   const onInvalid = () => {
     enqueueSnackbar("모든 칸을 채워 주세요.", { variant: "error" });
@@ -46,7 +70,7 @@ function Post() {
             px: 2,
             width: 1,
             backgroundColor: "background.default",
-            overflow: "scroll",
+            overflow: "auto",
           }}
         >
           <Box
@@ -62,9 +86,10 @@ function Post() {
               component="form"
               onSubmit={handleSubmit(onValid, onInvalid)}
               sx={{
-                p: 2,
+                py: 2,
                 display: "flex",
                 justifyContent: "space-between",
+                gap: 1,
               }}
             >
               <Button
@@ -83,6 +108,10 @@ function Post() {
             <Divider />
           </Box>
           <Box>
+            <Box sx={{ p: 2 }}>
+              <InputLabel>이력서 제목</InputLabel>
+              <TextField variant="standard" {...register("title")} />
+            </Box>
             {categories.map((category, categoryIndex) => (
               <CategoryFieldArray
                 key={category}
@@ -96,47 +125,100 @@ function Post() {
         <Box
           sx={{
             width: 1,
-            backgroundColor: "background.paper",
-            overflow: "scroll",
+            display: "flex",
+            justifyContent: "center",
+            backgroundColor: blueGrey[600],
             p: 4,
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "center", p: 3, pb: 5 }}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              이력서
-            </Typography>
-          </Box>
-          {watch("contents")?.map((item, index) => (
-            <Box key={index} mb={4}>
-              {item.data.length !== 0 && (
-                <>
-                  <Typography variant="h5" component="h2" gutterBottom>
-                    {categories[index]}
-                  </Typography>
-                  <Box mb={2}>
-                    {watch(`contents[${index}].data`).map((data, dataIndex) => (
-                      <Box key={dataIndex} p={1}>
-                        <Typography variant="h6" component="h3" gutterBottom>
-                          {data.title}
-                        </Typography>
-                        <Typography p={1} pt={0}>
-                          {data.description.split("\n").map((line, index) => {
-                            return (
-                              <span key={index}>
-                                {line}
-                                <br />
-                              </span>
-                            );
-                          })}
-                        </Typography>
-                      </Box>
-                    ))}
-                    <Divider />
-                  </Box>
-                </>
-              )}
+          <Box
+            sx={{
+              width: 720,
+              backgroundColor: "background.paper",
+              height: 1,
+              borderRadius: 1,
+              p: 5,
+              overflow: "auto",
+            }}
+          >
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+              <Typography variant="h4" component="h1">
+                {watch("title")}
+              </Typography>
             </Box>
-          ))}
+            <Box sx={{ display: "flex", gap: 1, mb: 5 }}>
+              <Avatar
+                alt={info.name}
+                src={info.profile}
+                sx={{ width: 100, height: 100, mx: 2 }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  m: 1,
+                }}
+              >
+                <Typography>{info.studentName}</Typography>
+                <Typography>{info.departmentName}</Typography>
+                <Typography>{info.email}</Typography>
+              </Box>
+            </Box>
+            {watch("content")?.map((item, index) => (
+              <Box key={index} mb={4}>
+                {item.data.length !== 0 && (
+                  <>
+                    <Typography variant="h5" component="h2" gutterBottom>
+                      {categories[index]}
+                    </Typography>
+                    <Box mb={2}>
+                      {watch(`content[${index}].data`).map(
+                        (data, dataIndex) => (
+                          <Box key={dataIndex} p={1} py={0.5}>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1.5,
+                                mb: 0.5,
+                              }}
+                            >
+                              <Typography variant="h6" component="h3">
+                                {data.title}
+                              </Typography>
+                              {data.hasDate && (
+                                <Typography variant="caption">
+                                  {data.startDate === data.endDate
+                                    ? data.startDate
+                                    : `${data.startDate} ~ ${
+                                        data.endDate || "현재"
+                                      }`}
+                                </Typography>
+                              )}
+                            </Box>
+                            <Typography p={1} pt={0}>
+                              {data.description
+                                .split("\n")
+                                .map((line, index) => {
+                                  return (
+                                    <span key={index}>
+                                      {line}
+                                      <br />
+                                    </span>
+                                  );
+                                })}
+                            </Typography>
+                          </Box>
+                        )
+                      )}
+                      <Divider />
+                    </Box>
+                  </>
+                )}
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Box>
     </Box>

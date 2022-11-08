@@ -17,7 +17,7 @@ const pages = [
   { name: "내 활동", link: "/activity" },
   { name: "마일리지", link: "/mileage" },
   { name: "이력서", link: "/resume" },
-  { name: "로그아웃", link: "#" },
+  { name: "로그아웃", link: "/login" },
 ];
 const settings = ["Logout"];
 
@@ -49,7 +49,7 @@ const Headers = () => {
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            href="/dashboard"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },

@@ -4,19 +4,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import parse from 'html-react-parser';
 
-const bull = (
-  <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-    •
-  </Box>
-);
-
 export default function BasicCard({ data }) {
   const DefaultCard = () => (
     <>
       <CardContent style={{ padding: '16px 16px 16px' }}>
         <StatusIcons imp={data.importance} style={{ float: 'right' }} />
         <Typography variant="body2">{data.managerName}</Typography>
-
         <Typography sx={{ fontSize: 14 }} color="text.secondary">
           {data.pubDate}
         </Typography>
@@ -48,13 +41,13 @@ export default function BasicCard({ data }) {
           </Typography>
         </Box>
         <Typography
-          sx={{ fontSize: 14 }}
+          sx={{ fontSize: 15 }}
           color="text.secondary"
-          display="flex"
-          justifyContent={'right'}
+          style={{ float: 'right' }}
           gap={0.5}
         >
-          {data.viewCnt} <VisibilityIcon fontSize="small" />
+          {data.viewCnt}
+          <VisibilityIcon style={{ float: 'right' }} fontSize="small" />
         </Typography>
       </CardContent>
     </>
