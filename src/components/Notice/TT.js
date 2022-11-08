@@ -16,6 +16,9 @@ import Switch from '@mui/material/Switch';
 import CardGrid from './CardGrid';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 const modalStyle = {
   position: 'absolute',
   top: '50%',
@@ -92,9 +95,18 @@ function TT() {
   const [noticeList, setNoticeList] = useState([]);
   const [card, setCard] = useState(false);
 
+  const PublishDuration = ({ p }) => {
+    var pubD = p.row.pubDate;
+    var expD = p.row.expDate;
+    return (
+      <Typography variant="h7" fontWeight="normal">
+        {pubD} ~ {expD}
+      </Typography>
+    );
+  };
+
   const columns = [
     {
-      field: 'importance',
       width: 10,
       renderCell: (param) => (
         <strong>
@@ -116,9 +128,10 @@ function TT() {
       filterable: false,
       renderCell: (index) => noticeList.length - index.api.getRowIndex(index.row.id),
     },
+
     {
       field: 'title',
-      width: 500,
+      width: 600,
       headerName: '제목',
     },
     {
@@ -128,16 +141,19 @@ function TT() {
     },
     {
       field: 'pubDate',
-      width: 150,
-      type: Date,
-      headerName: '게시일',
-    },
-
-    {
-      field: 'expDate',
-      width: 150,
-      type: Date,
-      headerName: '만료일',
+      width: 200,
+      headerName: '게시기간',
+      renderCell: (param) => (
+        <strong>
+          <Box
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            <PublishDuration p={param} />
+          </Box>
+        </strong>
+      ),
     },
     {
       field: 'viewCnt',
@@ -188,21 +204,54 @@ function TT() {
     loadData();
   }, [noticeType]);
 
+  const Mode = () => {
+    if (card)
+      return (
+        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
+          카드
+        </Typography>
+      );
+    else {
+      return (
+        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
+          테이블
+        </Typography>
+      );
+    }
+  };
+
   return (
     <Container>
       <Header>
         <Typography variant="h5" style={{ fontWeight: 'bold' }}>
           공지사항
         </Typography>
-
-        <Switch
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                color={card ? 'primary' : 'secondary'}
+                componentsProps={{ input: { 'aria-label': 'card mode' } }}
+                checked={card}
+                label="View Mode"
+                onChange={(event) => {
+                  setCard(event.target.checked);
+                }}
+              />
+            }
+            labelPlacement="start"
+            label={`Select View Mode: ${card ? 'Card Mode' : 'Table Mode'}`}
+          />
+        </FormGroup>
+        {/* <Switch
           color={card ? 'primary' : 'secondary'}
           componentsProps={{ input: { 'aria-label': 'card mode' } }}
           checked={card}
+          label="View Mode"
           onChange={(event) => {
             setCard(event.target.checked);
           }}
-        />
+        /> */}
       </Header>
       <Box display="flex" paddingBottom={1} gap={1.5} justifyContent={'right'}>
         <Button variant="outlined" onClick={() => setNoticeType(0)}>
@@ -246,8 +295,8 @@ function TT() {
               rows={noticeList}
               columns={columns}
               onRowClick={({ id }) => window.open(`/notice/${id}`, '_self')}
-              pageSize={20}
-              rowsPerPageOptions={[20]}
+              pageSize={10}
+              rowsPerPageOptions={[10]}
               AlternationCount="{ Binding MainData.ProjColl.Count}"
               disableColumnMenu
               disableDensitySelector
