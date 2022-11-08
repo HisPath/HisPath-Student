@@ -14,32 +14,40 @@ import { useSetRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
 import axios from "axios";
 import { semesterState } from "../../store/atom";
+import { CategoryRounded } from "@mui/icons-material";
+import { useEffect } from "react";
 
 const drawerWidth = 240;
 const style = {
   fontWeight: "bold",
 };
 
+export const getActivitiesBySemCate = async (category, semester) => {
+  const response = await axios.get(
+    `http://localhost:8080/api/student-allmactivities/18?semester=${semester}&category=${category}`
+  );
+
+  return response.data;
+};
+
 export default function TagMenu() {
   const setActivities = useSetRecoilState(activityState);
   const semester = useRecoilValue(semesterState);
 
-  const getActivitiesBySemCate = async (semester, category) => {
-    const response = await axios.get(
-      `http://localhost:8080/api/student-mactivities/1?semester=${category}&category=${semester}`
-    );
-    return response.data;
-  };
-
-  const changeSections = (cate) => {
-    if (!cate) {
+  const changeSections = (category) => {
+    if (!category) {
       getActivities().then((data) => setActivities(data));
     } else {
-      getActivitiesBySemCate(cate, semester).then((data) =>
-        setActivities(data)
-      );
+      getActivitiesBySemCate(category, semester).then((data) => {
+        setActivities(data);
+      });
     }
   };
+
+  // useEffect(() => {
+  //   getActivitiesBySemCate("ALL", "2022-2");
+  // }, []);
+
   return (
     <Box sx={{ display: "flex" }}>
       <Drawer
@@ -55,29 +63,7 @@ export default function TagMenu() {
         variant="permanent"
         anchor="left"
       >
-        <List
-        // sx={{ pt: "calc(11vh)" }}
-        >
-          {/* <ListItem key={"전체"} onClick={() => changeSections()}>
-            <ListItemButton>
-              <TagIcon />
-              <ListItemText
-                sx={{ ml: 1 }}
-                primaryTypographyProps={{ style: style }}
-                primary={"전체"}
-              />
-            </ListItemButton> */}
-          {/* </ListItem>
-          <ListItem key={"# 마일리지"}>
-            <ListItemButton>
-              <TagIcon />
-              <ListItemText
-                sx={{ ml: 1 }}
-                primaryTypographyProps={{ style: style }}
-                primary={"마일리지"}
-              />
-            </ListItemButton>
-          </ListItem> */}
+        <List>
           <ListItem></ListItem>
           <ListItem></ListItem>
           <ListItem></ListItem>
@@ -91,12 +77,6 @@ export default function TagMenu() {
             ["비교과-행사참여", "add/tech"],
             ["비교과-학회활동", "add/tech"],
             ["기타", "add/tech"],
-
-            // ["링크", "add/blog"],
-            // ["인턴", "add/intern"],
-            // ["자격증", "add/cert"],
-            // ["언어", "add/lang"],
-            // ["기타", "add"],
           ].map((text) => (
             <ListItem key={text[0]} onClick={() => changeSections(text[0])}>
               <ListItemButton>
@@ -108,40 +88,9 @@ export default function TagMenu() {
                   primary={text[0]}
                 />
               </ListItemButton>
-
-              {/* <Link to={text[1]} style={{ textDecoration: "none" }}>
-                <AddIcon fontSize="sm" color="secondary" />
-              </Link> */}
             </ListItem>
           ))}
         </List>
-        {/* <List
-        // sx={{ pt: "calc(11vh)" }}
-        >
-          {[
-            "# 마일리지",
-            "# 수상",
-            "# 기술",
-            "# 교육과정",
-            "# 블로그",
-            "# 인턴",
-            "# 자격증",
-            "# 어학사항",
-            "# 기타",
-          ].map((text, index) => (
-            <ListItem key={text}>
-              <ListItemButton>
-                <ListItemText
-                  primaryTypographyProps={{ style: style }}
-                  primary={text}
-                />
-              </ListItemButton>
-              <Link to={`/activity/add`} style={{ textDecoration: "none" }}>
-                <AddIcon fontSize="sm" color="secondary" />
-              </Link>
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
     </Box>
   );

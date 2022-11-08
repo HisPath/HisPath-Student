@@ -77,7 +77,13 @@ export default function BasicTabs() {
                 label="내 마일리지"
                 {...a11yProps(0)}
               />
-              <Tab label="내 활동" {...a11yProps(1)} />
+              <Tab
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                icon={<ListAltIcon />}
+                iconPosition="start"
+                label="내 활동"
+                {...a11yProps(1)}
+              />
               <Tab
                 sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
                 icon={<BarChartIcon />}

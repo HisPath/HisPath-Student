@@ -7,5 +7,5 @@ export const activityState = atom({
 
 export const semesterState = atom({
   key: "semester",
-  default: [],
+  default: "2022-1",
 });
