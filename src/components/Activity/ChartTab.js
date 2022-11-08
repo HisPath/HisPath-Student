@@ -103,20 +103,34 @@ const ChartTab = () => {
     ],
   });
   const [chartDataLanguage, setChartData1] = useState({
-    labels: ["C", "JAVA", "Python"],
+    labels: ["2021-1", "2021-2", "2022-1", "2022-2"],
     datasets: [
       {
-        label: "나의 실력",
-        data: [8, 4, 7],
+        label: "나의 JAVA 실력",
+        data: [2, 4, 7, 12],
         backgroundColor: "rgba(142, 202, 206, 0.2)",
         borderColor: "rgb(0, 156, 242)",
         borderWidth: 1.5,
       },
       {
-        label: "학년 평균",
-        data: [6, 8, 9],
+        label: "학년 JAVA 평균",
+        data: [6, 8, 9, 10],
         backgroundColor: "rgba(243, 229, 185, 0.2)",
         borderColor: "rgb(255, 183, 0)",
+        borderWidth: 1.5,
+      },
+      {
+        label: "나의 Python 실력",
+        data: [3, 4, 9, 12],
+        backgroundColor: "rgba(142, 202, 206, 0.2)",
+        borderColor: "rgb(156, 0, 242)",
+        borderWidth: 1.5,
+      },
+      {
+        label: "학년 Python 평균",
+        data: [8, 5, 7, 8],
+        backgroundColor: "rgba(243, 229, 185, 0.2)",
+        borderColor: "rgb(255, 0, 183)",
         borderWidth: 1.5,
       },
     ],
@@ -195,7 +209,7 @@ const ChartTab = () => {
               padding: "40px 10px 41px 10px",
             }}
           >
-            <Bar
+            <Line
               width={180}
               data={chartDataLanguage}
               options={options}
