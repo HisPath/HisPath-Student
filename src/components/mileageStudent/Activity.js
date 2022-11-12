@@ -15,11 +15,17 @@ import { Typography } from "@mui/material";
 import NavigatorToTop from "./NavigatorToTop";
 import axios from "axios";
 import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { semesterState } from "../../store/atom";
+import TagMenu from "../Activity/TagMenu";
 
 export default function BasicTable(props) {
   const [activities, setActivities] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
   const [semesters, setSemesters] = React.useState([]);
+  const semester = useRecoilValue(semesterState);
+
+  // const [mileageActivities, setActivities] = useRecoilState(activityState);
 
   const getCategories = async () => {
     const category = await axios.get("http://localhost:8080/api/categories");
@@ -43,7 +49,7 @@ export default function BasicTable(props) {
   return (
     <div className="root">
       {/* <Tags></Tags> */}
-      <h4>내 활동들</h4>
+      {/* <h4>내 활동들</h4> */}
       {/* {categories.map((m) => ( */}
       <div className="paper">
         {/* <div id={m.categoryId}>
@@ -70,7 +76,7 @@ export default function BasicTable(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.semesters === "whole" ? (
+              {props.semesters === "ALL" ? (
                 <>
                   {activities.map((activity) =>
                     activity.personal === true ? (
@@ -100,7 +106,7 @@ export default function BasicTable(props) {
                   {activities.map((activity) =>
                     // activity.categoryDto.name === m.name &&
                     activity.personal === true &&
-                    activity.semester === props.semester ? (
+                    activity.semester === semester ? (
                       <TableRow
                         key={activity.id}
                         sx={{

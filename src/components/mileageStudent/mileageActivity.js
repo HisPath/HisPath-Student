@@ -19,14 +19,22 @@ import { useEffect } from "react";
 import { LocalActivityOutlined } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { Padding } from "@mui/icons-material";
+import { useRecoilValue } from "recoil";
+import { semesterState } from "../../store/atom";
+import { activityState } from "../../store/atom";
+import { getActivitiesBySemCate } from "./TagMenu";
+import { useRecoilState } from "recoil";
+import { Chip } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
-export default function MileageTables(props) {
-  const [activities, setActivities] = React.useState([]);
+export default function MileageTables() {
   const [categories, setCategories] = React.useState([]);
-  const [semester, setSemesters] = React.useState([]);
   const [allActivity, setAllActivities] = React.useState([]);
+  const semester = useRecoilValue(semesterState);
+  const [mileageActivities, setActivities] = useRecoilState(activityState);
 
+  // console.log(mileageActivities);
   const getCategories = async () => {
     const category = await axios.get("http://localhost:8080/api/categories");
     setCategories(category.data);
@@ -46,141 +54,175 @@ export default function MileageTables(props) {
     setActivities(activity.data.activities);
   };
 
+  const changeSections = (category) => {
+    if (!category) {
+      getActivities().then((data) => setActivities(data));
+    } else {
+      getActivitiesBySemCate(category, semester).then((data) => {
+        setActivities(data);
+        console.log(category);
+        console.log(semester);
+        console.log(data);
+      });
+    }
+  };
   useEffect(() => {
     getActivities();
     getCategories();
     getAllActivities();
+    changeSections("ALL");
   }, []);
 
   useEffect(() => {
     getAllActivities();
   }, [semester]);
-
+  console.log(categories);
   return (
     <div className="root">
-      <Tags></Tags>
+      {/* <Tags></Tags> */}
 
-      {categories.map((m) => (
-        <div className="paper">
-          <div id={m.categoryId}>
-            <Typography color={"grey"} sx={{ marginLeft: 10 }}>
-              {/* {m.name} */}
-            </Typography>
-          </div>
-          <TableContainer
-            sx={{ marginLeft: 10, width: "90%" }}
-            component={Paper}
-            style={{ maxHeight: 500 }}
+      {/* {categories.map((m) => ( */}
+      <div className="paper">
+        <TableContainer
+          sx={{ marginLeft: 10, width: "90%" }}
+          component={Paper}
+          style={{ maxHeight: 500 }}
+        >
+          <Table
+            sx={{
+              width: "60vw",
+              border: `1px solid #e6e6e6`,
+            }}
+            aria-label="simple table"
+            stickyHeader
           >
-            <Table
-              sx={{
-                minWidth: 650,
-                border: `1px solid #e6e6e6`,
-              }}
-              aria-label="simple table"
-              stickyHeader
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ width: "20%" }}>카테고리</TableCell>
-                  <TableCell sx={{ width: "20%" }}>학기</TableCell>
-                  <TableCell sx={{ width: "20%" }}>항목명</TableCell>
-                  <TableCell sx={{ width: "20%" }}>참여여부</TableCell>
-                  <TableCell sx={{ width: "20%" }}>비고</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {props.semester === "whole" ? (
-                  <>
-                    {activities.map((activity) =>
-                      activity.categoryDto.name === m.name &&
-                      activity.personal === false ? (
-                        <TableRow
-                          key={activity.id}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell
-                            component="th"
-                            scope="row"
-                            sx={{ textOverflow: "ellipsis" }}
-                          >
-                            {activity.categoryDto.name}
-                          </TableCell>
-                          <TableCell
-                            component="th"
-                            scope="row"
-                            sx={{ textOverflow: "ellipsis" }}
-                          >
-                            {activity.semester}
-                          </TableCell>
-                          <TableCell
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ width: "20%" }}>카테고리</TableCell>
+                <TableCell sx={{ width: "20%" }}>학기</TableCell>
+                <TableCell sx={{ width: "20%" }}>항목명</TableCell>
+                <TableCell sx={{ width: "20%" }} align="center">
+                  참여여부
+                </TableCell>
+                <TableCell sx={{ width: "20%" }}>비고</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {semester === "ALL" ? (
+                <>
+                  {categories.map((m) => (
+                    // <div id={m.categoryId}>
+                    <>
+                      {/* <Typography color={"grey"} sx={{ marginLeft: 10 }}>
+                        {/* {m.name} */}
+                      {/* </Typography> */}
+                      {mileageActivities.map((activity) =>
+                        activity.category === m.name ? (
+                          <TableRow
+                            key={activity.id}
                             sx={{
-                              textOverflow: "ellipsis",
+                              "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            {activity.name}
-                          </TableCell>
-                          <TableCell sx={{ textOverflow: "ellipsis" }}>
-                            {}
-                          </TableCell>
-                          <TableCell>{activity.remark}</TableCell>
-                        </TableRow>
-                      ) : (
-                        ""
-                      )
-                    )}
-                  </>
-                ) : (
-                  <>
-                    {activities.map((activity) =>
-                      activity.categoryDto.name === m.name &&
-                      activity.personal === false &&
-                      activity.semester === props.semester ? (
-                        <TableRow
-                          key={activity.id}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell
-                            component="th"
-                            scope="row"
-                            sx={{ textOverflow: "ellipsis" }}
-                          >
-                            {activity.categoryDto.name}
-                          </TableCell>
-                          <TableCell
-                            component="th"
-                            scope="row"
-                            sx={{ textOverflow: "ellipsis" }}
-                          >
-                            {activity.semester}
-                          </TableCell>
-                          <TableCell
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              sx={{ textOverflow: "ellipsis" }}
+                            >
+                              {activity.category}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              sx={{ textOverflow: "ellipsis" }}
+                            >
+                              {activity.semester}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              sx={{ textOverflow: "ellipsis" }}
+                            >
+                              {activity.name}
+                            </TableCell>
+                            <TableCell
+                              sx={{
+                                textOverflow: "ellipsis",
+                                width: "20%",
+                              }}
+                              align="center"
+                            >
+                              {activity.participated && <DoneIcon />}
+                            </TableCell>
+                            <TableCell>{activity.remark}</TableCell>
+                          </TableRow>
+                        ) : (
+                          ""
+                        )
+                      )}
+                    </>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {categories.map((m) => (
+                    // <div id={m.categoryId}>
+                    //   <Typography color={"grey"} sx={{ marginLeft: 10 }}>
+                    //     {/* {m.name} */}
+                    //   </Typography>
+                    <>
+                      {mileageActivities.map((activity) => {
+                        console.log(m, activity, semester);
+                        return activity.category === m.name &&
+                          activity.semester === semester ? (
+                          <TableRow
+                            key={activity.id}
                             sx={{
-                              textOverflow: "ellipsis",
+                              "&:last-child td, &:last-child th": { border: 0 },
                             }}
                           >
-                            {activity.name}
-                          </TableCell>
-                          <TableCell sx={{ textOverflow: "ellipsis" }}>
-                            {}
-                          </TableCell>
-                          <TableCell>{activity.remark}</TableCell>
-                        </TableRow>
-                      ) : (
-                        ""
-                      )
-                    )}
-                  </>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-      ))}
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              sx={{ textOverflow: "ellipsis" }}
+                            >
+                              {activity.category}
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              scope="row"
+                              sx={{ textOverflow: "ellipsis" }}
+                            >
+                              {activity.semester}
+                            </TableCell>
+                            <TableCell
+                              sx={{
+                                textOverflow: "ellipsis",
+                              }}
+                            >
+                              {activity.name}
+                            </TableCell>
+                            <TableCell
+                              sx={{ textOverflow: "ellipsis" }}
+                              align="center"
+                            >
+                              {activity.participated && <DoneIcon />}
+                            </TableCell>
+                            <TableCell>{activity.remark}</TableCell>
+                          </TableRow>
+                        ) : (
+                          ""
+                        );
+                      })}
+                    </>
+                  ))}
+                </>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      {/* ))} */}
       <NavigatorToTop></NavigatorToTop>
       <Link
         href="/"
