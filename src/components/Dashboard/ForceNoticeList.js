@@ -45,7 +45,7 @@ export default function Notice() {
         color="secondary.dark"
         width={noticeWidth}
       >
-        Notice
+        필수공지
       </Typography>
       <List sx={style} component="nav" aria-label="mailbox folders">
         {notices.map((notice) => (
