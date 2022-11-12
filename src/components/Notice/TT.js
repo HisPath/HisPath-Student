@@ -90,11 +90,12 @@ const StatusIcons = ({ p }) => {
   }
 };
 
+// function TT({ card, setCard }) {
 function TT() {
   const [noticeType, setNoticeType] = useState(0);
   const [init, setInit] = useState(false);
   const [noticeList, setNoticeList] = useState([]);
-  const [card, setCard] = useState(false);
+  const [card, setCard] = useState(window.localStorage.getItem('card'));
 
   const PublishDuration = ({ p }) => {
     var pubD = p.row.pubDate;
@@ -121,7 +122,6 @@ function TT() {
         </strong>
       ),
     },
-
     {
       field: 'id',
       headerName: 'No',
@@ -199,27 +199,20 @@ function TT() {
       noticeFilter(response.data);
       setInit(true);
     });
+    setCard(window.localStorage.getItem('card'));
   };
-
   useEffect(() => {
     loadData();
   }, [noticeType]);
 
-  const Mode = () => {
-    if (card)
-      return (
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
-          카드
-        </Typography>
-      );
-    else {
-      return (
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
-          테이블
-        </Typography>
-      );
-    }
+  const saveCard = () => {
+    window.localStorage.setItem('card', card);
+    console.log(window.localStorage.getItem('card'));
   };
+
+  useState(() => {
+    saveCard();
+  }, [card]);
 
   return (
     <Container>
