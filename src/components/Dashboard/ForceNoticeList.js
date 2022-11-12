@@ -1,14 +1,14 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import { Box, Typography } from '@mui/material';
-import axios from 'axios';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import { Box, Typography } from "@mui/material";
+import axios from "axios";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const noticeWidth = '28rem';
+const noticeWidth = "28rem";
 
 const style = {
   padding: 2,
@@ -16,14 +16,16 @@ const style = {
   marginTop: 1,
   marginBottom: 1,
   maxWidth: noticeWidth,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
 };
 
 export default function Notice() {
   const [notices, setNotices] = React.useState([]);
 
   const getNotices = async () => {
-    const notice = await axios.get('http://localhost:8080/api/student/dashboard/1');
+    const notice = await axios.get(
+      "http://localhost:8080/api/student/dashboard/1"
+    );
     setNotices(notice.data.notice);
   };
 
@@ -37,11 +39,10 @@ export default function Notice() {
         gutterBottom
         variant="h5"
         component="div"
-        m={3}
         mt={1}
-        marginBottom={1}
-        fontFamily="Ubuntu"
+        mb={1}
         textAlign="center"
+        fontWeight={600}
         color="secondary.dark"
         width={noticeWidth}
       >
@@ -54,7 +55,7 @@ export default function Notice() {
               primary={notice.title}
               secondary={notice.pubDate}
               onClick={() => {
-                window.open(`/notice/${notice.noticeId}`, '_self');
+                window.open(`/notice/${notice.noticeId}`, "_self");
               }}
             />
           </ListItem>
