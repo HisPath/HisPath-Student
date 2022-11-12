@@ -1,21 +1,21 @@
 import React from 'react';
 import { Grid, Container, styled, Box } from '@mui/material';
-import BasicCard from './BasicCard';
+import NoticeCard from './NoticeCard';
 const Section = styled(Container)({
   marginTop: 0,
   padding: 0,
   borderRadius: 8,
 });
 function CardGrid({ noticeList }) {
-  const Propcheck = () => {
-    console.log(noticeList);
-  };
+  // const Propcheck = () => {
+  //   console.log(noticeList);
+  // };
   const NoticeTocard = () => {
     var arr = [];
     noticeList.map((notice) =>
       arr.push(
-        <Grid key={notice.id} item xs={12} lg={6}>
-          <BasicCard data={notice}></BasicCard>
+        <Grid key={notice.id} item xs={12} lg={6} style={{ height: 300 }}>
+          <NoticeCard data={notice} style={{ height: 'auto' }}></NoticeCard>
         </Grid>,
       ),
     );

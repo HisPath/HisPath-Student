@@ -4,26 +4,27 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import parse from 'html-react-parser';
 
-export default function BasicCard({ data }) {
+export default function NoticeCard({ data }) {
   const DefaultCard = () => (
-    <>
-      <CardContent style={{ padding: '16px 16px 16px' }}>
+    <Box container>
+      <CardContent style={{ padding: '16px 16px 16px', height: '100px' }}>
         <StatusIcons imp={data.importance} style={{ float: 'right' }} />
         <Typography variant="body2">{data.managerName}</Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary">
           {data.pubDate}
         </Typography>
         <Typography
-          variant="h4"
+          variant="h5"
           component="div"
           style={{
             fontWeight: 'bold',
             paddingBottom: 10,
+            height: '100px',
           }}
         >
           {data.title}
         </Typography>
-        <Box display="flex">
+        {/* <Box display="flex">
           <Typography
             sx={{
               display: '-webkit-box',
@@ -39,7 +40,7 @@ export default function BasicCard({ data }) {
           >
             {parse(data.content)}
           </Typography>
-        </Box>
+        </Box> */}
         <Typography
           sx={{ fontSize: 15 }}
           color="text.secondary"
@@ -50,7 +51,7 @@ export default function BasicCard({ data }) {
           <VisibilityIcon style={{ float: 'right' }} fontSize="small" />
         </Typography>
       </CardContent>
-    </>
+    </Box>
   );
 
   const [comp, setComp] = useState(<DefaultCard />);
