@@ -1,12 +1,10 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Chip, Container, Grid, styled, Stack, Typography } from '@mui/material';
-
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ReportIcon from '@mui/icons-material/Report';
-
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 const Section = styled(Container)({
   marginTop: 10,
@@ -38,27 +36,26 @@ function Article({
         </Typography>
       );
   }
-
   function HtmlToString() {
     return <div dangerouslySetInnerHTML={{ __html: content }}></div>;
   }
+
   return (
     <Section>
       <Header>
         <Typography variant="h5" style={{ fontWeight: 'bold' }}>
           공지사항 &#62; 상세
         </Typography>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            window.history.go(-1);
-          }}
-          style={{
-            float: 'right',
-          }}
-        >
-          돌아가기
-        </Button>
+        <Link to="/notice">
+          <Button
+            variant="outlined"
+            style={{
+              float: 'right',
+            }}
+          >
+            돌아가기
+          </Button>
+        </Link>
       </Header>
       <Box container>
         <br />
