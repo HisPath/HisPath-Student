@@ -6,8 +6,8 @@ import parse from 'html-react-parser';
 
 export default function NoticeCard({ data }) {
   const DefaultCard = () => (
-    <Box container>
-      <CardContent style={{ padding: '16px 16px 16px', height: '100px' }}>
+    <Box container style={{ height: '100px' }}>
+      <CardContent style={{ padding: '16px 16px 16px', height: 'auto' }}>
         <StatusIcons imp={data.importance} style={{ float: 'right' }} />
         <Typography variant="body2">{data.managerName}</Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary">
@@ -15,7 +15,13 @@ export default function NoticeCard({ data }) {
         </Typography>
         <Typography
           variant="h5"
-          component="div"
+          // display="inline"
+          sx={{
+            display: '-webkit-box',
+            overflow: 'hidden',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 1,
+          }}
           style={{
             fontWeight: 'bold',
             paddingBottom: 10,
@@ -24,7 +30,7 @@ export default function NoticeCard({ data }) {
         >
           {data.title}
         </Typography>
-        {/* <Box display="flex">
+        <Box display="flex" stype={{ height: 'auto' }}>
           <Typography
             sx={{
               display: '-webkit-box',
@@ -40,7 +46,7 @@ export default function NoticeCard({ data }) {
           >
             {parse(data.content)}
           </Typography>
-        </Box> */}
+        </Box>
         <Typography
           sx={{ fontSize: 15 }}
           color="text.secondary"
