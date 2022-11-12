@@ -6,6 +6,7 @@ import { MileageArea } from "../components/Dashboard/MileageArea.js";
 import Navigation from "../components/Dashboard/Navigation.js";
 import Readme from "../components/Dashboard/Readme.js";
 import { ResumeArea } from "../components/Dashboard/ResumeArea.js";
+import ForceNotice from "../components/Dashboard/ForceNotice.js";
 
 function Dashboard() {
   return (
@@ -40,6 +41,7 @@ function Dashboard() {
           <ResumeArea />
         </Box>
       </Container>
+      <ForceNotice />
     </>
   );
 }

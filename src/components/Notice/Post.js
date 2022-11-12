@@ -9,6 +9,7 @@ import {
   styled,
   Stack,
   Typography,
+  Backdrop,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ReportIcon from "@mui/icons-material/Report";
@@ -48,7 +49,9 @@ function Article({
   function HtmlToString() {
     return <div dangerouslySetInnerHTML={{ __html: content }}></div>;
   }
-
+  const gobackone = () => {
+    window.history.go(-1);
+  };
   return (
     <Section>
       <Header>

@@ -38,13 +38,14 @@ export default function Notice() {
         variant="h5"
         component="div"
         m={3}
-        mt={3}
+        mt={1}
+        marginBottom={1}
         fontFamily="Ubuntu"
         textAlign="center"
         color="secondary.dark"
         width={noticeWidth}
       >
-        Notice
+        필수공지
       </Typography>
       <List sx={style} component="nav" aria-label="mailbox folders">
         {notices.map((notice) => (
