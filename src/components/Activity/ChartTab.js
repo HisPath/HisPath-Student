@@ -136,7 +136,7 @@ const ChartTab = () => {
     <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
       <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
         <Paper sx={{ width: "calc(30vw)" }} elevation={0}>
-          <Typography
+          {/* <Typography
             style={{
               background: "rgb(238,242,245)",
               padding: "20px 0 8px calc(12vw)",
@@ -147,8 +147,24 @@ const ChartTab = () => {
             color="primary"
           >
             Activity
-          </Typography>
-          <Carousel navButtonsAlwaysVisible={true} stopAutoPlayOnHover={true}>
+          </Typography> */}
+          <Carousel
+            navButtonsAlwaysVisible={true}
+            stopAutoPlayOnHover={true}
+            navButtonsProps={{
+              style: {
+                backgroundColor: "cornflowerblue",
+                // borderRadius: 0,
+              },
+            }}
+            // navButtonsWrapperProps={{
+            //   style: {
+            //     bottom: "0",
+            //     top: "unset",
+            //   },
+            // }}
+            height="600px"
+          >
             <div
               style={{
                 background: "rgb(238,242,245)",
