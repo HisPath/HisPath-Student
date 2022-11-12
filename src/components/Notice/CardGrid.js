@@ -7,15 +7,12 @@ const Section = styled(Container)({
   borderRadius: 8,
 });
 function CardGrid({ noticeList }) {
-  // const Propcheck = () => {
-  //   console.log(noticeList);
-  // };
   const NoticeTocard = () => {
     var arr = [];
     noticeList.map((notice) =>
       arr.push(
         <Grid key={notice.id} item xs={12} lg={6} style={{ height: 300 }}>
-          <NoticeCard data={notice} style={{ height: 'auto' }}></NoticeCard>
+          <NoticeCard data={notice}></NoticeCard>
         </Grid>,
       ),
     );
