@@ -3,11 +3,11 @@ import { Line, Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-
-import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import { useEffect } from "react";
 import React from "react";
+import Carousel from "react-material-ui-carousel";
+import { Home } from "@mui/icons-material";
 
 const options = {
   elements: {
@@ -50,7 +50,7 @@ const options = {
   },
 };
 
-const pligins = [
+const plugins = [
   {
     beforeInit: function (chart) {
       chart.legend.afterFit = function () {
@@ -102,57 +102,29 @@ const ChartTab = () => {
       },
     ],
   });
-  const [chartDataLanguage, setChartData1] = useState({
-    labels: ["2021-1", "2021-2", "2022-1", "2022-2"],
-    datasets: [
-      {
-        label: "나의 JAVA 실력",
-        data: [2, 4, 7, 12],
-        backgroundColor: "rgba(142, 202, 206, 0.2)",
-        borderColor: "rgb(0, 156, 242)",
-        borderWidth: 1.5,
-      },
-      {
-        label: "학년 JAVA 평균",
-        data: [6, 8, 9, 10],
-        backgroundColor: "rgba(243, 229, 185, 0.2)",
-        borderColor: "rgb(255, 183, 0)",
-        borderWidth: 1.5,
-      },
-      {
-        label: "나의 Python 실력",
-        data: [3, 4, 9, 12],
-        backgroundColor: "rgba(142, 202, 206, 0.2)",
-        borderColor: "rgb(156, 0, 242)",
-        borderWidth: 1.5,
-      },
-      {
-        label: "학년 Python 평균",
-        data: [8, 5, 7, 8],
-        backgroundColor: "rgba(243, 229, 185, 0.2)",
-        borderColor: "rgb(255, 0, 183)",
-        borderWidth: 1.5,
-      },
-    ],
-  });
-  const [chartDataMileage, setChartDataMileage] = useState({
+
+  const [chartDataActivity2, setChartData2] = useState({
     labels: [
-      "교내 활동",
-      ["교외", "활동"],
-      "수상내역",
-      ["또 뭐가", "  있지  "],
+      "마일리지",
+      ["수상"],
+      "기술",
+      "과정",
+      "블로그",
+      "인턴",
+      "자격증",
+      "언어",
     ],
     datasets: [
       {
-        label: "내 마일리지 평균",
-        data: [1, 4, 5, 2], // 순서대로 교내, 교외, 수상, 또 뭐가 있지
+        label: "내 활동",
+        data: [2, 9, 3, 5, 1, 3, 9, 4],
         backgroundColor: "rgba(142, 202, 206, 0.2)",
         borderColor: "rgb(0, 156, 242)",
         borderWidth: 1.5,
       },
       {
-        label: "학년 마일리지 평균",
-        data: [5, 3, 2, 4],
+        label: "학년 평균",
+        data: [5, 3, 2, 4, 3, 2, 1, 3],
         backgroundColor: "rgba(243, 229, 185, 0.2)",
         borderColor: "rgb(255, 183, 0)",
         borderWidth: 1.5,
@@ -162,8 +134,8 @@ const ChartTab = () => {
 
   return (
     <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
-      <Box m={3} pb={3} display={"flex"} justifyContent={"space-evenly"}>
-        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+      <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
+        <Paper sx={{ width: "calc(30vw)" }} elevation={0}>
           <Typography
             style={{
               background: "rgb(238,242,245)",
@@ -176,74 +148,37 @@ const ChartTab = () => {
           >
             Activity
           </Typography>
-          <div
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "20px 10px 21px 10px",
-            }}
-          >
-            <Radar
-              width={180}
-              data={chartDataActivity}
-              options={options}
-              plugins={pligins}
-            />
-          </div>
+          <Carousel navButtonsAlwaysVisible={true}>
+            <div
+              style={{
+                background: "rgb(238,242,245)",
+                padding: "20px 10px 21px 10px",
+              }}
+            >
+              <Typography sx={{ ml: 3 }}>2022-1</Typography>
+              <Radar
+                width={180}
+                data={chartDataActivity}
+                options={options}
+                plugins={plugins}
+              />
+            </div>
+            <div
+              style={{
+                background: "rgb(238,242,245)",
+                padding: "20px 10px 21px 10px",
+              }}
+            >
+              <Typography sx={{ ml: 3 }}>2022-2</Typography>
+              <Radar
+                width={180}
+                data={chartDataActivity2}
+                options={options}
+                plugins={plugins}
+              />
+            </div>
+          </Carousel>
         </Paper>
-        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-          <Typography
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "41px 0 0 calc(11vw)",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              fontFamily: "ubuntu",
-            }}
-            color="primary"
-          >
-            Language
-          </Typography>
-          <div
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "40px 10px 41px 10px",
-            }}
-          >
-            <Line
-              width={180}
-              data={chartDataLanguage}
-              options={options}
-              plugins={pligins}
-            />
-          </div>
-        </Paper>
-        {/* <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-          <Typography
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "41px 0 0 calc(8.7vw)",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              fontFamily: "ubuntu",
-            }}
-            color="primary"
-          >
-            Mileage
-          </Typography>
-          <div
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "40px 10px 41px 10px",
-            }}
-          >
-            <Line
-              width={180}
-              data={chartDataMileage}
-              options={options}
-              plugins={pligins}
-            />
-          </div>
-        </Paper> */}
       </Box>
     </Box>
   );
