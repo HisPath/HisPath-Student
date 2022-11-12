@@ -148,11 +148,11 @@ const ChartTab = () => {
           >
             Activity
           </Typography>
-          <Carousel navButtonsAlwaysVisible={true}>
+          <Carousel navButtonsAlwaysVisible={true} stopAutoPlayOnHover={true}>
             <div
               style={{
                 background: "rgb(238,242,245)",
-                padding: "20px 10px 21px 10px",
+                padding: "20px 0px 21px 0px",
               }}
             >
               <Typography sx={{ ml: 3 }}>2022-1</Typography>
@@ -166,7 +166,7 @@ const ChartTab = () => {
             <div
               style={{
                 background: "rgb(238,242,245)",
-                padding: "20px 10px 21px 10px",
+                padding: "20px 0px 21px 0px",
               }}
             >
               <Typography sx={{ ml: 3 }}>2022-2</Typography>
