@@ -1,6 +1,16 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Chip, Container, Grid, styled, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Chip,
+  Container,
+  Grid,
+  styled,
+  Stack,
+  Typography,
+  Backdrop,
+} from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ReportIcon from '@mui/icons-material/Report';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
@@ -39,23 +49,26 @@ function Article({
   function HtmlToString() {
     return <div dangerouslySetInnerHTML={{ __html: content }}></div>;
   }
-
+  const gobackone = () => {
+    window.history.go(-1);
+  };
   return (
     <Section>
       <Header>
         <Typography variant="h5" style={{ fontWeight: 'bold' }}>
           공지사항 &#62; 상세
         </Typography>
-        <Link to="/notice">
-          <Button
-            variant="outlined"
-            style={{
-              float: 'right',
-            }}
-          >
-            돌아가기
-          </Button>
-        </Link>
+        <Button
+          variant="outlined"
+          style={{
+            float: 'right',
+          }}
+          onClick={() => {
+            window.history.go(-1);
+          }}
+        >
+          돌아가기
+        </Button>
       </Header>
       <Box container>
         <br />
