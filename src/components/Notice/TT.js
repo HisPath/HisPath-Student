@@ -19,6 +19,7 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ModeSwitch from './ModeSwitch';
 
 const modalStyle = {
   position: 'absolute',
@@ -94,7 +95,7 @@ function TT() {
   const [noticeType, setNoticeType] = useState(0);
   const [init, setInit] = useState(false);
   const [noticeList, setNoticeList] = useState([]);
-  const [card, setCard] = useState(false);
+  const [card, setCard] = useState(window.localStorage.getItem('card') == 'true');
 
   const PublishDuration = ({ p }) => {
     var pubD = p.row.pubDate;
@@ -121,7 +122,6 @@ function TT() {
         </strong>
       ),
     },
-
     {
       field: 'id',
       headerName: 'No',
@@ -198,29 +198,16 @@ function TT() {
     axios.get('http://localhost:8080/api/notice').then(function (response) {
       noticeFilter(response.data);
       setInit(true);
+      setCard(window.localStorage.getItem('card') == 'true');
     });
   };
-
   useEffect(() => {
     loadData();
   }, [noticeType]);
 
-  const Mode = () => {
-    if (card)
-      return (
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
-          카드
-        </Typography>
-      );
-    else {
-      return (
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
-          테이블
-        </Typography>
-      );
-    }
-  };
-
+  useEffect(() => {
+    window.localStorage.setItem('card', card);
+  }, [card]);
   return (
     <Container>
       <Header>
@@ -231,23 +218,7 @@ function TT() {
             </Typography>
           </Grid>
           <Grid item xs="5" display="flex" justifyContent={'right'}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    color={card ? 'primary' : 'secondary'}
-                    componentsProps={{ input: { 'aria-label': 'card mode' } }}
-                    checked={card}
-                    label="View Mode"
-                    onChange={(event) => {
-                      setCard(event.target.checked);
-                    }}
-                  />
-                }
-                labelPlacement="start"
-                label={`Select View Mode: ${card ? 'Card Mode' : 'Table Mode'}`}
-              />
-            </FormGroup>
+            <ModeSwitch card={card} setCard={setCard} />
           </Grid>
           <Grid item xs="3">
             <Box display="flex" gap={1.5} justifyContent={'right'}>
@@ -264,17 +235,6 @@ function TT() {
           </Grid>
         </Grid>
       </Header>
-      {/* <Box display="flex" paddingBottom={1} gap={1.5} justifyContent={'right'}>
-        <Button variant="outlined" onClick={() => setNoticeType(0)}>
-          전체 공지
-        </Button>
-        <Button variant="outlined" onClick={() => setNoticeType(1)}>
-          중요 공지
-        </Button>
-        <Button variant="outlined" onClick={() => setNoticeType(2)}>
-          지난 공지
-        </Button>
-      </Box> */}
       {card ? (
         <Article>
           {init ? (

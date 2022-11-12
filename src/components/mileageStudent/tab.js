@@ -53,7 +53,7 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  const [semester, setSemesters] = React.useState([]);
+  // const [semester, setSemesters] = React.useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -77,7 +77,13 @@ export default function BasicTabs() {
                 label="내 마일리지"
                 {...a11yProps(0)}
               />
-              <Tab label="내 활동" {...a11yProps(1)} />
+              <Tab
+                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                icon={<ListAltIcon />}
+                iconPosition="start"
+                label="내 활동"
+                {...a11yProps(1)}
+              />
               <Tab
                 sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
                 icon={<BarChartIcon />}
@@ -90,7 +96,7 @@ export default function BasicTabs() {
             </span> */}
             </Tabs>
             <SemesterSelect
-              setSemesters={setSemesters}
+              // setSemesters={setSemesters}
               sx={{
                 minWidth: 120,
                 backgroundColor: "white",
@@ -105,10 +111,10 @@ export default function BasicTabs() {
         </Box>
       </Box>
       <TabPanel value={value} index={0}>
-        <MileageTables semester={semester}></MileageTables>
+        <MileageTables></MileageTables>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ActivityTables semester={semester}></ActivityTables>
+        <ActivityTables></ActivityTables>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <MileageChart></MileageChart>
