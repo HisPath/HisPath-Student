@@ -8,13 +8,13 @@ import MileageChart from "./MileageChart";
 
 import Box from "@mui/material/Box";
 import MileageTables from "./mileageActivity";
-// import Button from "@mui/material/Button";
 import ActivityTables from "./Activity";
 import SemesterSelect from "./semesterSelect";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import BarChartIcon from "@mui/icons-material/BarChart";
-// import { Fab } from "@mui/material";
-// import { Link } from "react-router-dom";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import TagMenu from "./TagMenu";
+import ATagMenu from "./ATagMenu";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -30,7 +30,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ paddingTop: 0 }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -53,17 +53,21 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  // const [semester, setSemesters] = React.useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <div>
+    <Box>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <Tabs
               sx={{ flexGrow: 1 }}
               value={value}
@@ -79,7 +83,7 @@ export default function BasicTabs() {
               />
               <Tab
                 sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
-                icon={<ListAltIcon />}
+                icon={<PersonOutlineOutlinedIcon />}
                 iconPosition="start"
                 label="내 활동"
                 {...a11yProps(1)}
@@ -110,11 +114,18 @@ export default function BasicTabs() {
           </Box>
         </Box>
       </Box>
+
       <TabPanel value={value} index={0}>
-        <MileageTables></MileageTables>
+        <Box sx={{ display: "flex" }}>
+          <TagMenu />
+          <MileageTables></MileageTables>
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ActivityTables></ActivityTables>
+        <Box sx={{ display: "flex" }}>
+          <ATagMenu />
+          <ActivityTables></ActivityTables>
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <MileageChart></MileageChart>
@@ -144,6 +155,6 @@ export default function BasicTabs() {
           장학금 신청
         </Fab>
       </Link> */}
-    </div>
+    </Box>
   );
 }

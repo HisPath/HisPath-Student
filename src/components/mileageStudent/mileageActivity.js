@@ -36,20 +36,22 @@ export default function MileageTables() {
 
   // console.log(mileageActivities);
   const getCategories = async () => {
-    const category = await axios.get("http://localhost:8080/api/categories");
+    const category = await axios.get(
+      `${process.env.REACT_APP_SERVER}/categories`
+    );
     setCategories(category.data);
   };
 
   const getAllActivities = async () => {
     const activities = await axios.get(
-      "http://localhost:8080/api/mileage/semester?semester=" + semester
+      `${process.env.REACT_APP_SERVER}/mileage/semester?semester=${semester}`
     );
     setAllActivities(activities.data);
   };
 
   const getActivities = async () => {
     const activity = await axios.get(
-      "http://localhost:8080/api/studentmileage/1"
+      `${process.env.REACT_APP_SERVER}/studentmileage/1`
     );
     setActivities(activity.data.activities);
   };
@@ -60,37 +62,34 @@ export default function MileageTables() {
     } else {
       getActivitiesBySemCate(category, semester).then((data) => {
         setActivities(data);
-        console.log(category);
+        // console.log(category);
         console.log(semester);
-        console.log(data);
+        // console.log(data);
       });
     }
   };
   useEffect(() => {
-    getActivities();
+    // getActivities();
     getCategories();
-    getAllActivities();
+    // getAllActivities();
     changeSections("ALL");
   }, []);
 
   useEffect(() => {
-    getAllActivities();
+    // getAllActivities();
+    changeSections("ALL");
   }, [semester]);
-  console.log(categories);
+
   return (
     <div className="root">
-      {/* <Tags></Tags> */}
-
-      {/* {categories.map((m) => ( */}
       <div className="paper">
         <TableContainer
-          sx={{ marginLeft: 10, width: "90%" }}
+          sx={{ marginLeft: 10, width: "90%", minWidth: 900 }}
           component={Paper}
-          style={{ maxHeight: 500 }}
+          // style={{ maxHeight: 500 }}
         >
           <Table
             sx={{
-              width: "60vw",
               border: `1px solid #e6e6e6`,
             }}
             aria-label="simple table"
@@ -127,21 +126,21 @@ export default function MileageTables() {
                             <TableCell
                               component="th"
                               scope="row"
-                              sx={{ textOverflow: "ellipsis" }}
+                              sx={{ textOverflow: "ellipsis", width: "20%" }}
                             >
                               {activity.category}
                             </TableCell>
                             <TableCell
                               component="th"
                               scope="row"
-                              sx={{ textOverflow: "ellipsis" }}
+                              sx={{ textOverflow: "ellipsis", width: "20%" }}
                             >
                               {activity.semester}
                             </TableCell>
                             <TableCell
                               component="th"
                               scope="row"
-                              sx={{ textOverflow: "ellipsis" }}
+                              sx={{ textOverflow: "ellipsis", width: "20%" }}
                             >
                               {activity.name}
                             </TableCell>
@@ -172,7 +171,7 @@ export default function MileageTables() {
                     //   </Typography>
                     <>
                       {mileageActivities.map((activity) => {
-                        console.log(m, activity, semester);
+                        // console.log(m, activity, semester);
                         return activity.category === m.name &&
                           activity.semester === semester ? (
                           <TableRow

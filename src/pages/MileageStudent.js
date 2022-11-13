@@ -5,7 +5,6 @@ import Header from "../components/mileageStudent/header";
 
 import Tab from "../components/mileageStudent/tab";
 import { Box } from "@mui/material";
-import TagMenu from "../components/mileageStudent/TagMenu";
 
 // function MileageStudent() {
 //   return (
@@ -30,7 +29,6 @@ function MileageStudent() {
     //   <Tab></Tab>
     // </div>
     <Box className="outline" maxWidth="xl" sx={{ display: "flex" }}>
-      <TagMenu />
       <Tab />
     </Box>
   );

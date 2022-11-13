@@ -2,7 +2,6 @@ import ApplyButton from "./ApplyButton";
 
 import SemesterSelect from "./semesterSelect";
 
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,41 +9,42 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Tags from "./Tag";
 import { Typography } from "@mui/material";
 import NavigatorToTop from "./NavigatorToTop";
-import axios from "axios";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { semesterState } from "../../store/atom";
-import TagMenu from "../Activity/TagMenu";
+import { useRecoilState } from "recoil";
+import { myActivityState } from "../../store/atom";
+import { getActivities } from "../../api/activity";
+import { getMyActivitiesBySemCate } from "./ATagMenu";
+import { useState } from "react";
 
-export default function BasicTable(props) {
-  const [activities, setActivities] = React.useState([]);
-  const [categories, setCategories] = React.useState([]);
-  const [semesters, setSemesters] = React.useState([]);
-  const semester = useRecoilValue(semesterState);
+export default function BasicTable() {
+  // const [categories, setCategories] = React.useState([]);
+  // const [semesters, setSemesters] = React.useState([]);
+  const semesters = useRecoilValue(semesterState);
+  const [activities, setActivities] = useRecoilState(myActivityState);
+  const [activityId, setActivityId] = useState();
+  const [rq, setRq] = useState();
+  const [apply, setApply] = useState();
 
-  // const [mileageActivities, setActivities] = useRecoilState(activityState);
-
-  const getCategories = async () => {
-    const category = await axios.get("http://localhost:8080/api/categories");
-    setCategories(category.data);
-  };
-
-  const getActivities = async () => {
-    const activity = await axios.get(
-      "http://localhost:8080/api/studentmileage/1"
-    );
-    setActivities(activity.data.activities);
+  const changeSections = (section) => {
+    if (!section) {
+      getActivities().then((data) => setActivities(data));
+    } else {
+      getMyActivitiesBySemCate(section, semesters).then((data) => {
+        setActivities(data);
+        console.log(semesters);
+      });
+    }
   };
   useEffect(() => {
-    getActivities();
-    getCategories();
+    changeSections("ALL");
   }, []);
 
   useEffect(() => {
-    console.log(activities);
+    changeSections("ALL");
   }, [semesters]);
   return (
     <div className="root">
@@ -56,11 +56,10 @@ export default function BasicTable(props) {
             <Typography sx={{ color: "grey" }}>{m.period}</Typography>
             <Typography sx={{ color: "grey" }}></Typography>
           </div> */}
-
         <TableContainer
           component={Paper}
           sx={{ marginLeft: 10, width: "90%", minWidth: 900 }}
-          style={{ maxHeight: 500 }}
+          // style={{ maxHeight: 500 }}
         >
           <Table
             sx={{ minWidth: 650, border: `1px solid #e6e6e6` }}
@@ -76,10 +75,10 @@ export default function BasicTable(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.semesters === "ALL" ? (
+              {semesters === "ALL" ? (
                 <>
                   {activities.map((activity) =>
-                    activity.personal === true ? (
+                    activity.requestStatus !== 1 ? (
                       <TableRow
                         key={activity.id}
                         sx={{
@@ -92,21 +91,26 @@ export default function BasicTable(props) {
                         <TableCell>{activity.name}</TableCell>
                         <TableCell>{activity.remark}</TableCell>
                         <TableCell>
-                          <ApplyButton></ApplyButton>
+                          {activity.requestStatus !== 3
+                            ? (apply = true)
+                            : (apply = false)}
+                          <ApplyButton
+                            requestStatus={rq}
+                            id={activity.id}
+                            changeSections={changeSections}
+                          ></ApplyButton>
                         </TableCell>
                       </TableRow>
                     ) : (
-                      // ""
-                      <>{semesters}</>
+                      ""
                     )
                   )}
                 </>
               ) : (
                 <>
                   {activities.map((activity) =>
-                    // activity.categoryDto.name === m.name &&
-                    activity.personal === true &&
-                    activity.semester === semester ? (
+                    activity.requestStatus !== 1 &&
+                    semesters === activity.semester ? (
                       <TableRow
                         key={activity.id}
                         sx={{
@@ -119,7 +123,11 @@ export default function BasicTable(props) {
                         <TableCell>{activity.name}</TableCell>
                         <TableCell>{activity.remark}</TableCell>
                         <TableCell>
-                          <ApplyButton></ApplyButton>
+                          <ApplyButton
+                            requestStatus={activity.requestStatus}
+                            id={activity.id}
+                            changeSections={changeSections}
+                          ></ApplyButton>
                         </TableCell>
                       </TableRow>
                     ) : (
