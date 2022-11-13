@@ -7,8 +7,30 @@ import Navigation from "../components/Dashboard/Navigation.js";
 import Readme from "../components/Dashboard/Readme.js";
 import { ResumeArea } from "../components/Dashboard/ResumeArea.js";
 import ForceNotice from "../components/Dashboard/ForceNotice.js";
+import "../style/dashboard.css";
+import { useEffect, useState } from "react";
 
 function Dashboard() {
+  const [scroll, setScroll] = useState(true);
+  const [scrollText, setScrollText] = useState(false);
+
+  const controlScroll = () => {
+    if (window.scrollY > 130) {
+      setScroll(false);
+      setScrollText(true);
+    } else {
+      setScroll(true);
+      setScrollText(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlScroll);
+    return () => {
+      window.removeEventListener("scroll", controlScroll);
+    };
+  }, []);
+
   return (
     <>
       <Container>
@@ -17,7 +39,12 @@ function Dashboard() {
           <Readme />
           <Navigation />
         </Box>
-        <Box display={"flex"} justifyContent="center">
+        <Box
+          display={"flex"}
+          justifyContent="center"
+          alignItems={"center"}
+          flexDirection="column"
+        >
           <Typography
             sx={{
               WebkitBackgroundClip: "text",
@@ -27,9 +54,15 @@ function Dashboard() {
               fontWeight: 700,
               fontSize: "1.4rem",
             }}
+            id={`${scrollText && "scroll"}`}
           >
             Scroll down
           </Typography>
+          <div
+            component={"div"}
+            // id="scroll-down"
+            id={`${scroll && `scroll-down`}`}
+          />
         </Box>
         <Box>
           <ActivityArea />
