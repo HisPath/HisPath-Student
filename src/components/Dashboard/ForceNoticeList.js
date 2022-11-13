@@ -28,8 +28,6 @@ const checkLocalStorage = async (notice) => {
     const obj = { viewed: false, expire: exp };
     window.localStorage.setItem(`IMP#${notice.noticeId}`, JSON.stringify(obj));
   }
-  // console.log(window.localStorage.getItem(`IMP#${notice.noticeId}`));
-  // return window.localStorage.getItem(`IMP#${notice.noticeId}`);
 };
 
 const changeViewed = (id) => {
@@ -47,11 +45,8 @@ function clear() {
 function length() {
   console.log(window.localStorage.length);
 }
-const GetfromLS = ({ notice }) => {
+const GetfromLS = ({ notice, setId }) => {
   const [state, setState] = useState(false);
-  // clear();
-  // length();
-
   useEffect(() => {
     checkLocalStorage(notice).then(() => {
       setState(JSON.parse(window.localStorage.getItem(`IMP#${notice.noticeId}`)).viewed);
@@ -65,7 +60,8 @@ const GetfromLS = ({ notice }) => {
         onClick={() => {
           setState(true);
           changeViewed(notice.noticeId);
-          window.open(`/notice/${notice.noticeId}`);
+          setId(notice.noticeId);
+          // window.open(`/notice/${notice.noticeId}`);
         }}
       />
       <Checkbox disabled checked={state} />
@@ -80,7 +76,6 @@ const loadViewData = async (notices) => {
     const obj = JSON.parse(window.localStorage.getItem(`IMP#${notice.noticeId}`));
     if (obj.viewed) arr.push(notice.noticeId);
   });
-  console.log(arr);
   return arr;
 };
 const deleteExpData = async () => {
@@ -90,15 +85,9 @@ const deleteExpData = async () => {
     const today = new Date();
     if (obj.expire < today) window.localStorage.removeItem(key);
   }
-  // for (let i = 0; i < window.localStorage.length; i++) {
-  //   const key = window.localStorage.key(i);
-  //   const obj = window.localStorage.getItem(key);
-  //   console.log('key: ' + key + ', obj: ' + obj);
-  // }
-  console.log('DELETE()');
 };
 
-export default function ForceNoticeList() {
+export default function ForceNoticeList({ setId }) {
   const [notices, setNotices] = useState([]);
   let viewedList = [];
   const getNotices = async () => {
@@ -117,9 +106,11 @@ export default function ForceNoticeList() {
     getViewed();
   }, [notices]);
 
-  const CheckViwed = ({ n }) => {
+  const CheckViwed = ({ n, setId }) => {
     console.log(viewedList);
-    if (!(n.noticeId in viewedList)) return <GetfromLS notice={n} />;
+    if (!(n.noticeId in viewedList)) {
+      return <GetfromLS notice={n} setId={setId} />;
+    }
   };
   return (
     <Box>
@@ -138,7 +129,7 @@ export default function ForceNoticeList() {
       </Typography>
       <List sx={style} component="nav" aria-label="mailbox folders">
         {notices.map((notice) => (
-          <CheckViwed n={notice} />
+          <CheckViwed n={notice} setId={setId} />
         ))}
       </List>
     </Box>
