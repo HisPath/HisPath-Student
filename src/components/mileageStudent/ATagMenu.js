@@ -9,7 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import TagIcon from "@mui/icons-material/Tag";
 import { getActivities, getActivitiesBySec } from "../../api/activity";
-import { activityState } from "../../store/atom";
+import { myActivityState } from "../../store/atom";
 import { useSetRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
 import axios from "axios";
@@ -22,28 +22,36 @@ const style = {
   fontWeight: "bold",
 };
 
-export const getActivitiesBySemCate = async (category, semester) => {
+export const getMyActivitiesBySemCate = async (section, semester) => {
   const response = await axios.get(
-    `http://localhost:8080/api/student-allmactivities/18?semester=${semester}&category=${category}`
+    `http://localhost:8080/api/student-activities/status?semester=${semester}&section=${section}`
   );
 
   return response.data;
 };
 
-export default function TagMenu() {
-  const setActivities = useSetRecoilState(activityState);
+export default function ATagMenu() {
+  const setActivities = useSetRecoilState(myActivityState);
   const semester = useRecoilValue(semesterState);
 
-  const changeSections = (category) => {
-    if (!category) {
+  const changeSections = (section) => {
+    if (!section) {
       getActivities().then((data) => setActivities(data));
     } else {
-      getActivitiesBySemCate(category, semester).then((data) => {
+      getMyActivitiesBySemCate(section, semester).then((data) => {
         setActivities(data);
+        // console.log("section : " + section);
+        // console.log("semester : " + semester);
       });
     }
   };
 
+  useEffect(() => {
+    // getActivities();
+
+    // getAllActivities();
+    changeSections("ALL");
+  }, []);
   return (
     <Box sx={{ display: "flex" }}>
       <Drawer
@@ -65,13 +73,13 @@ export default function TagMenu() {
           <ListItem></ListItem>
           <ListItem></ListItem>
           {[
-            ["참여여부", "add/tech"],
-            ["전공마일리지", "add/tech"],
-            ["산학마일리지", "add/tech"],
-            ["비교과-연구활동", "add/tech"],
-            ["비교과-특강참여", "add/tech"],
-            ["비교과-행사참여", "add/tech"],
-            ["비교과-학회활동", "add/tech"],
+            ["수상", "add/tech"],
+            ["기술", "add/tech"],
+            ["학력", "add/tech"],
+            ["링크", "add/tech"],
+            ["경력", "add/tech"],
+            ["자격증", "add/tech"],
+            ["외국어", "add/tech"],
             ["기타", "add/tech"],
           ].map((text) => (
             <ListItem key={text[0]} onClick={() => changeSections(text[0])}>

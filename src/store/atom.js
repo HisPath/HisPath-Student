@@ -5,6 +5,11 @@ export const activityState = atom({
   default: [],
 });
 
+export const myActivityState = atom({
+  key: "myactivity",
+  default: [],
+});
+
 export const semesterState = atom({
   key: "semester",
   default: "2022-1",

@@ -7,6 +7,10 @@ import { Bar } from "react-chartjs-2";
 import React from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import Carousel from "react-material-ui-carousel";
+
+// 2번째 Line Column
+// 3번쨰 bar with markers
 
 const options = {
   elements: {
@@ -49,7 +53,7 @@ const options = {
   },
 };
 
-const pligins = [
+const plugins = [
   {
     beforeInit: function (chart) {
       chart.legend.afterFit = function () {
@@ -61,7 +65,7 @@ const pligins = [
 ];
 
 const ChartTab = () => {
-  const [chartDataActivity, setChartData] = useState({
+  const [chartDataMileage, setChartData] = useState({
     labels: [
       "교내 활동",
       "전공 마일리지",
@@ -90,7 +94,7 @@ const ChartTab = () => {
     ],
     // 분포 , 평균
   });
-  const [chartDataLanguage, setChartData1] = useState({
+  const [chartDataPopularity, setChartData1] = useState({
     labels: [
       "교내 활동",
       "전공 마일리지",
@@ -118,7 +122,7 @@ const ChartTab = () => {
       // },
     ],
   });
-  const [chartDataMileage, setChartDataMileage] = useState({
+  const [chartDataRank, setChartDataMileage] = useState({
     labels: [
       "최저점수",
       "내 점수(상위 10%)",
@@ -200,117 +204,197 @@ const ChartTab = () => {
   }, []);
 
   return (
-    <Box>
-      <Box m={3} pb={3} display={"flex"}>
-        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-          <Typography
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "20px 0 8px calc(9vw)",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              fontFamily: "ubuntu",
+    // <Box>
+    //   <Box m={3} pb={3} display={"flex"} justifyContent={"center"}>
+    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+    //       <Typography
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "20px 0 8px calc(9vw)",
+    //           fontSize: "1.4rem",
+    //           fontWeight: "bold",
+    //           fontFamily: "ubuntu",
+    //         }}
+    //         color="primary"
+    //       >
+    //         Mileage
+    //       </Typography>
+    //       <div
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "20px 10px 21px 10px",
+    //         }}
+    //       >
+    //         <Radar
+    //           width={180}
+    //           data={chartDataActivity}
+    //           options={options}
+    //           plugins={pligins}
+    //         />
+    //       </div>
+    //     </Paper>
+    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+    //       <Typography
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "41px 0 0 calc(8.5vw)",
+    //           fontSize: "1.4rem",
+    //           fontWeight: "bold",
+    //           fontFamily: "ubuntu",
+    //         }}
+    //         color="primary"
+    //       >
+    //         Popularity
+    //       </Typography>
+    //       <div
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "40px 10px 41px 10px",
+    //         }}
+    //       >
+    //         <Bar
+    //           width={180}
+    //           data={chartDataLanguage}
+    //           options={options}
+    //           plugins={pligins}
+    //         />
+    //       </div>
+    //     </Paper>
+    //   </Box>
+    //   <Box m={3} pb={3} display={"flex"} justifyContent={"center"}>
+    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+    //       <Typography
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "41px 0 0 calc(11vw)",
+    //           fontSize: "1.4rem",
+    //           fontWeight: "bold",
+    //           fontFamily: "ubuntu",
+    //         }}
+    //         color="primary"
+    //       >
+    //         Rank
+    //       </Typography>
+    //       <div
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "40px 10px 41px 10px",
+    //         }}
+    //       >
+    //         <Line
+    //           width={180}
+    //           data={chartDataMileage}
+    //           options={options}
+    //           plugins={pligins}
+    //         />
+    //       </div>
+    //     </Paper>
+    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
+    //       <Typography
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "41px 0 0 calc(11vw)",
+    //           fontSize: "1.4rem",
+    //           fontWeight: "bold",
+    //           fontFamily: "ubuntu",
+    //         }}
+    //         color="primary"
+    //       >
+    //         My Timeline
+    //       </Typography>
+    //       <div
+    //         style={{
+    //           background: "rgb(238,242,245)",
+    //           padding: "40px 10px 41px 10px",
+    //         }}
+    //       >
+    //         <Line
+    //           width={180}
+    //           data={chartDataTimeline}
+    //           options={options}
+    //           plugins={pligins}
+    //         />
+    //       </div>
+    //     </Paper>
+    //   </Box>
+    // </Box>
+    <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
+      <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
+        <Paper sx={{ width: "calc(30vw)" }} elevation={0}>
+          <Carousel
+            navButtonsAlwaysVisible={true}
+            stopAutoPlayOnHover={true}
+            navButtonsProps={{
+              style: {
+                backgroundColor: "cornflowerblue",
+                // borderRadius: 0,
+              },
             }}
-            color="primary"
+            // navButtonsWrapperProps={{
+            //   style: {
+            //     bottom: "0",
+            //     top: "unset",
+            //   },
+            // }}
+            height="600px"
           >
-            Mileage
-          </Typography>
-          <div
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "20px 10px 21px 10px",
-            }}
-          >
-            <Radar
-              width={180}
-              data={chartDataActivity}
-              options={options}
-              plugins={pligins}
-            />
-          </div>
-        </Paper>
-        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-          <Typography
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "41px 0 0 calc(8.5vw)",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              fontFamily: "ubuntu",
-            }}
-            color="primary"
-          >
-            Popularity
-          </Typography>
-          <div
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "40px 10px 41px 10px",
-            }}
-          >
-            <Bar
-              width={180}
-              data={chartDataLanguage}
-              options={options}
-              plugins={pligins}
-            />
-          </div>
-        </Paper>
-      </Box>
-      <Box m={3} pb={3} display={"flex"}>
-        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-          <Typography
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "41px 0 0 calc(11vw)",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              fontFamily: "ubuntu",
-            }}
-            color="primary"
-          >
-            Rank
-          </Typography>
-          <div
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "40px 10px 41px 10px",
-            }}
-          >
-            <Line
-              width={180}
-              data={chartDataMileage}
-              options={options}
-              plugins={pligins}
-            />
-          </div>
-        </Paper>
-        <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-          <Typography
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "41px 0 0 calc(11vw)",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              fontFamily: "ubuntu",
-            }}
-            color="primary"
-          >
-            My Timeline
-          </Typography>
-          <div
-            style={{
-              background: "rgb(238,242,245)",
-              padding: "40px 10px 41px 10px",
-            }}
-          >
-            <Line
-              width={180}
-              data={chartDataTimeline}
-              options={options}
-              plugins={pligins}
-            />
-          </div>
+            <div
+              style={{
+                background: "rgb(238,242,245)",
+                padding: "20px 0px 21px 0px",
+              }}
+            >
+              <Typography sx={{ ml: 3 }}>2022-1</Typography>
+              <Radar
+                width={180}
+                data={chartDataMileage}
+                options={options}
+                plugins={plugins}
+              />
+            </div>
+            <div
+              style={{
+                background: "rgb(238,242,245)",
+                padding: "20px 0px 21px 0px",
+              }}
+            >
+              <Typography sx={{ ml: 3 }}>2022-2</Typography>
+              <Radar
+                width={180}
+                data={chartDataPopularity}
+                options={options}
+                plugins={plugins}
+              />
+            </div>
+            <div
+              style={{
+                background: "rgb(238,242,245)",
+                padding: "20px 0px 21px 0px",
+              }}
+            >
+              <Typography sx={{ ml: 3 }}>2022-2</Typography>
+              <Radar
+                width={180}
+                data={chartDataRank}
+                options={options}
+                plugins={plugins}
+              />
+            </div>
+            <div
+              style={{
+                background: "rgb(238,242,245)",
+                padding: "20px 0px 21px 0px",
+              }}
+            >
+              <Typography sx={{ ml: 3 }}>2022-2</Typography>
+              <Radar
+                width={180}
+                data={chartDataTimeline}
+                options={options}
+                plugins={plugins}
+              />
+            </div>
+          </Carousel>
         </Paper>
       </Box>
     </Box>

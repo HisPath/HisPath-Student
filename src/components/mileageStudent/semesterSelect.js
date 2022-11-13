@@ -14,18 +14,15 @@ export default function SemesterSelect() {
   const [test, setTest] = React.useState([]);
 
   const getSemesters = async () => {
-    const sem = await axios.get("http://localhost:8080/api/semester/1");
+    const sem = await axios.get("http://localhost:8080/api/semester/18");
     setTest(sem.data);
   };
   const handleChange = (event) => {
-    setSemester(event.target.value);
-    // props.setSemesters(event.target.value);
+    // setSemester(event.target.value);
     setSemesters(event.target.value);
   };
   useEffect(() => {
     getSemesters();
-    // props.setSemesters("2022-2");
-    // setSemesters("2022-2");
   }, []);
 
   return (
@@ -53,6 +50,7 @@ export default function SemesterSelect() {
         value={semester}
         label="2022-1학기"
         onChange={handleChange}
+        sx={{ minWidth: 100 }}
       >
         <MenuItem value="ALL">
           <em>전기간</em>

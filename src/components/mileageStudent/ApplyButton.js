@@ -6,10 +6,32 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { blue, red } from "@mui/material/colors";
+import axios from "axios";
+import { useEffect } from "react";
 
-export default function ApplyButton() {
+export default function ApplyButton(props) {
   const [open, setOpen] = React.useState(false);
-  const [apply, setApply] = React.useState(false);
+
+  const applyMyActivity = async (id) => {
+    const category = await axios.put(
+      `http://localhost:8080/api/activity/apply/${id}`
+    );
+
+    window.location.replace("./mileage");
+  };
+
+  // useEffect(() => {
+  //   applyMyActivity(props.id);
+  // }, []);
+
+  // prop에는 activity id 랑 requestStatus가 들어와야 함.
+  // console.log("id : " + props.id);
+  // console.log("requestStatus : " + props.requestStatus);
+  // 산청 버튼을 눌었을 때 DB가 반영되는 함수 실행
+  // refresh
+  // requestStatus 값에 따라서 버튼 UI 다르게
+
+  let cond;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,13 +41,15 @@ export default function ApplyButton() {
     setOpen(false);
   };
 
-  const clickApply = () => {
-    setApply(true);
+  const clickApply = (id) => {
+    // props.setApply(true);
+    applyMyActivity(id);
   };
 
+  // console.log("props : " + props.test);
   return (
     <div>
-      {apply ? (
+      {props.requestStatus !== 3 ? (
         <Button disabled="true" variant="outlined" onClick={handleClickOpen}>
           신청완료
         </Button>
@@ -57,7 +81,7 @@ export default function ApplyButton() {
           <Button
             onClick={() => {
               handleClose();
-              clickApply();
+              clickApply(props.id);
             }}
             sx={{ color: blue[900] }}
           >
