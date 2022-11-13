@@ -6,7 +6,7 @@ function Navigation() {
   return (
     <Box sx={{ mt: 3 }}>
       <Notice />
-      <Buttons />
+      {/* <Buttons /> */}
     </Box>
   );
 }

@@ -1,13 +1,14 @@
-import * as React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import { Box, Typography } from "@mui/material";
-import axios from "axios";
-import { useEffect } from "react";
+import * as React from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import { Box, Typography } from '@mui/material';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const noticeWidth = "28rem";
+const noticeWidth = '28rem';
 
 const style = {
   padding: 2,
@@ -15,16 +16,14 @@ const style = {
   marginTop: 1,
   marginBottom: 1,
   maxWidth: noticeWidth,
-  bgcolor: "background.paper",
+  bgcolor: 'background.paper',
 };
 
 export default function Notice() {
   const [notices, setNotices] = React.useState([]);
 
   const getNotices = async () => {
-    const notice = await axios.get(
-      "http://localhost:8080/api/student/dashboard/1"
-    );
+    const notice = await axios.get('http://localhost:8080/api/student/dashboard/1');
     setNotices(notice.data.notice);
   };
 
@@ -39,8 +38,7 @@ export default function Notice() {
         variant="h5"
         component="div"
         m={3}
-        mt={1}
-        marginBottom={1}
+        mt={3}
         fontFamily="Ubuntu"
         textAlign="center"
         color="secondary.dark"
@@ -51,45 +49,16 @@ export default function Notice() {
       <List sx={style} component="nav" aria-label="mailbox folders">
         {notices.map((notice) => (
           <ListItem button divider>
-            <ListItemText primary={notice.title} secondary={notice.pubDate} />
+            <ListItemText
+              primary={notice.title}
+              secondary={notice.pubDate}
+              onClick={() => {
+                window.open(`/notice/${notice.noticeId}`, '_self');
+              }}
+            />
           </ListItem>
         ))}
       </List>
-      {/* <List sx={style} component="nav" aria-label="mailbox folders">
-        <ListItem button>
-          <ListItemText
-            primary="[여성공학인재양성] 기자재 공용 사용 안내 (충전드릴, 비트세트)"
-            secondary="2022년 9월 14일"
-          />
-        </ListItem>
-        <Divider />
-        <ListItem button divider>
-          <ListItemText
-            primary="「2022년 우주전파재난 예측 인공지능(AI) 경진대회」안내"
-            secondary="2022년 9월 14일"
-          />
-        </ListItem>
-        <ListItem button>
-          <ListItemText
-            primary="제22회 대학생 프로그래밍 경시대회 개최 안내"
-            secondary="2022년 9월 13일"
-          />
-        </ListItem>
-        <Divider light />
-        <ListItem button>
-          <ListItemText
-            primary="[대학원] 세미나(9월 16일, 홍성은 교수)-AI 활용분야 및 최신 기술 트렌드"
-            secondary="2022년 9월 13일"
-          />
-        </ListItem>
-        <Divider light />
-        <ListItem button>
-          <ListItemText
-            primary="[SW중심대] 22-2학기 노트북(Macbook) 추가 신규 승인 공지"
-            secondary="2022년 9월 7일"
-          />
-        </ListItem>
-      </List> */}
     </Box>
   );
 }
