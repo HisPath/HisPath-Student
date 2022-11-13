@@ -7,7 +7,7 @@ import {
   Box,
   Typography,
 } from '@mui/material';
-import Notice from './ForceNoticeList';
+import ForceNoticeList from './ForceNoticeList';
 
 const modalStyle = {
   position: 'absolute',
@@ -28,7 +28,7 @@ function Modal({ open, handleClose }) {
   return (
     <MUIModal open={open} onClose={handleClose}>
       <Box component={Paper} sx={modalStyle}>
-        <Notice />
+        <ForceNoticeList />
         <Box display="flex" justifyContent="flex-end" gap={1}>
           <MUIButton color="secondary" onClick={handleClose}>
             취소
