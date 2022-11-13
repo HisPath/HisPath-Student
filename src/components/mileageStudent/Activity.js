@@ -97,6 +97,7 @@ export default function BasicTable() {
                           <ApplyButton
                             requestStatus={rq}
                             id={activity.id}
+                            changeSections={changeSections}
                           ></ApplyButton>
                         </TableCell>
                       </TableRow>
@@ -125,6 +126,7 @@ export default function BasicTable() {
                           <ApplyButton
                             requestStatus={activity.requestStatus}
                             id={activity.id}
+                            changeSections={changeSections}
                           ></ApplyButton>
                         </TableCell>
                       </TableRow>

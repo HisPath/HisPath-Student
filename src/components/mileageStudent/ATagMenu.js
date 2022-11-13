@@ -24,7 +24,7 @@ const style = {
 
 export const getMyActivitiesBySemCate = async (section, semester) => {
   const response = await axios.get(
-    `http://localhost:8080/api/student-activities/status?semester=${semester}&section=${section}`
+    `${process.env.REACT_APP_SERVER}/student-activities/status?semester=${semester}&section=${section}`
   );
 
   return response.data;

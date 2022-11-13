@@ -14,7 +14,7 @@ export default function SemesterSelect() {
   const [test, setTest] = React.useState([]);
 
   const getSemesters = async () => {
-    const sem = await axios.get("http://localhost:8080/api/semester/18");
+    const sem = await axios.get(`${process.env.REACT_APP_SERVER}/semester/18`);
     setTest(sem.data);
   };
   const handleChange = (event) => {

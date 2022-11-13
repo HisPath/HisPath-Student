@@ -36,20 +36,22 @@ export default function MileageTables() {
 
   // console.log(mileageActivities);
   const getCategories = async () => {
-    const category = await axios.get("http://localhost:8080/api/categories");
+    const category = await axios.get(
+      `${process.env.REACT_APP_SERVER}/categories`
+    );
     setCategories(category.data);
   };
 
   const getAllActivities = async () => {
     const activities = await axios.get(
-      "http://localhost:8080/api/mileage/semester?semester=" + semester
+      `${process.env.REACT_APP_SERVER}/mileage/semester?semester=${semester}`
     );
     setAllActivities(activities.data);
   };
 
   const getActivities = async () => {
     const activity = await axios.get(
-      "http://localhost:8080/api/studentmileage/1"
+      `${process.env.REACT_APP_SERVER}/studentmileage/1`
     );
     setActivities(activity.data.activities);
   };
