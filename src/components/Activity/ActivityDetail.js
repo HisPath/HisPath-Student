@@ -19,6 +19,7 @@ export default function ActivityDetail() {
   const [newImgFile, setNewImgFile] = useState(data.newImgFile);
   const [newImgDir, setNewImgDir] = useState(data.newImgDir);
   const [dateState, setDateState] = useState(true);
+  const [jsonList, setJsonList] = useState([]);
 
   const [activity, setActivity] = React.useState([]);
 
@@ -26,8 +27,9 @@ export default function ActivityDetail() {
     const activity = await axios.get(
       `http://localhost:8080/api/activity-detail/${activityId}`
     );
-    console.log(activity.data);
     setActivity(activity.data);
+    const json = JSON.parse(activity.data.data);
+    setJsonList(json);
   };
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function ActivityDetail() {
     >
       <Box
         component={Paper}
-        width={500}
+        width={550}
         minHeight={600}
         p={3}
         borderRadius={3}
@@ -61,19 +63,6 @@ export default function ActivityDetail() {
               활동 상세
             </Typography>
           </Box>
-
-          {/* {dateState && (
-            <Box display="flex" gap={2}>
-              <Box width="50%">
-                <InputLabel sx={{ mt: 1 }}>카테고리</InputLabel>
-                <Typography sx={{ p: 2 }}>{activity.categoryName}</Typography>
-              </Box>
-              <Box width="50%">
-                <InputLabel sx={{ mt: 1 }}>종료일</InputLabel>
-                <Typography sx={{ p: 2 }}>{data.end}</Typography>
-              </Box>
-            </Box>
-          )} */}
           <Box maxHeight={400} overflow="scroll">
             <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
             <Typography sx={{ p: 2 }}>{activity.semester}</Typography>
@@ -85,24 +74,16 @@ export default function ActivityDetail() {
             <Typography sx={{ p: 2 }}>{activity.name}</Typography>
             {activity.data ? (
               <>
-                <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
-                <Typography sx={{ p: 2 }}>
-                  {activity.data ? activity.data : ""}
-                </Typography>
+                {jsonList.map((item) => (
+                  <Box key={item.id}>
+                    <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
+                    <Typography sx={{ p: 2 }}>{item.data}</Typography>
+                  </Box>
+                ))}
               </>
             ) : (
               ""
             )}
-            {/* <InputLabel sx={{ mt: 1 }}>내용</InputLabel>
-          <Typography sx={{ p: 2 }}>
-            {activity.data ? activity.data : ""}
-          </Typography> */}
-            <InputLabel sx={{ mt: 1 }}>마일리지 인정 여부</InputLabel>
-            <Typography sx={{ p: 2 }}>
-              {activity.personal
-                ? "마일리지 인정 활동"
-                : "마일리지 미인정 활동"}
-            </Typography>
             {activity.remark ? (
               <>
                 <InputLabel sx={{ mt: 1 }}>비고</InputLabel>
