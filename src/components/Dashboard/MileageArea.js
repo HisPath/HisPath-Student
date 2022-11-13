@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export function MileageArea() {
   return (
     <>
-      <Typography variant="h1" sx={{ fontWeight: 600, lineHeight: 4, mt: 5 }}>
+      <Typography variant="h1" sx={{ fontWeight: 800, lineHeight: 6, mt: 5 }}>
         Mileage
       </Typography>
       <Typography sx={{ fontWeight: 200, mb: 3, mr: 5, fontSize: "1.2rem" }}>
@@ -19,12 +19,12 @@ export function MileageArea() {
 
       <Link to={`/mileage`} style={{ textDecoration: "none" }}>
         <Button
+          variant="contained"
+          color={"secondary"}
           sx={{
             fontWeight: "900",
             fontSize: "1.2rem",
             fontFamily: "Ubuntu",
-            backgroundColor: "secondary.main",
-            color: "white",
             width: "10rem",
             height: "3.5rem",
             borderRadius: 6,

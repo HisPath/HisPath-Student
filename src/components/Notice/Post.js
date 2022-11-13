@@ -95,7 +95,9 @@ function Article({
           </Grid>
         </Grid>
         <hr />
-        <HtmlToString />
+        <Container maxWidth="md">
+          <HtmlToString />
+        </Container>
         <br />
       </Box>
     </Section>

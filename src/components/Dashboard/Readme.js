@@ -31,6 +31,7 @@ export default function Readme() {
           padding: 3,
           paddingBottom: 0,
           width: "calc(25vw)",
+          backgroundColor: "#fff",
         }}
       >
         <Typography

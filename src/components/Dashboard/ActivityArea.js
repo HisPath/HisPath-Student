@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export function ActivityArea() {
   return (
     <>
-      <Typography variant="h1" sx={{ fontWeight: 600, lineHeight: 4, mt: 15 }}>
+      <Typography variant="h1" sx={{ fontWeight: 800, lineHeight: 6, mt: 15 }}>
         My Activities
       </Typography>
       <Typography sx={{ fontWeight: 200, mb: 10, ml: 5, fontSize: "1.2rem" }}>
@@ -18,12 +18,12 @@ export function ActivityArea() {
       </Typography>
       <Link to={`/activity`} style={{ textDecoration: "none" }}>
         <Button
+          variant="contained"
+          color={"secondary"}
           sx={{
             fontWeight: "900",
             fontSize: "1.2rem",
             fontFamily: "Ubuntu",
-            backgroundColor: "secondary.main",
-            color: "white",
             width: "10rem",
             height: "3.5rem",
             borderRadius: 6,
