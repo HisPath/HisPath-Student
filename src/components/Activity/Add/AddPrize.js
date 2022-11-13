@@ -227,9 +227,15 @@ export default function ActivityAdd({ getActivities }) {
   };
 
   const onRemove = (removeId) => {
+    _.remove(jsonData, function (n) {
+      console.log(n);
+      if (n.id === removeId) {
+        return true;
+      }
+    });
+    setJsonData(jsonData);
+
     setTextField((old) => old.filter((item) => item.id !== removeId));
-    const removed = _.remove(jsonData, "removeId");
-    setJsonData(removed);
   };
 
   // dialog
