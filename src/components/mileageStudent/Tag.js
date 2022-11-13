@@ -47,7 +47,9 @@ export default function Tags() {
   const [isSelected, setIsSelected] = React.useState("");
 
   const getCategories = async () => {
-    const category = await axios.get("http://localhost:8080/api/categories");
+    const category = await axios.get(
+      `${process.env.REACT_APP_SERVER}/categories`
+    );
     setCategories(category.data);
   };
   const onSelectTag = (e, id) => {

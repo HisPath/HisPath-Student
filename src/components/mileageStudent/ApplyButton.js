@@ -6,10 +6,21 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { blue, red } from "@mui/material/colors";
+import axios from "axios";
+import { useEffect } from "react";
 
-export default function ApplyButton() {
+export default function ApplyButton({ requestStatus, id, changeSections }) {
   const [open, setOpen] = React.useState(false);
-  const [apply, setApply] = React.useState(false);
+
+  const applyMyActivity = async (id) => {
+    const category = await axios.put(
+      `${process.env.REACT_APP_SERVER}/activity/apply/${id}`
+    );
+
+    changeSections("ALL");
+  };
+
+  let cond;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,13 +30,15 @@ export default function ApplyButton() {
     setOpen(false);
   };
 
-  const clickApply = () => {
-    setApply(true);
+  const clickApply = (id) => {
+    // setApply(true);
+    applyMyActivity(id);
   };
 
+  // console.log("props : " + test);
   return (
     <div>
-      {apply ? (
+      {requestStatus !== 3 ? (
         <Button disabled="true" variant="outlined" onClick={handleClickOpen}>
           신청완료
         </Button>
@@ -57,7 +70,7 @@ export default function ApplyButton() {
           <Button
             onClick={() => {
               handleClose();
-              clickApply();
+              clickApply(id);
             }}
             sx={{ color: blue[900] }}
           >
