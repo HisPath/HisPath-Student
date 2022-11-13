@@ -256,11 +256,15 @@ export default function ActivityAdd() {
             </form>
           </Dialog>
           <Box display="flex" gap={1.5}>
-            <Link to={`/activity/detail`} style={{ textDecoration: "none" }}>
-              <Button variant="outlined" sx={{ fontWeight: "600" }}>
-                취소
-              </Button>
-            </Link>
+            <Button
+              variant="outlined"
+              sx={{ fontWeight: "600" }}
+              onClick={() => {
+                window.history.back();
+              }}
+            >
+              취소
+            </Button>
             <Link to={`/activity`} style={{ textDecoration: "none" }}>
               <Button
                 color="secondary"
