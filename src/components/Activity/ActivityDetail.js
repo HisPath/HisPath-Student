@@ -122,7 +122,10 @@ export default function ActivityDetail() {
                 취소
               </Button>
             </Link>
-            <Link to={`/activity/edit`} style={{ textDecoration: "none" }}>
+            <Link
+              to={`/activity/edit/${activityId}`}
+              style={{ textDecoration: "none" }}
+            >
               <Button
                 color="secondary"
                 variant="contained"
