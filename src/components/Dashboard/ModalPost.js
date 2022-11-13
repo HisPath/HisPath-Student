@@ -1,25 +1,15 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Chip,
-  Container,
-  Grid,
-  styled,
-  Stack,
-  Typography,
-  Backdrop,
-} from '@mui/material';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import ReportIcon from '@mui/icons-material/Report';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-import { Link } from 'react-router-dom';
+import { Box, Container, Grid, styled, Typography } from '@mui/material';
 import axios from 'axios';
 const Section = styled(Container)({
   marginTop: 10,
-  paddingLeft: 0,
+  paddingRight: 0,
   borderRadius: 8,
+  width: '700px',
+  maxHeight: '500px',
+  overflowY: 'scroll',
+  overflowX: 'hidden',
 });
 const Header = styled('div')({
   display: 'flex',
@@ -27,17 +17,7 @@ const Header = styled('div')({
   alignItems: 'flex-start',
   paddingBottom: 10,
 });
-function Article({
-  id,
-  managerId,
-  managerName,
-  title,
-  content,
-  viewCnt,
-  importance,
-  pubDate,
-  expDate,
-}) {
+function Article({ managerName, title, content, viewCnt, importance, pubDate, expDate }) {
   function ImpChip({ imp }) {
     if (imp)
       return (
@@ -50,22 +30,11 @@ function Article({
     return <div dangerouslySetInnerHTML={{ __html: content }}></div>;
   }
   return (
-    <Section>
+    <Section style={{ paddingLeft: 0, paddingRight: 50 }}>
       <Header>
         <Typography variant="h5" style={{ fontWeight: 'bold' }}>
           공지사항 &#62; 상세
         </Typography>
-        <Button
-          variant="outlined"
-          style={{
-            float: 'right',
-          }}
-          onClick={() => {
-            window.history.go(-1);
-          }}
-        >
-          돌아가기
-        </Button>
       </Header>
       <Box container>
         <br />
@@ -101,7 +70,7 @@ function Article({
   );
 }
 
-function Post({ modalId = -1 }) {
+function ModalPost({ modalId = -1 }) {
   const { noticeId } = useParams();
   const [notice, setNotice] = useState();
 
@@ -128,4 +97,4 @@ function Post({ modalId = -1 }) {
   );
 }
 
-export default Post;
+export default ModalPost;
