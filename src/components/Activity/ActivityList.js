@@ -5,20 +5,21 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Chip, TablePagination, Typography } from "@mui/material";
+import { Chip, IconButton, TablePagination, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import TagIcon from "@mui/icons-material/Tag";
 import { Box } from "@mui/system";
 import { useRecoilValue } from "recoil";
 import { activityState } from "../../store/atom";
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
 
 export default function ActivityList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(7);
   const activities = useRecoilValue(activityState);
 
-  console.log(activities);
+  // console.log(activities);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -27,6 +28,13 @@ export default function ActivityList() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const deleteActivity = async (activityId) => {
+    // await axios.delete(
+    //   "http://localhost:8080/api/student-activity/1/" + activityId,
+    //   {}
+    // );
   };
 
   const lightGray = "#F5F5F5";
@@ -194,7 +202,9 @@ export default function ActivityList() {
                       ) : (
                         ""
                       )}
-                      <DeleteIcon />{" "}
+                      <IconButton onClick={deleteActivity(activity.id)}>
+                        <DeleteIcon />
+                      </IconButton>
                     </Box>
                   </TableCell>
                 </TableRow>
