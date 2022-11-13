@@ -11,6 +11,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 const noticeWidth = '28rem';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 const style = {
   padding: 2,
   margin: 3,
@@ -126,11 +127,10 @@ export default function ForceNoticeList() {
         gutterBottom
         variant="h5"
         component="div"
-        m={3}
         mt={1}
-        marginBottom={1}
-        fontFamily="Ubuntu"
+        mb={1}
         textAlign="center"
+        fontWeight={600}
         color="secondary.dark"
         width={noticeWidth}
       >

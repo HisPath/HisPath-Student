@@ -38,8 +38,7 @@ export default function Notice() {
         variant="h5"
         component="div"
         m={3}
-        mt={1}
-        marginBottom={1}
+        mt={3}
         fontFamily="Ubuntu"
         textAlign="center"
         color="secondary.dark"

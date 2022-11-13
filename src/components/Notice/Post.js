@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -10,21 +10,21 @@ import {
   Stack,
   Typography,
   Backdrop,
-} from '@mui/material';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import ReportIcon from '@mui/icons-material/Report';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+} from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import ReportIcon from "@mui/icons-material/Report";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
+import { Link } from "react-router-dom";
+import axios from "axios";
 const Section = styled(Container)({
   marginTop: 10,
   paddingLeft: 0,
   borderRadius: 8,
 });
-const Header = styled('div')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'flex-start',
+const Header = styled("div")({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
   paddingBottom: 10,
 });
 function Article({
@@ -55,13 +55,13 @@ function Article({
   return (
     <Section>
       <Header>
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
+        <Typography variant="h5" style={{ fontWeight: "bold" }}>
           공지사항 &#62; 상세
         </Typography>
         <Button
           variant="outlined"
           style={{
-            float: 'right',
+            float: "right",
           }}
           onClick={() => {
             window.history.go(-1);
@@ -72,7 +72,7 @@ function Article({
       </Header>
       <Box container>
         <br />
-        <Box container display="flex" justifyContent={'center'}>
+        <Box container display="flex" justifyContent={"center"}>
           <Typography variant="h3" p={1}>
             {title}
           </Typography>
@@ -81,7 +81,7 @@ function Article({
         <hr />
         <Grid container alignItems="center">
           <Grid item xs={12}>
-            <Box display="flex" gap={3} justifyContent={'center'} mr={3}>
+            <Box display="flex" gap={3} justifyContent={"center"} mr={3}>
               <ImpChip imp={importance} label="Important Notice" />
 
               <Typography variant="p">작성자: {managerName}</Typography>
@@ -107,9 +107,11 @@ function Post() {
   const [notice, setNotice] = useState();
 
   const loadData = async () => {
-    await axios.get(`http://localhost:8080/api/notice/${noticeId}`).then(function (response) {
-      setNotice(response.data);
-    });
+    await axios
+      .get(`http://localhost:8080/api/notice/${noticeId}`)
+      .then(function (response) {
+        setNotice(response.data);
+      });
   };
 
   useEffect(() => {
