@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import { Link } from "react-scroll";
 import axios from "axios";
 import { useEffect } from "react";
+import { getCategories } from "../../api/mileage";
 
 // const datas = [
 //   {
@@ -46,21 +47,25 @@ export default function Tags() {
   const [categories, setCategories] = React.useState([]);
   const [isSelected, setIsSelected] = React.useState("");
 
-  const getCategories = async () => {
-    const category = await axios.get(
-      `${process.env.REACT_APP_SERVER}/categories`
-    );
-    setCategories(category.data);
-  };
+  // const getCategories = async () => {
+  //   const category = await axios.get(
+  //     `${process.env.REACT_APP_SERVER}/categories`
+  //   );
+  //   setCategories(category.data);
+  // };
+
   const onSelectTag = (e, id) => {
     e.preventDefault();
 
     setIsSelected(id);
   };
   useEffect(() => {
-    getCategories();
+    const fetch = async () => {
+      const cate = await getCategories();
+      setCategories(cate);
+    };
+    fetch();
 
-    console.log(categories);
     // console.log(activities);
   }, []);
 
