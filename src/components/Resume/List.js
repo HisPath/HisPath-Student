@@ -33,7 +33,9 @@ function List({ resumes }) {
       <Grid container spacing={4}>
         <Grid item xs={3} component={Link} to="post">
           <Card sx={{ alignItems: "center", justifyContent: "center" }}>
-            <Avatar sx={{ bgcolor: indigo[500], width: 64, height: 64 }}>
+            <Avatar
+              sx={{ backgroundColor: "primary.main", width: 64, height: 64 }}
+            >
               <LibraryAddRoundedIcon fontSize="large" />
             </Avatar>
             <Typography variant="h6" mt={2}>

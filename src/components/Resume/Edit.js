@@ -170,7 +170,7 @@ function Edit({ refresh }) {
               width: 720,
               backgroundColor: "background.paper",
               height: 1,
-              borderRadius: 2,
+              borderRadius: 1,
               overflow: "auto",
               display: "flex",
               gap: 1,
@@ -186,6 +186,7 @@ function Edit({ refresh }) {
                 backgroundColor: green[800],
                 color: "white",
                 p: 5,
+                width: 220,
               }}
             >
               <Avatar
