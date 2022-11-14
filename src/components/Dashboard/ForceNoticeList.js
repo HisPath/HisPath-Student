@@ -33,18 +33,10 @@ const checkLocalStorage = async (notice) => {
 const changeViewed = (id) => {
   var item = JSON.parse(window.localStorage.getItem(`IMP#${id}`));
   window.localStorage.removeItem(`IMP#${id}`);
-  console.log('before: ' + item.viewed);
   item.viewed = true;
-  console.log('after: ' + item.viewed);
   window.localStorage.setItem(`IMP#${id}`, JSON.stringify(item));
 };
 
-function clear() {
-  window.localStorage.clear();
-}
-function length() {
-  console.log(window.localStorage.length);
-}
 const GetfromLS = ({ notice, setId }) => {
   const [state, setState] = useState(false);
   useEffect(() => {
@@ -61,56 +53,28 @@ const GetfromLS = ({ notice, setId }) => {
           setState(true);
           changeViewed(notice.noticeId);
           setId(notice.noticeId);
-          // window.open(`/notice/${notice.noticeId}`);
         }}
       />
       <Checkbox disabled checked={state} />
     </ListItem>
   );
 };
-const loadViewData = async (notices) => {
-  console.log('LOAD VIEW DATA');
-  await deleteExpData();
-  let arr = [];
-  notices.map((notice) => {
-    const obj = JSON.parse(window.localStorage.getItem(`IMP#${notice.noticeId}`));
-    if (obj.viewed) arr.push(notice.noticeId);
-  });
-  return arr;
-};
-const deleteExpData = async () => {
-  for (let i = 0; i < window.localStorage.length; i++) {
-    const key = window.localStorage.key(i);
-    const obj = JSON.parse(window.localStorage.getItem(key));
-    const today = new Date();
-    if (obj.expire < today) window.localStorage.removeItem(key);
-  }
-};
 
 export default function ForceNoticeList({ setId }) {
   const [notices, setNotices] = useState([]);
-  let viewedList = [];
   const getNotices = async () => {
     await axios.get('http://localhost:8080/api/notice/imp').then((response) => {
       setNotices(response.data);
     });
   };
-  const getViewed = async () => {
-    viewedList = await loadViewData(notices);
-  };
+
   useEffect(() => {
     getNotices();
   }, []);
 
-  useEffect(() => {
-    getViewed();
-  }, [notices]);
-
   const CheckViwed = ({ n, setId }) => {
-    console.log(viewedList);
-    if (!(n.noticeId in viewedList)) {
-      return <GetfromLS notice={n} setId={setId} />;
-    }
+    const obj = JSON.parse(window.localStorage.getItem(`IMP#${n.noticeId}`));
+    if (obj === null || obj.viewed === false) return <GetfromLS notice={n} setId={setId} />;
   };
   return (
     <Box>

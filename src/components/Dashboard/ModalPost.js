@@ -31,11 +31,6 @@ function Article({ managerName, title, content, viewCnt, importance, pubDate, ex
   }
   return (
     <Section style={{ paddingLeft: 0, paddingRight: 50 }}>
-      <Header>
-        <Typography variant="h5" style={{ fontWeight: 'bold' }}>
-          공지사항 &#62; 상세
-        </Typography>
-      </Header>
       <Box container>
         <br />
         <Box container display="flex" justifyContent={'center'}>
