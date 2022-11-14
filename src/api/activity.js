@@ -24,7 +24,7 @@ export const getActivitiesBySem = async (semester) => {
 
 export const getSemesters = async () => {
   const response = await axios.get("http://localhost:8080/api/semester");
-  return response.data.sort();
+  return response.data.reverse();
 };
 
 export const getTags = async () => {
