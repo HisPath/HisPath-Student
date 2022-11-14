@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import { Box, FormControlLabel, FormGroup, Typography } from '@mui/material';
-import axios from 'axios';
+import { Box, Typography } from '@mui/material';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
+import { getImpNotices } from '../../api/notice';
 
 const noticeWidth = '28rem';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const style = {
   padding: 2,
@@ -62,14 +59,10 @@ const GetfromLS = ({ notice, setId }) => {
 
 export default function ForceNoticeList({ setId }) {
   const [notices, setNotices] = useState([]);
-  const getNotices = async () => {
-    await axios.get('http://localhost:8080/api/notice/imp').then((response) => {
-      setNotices(response.data);
-    });
-  };
-
   useEffect(() => {
-    getNotices();
+    getImpNotices().then((data) => {
+      setNotices(data);
+    });
   }, []);
 
   const CheckViwed = ({ n, setId }) => {
