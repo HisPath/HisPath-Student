@@ -1,24 +1,21 @@
 import {
   Avatar,
+  Card as MuiCard,
   Container,
   Grid,
-  Paper,
   styled,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
-import { indigo } from "@mui/material/colors";
 import { getDisplayTime } from "../../utils/functions";
 
-const Card = styled(Paper)(({ theme }) => ({
+const Card = styled(MuiCard)(({ theme }) => ({
   padding: 24,
   height: 200,
-  boxShadow: "rgb(0 0 0 / 4%) 0px 4px 16px 0px",
   transition: "all 0.15s ease-in 0s",
   "&:hover": {
     transform: "translateY(-4px);",
-    boxShadow: "rgb(0 0 0 / 8%) 0px 12px 20px 0px",
   },
   display: "flex",
   flexDirection: "column",
@@ -34,7 +31,12 @@ function List({ resumes }) {
         <Grid item xs={3} component={Link} to="post">
           <Card sx={{ alignItems: "center", justifyContent: "center" }}>
             <Avatar
-              sx={{ backgroundColor: "primary.main", width: 64, height: 64 }}
+              sx={{
+                color: "white",
+                backgroundColor: "primary.main",
+                width: 64,
+                height: 64,
+              }}
             >
               <LibraryAddRoundedIcon fontSize="large" />
             </Avatar>
