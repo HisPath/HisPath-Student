@@ -45,7 +45,7 @@ function Router() {
         <Route path="/activity/add/intern" element={<AddIntern />} />
         <Route path="/activity/add/cert" element={<AddCert />} />
         <Route path="/activity/add/lang" element={<AddLang />} />
-        <Route path="/activity/edit" element={<ActivityEdit />} />
+        <Route path="/activity/edit/:activityId" element={<ActivityEdit />} />
 
         <Route path="/resume/*" element={<Resume />} />
         <Route path="/login" element={<Login />} />

@@ -14,7 +14,7 @@ import { useSnackbar } from "notistack";
 import CategoryFieldArray from "./CategoryFieldArray";
 import CategoryModal from "./CategoryModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { blueGrey } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 import { getInfo, postResume } from "../../api/resume";
 
 function Post({ refresh }) {
@@ -40,7 +40,6 @@ function Post({ refresh }) {
     control,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({ defaultValues: { title: "이력서" } });
   const { move } = useFieldArray({
     control,
@@ -127,7 +126,7 @@ function Post({ refresh }) {
             width: 1,
             display: "flex",
             justifyContent: "center",
-            backgroundColor: blueGrey[600],
+            backgroundColor: green[100],
             p: 4,
           }}
         >
@@ -137,20 +136,28 @@ function Post({ refresh }) {
               backgroundColor: "background.paper",
               height: 1,
               borderRadius: 1,
-              p: 5,
               overflow: "auto",
+              display: "flex",
+              gap: 1,
             }}
           >
-            <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
-              <Typography variant="h4" component="h1">
-                {watch("title")}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", gap: 1, mb: 5 }}>
+            <Box
+              sx={{
+                position: "sticky",
+                top: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: green[800],
+                color: "white",
+                p: 5,
+                width: 220,
+              }}
+            >
               <Avatar
                 alt={info.name}
                 src={info.profile}
-                sx={{ width: 100, height: 100, mx: 2 }}
+                sx={{ width: 100, height: 100, mb: 3 }}
               />
               <Box
                 sx={{
@@ -160,64 +167,69 @@ function Post({ refresh }) {
                   m: 1,
                 }}
               >
-                <Typography>{info.studentName}</Typography>
-                <Typography>{info.departmentName}</Typography>
-                <Typography>{info.email}</Typography>
+                <Typography variant="h4">{info.studentName}</Typography>
+                <Typography fontWeight={600}>{info.departmentName}</Typography>
+                <Typography fontWeight={600}>{info.email}</Typography>
               </Box>
             </Box>
-            {watch("content")?.map((item, index) => (
-              <Box key={index} mb={4}>
-                {item.data.length !== 0 && (
-                  <>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                      {categories[index]}
-                    </Typography>
-                    <Box mb={2}>
-                      {watch(`content[${index}].data`).map(
-                        (data, dataIndex) => (
-                          <Box key={dataIndex} p={1} py={0.5}>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 1.5,
-                                mb: 0.5,
-                              }}
-                            >
-                              <Typography variant="h6" component="h3">
-                                {data.title}
-                              </Typography>
-                              {data.hasDate && (
-                                <Typography variant="caption">
-                                  {data.startDate === data.endDate
-                                    ? data.startDate
-                                    : `${data.startDate} ~ ${
-                                        data.endDate || "현재"
-                                      }`}
+            <Box sx={{ p: 5, width: 1 }}>
+              <Typography variant="h4" component="h1" mb={3}>
+                {watch("title")}
+              </Typography>
+              {watch("content")?.map((item, index) => (
+                <Box key={index} mb={4}>
+                  {item.data.length !== 0 && (
+                    <>
+                      <Typography variant="h5" component="h2" gutterBottom>
+                        {categories[index]}
+                      </Typography>
+                      <Box mb={2}>
+                        {watch(`content[${index}].data`).map(
+                          (data, dataIndex) => (
+                            <Box key={dataIndex} p={1} py={0.5}>
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: 1.5,
+                                  mb: 0.5,
+                                }}
+                              >
+                                <Typography variant="h6" component="h3">
+                                  {data.title}
                                 </Typography>
-                              )}
+                                {data.hasDate && (
+                                  <Typography variant="caption">
+                                    {data.startDate === data.endDate
+                                      ? data.startDate
+                                      : `${data.startDate} ~ ${
+                                          data.endDate || "현재"
+                                        }`}
+                                  </Typography>
+                                )}
+                              </Box>
+                              <Typography p={1} pt={0}>
+                                {data.description
+                                  .split("\n")
+                                  .map((line, index) => {
+                                    return (
+                                      <span key={index}>
+                                        {line}
+                                        <br />
+                                      </span>
+                                    );
+                                  })}
+                              </Typography>
                             </Box>
-                            <Typography p={1} pt={0}>
-                              {data.description
-                                .split("\n")
-                                .map((line, index) => {
-                                  return (
-                                    <span key={index}>
-                                      {line}
-                                      <br />
-                                    </span>
-                                  );
-                                })}
-                            </Typography>
-                          </Box>
-                        )
-                      )}
-                      <Divider />
-                    </Box>
-                  </>
-                )}
-              </Box>
-            ))}
+                          )
+                        )}
+                        <Divider />
+                      </Box>
+                    </>
+                  )}
+                </Box>
+              ))}
+            </Box>
           </Box>
         </Box>
       </Box>

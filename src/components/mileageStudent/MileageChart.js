@@ -9,8 +9,71 @@ import axios from "axios";
 import { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 
+import ApexCharts from "react-apexcharts";
+
 // 2번째 Line Column
 // 3번쨰 bar with markers
+// var apex_options = {
+//   series: [
+//     {
+//       name: "Website Blog",
+//       type: "column",
+//       data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160],
+//     },
+//     {
+//       name: "Social Media",
+//       type: "line",
+//       data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
+//     },
+//   ],
+//   chart: {
+//     height: 350,
+//     type: "line",
+//   },
+//   stroke: {
+//     width: [0, 4],
+//   },
+//   title: {
+//     text: "Traffic Sources",
+//   },
+//   dataLabels: {
+//     enabled: true,
+//     enabledOnSeries: [1],
+//   },
+//   labels: [
+//     "01 Jan 2001",
+//     "02 Jan 2001",
+//     "03 Jan 2001",
+//     "04 Jan 2001",
+//     "05 Jan 2001",
+//     "06 Jan 2001",
+//     "07 Jan 2001",
+//     "08 Jan 2001",
+//     "09 Jan 2001",
+//     "10 Jan 2001",
+//     "11 Jan 2001",
+//     "12 Jan 2001",
+//   ],
+//   xaxis: {
+//     type: "datetime",
+//   },
+//   yaxis: [
+//     {
+//       title: {
+//         text: "Website Blog",
+//       },
+//     },
+//     {
+//       opposite: true,
+//       title: {
+//         text: "Social Media",
+//       },
+//     },
+//   ],
+// };
+
+// var apchart = new ApexCharts(document.querySelector("#chart"), apex_options);
+// apchart.render();
 
 const options = {
   elements: {
@@ -94,7 +157,8 @@ const ChartTab = () => {
     ],
     // 분포 , 평균
   });
-  const [chartDataPopularity, setChartData1] = useState({
+
+  const [chartDataPopularity, setChartDataPopularity] = useState({
     labels: [
       "교내 활동",
       "전공 마일리지",
@@ -122,28 +186,11 @@ const ChartTab = () => {
       // },
     ],
   });
-  const [chartDataRank, setChartDataMileage] = useState({
-    labels: [
-      "최저점수",
-      "내 점수(상위 10%)",
-      "최고점수",
-      // "교내 활동",
-      // "전공 마일리지",
-      // "산학 마일리지 ",
-      // "비교과-연구활동",
-      // "기타",
-      // "비교과-특강참여",
-      // "비교과-행사참여",
-      // "비교과-학회활동",
-    ],
+
+  const [chartDataRank, setChartDataRank] = useState({
+    labels: ["최저점수", "내 점수(상위 10%)", "최고점수"],
+
     datasets: [
-      // {
-      //   // label: ["내 마일리지 총점 : 140점", "  "],
-      //   // data: [1, 1, 2, 4, 3, 2, 3, 5],
-      //   // backgroundColor: "rgba(142, 202, 206, 0.2)",
-      //   // borderColor: "rgb(0, 156, 242)",
-      //   // borderWidth: 1.5,
-      // },
       {
         label: "최고점: 200점",
         data: [0, 170, 200],
@@ -188,13 +235,15 @@ const ChartTab = () => {
 
   const getActivities = async () => {
     const activity = await axios.get(
-      "http://localhost:8080/api/studentmileage/1"
+      `${process.env.REACT_APP_SERVER}/studentmileage/1`
     );
     setActivities(activity.data.activities);
   };
 
   const getCategories = async () => {
-    const category = await axios.get("http://localhost:8080/api/categories");
+    const category = await axios.get(
+      `${process.env.REACT_APP_SERVER}/api/categories`
+    );
     setCategories(category.data);
   };
 
@@ -340,11 +389,13 @@ const ChartTab = () => {
           >
             <div
               style={{
-                background: "rgb(238,242,245)",
+                // background: "rgb(238,242,245)",
                 padding: "20px 0px 21px 0px",
+                height: "350px",
               }}
             >
-              <Typography sx={{ ml: 3 }}>2022-1</Typography>
+              <Typography sx={{ ml: 3 }}>Mileage</Typography>
+
               <Radar
                 width={180}
                 data={chartDataMileage}
@@ -354,12 +405,13 @@ const ChartTab = () => {
             </div>
             <div
               style={{
-                background: "rgb(238,242,245)",
+                // background: "rgb(238,242,245)",
                 padding: "20px 0px 21px 0px",
+                height: "350px",
               }}
             >
-              <Typography sx={{ ml: 3 }}>2022-2</Typography>
-              <Radar
+              <Typography sx={{ ml: 3 }}>Popularity</Typography>
+              <Bar
                 width={180}
                 data={chartDataPopularity}
                 options={options}
@@ -368,32 +420,40 @@ const ChartTab = () => {
             </div>
             <div
               style={{
-                background: "rgb(238,242,245)",
+                // background: "rgb(238,242,245)",
                 padding: "20px 0px 21px 0px",
+                height: "350px",
               }}
             >
-              <Typography sx={{ ml: 3 }}>2022-2</Typography>
-              <Radar
+              <Typography sx={{ ml: 3 }}>Rank</Typography>
+              <Line
                 width={180}
                 data={chartDataRank}
                 options={options}
                 plugins={plugins}
               />
             </div>
-            <div
+
+            {/* <div
               style={{
-                background: "rgb(238,242,245)",
+                // background: "rgb(238,242,245)",
                 padding: "20px 0px 21px 0px",
+                height: "350px",
               }}
             >
-              <Typography sx={{ ml: 3 }}>2022-2</Typography>
-              <Radar
+              <Typography sx={{ ml: 3 }}>Timeline</Typography>
+              <Line
+
+
                 width={180}
                 data={chartDataTimeline}
                 options={options}
                 plugins={plugins}
               />
-            </div>
+
+
+            </div> */}
+            {/* <div id="apchart"></div> */}
           </Carousel>
         </Paper>
       </Box>

@@ -1,5 +1,6 @@
 import { CssBaseline, GlobalStyles } from "@mui/material";
 import { SnackbarProvider } from "notistack";
+import GoogleLoginButton from "./components/GoogleLoginButton";
 import Router from "./Router";
 import ThemeProvider from "./theme";
 

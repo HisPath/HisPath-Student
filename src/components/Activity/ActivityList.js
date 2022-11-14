@@ -12,7 +12,7 @@ import { Box } from "@mui/system";
 import { useRecoilValue } from "recoil";
 import { activityState } from "../../store/atom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import axios from "axios";
+import { deleteActivity } from "../../api/activity";
 
 export default function ActivityList() {
   const [page, setPage] = React.useState(0);
@@ -30,11 +30,9 @@ export default function ActivityList() {
     setPage(0);
   };
 
-  const deleteActivity = async (activityId) => {
-    // await axios.delete(
-    //   "http://localhost:8080/api/student-activity/1/" + activityId,
-    //   {}
-    // );
+  const deleteActivityFromList = async (activityId) => {
+    deleteActivity(activityId);
+    window.location.reload();
   };
 
   const lightGray = "#F5F5F5";
@@ -202,7 +200,9 @@ export default function ActivityList() {
                       ) : (
                         ""
                       )}
-                      <IconButton onClick={deleteActivity(activity.id)}>
+                      <IconButton
+                        onClick={() => deleteActivityFromList(activity.id)}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </Box>

@@ -1,8 +1,8 @@
 import { Container } from "@mui/material";
-import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
+import { getMajor, getStudentInfo, updateInfoData } from "../api/editprofile";
 import EditForm from "../components/EditProfile/EditForm";
 import MdEditor from "../components/EditProfile/MdEditor";
 import Title from "../components/EditProfile/Title";
@@ -11,15 +11,13 @@ export default function EditProfile() {
   const { enqueueSnackbar } = useSnackbar();
   const [info, setInfo] = useState([]);
   const getInfo = async () => {
-    const info = await axios.get("http://localhost:8080/api/student/1");
+    const info = await getStudentInfo();
     console.log("불러온 데이터", info.data);
     setInfo(info.data);
   };
 
   const updateInfo = async (data) => {
-    await axios.put("http://localhost:8080/api/student/1", {
-      ...data,
-    });
+    await updateInfoData(data);
   };
   useEffect(() => {
     getInfo();
@@ -51,7 +49,7 @@ export default function EditProfile() {
 
   const [majors, setMajors] = useState([]);
   const getMajors = async () => {
-    const major = await axios.get("http://localhost:8080/api/majors");
+    const major = await getMajor();
     console.log(major.data);
     setMajors(major.data);
   };
