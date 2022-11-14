@@ -5,8 +5,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
 import TagIcon from "@mui/icons-material/Tag";
 import { getActivities, getActivitiesBySec } from "../../api/activity";
 import { activityState } from "../../store/atom";
@@ -18,7 +16,6 @@ import AddIntern from "./Add/AddIntern";
 import AddLang from "./Add/AddLang";
 import AddPrize from "./Add/AddPrize";
 import AddTech from "./Add/AddTech";
-import { Typography } from "@mui/material";
 import ActivityAdd from "./ActivityAdd";
 
 const drawerWidth = 240;

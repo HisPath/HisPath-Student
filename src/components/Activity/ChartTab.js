@@ -3,11 +3,8 @@ import { Line, Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import axios from "axios";
-import { useEffect } from "react";
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Home } from "@mui/icons-material";
 
 const options = {
   elements: {
@@ -62,18 +59,6 @@ const plugins = [
 ];
 
 const ChartTab = () => {
-  const [categories, setCategories] = React.useState([]);
-
-  const getCategories = async () => {
-    const category = await axios.get("http://localhost:8080/api/categories");
-    console.log(category.data);
-    setCategories(category.data);
-  };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
-
   const [chartDataActivity, setChartData] = useState({
     labels: [
       "마일리지",
@@ -135,7 +120,7 @@ const ChartTab = () => {
   return (
     <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
       <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
-        <Paper sx={{ width: "calc(30vw)" }} elevation={0}>
+        <Paper sx={{ width: "calc(36vw)" }} elevation={0}>
           {/* <Typography
             style={{
               background: "rgb(238,242,245)",
@@ -153,7 +138,12 @@ const ChartTab = () => {
             stopAutoPlayOnHover={true}
             navButtonsProps={{
               style: {
+                // backgroundColor: "transparent",
+                // color: "cornflowerblue",
                 backgroundColor: "cornflowerblue",
+                opacity: "0.6",
+                top: 900,
+                // position: "fixed",
                 // borderRadius: 0,
               },
             }}
@@ -163,7 +153,7 @@ const ChartTab = () => {
             //     top: "unset",
             //   },
             // }}
-            height="600px"
+            // height="650px"
           >
             <div
               style={{

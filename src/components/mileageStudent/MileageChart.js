@@ -8,6 +8,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
+
 import ApexCharts from "react-apexcharts";
 
 // 2번째 Line Column
@@ -156,6 +157,7 @@ const ChartTab = () => {
     ],
     // 분포 , 평균
   });
+
   const [chartDataPopularity, setChartDataPopularity] = useState({
     labels: [
       "교내 활동",
@@ -184,8 +186,10 @@ const ChartTab = () => {
       // },
     ],
   });
+
   const [chartDataRank, setChartDataRank] = useState({
     labels: ["최저점수", "내 점수(상위 10%)", "최고점수"],
+
     datasets: [
       {
         label: "최고점: 200점",
@@ -391,6 +395,7 @@ const ChartTab = () => {
               }}
             >
               <Typography sx={{ ml: 3 }}>Mileage</Typography>
+
               <Radar
                 width={180}
                 data={chartDataMileage}
@@ -428,6 +433,7 @@ const ChartTab = () => {
                 plugins={plugins}
               />
             </div>
+
             {/* <div
               style={{
                 // background: "rgb(238,242,245)",
@@ -437,11 +443,13 @@ const ChartTab = () => {
             >
               <Typography sx={{ ml: 3 }}>Timeline</Typography>
               <Line
+
                 width={180}
                 data={chartDataTimeline}
                 options={options}
                 plugins={plugins}
               />
+
             </div> */}
             {/* <div id="apchart"></div> */}
           </Carousel>
