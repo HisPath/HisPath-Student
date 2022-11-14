@@ -35,6 +35,7 @@ export default function ActivityList() {
       "http://localhost:8080/api/activity/student/" + activityId,
       {}
     );
+    window.location.reload();
   };
 
   const lightGray = "#F5F5F5";
