@@ -444,11 +444,13 @@ const ChartTab = () => {
               <Typography sx={{ ml: 3 }}>Timeline</Typography>
               <Line
 
+
                 width={180}
                 data={chartDataTimeline}
                 options={options}
                 plugins={plugins}
               />
+
 
             </div> */}
             {/* <div id="apchart"></div> */}
