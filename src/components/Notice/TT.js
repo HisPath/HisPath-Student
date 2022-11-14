@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import CustomNoRowsOverlay from './CustomNoRowsOverlay';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import axios from 'axios';
+
 import AlarmIcon from '@mui/icons-material/Alarm';
 import Switch from '@mui/material/Switch';
 import CardGrid from './CardGrid';
@@ -21,20 +21,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ModeSwitch from './ModeSwitch';
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  boxShadow: 24,
-  p: 3,
-  borderRadius: 4,
-  width: 500,
-  minHeight: 500,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-};
+import { getNotices } from '../../api/notice';
 
 const Header = styled('div')({
   display: 'flex',
@@ -194,9 +181,9 @@ function TT() {
 
     setNoticeList(arr);
   }
-  const loadData = () => {
-    axios.get('http://localhost:8080/api/notice').then(function (response) {
-      noticeFilter(response.data);
+  const loadData = async () => {
+    getNotices().then(function (data) {
+      noticeFilter(data);
       setInit(true);
       setCard(window.localStorage.getItem('card') == 'true');
     });

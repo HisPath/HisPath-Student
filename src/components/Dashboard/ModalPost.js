@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Grid, styled, Typography } from '@mui/material';
-import axios from 'axios';
+import { getNoticeById } from '../../api/notice';
 const Section = styled(Container)({
   marginTop: 10,
   paddingRight: 0,
@@ -71,12 +71,12 @@ function ModalPost({ modalId = -1 }) {
 
   const loadData = async () => {
     if (modalId === -1) {
-      await axios.get(`http://localhost:8080/api/notice/${noticeId}`).then(function (response) {
-        setNotice(response.data);
+      getNoticeById(noticeId).then(function (data) {
+        setNotice(data);
       });
     } else {
-      await axios.get(`http://localhost:8080/api/notice/${modalId}`).then(function (response) {
-        setNotice(response.data);
+      getNoticeById(modalId).then(function (data) {
+        setNotice(data);
       });
     }
   };

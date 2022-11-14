@@ -1,21 +1,9 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Chip,
-  Container,
-  Grid,
-  styled,
-  Stack,
-  Typography,
-  Backdrop,
-} from '@mui/material';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import ReportIcon from '@mui/icons-material/Report';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Box, Button, Container, Grid, styled, Typography } from '@mui/material';
+
+import { getNoticeById } from '../../api/notice';
+
 const Section = styled(Container)({
   marginTop: 10,
   paddingLeft: 0,
@@ -107,12 +95,12 @@ function Post({ modalId = -1 }) {
 
   const loadData = async () => {
     if (modalId === -1) {
-      await axios.get(`http://localhost:8080/api/notice/${noticeId}`).then(function (response) {
-        setNotice(response.data);
+      getNoticeById(noticeId).then(function (data) {
+        setNotice(data);
       });
     } else {
-      await axios.get(`http://localhost:8080/api/notice/${modalId}`).then(function (response) {
-        setNotice(response.data);
+      getNoticeById(modalId).then(function (data) {
+        setNotice(data);
       });
     }
   };
