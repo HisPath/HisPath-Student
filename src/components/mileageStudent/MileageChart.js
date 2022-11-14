@@ -8,6 +8,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
+import { getActivities, getCategories } from "../../api/mileage";
 
 import ApexCharts from "react-apexcharts";
 
@@ -233,23 +234,32 @@ const ChartTab = () => {
   const [activities, setActivities] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
 
-  const getActivities = async () => {
-    const activity = await axios.get(
-      `${process.env.REACT_APP_SERVER}/studentmileage/1`
-    );
-    setActivities(activity.data.activities);
-  };
+  // const getActivities = async () => {
+  //   const activity = await axios.get(
+  //     `${process.env.REACT_APP_SERVER}/studentmileage/1`
+  //   );
+  //   setActivities(activity.data.activities);
+  // };
 
-  const getCategories = async () => {
-    const category = await axios.get(
-      `${process.env.REACT_APP_SERVER}/api/categories`
-    );
-    setCategories(category.data);
-  };
+  // const getCategories = async () => {
+  //   const category = await axios.get(
+  //     `${process.env.REACT_APP_SERVER}/api/categories`
+  //   );
+  //   setCategories(category.data);
+  // };
 
   useEffect(() => {
-    getActivities();
-    getCategories();
+    const fetchCate = async () => {
+      const cate = await getCategories();
+      setCategories(cate);
+    };
+    fetchCate();
+
+    const fetchAct = async () => {
+      const act = await getActivities();
+      setActivities(act);
+    };
+    fetchAct();
   }, []);
 
   return (
