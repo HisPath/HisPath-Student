@@ -5,22 +5,20 @@ import userImg from "../../assets/user.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useEffect } from "react";
+import { getInfo } from "../../api/dashboard";
 
 export default function Info() {
   const [info, setInfo] = React.useState([]);
 
-  const getInfo = async () => {
-    const info = await axios.get(
-      "http://localhost:8080/api/student/dashboard/1"
-    );
+  const getDashboardInfo = async () => {
+    const info = await getInfo();
     console.log("내정보", info.data);
     setInfo(info.data);
   };
 
   useEffect(() => {
-    getInfo();
+    getDashboardInfo();
   }, []);
 
   return (

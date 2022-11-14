@@ -8,15 +8,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
+import { getDepartment } from "../../api/editprofile";
 
 export default function EditForm({ watch, register, majors }) {
   const [departments, setDepartments] = React.useState([]);
 
   const getDepartments = async () => {
-    const department = await axios.get("http://localhost:8080/api/departments");
+    const department = await getDepartment();
     setDepartments(department.data);
   };
 
