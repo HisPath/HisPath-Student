@@ -71,8 +71,28 @@ function Modal({ open, handleClose, openPost, handlePostOpen, handlePostClose })
 }
 
 function ForceNotice() {
-  const [open, setOpen] = useState(true);
+  const checkUnread = () => {
+    let count = 0;
+    let view = 0;
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const key = window.localStorage.key(i);
+      if (key.includes('IMP')) {
+        const today = new Date();
+        const obj = JSON.parse(window.localStorage.getItem(key));
+        if (obj.expire < today) window.localStorage.removeItem(key);
+        else {
+          count = count + 1;
+          if (obj.viewed === true) view = view + 1;
+        }
+      }
+    }
+    if (count == 0) return true;
+    else if (count === view) return false;
+    else return true;
+  };
+  const [open, setOpen] = useState(checkUnread);
   const [openpost, setOpenpost] = useState(false);
+
   return (
     <Modal
       open={open}
