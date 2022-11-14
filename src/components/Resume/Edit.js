@@ -38,12 +38,10 @@ function Edit({ refresh }) {
     "링크",
     "기타",
   ]);
-  const [prevCategories, setPrevCategories] = useState([]);
   useEffect(() => {
     getInfo().then((data) => setInfo(data));
     getResumeByResumeId(resumeId).then((data) => {
       const { categories, dataList } = JSON.parse(data.content);
-      setPrevCategories(categories);
       setCategories(categories);
       setResume({ title: data.title, content: dataList });
     });
@@ -78,10 +76,6 @@ function Edit({ refresh }) {
   };
   const onInvalid = () => {
     enqueueSnackbar("모든 칸을 채워 주세요.", { variant: "error" });
-  };
-  const handleRevert = () => {
-    setCategories(prevCategories);
-    reset();
   };
   const handleDelete = async () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
@@ -133,13 +127,6 @@ function Edit({ refresh }) {
               </Button>
               <Box sx={{ display: "flex", gap: 1 }}>
                 <CategoryModal {...{ categories, setCategories, move }} />
-                <Button
-                  variant="contained"
-                  color="warning"
-                  onClick={handleRevert}
-                >
-                  되돌리기
-                </Button>
                 <Button
                   variant="contained"
                   color="error"
