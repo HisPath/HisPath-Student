@@ -7,7 +7,6 @@ import {
   getSemesters,
 } from "../../api/activity";
 import { activityState } from "../../store/atom";
-import ActivityAdd from "./ActivityAdd";
 
 export default function SelectAndSearch() {
   const [semesters, setSemesters] = useState([]);
