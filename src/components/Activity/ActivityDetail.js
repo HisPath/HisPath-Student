@@ -1,7 +1,7 @@
 import { Box, Button, InputLabel, Paper, Typography } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getActivity } from "../../api/activity";
 
 const data = {
   title: "활동 이름",
@@ -23,17 +23,15 @@ export default function ActivityDetail() {
 
   const [activity, setActivity] = React.useState([]);
 
-  const getActivity = async () => {
-    const activity = await axios.get(
-      `http://localhost:8080/api/activity-detail/${activityId}`
-    );
-    setActivity(activity.data);
-    const json = JSON.parse(activity.data.data);
+  const listActivity = async () => {
+    const activity = await getActivity(activityId);
+    setActivity(activity);
+    const json = JSON.parse(activity.data);
     setJsonList(json);
   };
 
   useEffect(() => {
-    getActivity();
+    listActivity();
   }, []);
 
   return (

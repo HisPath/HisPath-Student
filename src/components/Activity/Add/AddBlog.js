@@ -27,6 +27,7 @@ import { getSemesters } from "../../../api/activity";
 import { useSnackbar } from "notistack";
 import { set, useForm } from "react-hook-form";
 import _ from "lodash";
+import { addActivity } from "../../../api/activity";
 
 const style = {
   position: "absolute",
@@ -205,12 +206,12 @@ export default function ActivityAdd({ getActivities }) {
     formState: { errors },
   } = useForm();
 
-  const addActivity = async (formdata) => {
-    await axios.post("http://localhost:8080/api/student-activity/1", {
-      ...formdata,
-      section: "링크",
-    });
-  };
+  // const addActivity = async (formdata) => {
+  //   await axios.post("http://localhost:8080/api/student-activity/1", {
+  //     ...formdata,
+  //     section: "링크",
+  //   });
+  // };
 
   const onValid = (formData) => {
     const final = _.uniqBy(jsonData.reverse(), "id");
@@ -219,7 +220,7 @@ export default function ActivityAdd({ getActivities }) {
     });
 
     formData.data = JSON.stringify(final);
-    addActivity(formData);
+    addActivity(formData, "링크");
     window.location.reload();
     // getActivities();
     handleCloseAdd();

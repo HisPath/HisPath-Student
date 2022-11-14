@@ -3,11 +3,8 @@ import { Line, Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import axios from "axios";
-import { useEffect } from "react";
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Home } from "@mui/icons-material";
 
 const options = {
   elements: {
@@ -62,18 +59,6 @@ const plugins = [
 ];
 
 const ChartTab = () => {
-  const [categories, setCategories] = React.useState([]);
-
-  const getCategories = async () => {
-    const category = await axios.get("http://localhost:8080/api/categories");
-    console.log(category.data);
-    setCategories(category.data);
-  };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
-
   const [chartDataActivity, setChartData] = useState({
     labels: [
       "마일리지",

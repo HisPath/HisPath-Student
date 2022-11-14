@@ -10,13 +10,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
-import { getSemesters } from "../../api/activity";
+import { getSemesters, getActivity, editActivity } from "../../api/activity";
 
 const data = {
   title: "활동 이름",
@@ -42,22 +41,16 @@ export default function ActivityEdit() {
 
   const [title, setTitle] = useState("");
 
-  const getActivity = async () => {
-    const activity = await axios.get(
-      `http://localhost:8080/api/activity-detail/${activityId}`
-    );
+  const listActivity = async () => {
+    const activity = getActivity(activityId);
     setActivity(activity.data);
     setTitle(activity.data.name);
     const json = JSON.parse(activity.data.data);
     setJsonList(json);
   };
 
-  const editActivity = async () => {
-    await axios.put(`http://localhost:8080/api/student-activity/${activityId}`);
-  };
-
   useEffect(() => {
-    getActivity();
+    listActivity(activityId);
     getSemesters().then((data) => {
       setSemesters(data);
     });
