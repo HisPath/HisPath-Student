@@ -15,7 +15,6 @@ export default function NoticeCard({ data }) {
         </Typography>
         <Typography
           variant="h5"
-          // display="inline"
           sx={{
             display: '-webkit-box',
             overflow: 'hidden',
