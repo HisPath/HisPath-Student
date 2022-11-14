@@ -82,7 +82,7 @@ function TT() {
   const [noticeType, setNoticeType] = useState(0);
   const [init, setInit] = useState(false);
   const [noticeList, setNoticeList] = useState([]);
-  const [card, setCard] = useState(window.localStorage.getItem('card') == 'true');
+  const [card, setCard] = useState(window.localStorage.getItem('card') === 'true');
 
   const PublishDuration = ({ p }) => {
     var pubD = p.row.pubDate;
@@ -185,7 +185,7 @@ function TT() {
     getNotices().then(function (data) {
       noticeFilter(data);
       setInit(true);
-      setCard(window.localStorage.getItem('card') == 'true');
+      setCard(window.localStorage.getItem('card') === 'true');
     });
   };
   useEffect(() => {

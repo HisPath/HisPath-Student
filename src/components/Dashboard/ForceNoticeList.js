@@ -60,8 +60,8 @@ const GetfromLS = ({ notice, setId }) => {
 export default function ForceNoticeList({ setId }) {
   const [notices, setNotices] = useState([]);
   useEffect(() => {
-    getImpNotices().then((response) => {
-      setNotices(response.data);
+    getImpNotices().then((data) => {
+      setNotices(data);
     });
   }, []);
 
