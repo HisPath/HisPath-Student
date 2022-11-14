@@ -9,7 +9,8 @@ export const getActivities = async () => {
 
 export const getActivitiesBySec = async (section) => {
   const response = await axios.get(
-    `http://localhost:8080/api/student-activities/1?semester=ALL&section=${section}`
+    `http://localhost:8080/api/student-activities/1?semester=ALL&section=${section}`,
+    { headers: { Authorization: localStorage.getItem("TOKEN") } }
   );
   return response.data.reverse();
 };
@@ -23,7 +24,7 @@ export const getActivitiesBySem = async (semester) => {
 
 export const getSemesters = async () => {
   const response = await axios.get("http://localhost:8080/api/semester");
-  return response.data.sort();
+  return response.data.reverse();
 };
 
 export const getTags = async () => {

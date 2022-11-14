@@ -2,6 +2,7 @@ import { Paper, SvgIcon, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { Link } from "react-router-dom";
 import loginImg from "../../assets/login.jpg";
+import GoogleLoginButton from "../GoogleLoginButton";
 
 export function Login() {
   const styles = {
@@ -109,7 +110,7 @@ export function Login() {
                   ></path>
                   <path fill="none" d="M0 0h18v18H0z"></path>
                 </SvgIcon>
-                <Typography>구글 로그인</Typography>
+                <GoogleLoginButton />
               </Box>
             </Link>
           </Box>

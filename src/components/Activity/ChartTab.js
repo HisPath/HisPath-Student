@@ -135,7 +135,7 @@ const ChartTab = () => {
   return (
     <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
       <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
-        <Paper sx={{ width: "calc(30vw)" }} elevation={0}>
+        <Paper sx={{ width: "calc(36vw)" }} elevation={0}>
           {/* <Typography
             style={{
               background: "rgb(238,242,245)",
@@ -153,7 +153,12 @@ const ChartTab = () => {
             stopAutoPlayOnHover={true}
             navButtonsProps={{
               style: {
+                // backgroundColor: "transparent",
+                // color: "cornflowerblue",
                 backgroundColor: "cornflowerblue",
+                opacity: "0.6",
+                top: 900,
+                // position: "fixed",
                 // borderRadius: 0,
               },
             }}
@@ -163,7 +168,7 @@ const ChartTab = () => {
             //     top: "unset",
             //   },
             // }}
-            height="600px"
+            // height="650px"
           >
             <div
               style={{

@@ -31,10 +31,11 @@ export default function ActivityList() {
   };
 
   const deleteActivity = async (activityId) => {
-    // await axios.delete(
-    //   "http://localhost:8080/api/student-activity/1/" + activityId,
-    //   {}
-    // );
+    await axios.delete(
+      "http://localhost:8080/api/activity/student/" + activityId,
+      {}
+    );
+    window.location.reload();
   };
 
   const lightGray = "#F5F5F5";
@@ -202,7 +203,7 @@ export default function ActivityList() {
                       ) : (
                         ""
                       )}
-                      <IconButton onClick={deleteActivity(activity.id)}>
+                      <IconButton onClick={() => deleteActivity(activity.id)}>
                         <DeleteIcon />
                       </IconButton>
                     </Box>
