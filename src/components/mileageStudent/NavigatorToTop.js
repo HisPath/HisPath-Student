@@ -27,7 +27,7 @@ export default function NavigatorToTop() {
       sx={{
         backgroundColor: "primary.main",
         float: "right",
-
+        marginRight: "0",
         ":hover": {
           backgroundColor: "primary.main",
         },
