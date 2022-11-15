@@ -41,11 +41,12 @@ export default function ActivityEdit() {
 
   const [title, setTitle] = useState("");
 
-  const listActivity = async () => {
-    const activity = getActivity(activityId);
-    setActivity(activity.data);
-    setTitle(activity.data.name);
-    const json = JSON.parse(activity.data.data);
+  const listActivity = async (activityId) => {
+    const activity = await getActivity(activityId);
+    console.log(activity);
+    setActivity(activity);
+    setTitle(activity.name);
+    const json = JSON.parse(activity.data);
     setJsonList(json);
   };
 
