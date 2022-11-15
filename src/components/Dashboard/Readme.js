@@ -1,23 +1,21 @@
 import { Box, Typography } from "@mui/material";
-import axios from "axios";
 import React, { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import { getInfo } from "../../api/dashboard";
 
 const readmeWidth = "25rem";
 
 export default function Readme() {
   const [info, setInfo] = React.useState([]);
 
-  const getInfo = async () => {
-    const info = await axios.get(
-      "http://localhost:8080/api/student/dashboard/1"
-    );
+  const getInformation = async () => {
+    const info = await getInfo();
     console.log(info.data);
     setInfo(info.data);
   };
 
   useEffect(() => {
-    getInfo();
+    getInformation();
   }, []);
 
   return (

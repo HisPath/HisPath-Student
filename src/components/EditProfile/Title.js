@@ -1,25 +1,13 @@
 import userImg from "../../assets/user.png";
-import {
-  Alert,
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Input,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, IconButton } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
-import { useState } from "react";
 import AWS from "aws-sdk";
-import axios from "axios";
+import { updateInfo } from "../../api/editprofile";
 
 export default function Title({ info, getInfo }) {
   console.log(info);
-  const updateInfo = async (profile) => {
-    await axios.put("http://localhost:8080/api/student/1", {
-      ...info,
-      profile,
-    });
+  const updateInformation = async (profile) => {
+    await updateInfo(profile, info);
     getInfo();
   };
 
@@ -41,7 +29,7 @@ export default function Title({ info, getInfo }) {
     //   return;
     // }
     uploadFile(e.target.files[0]);
-    updateInfo(
+    updateInformation(
       `https://shine-jung-test-bucket.s3.ap-northeast-2.amazonaws.com/upload/student-${info.studentId}/${e.target.files[0].name}`
     );
   };

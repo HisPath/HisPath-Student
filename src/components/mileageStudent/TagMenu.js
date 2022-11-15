@@ -16,19 +16,20 @@ import axios from "axios";
 import { semesterState } from "../../store/atom";
 import { CategoryRounded } from "@mui/icons-material";
 import { useEffect } from "react";
+import { getActivitiesBySemCate } from "../../api/mileage";
 
 const drawerWidth = 240;
 const style = {
   fontWeight: "bold",
 };
 
-export const getActivitiesBySemCate = async (category, semester) => {
-  const response = await axios.get(
-    `${process.env.REACT_APP_SERVER}/student-allmactivities/18?semester=${semester}&category=${category}`
-  );
+// export const getActivitiesBySemCate = async (category, semester) => {
+//   const response = await axios.get(
+//     `${process.env.REACT_APP_SERVER}/student-allmactivities/18?semester=${semester}&category=${category}`
+//   );
 
-  return response.data;
-};
+//   return response.data;
+// };
 
 export default function TagMenu() {
   const setActivities = useSetRecoilState(activityState);

@@ -8,17 +8,18 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { blue, red } from "@mui/material/colors";
 import axios from "axios";
 import { useEffect } from "react";
+import { applyMyActivity } from "../../api/mileage";
 
 export default function ApplyButton({ requestStatus, id, changeSections }) {
   const [open, setOpen] = React.useState(false);
 
-  const applyMyActivity = async (id) => {
-    const category = await axios.put(
-      `${process.env.REACT_APP_SERVER}/activity/apply/${id}`
-    );
+  // const applyMyActivity = async (id) => {
+  //   const category = await axios.put(
+  //     `${process.env.REACT_APP_SERVER}/activity/apply/${id}`
+  //   );
 
-    changeSections("ALL");
-  };
+  //   changeSections("ALL");
+  // };
 
   let cond;
 
@@ -33,6 +34,7 @@ export default function ApplyButton({ requestStatus, id, changeSections }) {
   const clickApply = (id) => {
     // setApply(true);
     applyMyActivity(id);
+    changeSections("ALL");
   };
 
   // console.log("props : " + test);
