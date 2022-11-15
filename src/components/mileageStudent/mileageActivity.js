@@ -22,10 +22,15 @@ import { Padding } from "@mui/icons-material";
 import { useRecoilValue } from "recoil";
 import { semesterState } from "../../store/atom";
 import { activityState } from "../../store/atom";
-import { getActivitiesBySemCate } from "./TagMenu";
+// import { getActivitiesBySemCate } from "./TagMenu";
 import { useRecoilState } from "recoil";
 import { Chip } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
+import {
+  getActivities,
+  getCategories,
+  getActivitiesBySemCate,
+} from "../../api/mileage";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 export default function MileageTables() {
@@ -35,26 +40,26 @@ export default function MileageTables() {
   const [mileageActivities, setActivities] = useRecoilState(activityState);
 
   // console.log(mileageActivities);
-  const getCategories = async () => {
-    const category = await axios.get(
-      `${process.env.REACT_APP_SERVER}/categories`
-    );
-    setCategories(category.data);
-  };
+  // const getCategories = async () => {
+  //   const category = await axios.get(
+  //     `${process.env.REACT_APP_SERVER}/categories`
+  //   );
+  //   setCategories(category.data);
+  // };
 
-  const getAllActivities = async () => {
-    const activities = await axios.get(
-      `${process.env.REACT_APP_SERVER}/mileage/semester?semester=${semester}`
-    );
-    setAllActivities(activities.data);
-  };
+  // const getAllActivities = async () => {
+  //   const activities = await axios.get(
+  //     `${process.env.REACT_APP_SERVER}/mileage/semester?semester=${semester}`
+  //   );
+  //   setAllActivities(activities.data);
+  // };
 
-  const getActivities = async () => {
-    const activity = await axios.get(
-      `${process.env.REACT_APP_SERVER}/studentmileage/1`
-    );
-    setActivities(activity.data.activities);
-  };
+  // const getActivities = async () => {
+  //   const activity = await axios.get(
+  //     `${process.env.REACT_APP_SERVER}/studentmileage/1`
+  //   );
+  //   setActivities(activity.data.activities);
+  // };
 
   const changeSections = (category) => {
     if (!category) {
@@ -69,9 +74,12 @@ export default function MileageTables() {
     }
   };
   useEffect(() => {
-    // getActivities();
-    getCategories();
-    // getAllActivities();
+    const fetchCate = async () => {
+      const cate = await getCategories();
+      setCategories(cate);
+    };
+    fetchCate();
+
     changeSections("ALL");
   }, []);
 

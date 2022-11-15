@@ -17,8 +17,9 @@ import { semesterState } from "../../store/atom";
 import { useRecoilState } from "recoil";
 import { myActivityState } from "../../store/atom";
 import { getActivities } from "../../api/activity";
-import { getMyActivitiesBySemCate } from "./ATagMenu";
+// import { getMyActivitiesBySemCate } from "./ATagMenu";
 import { useState } from "react";
+import { getMyActivitiesBySemCate } from "../../api/mileage";
 
 export default function BasicTable() {
   // const [categories, setCategories] = React.useState([]);
