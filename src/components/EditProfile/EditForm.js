@@ -83,7 +83,7 @@ export default function EditForm({ watch, register, majors }) {
           <InputLabel id="demo-simple-select-standard-label" shrink={true}>
             2 전공
           </InputLabel>
-          <NativeSelect {...register("major2")}>
+          <NativeSelect {...register("major2Id")}>
             {majors.map((major, index) => (
               <option key={index} value={index + 1}>
                 {major.name}
