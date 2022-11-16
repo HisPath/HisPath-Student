@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const updateInfo = async (profile, info) => {
   await axios.put(
-    `${process.env.REACT_APP_SERVER}/student/1`,
+    `${process.env.REACT_APP_SERVER}/student`,
     {
       ...info,
       profile,
@@ -25,7 +25,7 @@ export const getDepartment = async () => {
 
 export const updateInfoData = async (data) => {
   await axios.put(
-    `${process.env.REACT_APP_SERVER}/student/1`,
+    `${process.env.REACT_APP_SERVER}/student`,
     {
       ...data,
     },
@@ -36,7 +36,7 @@ export const updateInfoData = async (data) => {
 };
 
 export const getStudentInfo = async () => {
-  const info = await axios.get(`${process.env.REACT_APP_SERVER}/student/1`, {
+  const info = await axios.get(`${process.env.REACT_APP_SERVER}/student`, {
     headers: { Authorization: localStorage.getItem("TOKEN") },
   });
   return info;
