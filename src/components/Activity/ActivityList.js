@@ -31,7 +31,7 @@ export default function ActivityList() {
   };
 
   const deleteActivityFromList = async (activityId) => {
-    deleteActivity(activityId);
+    await deleteActivity(activityId);
     window.location.reload();
   };
 
