@@ -1,7 +1,7 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import { Box, Button, IconButton, Tooltip, Typography } from "@mui/material";
-import userImg from "../../assets/user.png";
+import userImg from "../../assets/profile.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
