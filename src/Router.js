@@ -19,6 +19,7 @@ import DashboardNotice from "./components/Dashboard/Notice";
 import Notice from "./pages/Notice";
 import Post from "./components/Notice/Post";
 import { Login } from "./components/Login/Login";
+import AboutUs from "./pages/AboutUs";
 
 function Router() {
   return (
@@ -49,6 +50,7 @@ function Router() {
 
         <Route path="/resume/*" element={<Resume />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<AboutUs />} />
       </Routes>
     </BrowserRouter>
   );
