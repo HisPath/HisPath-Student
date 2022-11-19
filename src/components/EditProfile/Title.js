@@ -1,4 +1,4 @@
-import userImg from "../../assets/user.png";
+import userImg from "../../assets/profile.png";
 import { Avatar, Box, IconButton } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import AWS from "aws-sdk";
