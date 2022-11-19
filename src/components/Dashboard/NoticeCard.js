@@ -1,44 +1,93 @@
-import { Card, Typography, CardContent, InputBase } from "@mui/material";
+import { Image } from "@mui/icons-material";
+import { Card, Typography, CardContent, Box, InputBase } from "@mui/material";
 import { Link } from "react-router-dom";
 import TextMaxLine from "../../components/text-max-line";
+import Iconify from "../iconify/Iconify";
+import Img from "../../assets/login.jpg";
 
-export default function NoticeCard({ title }) {
+export default function NoticeCard({ notice }) {
+  function HtmlToString() {
+    return <div dangerouslySetInnerHTML={{ __html: notice.content }}></div>;
+  }
+
   return (
-    <Card sx={{ mt: 3, width: 1 }}>
-      <CardContent
-        sx={{
-          pt: 4.5,
-          // width: 1,
-        }}
-      >
-        <Typography
-          gutterBottom
-          variant="caption"
-          component="div"
+    <>
+      <Card sx={{ mt: 3, width: 1 }}>
+        <Box
+          sx={
+            {
+              // backgroundColor: "#dacdff",
+              // height: "calc(20vh)",
+            }
+          }
+        >
+          <img
+            src={
+              "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_18.jpg"
+            }
+          />
+        </Box>
+        <CardContent
           sx={{
-            color: "text.disabled",
+            pt: 2,
+            // width: 1,
+            maxHeight: "calc(40vh)",
+            overflow: "scroll",
           }}
         >
-          {"2022-11-03"}
-        </Typography>
+          <Typography
+            gutterBottom
+            variant="caption"
+            component="div"
+            sx={{
+              color: "text.disabled",
+            }}
+          >
+            {notice.regDate}
+          </Typography>
 
-        {/* <Link to={`/notice/${notice.notice.noticeId}`}> */}
-        <TextMaxLine variant={"h5"} line={2} persistent>
-          {"notice title"}
-        </TextMaxLine>
-        {/* </Link> */}
-        <InputBase
-          multiline
-          fullWidth
-          // rows={4}
-          value="이거 공지 내용이거 공지 내용이거 공지 내용이거 공지 내용이거 공지 내용이거 공지 내용이거 공지 내용이거 공지 내용이거 공지 내용"
-          sx={{
-            p: 2,
-            mb: 3,
-            borderRadius: 1,
-          }}
-        />
-      </CardContent>
-    </Card>
+          {/* <Link to={`/notice/${notice.notice.noticeId}`}> */}
+          <TextMaxLine variant={"h5"} line={2} persistent>
+            {notice.title}
+          </TextMaxLine>
+          {/* </Link> */}
+          {/* <InputBase
+            multiline
+            fullWidth
+            // rows={4}
+            value={html(notice.content)}
+            sx={{
+              p: 1,
+              mb: 1,
+              borderRadius: 1,
+            }}
+          /> */}
+          <HtmlToString />
+        </CardContent>
+      </Card>
+    </>
   );
+}
+{
+  /* <Card sx={{ textAlign: "center" }}>
+       <Box sx={{ position: "relative" }}>
+         <Image src={userImg} ratio="16/9" />
+       </Box>
+
+       <Typography variant="subtitle1" sx={{ mt: 6, mb: 0.5, color: "black" }}>
+         {"제목"}
+       </Typography>
+       <Typography
+        variant="body2"
+        sx={{ color: "text.secondary", fontWeight: "bolder" }}
+      >
+        {"3"}학기
+      </Typography>
+      <Typography
+        variant="body2"
+        sx={{ color: "text.secondary", fontWeight: "bolder" }}
+      >
+        {"220000371"}
+      </Typography>
+    </Card> */
 }
