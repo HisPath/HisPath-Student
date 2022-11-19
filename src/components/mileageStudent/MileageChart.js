@@ -9,72 +9,19 @@ import axios from "axios";
 import { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import { getActivities, getCategories } from "../../api/mileage";
+import { Card, Grid, Container, CardHeader, CardContent } from "@mui/material";
+
+import {
+  ChartBar,
+  // ChartColumnStacked,
+  // ChartColumnSingle,
+  ChartRadialBar,
+  ChartLine,
+  ChartMixed,
+  ChartsRadarBar,
+} from "../charts";
 
 import ApexCharts from "react-apexcharts";
-
-// 2번째 Line Column
-// 3번쨰 bar with markers
-// var apex_options = {
-//   series: [
-//     {
-//       name: "Website Blog",
-//       type: "column",
-//       data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160],
-//     },
-//     {
-//       name: "Social Media",
-//       type: "line",
-//       data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
-//     },
-//   ],
-//   chart: {
-//     height: 350,
-//     type: "line",
-//   },
-//   stroke: {
-//     width: [0, 4],
-//   },
-//   title: {
-//     text: "Traffic Sources",
-//   },
-//   dataLabels: {
-//     enabled: true,
-//     enabledOnSeries: [1],
-//   },
-//   labels: [
-//     "01 Jan 2001",
-//     "02 Jan 2001",
-//     "03 Jan 2001",
-//     "04 Jan 2001",
-//     "05 Jan 2001",
-//     "06 Jan 2001",
-//     "07 Jan 2001",
-//     "08 Jan 2001",
-//     "09 Jan 2001",
-//     "10 Jan 2001",
-//     "11 Jan 2001",
-//     "12 Jan 2001",
-//   ],
-//   xaxis: {
-//     type: "datetime",
-//   },
-//   yaxis: [
-//     {
-//       title: {
-//         text: "Website Blog",
-//       },
-//     },
-//     {
-//       opposite: true,
-//       title: {
-//         text: "Social Media",
-//       },
-//     },
-//   ],
-// };
-
-// var apchart = new ApexCharts(document.querySelector("#chart"), apex_options);
-// apchart.render();
 
 const options = {
   elements: {
@@ -262,124 +209,67 @@ const ChartTab = () => {
     fetchAct();
   }, []);
 
+  const chartData = [
+    <Box
+      sx={{
+        pt: 6,
+        pb: 1,
+        bgcolor: (theme) =>
+          theme.palette.mode === "light" ? "grey.200" : "grey.800",
+        borderRadius: "20px",
+      }}
+    >
+      <Container>
+        <Grid item xs={12} md={6}>
+          <Card dir="ltr">
+            <CardHeader title="Mixed" />
+            <CardContent
+              sx={{
+                height: 420,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ChartMixed />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Container>
+    </Box>,
+    <Box
+      sx={{
+        pt: 6,
+        pb: 1,
+        bgcolor: (theme) =>
+          theme.palette.mode === "light" ? "grey.200" : "grey.800",
+        borderRadius: "20px",
+      }}
+    >
+      <Container>
+        <Grid item xs={12} md={6}>
+          <Card dir="ltr">
+            <CardHeader title="Mixed" />
+            <CardContent
+              sx={{
+                height: 420,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ChartMixed />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Container>
+    </Box>,
+  ];
+
   return (
-    // <Box>
-    //   <Box m={3} pb={3} display={"flex"} justifyContent={"center"}>
-    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-    //       <Typography
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "20px 0 8px calc(9vw)",
-    //           fontSize: "1.4rem",
-    //           fontWeight: "bold",
-    //           fontFamily: "ubuntu",
-    //         }}
-    //         color="primary"
-    //       >
-    //         Mileage
-    //       </Typography>
-    //       <div
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "20px 10px 21px 10px",
-    //         }}
-    //       >
-    //         <Radar
-    //           width={180}
-    //           data={chartDataActivity}
-    //           options={options}
-    //           plugins={pligins}
-    //         />
-    //       </div>
-    //     </Paper>
-    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-    //       <Typography
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "41px 0 0 calc(8.5vw)",
-    //           fontSize: "1.4rem",
-    //           fontWeight: "bold",
-    //           fontFamily: "ubuntu",
-    //         }}
-    //         color="primary"
-    //       >
-    //         Popularity
-    //       </Typography>
-    //       <div
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "40px 10px 41px 10px",
-    //         }}
-    //       >
-    //         <Bar
-    //           width={180}
-    //           data={chartDataLanguage}
-    //           options={options}
-    //           plugins={pligins}
-    //         />
-    //       </div>
-    //     </Paper>
-    //   </Box>
-    //   <Box m={3} pb={3} display={"flex"} justifyContent={"center"}>
-    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-    //       <Typography
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "41px 0 0 calc(11vw)",
-    //           fontSize: "1.4rem",
-    //           fontWeight: "bold",
-    //           fontFamily: "ubuntu",
-    //         }}
-    //         color="primary"
-    //       >
-    //         Rank
-    //       </Typography>
-    //       <div
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "40px 10px 41px 10px",
-    //         }}
-    //       >
-    //         <Line
-    //           width={180}
-    //           data={chartDataMileage}
-    //           options={options}
-    //           plugins={pligins}
-    //         />
-    //       </div>
-    //     </Paper>
-    //     <Paper sx={{ width: "calc(30vw)", m: 2 }}>
-    //       <Typography
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "41px 0 0 calc(11vw)",
-    //           fontSize: "1.4rem",
-    //           fontWeight: "bold",
-    //           fontFamily: "ubuntu",
-    //         }}
-    //         color="primary"
-    //       >
-    //         My Timeline
-    //       </Typography>
-    //       <div
-    //         style={{
-    //           background: "rgb(238,242,245)",
-    //           padding: "40px 10px 41px 10px",
-    //         }}
-    //       >
-    //         <Line
-    //           width={180}
-    //           data={chartDataTimeline}
-    //           options={options}
-    //           plugins={pligins}
-    //         />
-    //       </div>
-    //     </Paper>
-    //   </Box>
-    // </Box>
-    <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
+    <Box overflow={"auto"} maxHeight="calc(78vh)">
       <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
-        <Paper sx={{ width: "calc(30vw)" }} elevation={0}>
+        <Paper sx={{ width: "calc(50vw)" }} elevation={0}>
           <Carousel
             navButtonsAlwaysVisible={true}
             stopAutoPlayOnHover={true}
@@ -391,13 +281,123 @@ const ChartTab = () => {
             }}
             // navButtonsWrapperProps={{
             //   style: {
-            //     bottom: "0",
-            //     top: "unset",
+            //     marginLeft: "40",
             //   },
             // }}
-            height="600px"
+            height="550px"
           >
-            <div
+            <Box
+              sx={{
+                pt: 6,
+                pb: 1,
+                bgcolor: (theme) =>
+                  theme.palette.mode === "light" ? "grey.200" : "grey.800",
+                borderRadius: "20px",
+              }}
+            >
+              <Container>
+                <Grid item>
+                  <Card dir="ltr">
+                    <CardHeader title="내 마일리지 분포" />
+                    <CardContent
+                      sx={{
+                        height: 420,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <ChartsRadarBar />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Container>
+            </Box>
+            <Box
+              sx={{
+                pt: 6,
+                pb: 1,
+                bgcolor: (theme) =>
+                  theme.palette.mode === "light" ? "grey.200" : "grey.800",
+                borderRadius: "20px",
+              }}
+            >
+              <Container>
+                <Grid item>
+                  <Card dir="ltr">
+                    <CardHeader title="마일리지 참여 학생 수" />
+                    <CardContent
+                      sx={{
+                        width: 1000,
+                        height: 420,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "left",
+                      }}
+                    >
+                      <ChartMixed />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Container>
+            </Box>
+            <Box
+              sx={{
+                pt: 6,
+                pb: 1,
+                bgcolor: (theme) =>
+                  theme.palette.mode === "light" ? "grey.200" : "grey.800",
+                borderRadius: "20px",
+              }}
+            >
+              <Container>
+                <Grid item xs={12} md={6}>
+                  <Card dir="ltr">
+                    <CardHeader title="내 마일리지 총점 순위" />
+                    <CardContent
+                      sx={{
+                        width: 650,
+                        height: 420,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "left",
+                      }}
+                    >
+                      <ChartRadialBar />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Container>
+            </Box>
+            <Box
+              sx={{
+                pt: 6,
+                pb: 1,
+                bgcolor: (theme) =>
+                  theme.palette.mode === "light" ? "grey.200" : "grey.800",
+                borderRadius: "20px",
+              }}
+            >
+              <Container>
+                <Grid item xs={12} md={6}>
+                  <Card dir="ltr">
+                    <CardHeader title="내 마일리지 성장 타임라인" />
+                    <CardContent
+                      sx={{
+                        width: 1000,
+                        height: 420,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "left",
+                      }}
+                    >
+                      <ChartLine />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Container>
+            </Box>
+            {/* <div
               style={{
                 // background: "rgb(238,242,245)",
                 padding: "20px 0px 21px 0px",
@@ -442,28 +442,7 @@ const ChartTab = () => {
                 options={options}
                 plugins={plugins}
               />
-            </div>
-
-            {/* <div
-              style={{
-                // background: "rgb(238,242,245)",
-                padding: "20px 0px 21px 0px",
-                height: "350px",
-              }}
-            >
-              <Typography sx={{ ml: 3 }}>Timeline</Typography>
-              <Line
-
-
-                width={180}
-                data={chartDataTimeline}
-                options={options}
-                plugins={plugins}
-              />
-
-
             </div> */}
-            {/* <div id="apchart"></div> */}
           </Carousel>
         </Paper>
       </Box>
