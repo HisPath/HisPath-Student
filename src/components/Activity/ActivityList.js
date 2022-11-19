@@ -86,7 +86,7 @@ export default function ActivityList() {
                     },
                   }}
                 >
-                  <TableCell style={{ width: "calc(5vw)" }}>
+                  <TableCell style={{ width: "calc(2vw)" }}>
                     {activity.section === "수상" ? (
                       <Chip
                         label={activity.section}
@@ -162,13 +162,13 @@ export default function ActivityList() {
                     )}
                     {/* <Chip label={activity.section} color="secondary" /> */}
                   </TableCell>
-                  <TableCell style={{ width: "calc(10vw)" }}>
+                  <TableCell style={{ width: "calc(3vw)" }}>
                     {activity.semester}
                   </TableCell>
                   <TableCell
                     component="th"
                     scope="row"
-                    style={{ width: "calc(35vw)" }}
+                    style={{ width: "calc(20vw)" }}
                   >
                     <Link
                       to={`/activity/detail/${activity.id}`}
