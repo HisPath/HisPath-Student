@@ -32,7 +32,7 @@ export const getCategories = async () => {
 
 export const getActivities = async () => {
   const response = await axios.get(
-    `${process.env.REACT_APP_SERVER}/studentmileage/1`,
+    `${process.env.REACT_APP_SERVER}/studentmileage/`,
     {
       headers: { Authorization: localStorage.getItem("TOKEN") },
     }
@@ -43,7 +43,7 @@ export const getActivities = async () => {
 
 export const getSemesters = async () => {
   const response = await axios.get(
-    `${process.env.REACT_APP_SERVER}/semester/18`,
+    `${process.env.REACT_APP_SERVER}/semester/`,
     {
       headers: { Authorization: localStorage.getItem("TOKEN") },
     }
@@ -53,7 +53,7 @@ export const getSemesters = async () => {
 
 export const getActivitiesBySemCate = async (category, semester) => {
   const response = await axios.get(
-    `${process.env.REACT_APP_SERVER}/student-allmactivities/18?semester=${semester}&category=${category}`,
+    `${process.env.REACT_APP_SERVER}/student-allmactivities/?semester=${semester}&category=${category}`,
     {
       headers: { Authorization: localStorage.getItem("TOKEN") },
     }
