@@ -69,7 +69,6 @@ function Modal({ open, handleClose, openPost, handlePostOpen, handlePostClose })
     </Box>
   );
 }
-
 function ForceNotice() {
   const checkUnread = () => {
     let count = 0;
