@@ -12,21 +12,11 @@ import { getActivities, getCategories } from "../../api/mileage";
 import { Card, Grid, Container, CardHeader, CardContent } from "@mui/material";
 
 import {
-  ChartBar,
-  // ChartColumnStacked,
-  // ChartColumnSingle,
   ChartRadialBar,
   ChartLine,
   ChartMixed,
   ChartsRadarBar,
 } from "../charts";
-
-import {
-  ChartLine,
-  ChartMixed,
-  ChartsRadarBar,
-  ChartRadialBar,
-} from "../../components/charts";
 
 export default function MileageChart() {
   return (

@@ -130,8 +130,7 @@ export default function BasicTabs() {
         </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {/* <MileageChart></MileageChart> */}
-        <DemoChartsPage></DemoChartsPage>
+        <MileageChart></MileageChart>
       </TabPanel>
 
       {/* <Link
