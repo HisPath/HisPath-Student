@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import MileageChart from "./MileageChart";
 
 import Box from "@mui/material/Box";
 import MileageTables from "./mileageActivity";
@@ -16,7 +15,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import TagMenu from "./TagMenu";
 import ATagMenu from "./ATagMenu";
 import InvoiceListPage from "./mileageActivity";
-import DemoChartsPage from "./NewDesign";
+import MileageChart from "./MileageChart";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -120,8 +119,7 @@ export default function BasicTabs() {
       <TabPanel value={value} index={0}>
         <Box sx={{ display: "flex" }}>
           <TagMenu />
-          {/* <MileageTables></MileageTables> */}
-          <InvoiceListPage></InvoiceListPage>
+          <MileageTables></MileageTables>
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -131,8 +129,7 @@ export default function BasicTabs() {
         </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {/* <MileageChart></MileageChart> */}
-        <DemoChartsPage></DemoChartsPage>
+        <MileageChart></MileageChart>
       </TabPanel>
 
       {/* <Link
