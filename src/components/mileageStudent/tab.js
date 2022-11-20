@@ -119,7 +119,8 @@ export default function BasicTabs() {
       <TabPanel value={value} index={0}>
         <Box sx={{ display: "flex" }}>
           <TagMenu />
-          <MileageTables></MileageTables>
+          {/* <MileageTables></MileageTables> */}
+          <InvoiceListPage></InvoiceListPage>
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -129,7 +130,8 @@ export default function BasicTabs() {
         </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <MileageChart></MileageChart>
+        {/* <MileageChart></MileageChart> */}
+        <DemoChartsPage></DemoChartsPage>
       </TabPanel>
 
       {/* <Link

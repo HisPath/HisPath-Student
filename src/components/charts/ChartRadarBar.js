@@ -68,6 +68,7 @@ export default function ChartRadarBar() {
       position: "bottom",
       horizontalAlign: "center",
     },
+
     yaxis: {
       max: 100,
       min: 0,

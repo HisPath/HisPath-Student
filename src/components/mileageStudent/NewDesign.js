@@ -1,25 +1,13 @@
-import { useState } from "react";
-import { Line, Radar } from "react-chartjs-2";
-import Chart from "chart.js/auto";
-import { Paper, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import { Bar } from "react-chartjs-2";
-import React from "react";
-import axios from "axios";
-import { useEffect } from "react";
-import Carousel from "react-material-ui-carousel";
-import { getActivities, getCategories } from "../../api/mileage";
-import { Card, Grid, Container, CardHeader, CardContent } from "@mui/material";
-
+// import { Helmet } from "react-helmet-async";
+// @mui
 import {
-  ChartBar,
-  // ChartColumnStacked,
-  // ChartColumnSingle,
-  ChartRadialBar,
-  ChartLine,
-  ChartMixed,
-  ChartsRadarBar,
-} from "../charts";
+  Box,
+  Card,
+  Grid,
+  Container,
+  CardHeader,
+  CardContent,
+} from "@mui/material";
 
 import {
   ChartLine,
@@ -28,7 +16,9 @@ import {
   ChartRadialBar,
 } from "../../components/charts";
 
-export default function MileageChart() {
+// ----------------------------------------------------------------------
+
+export default function DemoChartsPage() {
   return (
     <>
       <Container sx={{ my: 10 }}>
