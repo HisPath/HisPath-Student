@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { getSemesters, getActivity, editActivity } from "../../api/activity";
@@ -36,16 +36,12 @@ export default function ActivityEdit() {
   const [semesters, setSemesters] = useState([]);
   const [jsonList, setJsonList] = useState([]);
 
-  const [activity, setActivity] = React.useState([]);
+  const [activity, setActivity] = useState([]);
   const [jsonData, setJsonData] = useState([]);
-
-  const [title, setTitle] = useState("");
 
   const listActivity = async (activityId) => {
     const activity = await getActivity(activityId);
-    console.log(activity);
     setActivity(activity);
-    setTitle(activity.name);
     const json = JSON.parse(activity.data);
     setJsonList(json);
   };
@@ -61,33 +57,27 @@ export default function ActivityEdit() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
+  useEffect(() => {
+    reset(activity);
+  }, [activity]);
 
   const editData = (id, param, type, e) => {
     const fieldData = e.currentTarget.value ? e.currentTarget.value : "";
-
-    setJsonData((old) => {
-      return [
-        ...old,
-        {
-          id: id,
-          field: param,
-          type: type,
-          data: fieldData,
-        },
-      ];
-    });
+    setJsonList((old) =>
+      old.map((item) => (item.id === id ? { ...item, data: fieldData } : item))
+    );
   };
 
   const onValid = (formData) => {
-    const final = _.uniqBy(jsonData.reverse(), "id");
+    const final = _.uniqBy(jsonList.reverse(), "id");
     final.sort((d1, d2) => {
       return d1.id - d2.id;
     });
 
     formData.data = JSON.stringify(final);
-    editActivity(formData);
-    window.location.reload();
+    editActivity(activityId, formData, activity.section);
     enqueueSnackbar("수정되었습니다.", { variant: "success" });
   };
 
@@ -146,11 +136,7 @@ export default function ActivityEdit() {
               hiddenLabel
               variant="filled"
               size="small"
-              value={title}
               sx={{ mb: 1 }}
-              onChange={(e) => {
-                console.log(e.target.value);
-              }}
               {...register("name", {
                 required: "필수 항목입니다.",
               })}
@@ -169,6 +155,9 @@ export default function ActivityEdit() {
                       size="small"
                       value={item.data}
                       sx={{ mb: 1 }}
+                      onChange={(e) => {
+                        editData(item.id, item.data, "text", e);
+                      }}
                     />
                   </Box>
                 ))}
@@ -188,6 +177,7 @@ export default function ActivityEdit() {
                   size="small"
                   value={activity.remark}
                   sx={{ mb: 1 }}
+                  {...register("remark")}
                 />
               </>
             ) : (
