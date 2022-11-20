@@ -61,8 +61,9 @@ export default function ActivityTab() {
             >
               <Tab
                 sx={{
-                  minHeight: 3,
                   pt: 1.5,
+                  pl: 1,
+                  pr: 1,
                   fontWeight: 600,
                   fontSize: "1.3rem",
                 }}
@@ -73,8 +74,9 @@ export default function ActivityTab() {
               />
               <Tab
                 sx={{
-                  minHeight: 3,
                   pt: 1.5,
+                  pl: 1,
+                  pr: 1,
                   fontWeight: 600,
                   fontSize: "1.3rem",
                 }}
@@ -84,10 +86,9 @@ export default function ActivityTab() {
                 {...a11yProps(1)}
               />
             </Tabs>
-            {value === 0 ? <SelectAndSearch /> : ""}
+            {value === 0 ? <SelectAndSearch /> : <SelectAndSearch />}
           </Box>
           <TabPanel value={value} index={0}>
-            {/* <SelectAndSearch /> */}
             <ActivityList />
           </TabPanel>
           <TabPanel value={value} index={1}>
