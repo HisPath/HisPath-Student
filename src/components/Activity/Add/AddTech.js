@@ -461,7 +461,7 @@ export default function ActivityAdd({ getActivities }) {
         <form onSubmit={itemHandleSubmit}>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              <Box display={"flex"} alignItems={"center"}>
+              <Box display={"flex"} alignItems={"center"} pt={3}>
                 <Typography sx={{ pr: 2, color: "#222222" }}>
                   항목 이름
                 </Typography>
