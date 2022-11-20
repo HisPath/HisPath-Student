@@ -3,19 +3,59 @@ import { useTheme } from "@mui/material/styles";
 // components
 import Chart, { useChart } from "../chart";
 
-const series = [
-  {
-    name: "동학년 카테고리별 평균 분포",
-    data: [80, 50, 30, 40, 90, 20],
-  },
-  {
-    name: "내 카테고리별 평균 분포",
-    data: [20, 30, 40, 80, 20, 80],
-  },
-];
+//API
+import { getChartPopularity } from "../../api/chart";
+import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { semesterState } from "../../store/atom";
+import { useState } from "react";
 
 export default function ChartRadarBar() {
   const theme = useTheme();
+  const semester = useRecoilValue(semesterState);
+  const [datas, setDatas] = useState([]);
+  const [studentAverage, setStudentAverage] = useState([]);
+  const [totalAverage, setTotalAverage] = useState([]);
+
+  const series = [
+    {
+      name: "동학년 카테고리별 평균 분포",
+      data: totalAverage,
+    },
+    {
+      name: "내 카테고리별 평균 분포",
+      data: studentAverage,
+    },
+  ];
+  const getChartData = (semester) => {
+    getChartPopularity(semester).then((data) => {
+      setDatas(data);
+    });
+  };
+  const getTotalAveragePerCate = () => {
+    setTotalAverage(
+      datas.map((item) => (item.averageCnt / item.totalCategoryCnt) * 100)
+    );
+  };
+
+  const getStuAveragePerCate = () => {
+    setStudentAverage(
+      datas.map((item) => (item.myCnt / item.totalCategoryCnt) * 100)
+    );
+  };
+
+  useEffect(() => {
+    getChartData(semester);
+  }, []);
+
+  useEffect(() => {
+    getChartData(semester);
+  }, [semester]);
+
+  useEffect(() => {
+    getTotalAveragePerCate();
+    getStuAveragePerCate();
+  }, [datas, semester]);
 
   const chartOptions = useChart({
     stroke: {
@@ -28,15 +68,13 @@ export default function ChartRadarBar() {
       position: "bottom",
       horizontalAlign: "center",
     },
+
+    yaxis: {
+      max: 100,
+      min: 0,
+    },
     xaxis: {
-      categories: [
-        "전공 마일리지",
-        "산학 마일리지",
-        "비교과-연구활동",
-        "비교과-특강참여",
-        "비교과-행사참여",
-        "비교과-학회활동",
-      ],
+      categories: datas.map((item) => item.categoryName),
       labels: {
         style: {
           colors: [

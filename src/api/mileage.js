@@ -1,8 +1,9 @@
 import axios from "axios";
 
 export const applyMyActivity = async (id) => {
-  const response = await axios.get(
+  const response = await axios.put(
     `${process.env.REACT_APP_SERVER}/activity/apply/${id}`,
+    {},
     {
       headers: { Authorization: localStorage.getItem("TOKEN") },
     }
