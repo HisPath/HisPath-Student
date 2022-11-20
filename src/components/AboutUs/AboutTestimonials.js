@@ -15,6 +15,7 @@ import {
 import useResponsive from "../../hooks/useResponsive";
 // utils
 import { bgBlur, bgGradient } from "../../utils/cssStyles";
+import { fDate } from "../../utils/formatTime";
 // components
 import Iconify from "../../components/iconify";
 import { MotionViewport, varFade } from "../../components/animate";
@@ -26,37 +27,37 @@ const TESTIMONIALS = [
   {
     name: "Jenny Wilson",
     rating: 5,
-    dateCreate: "19 Nov 2022",
+    dateCreate: new Date(),
     content: `Excellent Work! Thanks a lot!`,
   },
   {
     name: "Cody Fisher",
     rating: 5,
-    dateCreate: "19 Nov 2022",
+    dateCreate: new Date(),
     content: `It's a very good dashboard and we are really liking the product . We've done some things, like migrate to TS and implementing a react useContext api, to fit our job methodology but the product is one of the best in terms of design and application architecture. The team did a really good job.`,
   },
   {
     name: "Marvin McKinney",
     rating: 5,
-    dateCreate: "19 Nov 2022",
+    dateCreate: new Date(),
     content: `Customer support is realy fast and helpful the desgin of this theme is looks amazing also the code is very clean and readble realy good job !`,
   },
   {
     name: "Darrell Steward",
     rating: 5,
-    dateCreate: "19 Nov 2022",
+    dateCreate: new Date(),
     content: `Amazing, really good code quality and gives you a lot of examples for implementations.`,
   },
   {
     name: "Jacob Jones",
     rating: 5,
-    dateCreate: "19 Nov 2022",
+    dateCreate: new Date(),
     content: `Got a few questions after purchasing the product. The owner responded very fast and very helpfull. Overall the code is excellent and works very good. 5/5 stars!`,
   },
   {
     name: "Bessie Cooper",
     rating: 5,
-    dateCreate: "19 Nov 2022",
+    dateCreate: new Date(),
     content: `CEO of Codealy.io here. We’ve built a developer assessment platform that makes sense - tasks are based on git repositories and run in virtual machines. We automate the pain points - storing candidates code, running it and sharing test results with the whole team, remotely. Bought this template as we need to provide an awesome dashboard for our early customers. I am super happy with purchase. The code is just as good as the design. Thanks!`,
   },
 ];
@@ -76,14 +77,15 @@ const StyledRoot = styled("div")(({ theme }) => ({
   },
 }));
 
-// ----------------------------------------------------------------------
-
 export default function AboutTestimonials() {
   const isDesktop = useResponsive("up", "md");
 
   return (
     <StyledRoot>
-      <Container sx={{ position: "relative", height: 1 }}>
+      <Container
+        component={MotionViewport}
+        sx={{ position: "relative", height: 1 }}
+      >
         <Grid
           container
           spacing={3}
@@ -93,7 +95,7 @@ export default function AboutTestimonials() {
         >
           <Grid item xs={10} md={4}>
             <Box sx={{ maxWidth: { md: 360 } }}>
-              <m.div>
+              <m.div variants={varFade().inUp}>
                 <Typography
                   component="p"
                   variant="overline"
@@ -103,14 +105,14 @@ export default function AboutTestimonials() {
                 </Typography>
               </m.div>
 
-              <m.div>
+              <m.div variants={varFade().inUp}>
                 <Typography variant="h2" sx={{ mb: 3, color: "common.white" }}>
                   Who love <br />
                   my work
                 </Typography>
               </m.div>
 
-              <m.div>
+              <m.div variants={varFade().inUp}>
                 <Typography sx={{ color: "common.white" }}>
                   Our goal is to create a product and service that you’re
                   satisfied with and use it every day. This is why we’re
@@ -121,7 +123,7 @@ export default function AboutTestimonials() {
 
               {!isDesktop && (
                 <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
-                  <m.div>
+                  <m.div variants={varFade().inUp}>
                     <TestimonialLink />
                   </m.div>
                 </Box>
@@ -142,7 +144,7 @@ export default function AboutTestimonials() {
             <Grid container spacing={isDesktop ? 3 : 0} alignItems="center">
               <Grid item xs={12} md={6}>
                 {TESTIMONIALS.slice(0, 3).map((testimonial) => (
-                  <m.div key={testimonial.name}>
+                  <m.div key={testimonial.name} variants={varFade().inUp}>
                     <TestimonialCard testimonial={testimonial} />
                   </m.div>
                 ))}
@@ -150,7 +152,7 @@ export default function AboutTestimonials() {
 
               <Grid item xs={12} md={6}>
                 {TESTIMONIALS.slice(3, 6).map((testimonial) => (
-                  <m.div key={testimonial.name}>
+                  <m.div key={testimonial.name} variants={varFade().inUp}>
                     <TestimonialCard testimonial={testimonial} />
                   </m.div>
                 ))}
@@ -161,7 +163,7 @@ export default function AboutTestimonials() {
 
         {isDesktop && (
           <Box sx={{ bottom: 60, position: "absolute" }}>
-            <m.div>
+            <m.div variants={varFade().inLeft}>
               <TestimonialLink />
             </m.div>
           </Box>
@@ -170,6 +172,8 @@ export default function AboutTestimonials() {
     </StyledRoot>
   );
 }
+
+// ----------------------------------------------------------------------
 
 TestimonialCard.propTypes = {
   testimonial: PropTypes.shape({
@@ -207,7 +211,7 @@ function TestimonialCard({ testimonial }) {
         variant="caption"
         sx={{ color: "grey.500" }}
       >
-        {dateCreate}
+        {fDate(dateCreate)}
       </Typography>
 
       <Rating value={rating} readOnly size="small" />
@@ -218,6 +222,8 @@ function TestimonialCard({ testimonial }) {
     </Paper>
   );
 }
+
+// ----------------------------------------------------------------------
 
 function TestimonialLink() {
   return (
