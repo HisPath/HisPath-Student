@@ -1,22 +1,8 @@
-import {
-  Card,
-  Typography,
-  CardContent,
-  Box,
-  Chip,
-  IconButton,
-} from "@mui/material";
+import { Card, Typography, CardContent, Box, Chip } from "@mui/material";
 import TextMaxLine from "../../components/text-max-line";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteActivity } from "../../api/activity";
 import { Link } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
-  const deleteActivityFromList = async (activityId) => {
-    await deleteActivity(activityId);
-    window.location.reload();
-  };
-
   return (
     <>
       <Card sx={{ mt: 3, width: 1 }}>
@@ -57,7 +43,7 @@ export default function ActivityCard({ activity }) {
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_15.jpg"
               }
             />
-          ) : activity.section === "언어" ? (
+          ) : activity.section === "외국어" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_19.jpg"
@@ -156,7 +142,7 @@ export default function ActivityCard({ activity }) {
                   fontWeight: 900,
                 }}
               />
-            ) : activity.section === "언어" ? (
+            ) : activity.section === "외국어" ? (
               <Chip
                 label={activity.section}
                 sx={{
