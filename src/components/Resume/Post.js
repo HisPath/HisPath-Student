@@ -41,7 +41,7 @@ function Post({ refresh }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: { title: "이력서" } });
-  const { move } = useFieldArray({
+  const { move, remove } = useFieldArray({
     control,
     name: `content`,
   });
@@ -98,7 +98,9 @@ function Post({ refresh }) {
                 이전
               </Button>
               <Box sx={{ display: "flex", gap: 1 }}>
-                <CategoryModal {...{ categories, setCategories, move }} />
+                <CategoryModal
+                  {...{ categories, setCategories, move, remove }}
+                />
                 <Button variant="contained" type="submit">
                   저장
                 </Button>
