@@ -6,6 +6,8 @@ import LinkIcon from "@mui/icons-material/Link";
 import { getInfo } from "../../api/dashboard";
 import { useEffect, useState } from "react";
 import Iconify from "../iconify/Iconify";
+import Label from "../../components/label";
+import { yellow } from "@mui/material/colors";
 
 export default function ProfileSocialInfo() {
   const [info, setInfo] = useState([]);
@@ -29,9 +31,20 @@ export default function ProfileSocialInfo() {
 
   return (
     <Card>
-      <CardHeader title="Social" />
-
       <Stack spacing={2} sx={{ p: 3 }}>
+        <Label
+          variant="soft"
+          style={{ color: "#e69b00", backgroundColor: "#f7f5bc" }}
+          sx={{
+            fontSize: "1.3rem",
+            p: 2,
+            pt: 2.5,
+            fontFamily: "Public Sans,sans-serif",
+            color: yellow,
+          }}
+        >
+          Social
+        </Label>
         <Stack key={"github"} direction="row" sx={{ wordBreak: "break-all" }}>
           <GitHubIcon sx={{ mr: 2 }} />
           <Link
