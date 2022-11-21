@@ -58,7 +58,7 @@ function Edit({ refresh }) {
       return resume;
     }, [resume]),
   });
-  const { move } = useFieldArray({
+  const { move, remove } = useFieldArray({
     control,
     name: `content`,
   });
@@ -126,7 +126,9 @@ function Edit({ refresh }) {
                 이전
               </Button>
               <Box sx={{ display: "flex", gap: 1 }}>
-                <CategoryModal {...{ categories, setCategories, move }} />
+                <CategoryModal
+                  {...{ categories, setCategories, move, remove }}
+                />
                 <Button
                   variant="contained"
                   color="error"

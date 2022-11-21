@@ -11,7 +11,6 @@ import TagIcon from "@mui/icons-material/Tag";
 import { Box } from "@mui/system";
 import { useRecoilValue } from "recoil";
 import { activityState } from "../../store/atom";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteActivity } from "../../api/activity";
 import ActivityCard from "./ActivityCard";
 

@@ -1,13 +1,23 @@
-import { Card, Typography, CardContent, Box, Chip } from "@mui/material";
+import {
+  Card,
+  Typography,
+  CardContent,
+  Box,
+  Chip,
+  IconButton,
+} from "@mui/material";
 import TextMaxLine from "../../components/text-max-line";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteActivity } from "../../api/activity";
+import { Link } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
-  console.log(activity);
-  function HtmlToString() {
-    return <div dangerouslySetInnerHTML={{ __html: activity.content }}></div>;
-  }
-  //api-dev-minimal-v4.vercel.app/assets/images/covers/cover_5.jpg
-  https: return (
+  const deleteActivityFromList = async (activityId) => {
+    await deleteActivity(activityId);
+    window.location.reload();
+  };
+
+  return (
     <>
       <Card sx={{ mt: 3, width: 1 }}>
         <Box>
@@ -74,13 +84,19 @@ export default function ActivityCard({ activity }) {
             overflow: "scroll",
           }}
         >
-          <Box display={"flex"} gap={2} mb={2} justifyContent="space-around">
+          <Box
+            display={"flex"}
+            gap={2}
+            mb={2}
+            justifyContent="space-around"
+            alignItems={"center"}
+          >
             <Typography
               gutterBottom
               variant="caption"
               component="div"
               sx={{
-                color: "text.disabled",
+                color: "#222",
                 mt: 0.8,
               }}
             >
@@ -170,16 +186,30 @@ export default function ActivityCard({ activity }) {
                 }}
               />
             ) : (
-              ""
+              <Chip
+                label="개인활동"
+                variant="outlined"
+                sx={{
+                  color: "secondary.main",
+                  backgroundColor: "#fff",
+                  fontWeight: 800,
+                }}
+              />
             )}
           </Box>
 
-          {/* <Link to={`/notice/${notice.notice.noticeId}`}> */}
-          <TextMaxLine variant={"h5"} line={2} persistent>
-            {activity.name}
-          </TextMaxLine>
-          <Typography persistent>{activity.remark}</Typography>
-          {/* </Link> */}
+          <Link
+            to={`/activity/detail/${activity.id}`}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <TextMaxLine variant={"h5"} line={2} persistent>
+              {activity.name}
+            </TextMaxLine>
+          </Link>
+          {/* <Typography persistent>{activity.remark}</Typography> */}
+          {/* <IconButton onClick={() => deleteActivityFromList(activity.id)}>
+            <DeleteIcon />
+          </IconButton> */}
           {/* <InputBase
                 multiline
                 fullWidth
@@ -191,7 +221,6 @@ export default function ActivityCard({ activity }) {
                   borderRadius: 1,
                 }}
               /> */}
-          <HtmlToString />
         </CardContent>
       </Card>
     </>
