@@ -35,7 +35,7 @@ function Router() {
       <Routes>
         {isLogin ? (
           <>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/edit" element={<EditProfile />} />
             <Route path="/notice" element={<Notice />} />
