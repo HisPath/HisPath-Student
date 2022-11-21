@@ -44,7 +44,7 @@ const style = {
   p: 4,
 };
 
-function CategoryModal({ categories, setCategories, move }) {
+function CategoryModal({ categories, setCategories, move, remove }) {
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -70,7 +70,12 @@ function CategoryModal({ categories, setCategories, move }) {
     setNewCategory("");
   };
   const onDelete = (category) => {
-    setCategories((old) => old.filter((item) => item !== category));
+    if (window.confirm("카테고리를 삭제하시겠습니까?")) {
+      categories.forEach((item, index) => {
+        if (item === category) remove(index);
+      });
+      setCategories((old) => old.filter((item) => item !== category));
+    }
   };
   return (
     <div>
