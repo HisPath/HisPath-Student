@@ -58,7 +58,7 @@ export default function NoticeCard({ notice }) {
               borderRadius: 1,
             }}
           /> */}
-          <HtmlToString />
+          {/* <HtmlToString /> */}
         </CardContent>
       </Card>
     </>
