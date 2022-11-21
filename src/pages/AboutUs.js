@@ -7,11 +7,16 @@ import AboutTestimonials from "../components/AboutUs/AboutTestimonials";
 import { Box } from "@mui/system";
 
 export default function AboutUs() {
+  const googleLoginHandler = () => {
+    const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_CLIENT}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+    window.location.href = GOOGLE_LOGIN_URL;
+  };
   return (
     <>
       <AboutHero />
 
       <Box
+        onClick={googleLoginHandler}
         display="flex"
         justifyContent="flex-end"
         sx={{ m: 3, mt: 5, mr: "calc(10vw)" }}
