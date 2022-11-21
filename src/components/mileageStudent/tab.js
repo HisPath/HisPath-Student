@@ -16,6 +16,7 @@ import TagMenu from "./TagMenu";
 import ATagMenu from "./ATagMenu";
 import InvoiceListPage from "./mileageActivity";
 import MileageChart from "./MileageChart";
+import { Container } from "@mui/material";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -60,80 +61,81 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box>
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Tabs
-              sx={{ flexGrow: 1 }}
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
+    <Container>
+      <Box>
+        <Box sx={{ width: "100%" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <Tab
-                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
-                icon={<ListAltIcon />}
-                iconPosition="start"
-                label="내 마일리지"
-                {...a11yProps(0)}
-              />
-              <Tab
-                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
-                icon={<PersonOutlineOutlinedIcon />}
-                iconPosition="start"
-                label="내 활동"
-                {...a11yProps(1)}
-              />
-              <Tab
-                sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
-                icon={<BarChartIcon />}
-                iconPosition="start"
-                label="차트"
-                {...a11yProps(2)}
-              />
-              {/* <span className="mileageStatus">
+              <Tabs
+                sx={{ flexGrow: 1 }}
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab
+                  sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                  icon={<ListAltIcon />}
+                  iconPosition="start"
+                  label="내 마일리지"
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                  icon={<PersonOutlineOutlinedIcon />}
+                  iconPosition="start"
+                  label="내 활동"
+                  {...a11yProps(1)}
+                />
+                <Tab
+                  sx={{ minHeight: 3, pt: 1.5, fontWeight: 600 }}
+                  icon={<BarChartIcon />}
+                  iconPosition="start"
+                  label="차트"
+                  {...a11yProps(2)}
+                />
+                {/* <span className="mileageStatus">
               {value ? "" : "장학금 신청 완료"}
             </span> */}
-            </Tabs>
-            <SemesterSelect
-              // setSemesters={setSemesters}
-              sx={{
-                minWidth: 120,
-                backgroundColor: "white",
-                overflow: "auto",
-                position: "sticky",
-                top: 0,
-                zIndex: "20",
-                float: "right",
-              }}
-            />
+              </Tabs>
+              <SemesterSelect
+                // setSemesters={setSemesters}
+                sx={{
+                  minWidth: 120,
+                  backgroundColor: "white",
+                  overflow: "auto",
+                  position: "sticky",
+                  top: 0,
+                  zIndex: "20",
+                  float: "right",
+                }}
+              />
+            </Box>
           </Box>
         </Box>
-      </Box>
 
-      <TabPanel value={value} index={0}>
-        <Box sx={{ display: "flex" }}>
-          <TagMenu />
-          {/* <MileageTables></MileageTables> */}
-          <InvoiceListPage></InvoiceListPage>
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Box sx={{ display: "flex" }}>
-          <ATagMenu />
-          <ActivityTables></ActivityTables>
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <MileageChart></MileageChart>
-      </TabPanel>
+        <TabPanel value={value} index={0}>
+          <Box sx={{ display: "flex" }}>
+            <TagMenu />
+            {/* <MileageTables></MileageTables> */}
+            <InvoiceListPage></InvoiceListPage>
+          </Box>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Box sx={{ display: "flex" }}>
+            <ATagMenu />
+            <ActivityTables></ActivityTables>
+          </Box>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <MileageChart></MileageChart>
+        </TabPanel>
 
-      {/* <Link
+        {/* <Link
         href="/"
         variant="body2"
         sx={{
@@ -157,6 +159,7 @@ export default function BasicTabs() {
           장학금 신청
         </Fab>
       </Link> */}
-    </Box>
+      </Box>
+    </Container>
   );
 }
