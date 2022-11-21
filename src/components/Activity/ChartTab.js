@@ -4,7 +4,6 @@ import Chart from "chart.js/auto";
 import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import Carousel from "react-material-ui-carousel";
 
 const options = {
   elements: {
@@ -120,56 +119,22 @@ const ChartTab = () => {
   return (
     <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
       <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
-        <Paper sx={{ width: "calc(36vw)" }} elevation={0}>
-          {/* <Typography
+        <Paper sx={{ width: "calc(35vw)" }} elevation={0}>
+          <div
             style={{
               background: "rgb(238,242,245)",
-              padding: "20px 0 8px calc(12vw)",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              fontFamily: "ubuntu",
+              padding: "20px 0px 21px 0px",
             }}
-            color="primary"
           >
-            Activity
-          </Typography> */}
-          <Carousel
-            navButtonsAlwaysVisible={true}
-            stopAutoPlayOnHover={true}
-            navButtonsProps={{
-              style: {
-                // backgroundColor: "transparent",
-                // color: "cornflowerblue",
-                backgroundColor: "cornflowerblue",
-                opacity: "0.6",
-                top: 900,
-                // position: "fixed",
-                // borderRadius: 0,
-              },
-            }}
-            // navButtonsWrapperProps={{
-            //   style: {
-            //     bottom: "0",
-            //     top: "unset",
-            //   },
-            // }}
-            // height="650px"
-          >
-            <div
-              style={{
-                background: "rgb(238,242,245)",
-                padding: "20px 0px 21px 0px",
-              }}
-            >
-              <Typography sx={{ ml: 3 }}>2022-1</Typography>
-              <Radar
-                width={180}
-                data={chartDataActivity}
-                options={options}
-                plugins={plugins}
-              />
-            </div>
-            <div
+            <Typography sx={{ ml: 3 }}>2022-1</Typography>
+            <Radar
+              width={180}
+              data={chartDataActivity}
+              options={options}
+              plugins={plugins}
+            />
+          </div>
+          {/* <div
               style={{
                 background: "rgb(238,242,245)",
                 padding: "20px 0px 21px 0px",
@@ -182,8 +147,7 @@ const ChartTab = () => {
                 options={options}
                 plugins={plugins}
               />
-            </div>
-          </Carousel>
+            </div> */}
         </Paper>
       </Box>
     </Box>

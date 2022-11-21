@@ -67,10 +67,18 @@ export const getActivity = async (activityId) => {
   return activity.data;
 };
 
-export const editActivity = async (activityId) => {
-  // await axios.put(
-  //   `${process.env.REACT_APP_SERVER}/student-activity/${activityId}`
-  // );
+export const editActivity = async (activityId, formdata, sec) => {
+  console.log("activity edit API", formdata);
+  await axios.put(
+    `${process.env.REACT_APP_SERVER}/student-activity/${activityId}`,
+    {
+      ...formdata,
+      section: sec,
+    },
+    {
+      headers: { Authorization: localStorage.getItem("TOKEN") },
+    }
+  );
 };
 
 export const deleteActivity = async (activityId) => {
