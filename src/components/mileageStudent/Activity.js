@@ -37,6 +37,7 @@ export default function BasicTable() {
       getMyActivitiesBySemCate(section, semesters).then((data) => {
         setActivities(data);
         console.log(semesters);
+        console.log(activities);
       });
     }
   };
