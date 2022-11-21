@@ -1,22 +1,64 @@
 // components
 import Chart, { useChart } from "../chart";
 
-// ----------------------------------------------------------------------
-
-const series = [
-  {
-    name: "카테고리별 전체 학생 평균 ",
-    type: "column",
-    data: [50, 70, 40, 100, 90, 60],
-  },
-  {
-    name: "내 평균",
-    type: "line",
-    data: [30, 25, 36, 30, 45, 35],
-  },
-];
+import { useState } from "react";
+import { getChartPopularity } from "../../api/chart";
+import { useRecoilValue } from "recoil";
+import { semesterState } from "../../store/atom";
+import { useEffect } from "react";
 
 export default function ChartMixed() {
+  const [datas, setDatas] = useState([]);
+  const semester = useRecoilValue(semesterState);
+  const [studentAverage, setStudentAverage] = useState([]);
+  const [totalAverage, setTotalAverage] = useState([]);
+
+  const getChartData = (semester) => {
+    getChartPopularity(semester).then((data) => {
+      setDatas(data);
+      // console.log(datas);
+    });
+  };
+
+  const getTotalAveragePerCate = () => {
+    setTotalAverage(
+      datas.map((item) => (item.averageCnt / item.totalCategoryCnt) * 100)
+    );
+    // console.log(totalAverage);
+  };
+
+  const getStuAveragePerCate = () => {
+    setStudentAverage(
+      datas.map((item) => (item.myCnt / item.totalCategoryCnt) * 100)
+    );
+    // console.log(studentAverage);
+  };
+
+  useEffect(() => {
+    getChartData(semester);
+  }, []);
+
+  useEffect(() => {
+    getChartData(semester);
+  }, [semester]);
+
+  useEffect(() => {
+    getTotalAveragePerCate();
+    getStuAveragePerCate();
+  }, [datas]);
+
+  const series = [
+    {
+      name: "카테고리별 전체 학생 평균 ",
+      type: "column",
+      data: studentAverage,
+    },
+    {
+      name: "내 평균",
+      type: "line",
+      data: totalAverage,
+    },
+  ];
   const chartOptions = useChart({
     stroke: {
       width: [0, 2, 3],
@@ -27,14 +69,7 @@ export default function ChartMixed() {
     fill: {
       type: ["solid", "solid"],
     },
-    labels: [
-      "전공 마일리지",
-      "산학 마일리지",
-      "비교과-연구활동",
-      "비교과-특강참여",
-      "비교과-행사참여",
-      "비교과-학회활동",
-    ],
+    labels: datas.map((item) => item.categoryName),
     xaxis: {},
     yaxis: {
       title: { text: "Points" },

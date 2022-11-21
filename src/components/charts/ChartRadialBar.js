@@ -4,16 +4,73 @@ import { useTheme } from "@mui/material/styles";
 import { fNumber } from "../../utils/formatNumber";
 // components
 import Chart, { useChart } from "../chart";
-
-// ----------------------------------------------------------------------
-
-const series = [70, 80];
+import { useState } from "react";
+// API
+import { getChartRank } from "../../api/chart";
+import { ConstructionOutlined } from "@mui/icons-material";
+import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { semesterState } from "../../store/atom";
 
 export default function ChartRadialBar() {
   const theme = useTheme();
+  const [datas, setDatas] = useState([]);
+  const semester = useRecoilValue(semesterState);
+  const [studentAverage, setStudentAverage] = useState([]);
+  const [totalAverage, setTotalAverage] = useState([]);
+  const [stuValue, setStuValue] = useState([]);
+  // const [totalValue, setTotalValue] = useState([]);
+  const series = [totalAverage, studentAverage];
+  const [myPoint, setMypoint] = useState([]);
+
+  const getChartData = (semester) => {
+    getChartRank(semester).then((data) => {
+      setDatas(data);
+      console.log(datas);
+    });
+  };
+
+  const getTotalAverage = () => {
+    setTotalAverage((datas.avgTotalWeight / datas.maxTotalWeight) * 100);
+  };
+
+  const getStuAverage = () => {
+    setStudentAverage((datas.myTotalWeight / datas.maxTotalWeight) * 100);
+  };
+
+  const calValue = () => {
+    setStuValue(100 - studentAverage + 1);
+  };
+
+  const getMyPoint = () => {
+    setMypoint(datas.myTotalWeight);
+  };
+
+  useEffect(() => {
+    getChartData(semester);
+  }, []);
+
+  useEffect(() => {
+    getChartData(semester);
+    getMyPoint();
+    calValue();
+    console.log(semester);
+  }, [semester]);
+
+  useEffect(() => {
+    getTotalAverage();
+    getStuAverage();
+    calValue();
+    getMyPoint();
+  }, [datas]);
 
   const chartOptions = useChart({
-    labels: ["전체 학생 평균 마일리지 총점", "내 마일리지 총점(상위 10%)"],
+    labels: [
+      // `전체 학생 평균 마일리지 총점(` + totalAverage + `%)`,
+      `전체 학생 평균 마일리지 총점(60)`,
+      // "내 마일리지 총점(상위 " + stuValue + "%)",
+      "내 마일리지 총점(상위 10%)",
+    ],
     fill: {
       type: "gradient",
       gradient: {
@@ -42,7 +99,7 @@ export default function ChartRadialBar() {
             offsetY: 16,
           },
           total: {
-            formatter: () => fNumber(80),
+            formatter: () => fNumber(myPoint),
           },
         },
       },
