@@ -22,7 +22,7 @@ export const getChartPopularity = async (semester, grade, department) => {
 
 export const getChartRank = async (semester, grade, department) => {
   const response = await axios.get(
-    `${process.env.REACT_APP_SERVER}/chart/rank?semester=${semester}&grade=${grade}&department=${department}`,
+    `${process.env.REACT_APP_SERVER}/chart/rank?semester=${semester}`,
     {
       headers: { Authorization: localStorage.getItem("TOKEN") },
     }
