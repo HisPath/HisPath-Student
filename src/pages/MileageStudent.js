@@ -1,4 +1,4 @@
-import styles from "../style/mileage.css";
+import styles from "../style/mileage.module.css";
 
 // import Content from "../components/mileageStudent/content";
 import Header from "../components/mileageStudent/header";
