@@ -22,16 +22,20 @@ export default function ChartMixed() {
 
   const getTotalAveragePerCate = () => {
     setTotalAverage(
-      datas.map((item) => (item.averageCnt / item.totalCategoryCnt) * 100)
+      datas.map((item) =>
+        Math.floor((item.averageCnt / item.totalCategoryCnt) * 100)
+      )
     );
-    // console.log(totalAverage);
+    console.log(totalAverage);
   };
 
   const getStuAveragePerCate = () => {
     setStudentAverage(
-      datas.map((item) => (item.myCnt / item.totalCategoryCnt) * 100)
+      datas.map((item) =>
+        Math.floor((item.myCnt / item.totalCategoryCnt) * 100)
+      )
     );
-    // console.log(studentAverage);
+    console.log(studentAverage);
   };
 
   useEffect(() => {

@@ -32,6 +32,7 @@ import {
   getActivitiesBySemCate,
 } from "../../api/mileage";
 import { Container } from "@mui/material";
+import styles from "../../style/mileage.module.css";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 export default function MileageTables() {
@@ -250,7 +251,7 @@ export default function MileageTables() {
           rel="noopener noreferrer"
         >
           <Fab
-            className="apply_button"
+            className={styles.apply_button}
             variant="extended"
             size="medium"
             color="primary"

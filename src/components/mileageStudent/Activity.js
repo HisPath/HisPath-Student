@@ -23,8 +23,6 @@ import { getMyActivitiesBySemCate } from "../../api/mileage";
 import { Container } from "@mui/material";
 
 export default function BasicTable() {
-  // const [categories, setCategories] = React.useState([]);
-  // const [semesters, setSemesters] = React.useState([]);
   const semesters = useRecoilValue(semesterState);
   const [activities, setActivities] = useRecoilState(myActivityState);
   const [activityId, setActivityId] = useState();
