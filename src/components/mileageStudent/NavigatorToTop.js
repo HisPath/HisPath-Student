@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
-
+import styles from "../../style/mileage.module.css";
 import NavigationIcon from "@mui/icons-material/Navigation";
 
 // const MoveToTop = () => {
@@ -21,7 +21,7 @@ export default function NavigatorToTop() {
   };
   return (
     <Fab
-      className="movetop_button"
+      className={styles.movetop_button}
       variant="extended"
       onClick={MoveToTop}
       sx={{
