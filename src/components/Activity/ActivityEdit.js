@@ -15,7 +15,12 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
-import { getSemesters, getActivity, editActivity } from "../../api/activity";
+import {
+  getSemesters,
+  getActivity,
+  editActivity,
+  getTags,
+} from "../../api/activity";
 
 const data = {
   title: "활동 이름",
@@ -34,10 +39,9 @@ export default function ActivityEdit() {
   const [newImgDir, setNewImgDir] = useState(data.newImgDir);
   const [dateState, setDateState] = useState(true);
   const [semesters, setSemesters] = useState([]);
+  const [sections, setSections] = useState([]);
   const [jsonList, setJsonList] = useState([]);
-
   const [activity, setActivity] = useState([]);
-  const [jsonData, setJsonData] = useState([]);
 
   const listActivity = async (activityId) => {
     const activity = await getActivity(activityId);
@@ -50,6 +54,9 @@ export default function ActivityEdit() {
     listActivity(activityId);
     getSemesters().then((data) => {
       setSemesters(data);
+    });
+    getTags().then((data) => {
+      setSections(data);
     });
   }, []);
 
@@ -77,7 +84,7 @@ export default function ActivityEdit() {
     });
 
     formData.data = JSON.stringify(final);
-    editActivity(activityId, formData, activity.section);
+    editActivity(activityId, formData);
     enqueueSnackbar("수정되었습니다.", { variant: "success" });
   };
 
@@ -92,7 +99,7 @@ export default function ActivityEdit() {
     >
       <Box
         component={Paper}
-        width={550}
+        width={"calc(60vw)"}
         minHeight={600}
         p={3}
         borderRadius={3}
@@ -109,24 +116,37 @@ export default function ActivityEdit() {
             </Typography>
           </Box>
           <Box maxHeight={400} overflow="scroll">
-            <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
-            <FormControl sx={{ minWidth: 120, m: 1 }} size="small">
-              <NativeSelect
-                labelId="demo-select-small"
-                id="demo-select-small"
-                defaultValue={activity.semester}
-                {...register("semester", { required: "필수 항목입니다." })}
-              >
-                {semesters.map((semester) => (
-                  <option value={semester.semester} key={semester.semester}>
-                    {semester.semester}
-                  </option>
-                ))}
-              </NativeSelect>
-            </FormControl>
-            <Box>
-              <InputLabel sx={{ mt: 1 }}>카테고리</InputLabel>
-              <Typography sx={{ p: 2 }}>{activity.section}</Typography>
+            <Box display={"flex"} gap={2}>
+              <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
+              <FormControl sx={{ minWidth: 120, m: 1 }} size="small">
+                <NativeSelect
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  defaultValue={activity.semester}
+                  {...register("semester", { required: "필수 항목입니다." })}
+                >
+                  {semesters.map((semester) => (
+                    <option value={semester.semester} key={semester.semester}>
+                      {semester.semester}
+                    </option>
+                  ))}
+                </NativeSelect>
+              </FormControl>
+              <InputLabel sx={{ mt: 1, ml: 5 }}>카테고리</InputLabel>
+              <FormControl sx={{ minWidth: 120, m: 1 }} size="small">
+                <NativeSelect
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  defaultValue={activity.section}
+                  {...register("section", { required: "필수 항목입니다." })}
+                >
+                  {sections.map((section) => (
+                    <option value={section} key={section}>
+                      {section}
+                    </option>
+                  ))}
+                </NativeSelect>
+              </FormControl>
             </Box>
             <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
             <TextField
