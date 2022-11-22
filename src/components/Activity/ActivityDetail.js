@@ -1,7 +1,15 @@
-import { Box, Button, InputLabel, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputLabel,
+  Paper,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getActivity } from "../../api/activity";
+import { getActivity, deleteActivity } from "../../api/activity";
+import Label from "../../components/label";
 
 const data = {
   title: "활동 이름",
@@ -34,6 +42,11 @@ export default function ActivityDetail() {
     listActivity();
   }, []);
 
+  const deleteActivityFromList = async (activityId) => {
+    await deleteActivity(activityId);
+    window.location.reload();
+  };
+
   return (
     <Box
       sx={{
@@ -54,12 +67,23 @@ export default function ActivityDetail() {
           flexDirection: "column",
           justifyContent: "space-between",
         }}
+        boxShadow={24}
       >
         <Box>
           <Box display="flex" justifyContent="space-between">
-            <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 3 }}>
+            <Label
+              variant="soft"
+              color={"secondary"}
+              sx={{
+                fontSize: "1.3rem",
+                p: 2,
+                pt: 2.5,
+                mb: 3,
+                fontFamily: "Public Sans,sans-serif",
+              }}
+            >
               활동 상세
-            </Typography>
+            </Label>
           </Box>
           <Box maxHeight={400} overflow="scroll">
             <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
@@ -109,8 +133,13 @@ export default function ActivityDetail() {
           </Box> */}
           </Box>
         </Box>
-        <Box display="flex" justifyContent="flex-end" mt={3}>
-          <Box display="flex" gap={1.5}>
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          alignItems={"center"}
+          mt={3}
+        >
+          <Box display="flex" alignItems={"center"} gap={1.5}>
             <Link to={`/activity`} style={{ textDecoration: "none" }}>
               <Button
                 color="secondary"
@@ -120,6 +149,22 @@ export default function ActivityDetail() {
                 취소
               </Button>
             </Link>
+            {activity.mileage ? (
+              <></>
+            ) : (
+              <Button
+                color="error"
+                variant="contained"
+                sx={{ fontWeight: "600" }}
+                onClick={() => {
+                  deleteActivityFromList(activity.id);
+                  window.history.back();
+                }}
+              >
+                삭제
+              </Button>
+            )}
+
             <Link
               to={`/activity/edit/${activityId}`}
               style={{ textDecoration: "none" }}

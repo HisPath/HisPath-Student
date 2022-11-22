@@ -17,11 +17,14 @@ const pages = [
   { name: "내 활동", link: "/activity" },
   { name: "마일리지", link: "/mileage" },
   { name: "이력서", link: "/resume" },
-  { name: "로그아웃", link: "/login" },
 ];
 const settings = ["Logout"];
 
 const Headers = () => {
+  const logout = () => {
+    localStorage.removeItem("TOKEN");
+    window.location.reload();
+  };
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -145,6 +148,17 @@ const Headers = () => {
               </Link>
             ))}
           </Box>
+          <Button
+            onClick={logout}
+            sx={{
+              my: 2,
+              color: "white",
+              display: "block",
+              fontWeight: "bold",
+            }}
+          >
+            로그아웃
+          </Button>
           {/* <Box flexGrow={0.05} /> header menu와 profile 사이의 여백 */}
           {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

@@ -40,5 +40,7 @@ export const putResume = async (id, data) => {
 };
 
 export const deleteResume = async (id) => {
-  await axios.delete(`${process.env.REACT_APP_SERVER}/resume/${id}`);
+  await axios.delete(`${process.env.REACT_APP_SERVER}/resume/${id}`, {
+    headers: { Authorization: localStorage.getItem("TOKEN") },
+  });
 };
