@@ -10,7 +10,6 @@ export default function Readme() {
 
   const getInformation = async () => {
     const info = await getInfo();
-    console.log(info.data);
     setInfo(info.data);
   };
 

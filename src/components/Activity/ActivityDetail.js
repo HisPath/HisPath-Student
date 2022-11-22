@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Chip,
   IconButton,
   InputLabel,
   Paper,
@@ -58,7 +59,7 @@ export default function ActivityDetail() {
     >
       <Box
         component={Paper}
-        width={550}
+        width={"calc(60vw)"}
         minHeight={600}
         p={3}
         borderRadius={3}
@@ -70,30 +71,62 @@ export default function ActivityDetail() {
         boxShadow={24}
       >
         <Box>
-          <Box display="flex" justifyContent="space-between">
-            <Label
-              variant="soft"
-              color={"secondary"}
+          <Box display="flex" justifyContent="space-between" sx={{ mt: 2.5 }}>
+            <Typography
               sx={{
                 fontSize: "1.3rem",
-                p: 2,
-                pt: 2.5,
-                mb: 3,
+                fontWeight: "bold",
+                pl: 2,
+                pt: 0.5,
                 fontFamily: "Public Sans,sans-serif",
               }}
             >
               활동 상세
-            </Label>
-          </Box>
-          <Box maxHeight={400} overflow="scroll">
-            <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
-            <Typography sx={{ p: 2 }}>{activity.semester}</Typography>
-            <Box>
-              <InputLabel sx={{ mt: 1 }}>카테고리</InputLabel>
-              <Typography sx={{ p: 2 }}>{activity.section}</Typography>
+            </Typography>
+
+            <Box display={"flex"}>
+              {activity.mileage ? (
+                <Chip
+                  label="마일리지"
+                  variant="outlined"
+                  sx={{
+                    color: "primary.main",
+                    backgroundColor: "#fff",
+                    fontWeight: 800,
+                    m: 0.5,
+                    mr: 2,
+                  }}
+                />
+              ) : (
+                <Chip
+                  label="개인활동"
+                  variant="outlined"
+                  sx={{
+                    color: "secondary.main",
+                    backgroundColor: "#fff",
+                    fontWeight: 800,
+                    m: 0.5,
+                    mr: 2,
+                  }}
+                />
+              )}
+              <Label color={"success"} sx={{ mt: 1 }}>
+                학기
+              </Label>
+              <Typography sx={{ p: 1, mr: 2 }}>{activity.semester}</Typography>
+
+              <Label color={"success"} sx={{ mt: 1 }}>
+                카테고리
+              </Label>
+              <Typography sx={{ p: 1, mr: 2 }}>{activity.section}</Typography>
+
+              <Label color={"success"} sx={{ mt: 1 }}>
+                제목
+              </Label>
+              <Typography sx={{ p: 1, mr: 2 }}>{activity.name}</Typography>
             </Box>
-            <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
-            <Typography sx={{ p: 2 }}>{activity.name}</Typography>
+          </Box>
+          <Box maxHeight={400} overflow="scroll" p={3} pt={1}>
             {activity.data ? (
               <>
                 {jsonList.map((item) => (

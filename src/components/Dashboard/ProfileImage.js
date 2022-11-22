@@ -9,7 +9,6 @@ export default function ProfileImage() {
 
   const getDashboardInfo = async () => {
     const info = await getInfo();
-    console.log("내정보", info.data);
     setInfo(info.data);
   };
 
