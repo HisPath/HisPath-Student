@@ -35,7 +35,7 @@ export default function TagMenu() {
     }
   };
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} border="none">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -55,9 +55,11 @@ export default function TagMenu() {
           <ListItem
             key={"전체"}
             onClick={() => changeSections()}
-            sx={{
-              backgroundColor: "#fff8e1",
-            }}
+            sx={
+              {
+                // backgroundColor: "#fff8e1",
+              }
+            }
           >
             <ListItemButton>
               <TagIcon />
@@ -68,7 +70,14 @@ export default function TagMenu() {
               />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"# 마일리지"} sx={{ backgroundColor: "#fffde7" }}>
+          <ListItem
+            key={"# 마일리지"}
+            sx={
+              {
+                // backgroundColor: "#fffde7"
+              }
+            }
+          >
             <ListItemButton>
               <TagIcon />
               <ListItemText
@@ -91,7 +100,7 @@ export default function TagMenu() {
             <ListItem
               key={text[0]}
               onClick={() => changeSections(text[0])}
-              sx={{ backgroundColor: text[3] }}
+              // sx={{ backgroundColor: text[3] }}
             >
               <ListItemButton>
                 <TagIcon />
