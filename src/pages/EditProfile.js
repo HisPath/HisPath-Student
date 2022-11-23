@@ -12,7 +12,6 @@ export default function EditProfile() {
   const [info, setInfo] = useState([]);
   const getInfo = async () => {
     const info = await getStudentInfo();
-    console.log("불러온 데이터", info.data);
     setInfo(info.data);
   };
 
@@ -41,7 +40,6 @@ export default function EditProfile() {
 
   const onValid = (data) => {
     setInfo(data);
-    console.log(data);
     updateInfo(data);
     enqueueSnackbar("수정되었습니다.", { variant: "success" });
     window.location.replace(`/dashboard`);

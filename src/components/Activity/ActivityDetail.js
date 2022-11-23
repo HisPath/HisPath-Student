@@ -1,7 +1,16 @@
-import { Box, Button, InputLabel, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  IconButton,
+  InputLabel,
+  Paper,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getActivity } from "../../api/activity";
+import { getActivity, deleteActivity } from "../../api/activity";
+import Label from "../../components/label";
 
 const data = {
   title: "활동 이름",
@@ -34,6 +43,11 @@ export default function ActivityDetail() {
     listActivity();
   }, []);
 
+  const deleteActivityFromList = async (activityId) => {
+    await deleteActivity(activityId);
+    window.location.reload();
+  };
+
   return (
     <Box
       sx={{
@@ -45,7 +59,7 @@ export default function ActivityDetail() {
     >
       <Box
         component={Paper}
-        width={550}
+        width={"calc(60vw)"}
         minHeight={600}
         p={3}
         borderRadius={3}
@@ -54,22 +68,65 @@ export default function ActivityDetail() {
           flexDirection: "column",
           justifyContent: "space-between",
         }}
+        boxShadow={24}
       >
         <Box>
-          <Box display="flex" justifyContent="space-between">
-            <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 3 }}>
+          <Box display="flex" justifyContent="space-between" sx={{ mt: 2.5 }}>
+            <Typography
+              sx={{
+                fontSize: "1.3rem",
+                fontWeight: "bold",
+                pl: 2,
+                pt: 0.5,
+                fontFamily: "Public Sans,sans-serif",
+              }}
+            >
               활동 상세
             </Typography>
-          </Box>
-          <Box maxHeight={400} overflow="scroll">
-            <InputLabel sx={{ mt: 1 }}>학기</InputLabel>
-            <Typography sx={{ p: 2 }}>{activity.semester}</Typography>
-            <Box>
-              <InputLabel sx={{ mt: 1 }}>카테고리</InputLabel>
-              <Typography sx={{ p: 2 }}>{activity.section}</Typography>
+
+            <Box display={"flex"}>
+              {activity.mileage ? (
+                <Chip
+                  label="마일리지"
+                  variant="outlined"
+                  sx={{
+                    color: "primary.main",
+                    backgroundColor: "#fff",
+                    fontWeight: 800,
+                    m: 0.5,
+                    mr: 2,
+                  }}
+                />
+              ) : (
+                <Chip
+                  label="개인활동"
+                  variant="outlined"
+                  sx={{
+                    color: "secondary.main",
+                    backgroundColor: "#fff",
+                    fontWeight: 800,
+                    m: 0.5,
+                    mr: 2,
+                  }}
+                />
+              )}
+              <Label color={"success"} sx={{ mt: 1 }}>
+                학기
+              </Label>
+              <Typography sx={{ p: 1, mr: 2 }}>{activity.semester}</Typography>
+
+              <Label color={"success"} sx={{ mt: 1 }}>
+                카테고리
+              </Label>
+              <Typography sx={{ p: 1, mr: 2 }}>{activity.section}</Typography>
+
+              <Label color={"success"} sx={{ mt: 1 }}>
+                제목
+              </Label>
+              <Typography sx={{ p: 1, mr: 2 }}>{activity.name}</Typography>
             </Box>
-            <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
-            <Typography sx={{ p: 2 }}>{activity.name}</Typography>
+          </Box>
+          <Box maxHeight={400} overflow="scroll" p={3} pt={1}>
             {activity.data ? (
               <>
                 {jsonList.map((item) => (
@@ -109,8 +166,13 @@ export default function ActivityDetail() {
           </Box> */}
           </Box>
         </Box>
-        <Box display="flex" justifyContent="flex-end" mt={3}>
-          <Box display="flex" gap={1.5}>
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          alignItems={"center"}
+          mt={3}
+        >
+          <Box display="flex" alignItems={"center"} gap={1.5}>
             <Link to={`/activity`} style={{ textDecoration: "none" }}>
               <Button
                 color="secondary"
@@ -120,6 +182,22 @@ export default function ActivityDetail() {
                 취소
               </Button>
             </Link>
+            {activity.mileage ? (
+              <></>
+            ) : (
+              <Button
+                color="error"
+                variant="contained"
+                sx={{ fontWeight: "600" }}
+                onClick={() => {
+                  deleteActivityFromList(activity.id);
+                  window.history.back();
+                }}
+              >
+                삭제
+              </Button>
+            )}
+
             <Link
               to={`/activity/edit/${activityId}`}
               style={{ textDecoration: "none" }}

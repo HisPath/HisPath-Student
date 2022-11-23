@@ -9,7 +9,6 @@ export default function ProfileImage() {
 
   const getDashboardInfo = async () => {
     const info = await getInfo();
-    console.log("내정보", info.data);
     setInfo(info.data);
   };
 
@@ -21,7 +20,7 @@ export default function ProfileImage() {
     <>
       <Avatar
         alt="K"
-        src={info.profile === "profile.url" ? userImg : info.profile}
+        src={`${info.profile}`}
         sx={{ width: 256, height: 256, ml: 5, mt: 5, mb: 0 }}
       />
       <Link to={`/edit`} style={{ textDecoration: "none" }}>

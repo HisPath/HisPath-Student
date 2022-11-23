@@ -1,13 +1,44 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Paper, Tab, Tabs } from "@mui/material";
 import { Stack } from "@mui/system";
 import ProfileAbout from "../components/Dashboard/ProfileAbout.js";
 import ProfileSocialInfo from "../components/Dashboard/ProfileSocialInfo.js";
 import DashReadme from "../components/Dashboard/DashReadme.js";
 import ProfileImage from "../components/Dashboard/ProfileImage.js";
 import NoticeCard from "../components/Dashboard/NoticeCard.js";
-import Label from "../components/label";
 import { getInfo } from "../api/dashboard";
 import { useEffect, useState } from "react";
+import ForceNotice from "../components/Dashboard/ForceNotice.js";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box>{children}</Box>}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 
 export default function Dashboard() {
   const [notices, setNotices] = useState([]);
@@ -15,62 +46,153 @@ export default function Dashboard() {
   const getNotices = async () => {
     const notice = await getInfo();
     setNotices(notice.data.notice);
-    console.log(notice.data.notice);
   };
 
   useEffect(() => {
     getNotices();
   }, []);
 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <Container sx={{ mt: 3 }}>
-      <Grid container spacing={3} mb={5}>
-        <Grid item xs={12} md={4}>
-          <Stack spacing={3}>
-            <ProfileImage />
+    <>
+      <Container sx={{ mt: 3 }}>
+        <Grid container spacing={3} mb={5}>
+          <Grid item xs={12} md={4}>
+            <Stack spacing={3}>
+              <ProfileImage />
 
-            {/* profile info */}
-            <ProfileAbout />
+              {/* profile info */}
+              <ProfileAbout />
 
-            {/* blog link */}
-            <ProfileSocialInfo />
-          </Stack>
+              {/* blog link */}
+              <ProfileSocialInfo />
+            </Stack>
+          </Grid>
+
+          <Grid item xs={12} md={8} mt={5}>
+            <Stack spacing={3}>
+              <DashReadme />
+            </Stack>
+
+            <Paper sx={{ width: "100%", mb: 2, mt: 2, ml: 2 }}>
+              <Box sx={{ width: "100%" }}>
+                <Box display={"flex"} justifyContent="space-between">
+                  <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    textColor={"secondary"}
+                    indicatorColor={"secondary"}
+                    // aria-label="icon position tabs example"
+                  >
+                    <Tab
+                      sx={{
+                        pt: 1.5,
+                        pl: 1,
+                        pr: 1,
+                        fontWeight: 800,
+                        fontSize: "1.3rem",
+                      }}
+                      label="Notice"
+                      {...a11yProps(0)}
+                    />
+                    <Tab
+                      sx={{
+                        pt: 1.5,
+                        pl: 1,
+                        pr: 1,
+                        fontWeight: 800,
+                        fontSize: "1.3rem",
+                      }}
+                      label="Activity"
+                      {...a11yProps(1)}
+                    />
+                    <Tab
+                      sx={{
+                        pt: 1.5,
+                        pl: 1,
+                        pr: 1,
+                        fontWeight: 800,
+                        fontSize: "1.3rem",
+                      }}
+                      label="Resume"
+                      {...a11yProps(2)}
+                    />
+                  </Tabs>
+                </Box>
+                <TabPanel value={value} index={0}>
+                  <Box
+                    gap={3}
+                    display="grid"
+                    mb={5}
+                    gridTemplateColumns={{
+                      xs: "repeat(1, 1fr)",
+                      sm: "repeat(2, 1fr)",
+                      md: "repeat(3, 1fr)",
+                    }}
+                  >
+                    {notices.map((notice) => (
+                      <Link
+                        to={`/notice/${notice.noticeId}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <NoticeCard key={notice.noticeId} notice={notice} />
+                      </Link>
+                    ))}
+                  </Box>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <Box
+                    gap={3}
+                    display="grid"
+                    mb={5}
+                    gridTemplateColumns={{
+                      xs: "repeat(1, 1fr)",
+                      sm: "repeat(2, 1fr)",
+                      md: "repeat(3, 1fr)",
+                    }}
+                  >
+                    {notices.map((notice) => (
+                      <Link
+                        to={`/notice/${notice.noticeId}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <NoticeCard key={notice.noticeId} notice={notice} />
+                      </Link>
+                    ))}
+                  </Box>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <Box
+                    gap={3}
+                    display="grid"
+                    mb={5}
+                    gridTemplateColumns={{
+                      xs: "repeat(1, 1fr)",
+                      sm: "repeat(2, 1fr)",
+                      md: "repeat(3, 1fr)",
+                    }}
+                  >
+                    {notices.map((notice) => (
+                      <Link
+                        to={`/notice/${notice.noticeId}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <NoticeCard key={notice.noticeId} notice={notice} />
+                      </Link>
+                    ))}
+                  </Box>
+                </TabPanel>
+              </Box>
+            </Paper>
+          </Grid>
         </Grid>
-
-        <Grid item xs={12} md={8} mt={5}>
-          <Stack spacing={3}>
-            <DashReadme />
-          </Stack>
-
-          <Label
-            variant="soft"
-            color={"success"}
-            sx={{
-              fontSize: "1.3rem",
-              p: 2,
-              pt: 2.5,
-              mt: 3,
-              fontFamily: "Public Sans,sans-serif",
-            }}
-          >
-            {"Notice"}
-          </Label>
-          <Box
-            gap={3}
-            display="grid"
-            mb={5}
-            gridTemplateColumns={{
-              xs: "repeat(1, 1fr)",
-              sm: "repeat(2, 1fr)",
-              md: "repeat(3, 1fr)",
-            }}
-          >
-            {notices.map((notice) => (
-              <NoticeCard key={notice.noticeId} notice={notice} />
-            ))}
-          </Box>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+      <ForceNotice />
+    </>
   );
 }

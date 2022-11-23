@@ -13,7 +13,6 @@ export default function Info() {
 
   const getDashboardInfo = async () => {
     const info = await getInfo();
-    console.log("내정보", info.data);
     setInfo(info.data);
   };
 
@@ -50,16 +49,27 @@ export default function Info() {
               >
                 {info.name}
               </Typography>
-
-              <Typography
-                mt={1}
-                mb={1}
-                fontSize={"1.3rem"}
-                fontWeight={600}
-                color="secondary.dark"
-              >
-                {Math.floor(info.semester / 2)}학년 {info.semester}학기
-              </Typography>
+              {info.semester === 1 ? (
+                <Typography
+                  mt={1}
+                  mb={1}
+                  fontSize={"1.3rem"}
+                  fontWeight={600}
+                  color="secondary.dark"
+                >
+                  1학년 {info.semester}학기
+                </Typography>
+              ) : (
+                <Typography
+                  mt={1}
+                  mb={1}
+                  fontSize={"1.3rem"}
+                  fontWeight={600}
+                  color="secondary.dark"
+                >
+                  {Math.floor(info.semester / 2)}학년 {info.semester}학기
+                </Typography>
+              )}
             </Box>
             <Typography mt={1} mb={1} fontSize={"1.3rem"} fontWeight={600}>
               {info.departmentName}

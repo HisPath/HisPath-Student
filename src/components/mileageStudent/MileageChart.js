@@ -21,7 +21,7 @@ import {
 export default function MileageChart() {
   return (
     <>
-      <Container sx={{ my: 10 }}>
+      <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Card dir="ltr">

@@ -1,9 +1,5 @@
-import { Image } from "@mui/icons-material";
-import { Card, Typography, CardContent, Box, InputBase } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Card, Typography, CardContent, Box } from "@mui/material";
 import TextMaxLine from "../../components/text-max-line";
-import Iconify from "../iconify/Iconify";
-import Img from "../../assets/login.jpg";
 
 export default function NoticeCard({ notice }) {
   function HtmlToString() {
@@ -62,7 +58,7 @@ export default function NoticeCard({ notice }) {
               borderRadius: 1,
             }}
           /> */}
-          <HtmlToString />
+          {/* <HtmlToString /> */}
         </CardContent>
       </Card>
     </>

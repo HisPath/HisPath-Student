@@ -36,12 +36,14 @@ export default function ChartRadarBar() {
     setTotalAverage(
       datas.map((item) => (item.averageCnt / item.totalCategoryCnt) * 100)
     );
+    // console.log(totalAverage);
   };
 
   const getStuAveragePerCate = () => {
     setStudentAverage(
       datas.map((item) => (item.myCnt / item.totalCategoryCnt) * 100)
     );
+    // console.log(studentAverage);
   };
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function ChartRadarBar() {
   useEffect(() => {
     getTotalAveragePerCate();
     getStuAveragePerCate();
-  }, [datas, semester]);
+  }, [datas]);
 
   const chartOptions = useChart({
     stroke: {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Line, Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import { Paper, Typography } from "@mui/material";
+import { Card, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
@@ -118,8 +118,8 @@ const ChartTab = () => {
 
   return (
     <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
-      <Box m={1} display={"flex"} justifyContent={"space-evenly"}>
-        <Paper sx={{ width: "calc(35vw)" }} elevation={0}>
+      <Box m={1} mt={3} display={"flex"} justifyContent={"space-evenly"}>
+        <Card sx={{ width: "calc(30vw)" }} elevation={0}>
           <div
             style={{
               background: "rgb(238,242,245)",
@@ -148,7 +148,7 @@ const ChartTab = () => {
                 plugins={plugins}
               />
             </div> */}
-        </Paper>
+        </Card>
       </Box>
     </Box>
   );
