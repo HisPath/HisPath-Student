@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import RouteIcon from "@mui/icons-material/Route";
 import { Link } from "react-router-dom";
+import Logo from "../assets/Logo.png";
 
 const pages = [
   { name: "공지", link: "/notice" },
@@ -47,7 +48,13 @@ const Headers = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <RouteIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Box
+            component="img"
+            src={Logo}
+            alt="logo"
+            height={48}
+            sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -56,7 +63,6 @@ const Headers = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "Ubuntu",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
@@ -107,7 +113,13 @@ const Headers = () => {
               ))}
             </Menu>
           </Box>
-          <RouteIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Box
+            component="img"
+            src={Logo}
+            alt="logo"
+            height={48}
+            sx={{ display: { xs: "flex", md: "none" }, mr: 2 }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -117,7 +129,6 @@ const Headers = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 0,
-              fontFamily: "Ubuntu",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
