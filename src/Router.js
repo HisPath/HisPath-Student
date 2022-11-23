@@ -20,6 +20,7 @@ import Notice from "./pages/Notice";
 import Post from "./components/Notice/Post";
 import AboutUs from "./pages/AboutUs";
 import { useEffect, useState } from "react";
+import Page404 from "./pages/Page404";
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
@@ -61,6 +62,7 @@ function Router() {
             />
 
             <Route path="/resume/*" element={<Resume />} />
+            <Route path="*" element={<Page404 />} />
           </>
         ) : (
           <Route path="*" element={<AboutUs />} />
