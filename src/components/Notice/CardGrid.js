@@ -12,7 +12,7 @@ function CardGrid({ noticeList }) {
     noticeList.map((notice) =>
       arr.push(
         <Grid key={notice.id} item xs={6} lg={4} style={{ height: 300 }}>
-          <NoticeCard data={notice}></NoticeCard>
+          <NoticeCard notice={notice}></NoticeCard>
         </Grid>,
       ),
     );

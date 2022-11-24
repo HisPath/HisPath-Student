@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import RouteIcon from "@mui/icons-material/Route";
 import { Link } from "react-router-dom";
+import Logo from "../assets/Logo.png";
 
 const pages = [
   { name: "공지", link: "/notice" },
@@ -47,24 +48,33 @@ const Headers = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <RouteIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/dashboard"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "Ubuntu",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+          <Box
+            component={Link}
+            to="/"
+            sx={{ display: "flex", alignItems: "center" }}
           >
-            HisPath
-          </Typography>
+            <Box
+              component="img"
+              src={Logo}
+              alt="logo"
+              height={36}
+              sx={{ display: { xs: "none", md: "flex" }, mx: 2 }}
+            />
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              HisPath
+            </Typography>
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -107,25 +117,34 @@ const Headers = () => {
               ))}
             </Menu>
           </Box>
-          <RouteIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 0,
-              fontFamily: "Ubuntu",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+          <Box
+            component={Link}
+            to="/"
+            sx={{ display: "flex", alignItems: "center" }}
           >
-            HisPath
-          </Typography>
+            <Box
+              component="img"
+              src={Logo}
+              alt="logo"
+              height={36}
+              sx={{ display: { xs: "flex", md: "none" }, mx: 2 }}
+            />
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 0,
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              HisPath
+            </Typography>
+          </Box>
           <Box flexGrow={1} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
