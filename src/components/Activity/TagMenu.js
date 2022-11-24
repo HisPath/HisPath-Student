@@ -72,6 +72,7 @@ export default function TagMenu() {
           </ListItem>
           <ListItem
             key={"# 마일리지"}
+            onClick={() => changeSections("마일리지")}
             sx={
               {
                 // backgroundColor: "#fffde7"
@@ -82,6 +83,7 @@ export default function TagMenu() {
               <TagIcon />
               <ListItemText
                 sx={{ ml: 1 }}
+                onClick={changeSections}
                 primaryTypographyProps={{ style: style }}
                 primary={"마일리지"}
               />
