@@ -60,7 +60,7 @@ export default function ActivityDetail() {
       <Box
         component={Paper}
         width={"calc(60vw)"}
-        minHeight={600}
+        minHeight={700}
         p={3}
         borderRadius={3}
         sx={{
@@ -126,13 +126,22 @@ export default function ActivityDetail() {
               <Typography sx={{ p: 1, mr: 2 }}>{activity.name}</Typography>
             </Box>
           </Box>
-          <Box maxHeight={400} overflow="scroll" p={3} pt={1}>
+          <Box maxHeight={600} overflow="scroll" p={3} pt={1}>
             {activity.data ? (
               <>
                 {jsonList.map((item) => (
                   <Box key={item.id}>
-                    <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
-                    <Typography sx={{ p: 2 }}>{item.data}</Typography>
+                    {item.type === "image" ? (
+                      <>
+                        <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
+                        <img src={item.data} height={500}></img>
+                      </>
+                    ) : (
+                      <>
+                        <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
+                        <Typography sx={{ p: 2 }}>{item.data}</Typography>
+                      </>
+                    )}
                   </Box>
                 ))}
               </>

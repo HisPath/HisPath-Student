@@ -50,7 +50,6 @@ export default function Dashboard() {
 
   const getNotices = async () => {
     const notice = await getInfo();
-    console.log(notice.data);
     setNotices(notice.data.notice);
   };
 
