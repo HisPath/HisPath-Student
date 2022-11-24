@@ -1,4 +1,3 @@
-// components
 import Chart, { useChart } from "../chart";
 
 import { useState } from "react";
@@ -26,7 +25,7 @@ export default function ChartMixed() {
         Math.floor((item.averageCnt / item.totalCategoryCnt) * 100)
       )
     );
-    console.log(totalAverage);
+    // console.log(totalAverage);
   };
 
   const getStuAveragePerCate = () => {
@@ -35,7 +34,7 @@ export default function ChartMixed() {
         Math.floor((item.myCnt / item.totalCategoryCnt) * 100)
       )
     );
-    console.log(studentAverage);
+    // console.log(studentAverage);
   };
 
   useEffect(() => {
@@ -53,14 +52,14 @@ export default function ChartMixed() {
 
   const series = [
     {
-      name: "카테고리별 전체 학생 평균 ",
+      name: "전체 학생 평균 참여 횟수 ",
       type: "column",
-      data: studentAverage,
+      data: totalAverage,
     },
     {
-      name: "내 평균",
+      name: "내 평균 참여 횟수",
       type: "line",
-      data: totalAverage,
+      data: studentAverage,
     },
   ];
   const chartOptions = useChart({
@@ -76,7 +75,7 @@ export default function ChartMixed() {
     labels: datas.map((item) => item.categoryName),
     xaxis: {},
     yaxis: {
-      title: { text: "Points" },
+      title: { text: "학생 참여 비율(%)" },
       min: 0,
     },
     tooltip: {
@@ -85,7 +84,7 @@ export default function ChartMixed() {
       y: {
         formatter: (value) => {
           if (typeof value !== "undefined") {
-            return `${value.toFixed(0)} points`;
+            return `${value.toFixed(0)} %`;
           }
           return value;
         },

@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import { getActivities, getCategories } from "../../api/mileage";
 import { Card, Grid, Container, CardHeader, CardContent } from "@mui/material";
+import styles from "../../style/mileage.module.css";
 
 import {
   ChartRadialBar,
@@ -22,53 +23,54 @@ export default function MileageChart() {
   return (
     <>
       <Container>
-        <Grid container spacing={3}>
+        <div className={styles.paper}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Card dir="ltr">
+                <CardHeader title="마일리지 분포" />
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ChartsRadarBar />
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Card dir="ltr">
+                <CardHeader title="내 마일리지 총점 순위" />
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ChartRadialBar />
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
           <Grid item xs={12} md={6}>
             <Card dir="ltr">
-              <CardHeader title="마일리지 분포" />
-              <CardContent
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <ChartsRadarBar />
+              <CardHeader title="마일리지 참여 횟수" />
+              <CardContent>
+                <ChartMixed />
               </CardContent>
             </Card>
           </Grid>
-
           <Grid item xs={12} md={6}>
             <Card dir="ltr">
-              <CardHeader title="내 마일리지 총점 순위" />
-              <CardContent
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <ChartRadialBar />
+              <CardHeader title="내 마일리지 성장 타임라인" />
+              <CardContent>
+                <ChartLine />
               </CardContent>
             </Card>
           </Grid>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Card dir="ltr">
-            <CardHeader title="마일리지 참여 횟수" />
-            <CardContent>
-              <ChartMixed />
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Card dir="ltr">
-            <CardHeader title="내 마일리지 성장 타임라인" />
-            <CardContent>
-              <ChartLine />
-            </CardContent>
-          </Card>
-        </Grid>
+        </div>
       </Container>
     </>
   );
