@@ -21,6 +21,7 @@ import { getActivities } from "../../api/activity";
 import { useState } from "react";
 import { getMyActivitiesBySemCate } from "../../api/mileage";
 import { Container } from "@mui/material";
+import styles from "../../style/mileage.module.css";
 
 export default function BasicTable() {
   const semesters = useRecoilValue(semesterState);
@@ -49,11 +50,11 @@ export default function BasicTable() {
   }, [semesters]);
   return (
     <Container>
-      <div className="root">
+      <div className={styles.root}>
         {/* <Tags></Tags> */}
         {/* <h4>내 활동들</h4> */}
         {/* {categories.map((m) => ( */}
-        <div className="paper">
+        <div className={styles.paper}>
           {/* <div id={m.categoryId}>
             <Typography sx={{ color: "grey" }}>{m.period}</Typography>
             <Typography sx={{ color: "grey" }}></Typography>
@@ -94,11 +95,11 @@ export default function BasicTable() {
                           <TableCell>{activity.name}</TableCell>
                           <TableCell>{activity.remark}</TableCell>
                           <TableCell>
-                            {activity.requestStatus !== 3
+                            {/* {activity.requestStatus !== 3
                               ? (apply = true)
-                              : (apply = false)}
+                              : (apply = false)} */}
                             <ApplyButton
-                              requestStatus={rq}
+                              requestStatus={activity.requestStatus}
                               id={activity.id}
                               changeSections={changeSections}
                             ></ApplyButton>
