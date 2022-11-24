@@ -52,7 +52,6 @@ const GetfromLS = ({ notice, setId }) => {
           setId(notice.noticeId);
         }}
       />
-      <Checkbox disabled checked={state} />
     </ListItem>
   );
 };
@@ -84,11 +83,11 @@ export default function ForceNoticeList({ setId }) {
       >
         필수공지
       </Typography>
-      {/* <List sx={style} component="nav" aria-label="mailbox folders">
+      <List sx={style} component="nav" aria-label="mailbox folders">
         {notices.map((notice) => (
           <CheckViwed n={notice} setId={setId} />
         ))}
-      </List> */}
+      </List>
     </Box>
   );
 }

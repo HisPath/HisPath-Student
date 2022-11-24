@@ -29,7 +29,7 @@ export default function Title({ info, getInfo }) {
     // }
     uploadFile(e.target.files[0]);
     updateInformation(
-      `https://shine-jung-test-bucket.s3.ap-northeast-2.amazonaws.com/upload/student-${info.studentId}/${e.target.files[0].name}`
+      `${process.env.REACT_APP_S3_STORAGE}/student-${info.studentId}/${e.target.files[0].name}`
     );
   };
   const uploadFile = (file) => {
