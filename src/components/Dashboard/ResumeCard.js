@@ -1,7 +1,9 @@
 import { Card, Typography, CardContent, Box } from "@mui/material";
 import TextMaxLine from "../../components/text-max-line";
+import resumeImg from "../../assets/resume.jpeg";
 
 export default function ResumeCard({ resume }) {
+  const date = new Date(resume.createdAt);
   return (
     <>
       <Card sx={{ mt: 3, width: 1 }}>
@@ -13,11 +15,7 @@ export default function ResumeCard({ resume }) {
             }
           }
         >
-          <img
-            src={
-              "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_18.jpg"
-            }
-          />
+          <img src={resumeImg} />
         </Box>
         <CardContent
           sx={{
@@ -35,7 +33,8 @@ export default function ResumeCard({ resume }) {
               color: "text.disabled",
             }}
           >
-            {resume.createdAt}
+            {date.getFullYear()}년 {date.getMonth() - 1}월 {date.getDate() - 1}
+            일
           </Typography>
 
           {/* <Link to={`/notice/${notice.notice.noticeId}`}> */}
@@ -59,27 +58,4 @@ export default function ResumeCard({ resume }) {
       </Card>
     </>
   );
-}
-{
-  /* <Card sx={{ textAlign: "center" }}>
-       <Box sx={{ position: "relative" }}>
-         <Image src={userImg} ratio="16/9" />
-       </Box>
-
-       <Typography variant="subtitle1" sx={{ mt: 6, mb: 0.5, color: "black" }}>
-         {"제목"}
-       </Typography>
-       <Typography
-        variant="body2"
-        sx={{ color: "text.secondary", fontWeight: "bolder" }}
-      >
-        {"3"}학기
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{ color: "text.secondary", fontWeight: "bolder" }}
-      >
-        {"220000371"}
-      </Typography>
-    </Card> */
 }

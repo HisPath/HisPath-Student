@@ -85,6 +85,7 @@ export default function ActivityEdit() {
 
     formData.data = JSON.stringify(final);
     editActivity(activityId, formData);
+    window.location.replace("/activity");
     enqueueSnackbar("수정되었습니다.", { variant: "success" });
   };
 

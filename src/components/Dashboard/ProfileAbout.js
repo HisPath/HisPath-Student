@@ -42,16 +42,9 @@ export default function ProfileAbout() {
         </Label>
         <Stack direction="row">
           <StyledIcon icon="eva:flag-fill" />
-
-          {info.semester === 1 ? (
-            <Typography variant="body2">
-              {info.semester}학년 {info.semester}학기
-            </Typography>
-          ) : (
-            <Typography variant="body2">
-              {Math.floor(info.semester / 2)}학년 {info.semester}학기
-            </Typography>
-          )}
+          <Typography variant="body2">
+            {Math.ceil(info.semester / 2)}학년 {info.semester}학기
+          </Typography>
         </Stack>
 
         <Stack direction="row">
