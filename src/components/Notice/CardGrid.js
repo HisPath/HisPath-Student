@@ -7,24 +7,25 @@ const Section = styled(Container)({
   borderRadius: 8,
 });
 function CardGrid({ noticeList }) {
-  const NoticeTocard = () => {
-    var arr = [];
-    noticeList.map((notice) =>
-      arr.push(
-        <Grid key={notice.id} item xs={6} lg={4} style={{ height: 300 }}>
-          <NoticeCard notice={notice}></NoticeCard>
-        </Grid>,
-      ),
-    );
-    return arr;
-  };
-
   return (
-    <Box>
-      <Grid container spacing={10}>
-        <NoticeTocard />
-      </Grid>
-    </Box>
+    <>
+      <Container maxWidth={'lg'}>
+        <Box
+          gap={5}
+          display="grid"
+          gridTemplateColumns={{
+            xs: 'repeat(1, 1fr)',
+            sm: 'repeat(2, 1fr)',
+            md: 'repeat(4, 1fr)',
+          }}
+          style={{ height: 'auto' }}
+        >
+          {noticeList.map((notice) => (
+            <NoticeCard notice={notice}></NoticeCard>
+          ))}
+        </Box>
+      </Container>
+    </>
   );
 }
 export default CardGrid;

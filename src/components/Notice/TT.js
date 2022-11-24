@@ -214,14 +214,19 @@ function TT() {
             <ModeSwitch card={card} setCard={setCard} />
           </Grid>
           <Grid item xs="3">
-            <Box display="flex" gap={1.5} justifyContent={'right'}>
-              <Button variant="outlined" onClick={() => setNoticeType(0)}>
+            <Box id="all" display="flex" gap={1.5} justifyContent={'right'}>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  setNoticeType(0);
+                }}
+              >
                 전체 공지
               </Button>
-              <Button variant="outlined" onClick={() => setNoticeType(1)}>
+              <Button id="imp" variant="outlined" onClick={() => setNoticeType(1)}>
                 중요 공지
               </Button>
-              <Button variant="outlined" onClick={() => setNoticeType(2)}>
+              <Button id="exp" variant="outlined" onClick={() => setNoticeType(2)}>
                 지난 공지
               </Button>
             </Box>

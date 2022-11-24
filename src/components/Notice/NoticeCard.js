@@ -40,7 +40,7 @@ function NoticeCard({ notice }) {
             display: '-webkit-box',
             overflow: 'hidden',
             WebkitBoxOrient: 'vertical',
-            WebkitLineClamp: 5,
+            WebkitLineClamp: 3,
             color: 'text.disabled',
           }}
           variant="body2"
