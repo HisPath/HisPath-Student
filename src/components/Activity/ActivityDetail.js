@@ -35,6 +35,7 @@ export default function ActivityDetail() {
   const listActivity = async () => {
     const activity = await getActivity(activityId);
     setActivity(activity);
+    console.log(activity.data);
     const json = JSON.parse(activity.data);
     setJsonList(json);
   };
@@ -60,7 +61,7 @@ export default function ActivityDetail() {
       <Box
         component={Paper}
         width={"calc(60vw)"}
-        minHeight={700}
+        minHeight={600}
         p={3}
         borderRadius={3}
         sx={{
@@ -126,7 +127,7 @@ export default function ActivityDetail() {
               <Typography sx={{ p: 1, mr: 2 }}>{activity.name}</Typography>
             </Box>
           </Box>
-          <Box maxHeight={600} overflow="scroll" p={3} pt={1}>
+          <Box maxHeight={500} overflow="scroll" p={3} pt={1}>
             {activity.data ? (
               <>
                 {jsonList.map((item) => (
@@ -134,7 +135,7 @@ export default function ActivityDetail() {
                     {item.type === "image" ? (
                       <>
                         <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
-                        <img src={item.data} height={500}></img>
+                        <img src={item.data}></img>
                       </>
                     ) : (
                       <>
