@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -22,10 +22,10 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import axios from "axios";
+import AWS from "aws-sdk";
 import { getSemesters } from "../../../api/activity";
 import { useSnackbar } from "notistack";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import _ from "lodash";
 import { addActivity } from "../../../api/activity";
 
@@ -79,7 +79,7 @@ function LinkInput({ id, name, addData }) {
   );
 }
 
-function ImageInput({ name, addData }) {
+function ImageInput({ id, name, addImage }) {
   const [newImgFile, setNewImgFile] = useState(null);
   const [newImgDir, setNewImgDir] = useState(null);
 
@@ -93,6 +93,41 @@ function ImageInput({ name, addData }) {
     if (files) fileReader.readAsDataURL(files[0]);
   };
 
+  AWS.config.update({
+    accessKeyId: process.env.REACT_APP_S3_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_S3_SECRET_ACCESS_KEY,
+  });
+  const uploadBucket = new AWS.S3({
+    params: { Bucket: process.env.REACT_APP_S3_BUCKET },
+    region: process.env.REACT_APP_S3_REGION,
+  });
+
+  const handleFileInput = (e) => {
+    uploadFile(e.target.files[0]);
+    addImage(
+      id,
+      name,
+      "image",
+      `${process.env.REACT_APP_S3_STORAGE}/activity-${id}/${e.target.files[0].name}`
+    );
+  };
+  const uploadFile = (file) => {
+    const params = {
+      ACL: "public-read",
+      Body: file,
+      Bucket: process.env.REACT_APP_S3_BUCKET,
+      Key: `upload/activity-${id}/` + file.name,
+      ContentType: "image/jpeg",
+    };
+
+    uploadBucket
+      .putObject(params)
+      .on("httpUploadProgress", (event) => {})
+      .send((err) => {
+        if (err) console.log(err);
+      });
+  };
+
   return (
     <>
       <Box display={"flex"} flexDirection={"column"} alignItems={"flex-start"}>
@@ -103,6 +138,7 @@ function ImageInput({ name, addData }) {
             color="secondary"
             variant="contained"
             sx={{ height: 36.5 }}
+            onChange={handleFileInput}
           >
             파일 선택
             <input
@@ -189,6 +225,20 @@ export default function ActivityAdd({ getActivities }) {
           field: param,
           type: type,
           data: fieldData,
+        },
+      ];
+    });
+  };
+
+  const addImage = (id, param, type, url) => {
+    setJsonData((old) => {
+      return [
+        ...old,
+        {
+          id: id,
+          field: param,
+          type: type,
+          data: url,
         },
       ];
     });
@@ -305,7 +355,7 @@ export default function ActivityAdd({ getActivities }) {
               justifyContent="space-between"
               alignItems={"center"}
             >
-              <ImageInput name={name} />
+              <ImageInput name={name} id={id} addImage={addImage} />{" "}
               <DeleteIcon
                 sx={{ mt: 3 }}
                 fontSize="small"

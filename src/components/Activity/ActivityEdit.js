@@ -109,6 +109,7 @@ export default function ActivityEdit() {
           flexDirection: "column",
           justifyContent: "space-between",
         }}
+        boxShadow={24}
       >
         <Box>
           <Box display="flex" justifyContent="space-between">
@@ -166,20 +167,29 @@ export default function ActivityEdit() {
               <>
                 {jsonList.map((item) => (
                   <Box key={item.id}>
-                    <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
-                    <TextField
-                      color="secondary"
-                      InputProps={{ disableUnderline: true }}
-                      fullWidth
-                      hiddenLabel
-                      variant="filled"
-                      size="small"
-                      value={item.data}
-                      sx={{ mb: 1 }}
-                      onChange={(e) => {
-                        editData(item.id, item.data, "text", e);
-                      }}
-                    />
+                    {item.type === "image" ? (
+                      <>
+                        <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
+                        <img src={item.data}></img>
+                      </>
+                    ) : (
+                      <>
+                        <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
+                        <TextField
+                          color="secondary"
+                          InputProps={{ disableUnderline: true }}
+                          fullWidth
+                          hiddenLabel
+                          variant="filled"
+                          size="small"
+                          value={item.data}
+                          sx={{ mb: 1 }}
+                          onChange={(e) => {
+                            editData(item.id, item.data, "text", e);
+                          }}
+                        />
+                      </>
+                    )}
                   </Box>
                 ))}
               </>

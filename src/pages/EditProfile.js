@@ -48,7 +48,6 @@ export default function EditProfile() {
   const [majors, setMajors] = useState([]);
   const getMajors = async () => {
     const major = await getMajor();
-    console.log(major.data);
     setMajors(major.data);
   };
 
