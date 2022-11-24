@@ -17,7 +17,7 @@ export default function ChartLine() {
     getChartTimeline(semester).then((data) => {
       setDatas(data);
     });
-    // console.log(datas);
+    console.log(datas);
   };
 
   const getSem = () => {
@@ -52,6 +52,7 @@ export default function ChartLine() {
     xaxis: {
       categories: sem,
     },
+    yaxis: { title: { text: "마일리지 포인트 총점" } },
     tooltip: {
       x: {
         show: false,

@@ -14,9 +14,10 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import TagMenu from "./TagMenu";
 import ATagMenu from "./ATagMenu";
-import InvoiceListPage from "./mileageActivity";
 import MileageChart from "./MileageChart";
 import { Container } from "@mui/material";
+import { useRecoilValue } from "recoil";
+import { scholarshipApplyState } from "../../store/atom";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -55,6 +56,7 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
+  const applied = useRecoilValue(scholarshipApplyState);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -102,6 +104,7 @@ export default function BasicTabs() {
               {value ? "" : "장학금 신청 완료"}
             </span> */}
               </Tabs>
+              {applied ? "장학금 신청 완료" : ""}
               <SemesterSelect
                 // setSemesters={setSemesters}
                 sx={{
@@ -121,8 +124,8 @@ export default function BasicTabs() {
         <TabPanel value={value} index={0}>
           <Box sx={{ display: "flex" }}>
             <TagMenu />
-            {/* <MileageTables></MileageTables> */}
-            <InvoiceListPage></InvoiceListPage>
+            <MileageTables></MileageTables>
+            {/* <InvoiceListPage></InvoiceListPage> */}
           </Box>
         </TabPanel>
         <TabPanel value={value} index={1}>

@@ -61,19 +61,18 @@ export default function TagMenu() {
         anchor="left"
       >
         <List>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+          <ListItem />
+          <ListItem />
+          <ListItem />
           {[
-            ["참여여부", "add/tech"],
-            ["전공마일리지", "add/tech"],
-            ["산학마일리지", "add/tech"],
-            ["비교과-연구활동", "add/tech"],
-            ["비교과-특강참여", "add/tech"],
-            ["비교과-행사참여", "add/tech"],
-            ["비교과-학회활동", "add/tech"],
-            ["기타", "add/tech"],
+            ["참여여부"],
+            ["전공마일리지"],
+            ["산학마일리지"],
+            ["비교과-연구활동"],
+            ["비교과-특강참여"],
+            ["비교과-행사참여"],
+            ["비교과-학회활동"],
+            ["기타"],
           ].map((text) => (
             <ListItem key={text[0]} onClick={() => changeSections(text[0])}>
               <ListItemButton>

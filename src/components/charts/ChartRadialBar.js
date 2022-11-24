@@ -19,6 +19,7 @@ export default function ChartRadialBar() {
   const [studentAverage, setStudentAverage] = useState([]);
   const [totalAverage, setTotalAverage] = useState([]);
   const [stuValue, setStuValue] = useState([]);
+  const [totalValue, setTotalValue] = useState([]);
   // const [totalValue, setTotalValue] = useState([]);
   const series = [totalAverage, studentAverage];
   const [myPoint, setMypoint] = useState([]);
@@ -26,20 +27,27 @@ export default function ChartRadialBar() {
   const getChartData = (semester) => {
     getChartRank(semester).then((data) => {
       setDatas(data);
-      console.log(datas);
+      // console.log(datas);
     });
   };
 
   const getTotalAverage = () => {
-    setTotalAverage((datas.avgTotalWeight / datas.maxTotalWeight) * 100);
+    setTotalAverage(
+      Math.floor((datas.avgTotalWeight / datas.maxTotalWeight) * 100)
+    );
   };
 
   const getStuAverage = () => {
-    setStudentAverage((datas.myTotalWeight / datas.maxTotalWeight) * 100);
+    setStudentAverage(
+      Math.floor((datas.myTotalWeight / datas.maxTotalWeight) * 100)
+    );
   };
 
   const calValue = () => {
-    setStuValue(100 - studentAverage + 1);
+    // const v = 100 - studentAverage;
+    // setStuValue(v);
+    setStuValue(100 - studentAverage);
+    setTotalValue(100 - totalAverage);
   };
 
   const getMyPoint = () => {
@@ -54,7 +62,7 @@ export default function ChartRadialBar() {
     getChartData(semester);
     getMyPoint();
     calValue();
-    console.log(semester);
+    // console.log(semester);
   }, [semester]);
 
   useEffect(() => {
@@ -66,10 +74,18 @@ export default function ChartRadialBar() {
 
   const chartOptions = useChart({
     labels: [
-      // `전체 학생 평균 마일리지 총점(` + totalAverage + `%)`,
-      `전체 학생 평균 마일리지 총점(60)`,
-      // "내 마일리지 총점(상위 " + stuValue + "%)",
-      "내 마일리지 총점(상위 10%)",
+      "전체 학생 평균 마일리지 총점(" +
+        Math.floor(datas.avgTotalWeight) +
+        "점 상위" +
+        totalValue +
+        "%)",
+      // `전체 학생 평균 마일리지 총점(60)`,
+      "내 마일리지 총점(" +
+        Math.floor(datas.myTotalWeight) +
+        "점 상위" +
+        stuValue +
+        "%)",
+      // "내 마일리지 총점(상위 10%)",
     ],
     fill: {
       type: "gradient",
@@ -111,7 +127,7 @@ export default function ChartRadialBar() {
       type="radialBar"
       series={series}
       options={chartOptions}
-      height={350}
+      height={600}
     />
   );
 }

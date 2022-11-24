@@ -29,7 +29,7 @@ function MileageStudent() {
     //   <Tab></Tab>
     // </div>
     // sungjin 왔다감
-    <Box className="outline" maxWidth="xl" sx={{ display: "flex" }}>
+    <Box className="outline" sx={{ display: "flex" }}>
       <Tab />
     </Box>
   );

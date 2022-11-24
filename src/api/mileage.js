@@ -12,6 +12,17 @@ export const applyMyActivity = async (id) => {
 };
 
 export const getMyActivitiesBySemCate = async (section, semester) => {
+  if (section == "필터제거") {
+    const response = await axios.get(
+      `${
+        process.env.REACT_APP_SERVER
+      }/student-activities/status?semester=${semester}&section=${"ALL"}`,
+      {
+        headers: { Authorization: localStorage.getItem("TOKEN") },
+      }
+    );
+    return response.data;
+  }
   const response = await axios.get(
     `${process.env.REACT_APP_SERVER}/student-activities/status?semester=${semester}&section=${section}`,
     {
@@ -55,6 +66,19 @@ export const getSemesters = async () => {
 export const getActivitiesBySemCate = async (category, semester) => {
   const response = await axios.get(
     `${process.env.REACT_APP_SERVER}/student-allmactivities/?semester=${semester}&category=${category}`,
+    {
+      headers: { Authorization: localStorage.getItem("TOKEN") },
+    }
+  );
+  return response.data;
+};
+
+export const applyScholarship = async (semester) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_SERVER}/scholarship`,
+    {
+      semester,
+    },
     {
       headers: { Authorization: localStorage.getItem("TOKEN") },
     }
