@@ -15,7 +15,7 @@ export default function AboutUs() {
     <>
       <AboutHero />
 
-      <Box
+      {/* <Box
         onClick={googleLoginHandler}
         display="flex"
         justifyContent="flex-end"
@@ -47,7 +47,7 @@ export default function AboutUs() {
           </SvgIcon>
           Sign in with Google
         </Button>
-      </Box>
+      </Box> */}
 
       <AboutWhat />
 
