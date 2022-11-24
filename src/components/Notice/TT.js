@@ -35,6 +35,11 @@ const Article = styled(Box)({
   height: 'calc(100vh - 236.5px)',
 });
 
+const CardArticle = styled(Box)({
+  height: 'auto',
+  paddingBottom: 24,
+});
+
 function AlarmIconCheck({ t }) {
   const p = new Date(t.row.pubDate);
   const d = new Date();
@@ -82,6 +87,7 @@ function TT() {
   const [noticeType, setNoticeType] = useState(0);
   const [init, setInit] = useState(false);
   const [noticeList, setNoticeList] = useState([]);
+
   const [card, setCard] = useState(window.localStorage.getItem('card') === 'true');
 
   const PublishDuration = ({ p }) => {
@@ -208,14 +214,19 @@ function TT() {
             <ModeSwitch card={card} setCard={setCard} />
           </Grid>
           <Grid item xs="3">
-            <Box display="flex" gap={1.5} justifyContent={'right'}>
-              <Button variant="outlined" onClick={() => setNoticeType(0)}>
+            <Box id="all" display="flex" gap={1.5} justifyContent={'right'}>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  setNoticeType(0);
+                }}
+              >
                 전체 공지
               </Button>
-              <Button variant="outlined" onClick={() => setNoticeType(1)}>
+              <Button id="imp" variant="outlined" onClick={() => setNoticeType(1)}>
                 중요 공지
               </Button>
-              <Button variant="outlined" onClick={() => setNoticeType(2)}>
+              <Button id="exp" variant="outlined" onClick={() => setNoticeType(2)}>
                 지난 공지
               </Button>
             </Box>
@@ -223,7 +234,7 @@ function TT() {
         </Grid>
       </Header>
       {card ? (
-        <Article>
+        <CardArticle>
           {init ? (
             <CardGrid noticeList={noticeList}></CardGrid>
           ) : (
@@ -234,7 +245,7 @@ function TT() {
               <CircularProgress color="inherit" />
             </Backdrop>
           )}
-        </Article>
+        </CardArticle>
       ) : (
         <Article>
           {init ? (

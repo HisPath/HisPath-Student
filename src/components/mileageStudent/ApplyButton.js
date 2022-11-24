@@ -21,8 +21,6 @@ export default function ApplyButton({ requestStatus, id, changeSections }) {
   //   changeSections("ALL");
   // };
 
-  let cond;
-
   const handleClickOpen = () => {
     setOpen(true);
   };

@@ -2,7 +2,6 @@ import { Avatar, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getInfo } from "../../api/dashboard";
-import userImg from "../../assets/user.png";
 
 export default function ProfileImage() {
   const [info, setInfo] = useState([]);
@@ -20,7 +19,7 @@ export default function ProfileImage() {
     <>
       <Avatar
         alt="K"
-        src={info.profile === "profile.url" ? userImg : info.profile}
+        src={`${info.profile}`}
         sx={{ width: 256, height: 256, ml: 5, mt: 5, mb: 0 }}
       />
       <Link to={`/edit`} style={{ textDecoration: "none" }}>
