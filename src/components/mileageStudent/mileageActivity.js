@@ -20,7 +20,7 @@ import { LocalActivityOutlined } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { Padding } from "@mui/icons-material";
 import { useRecoilValue } from "recoil";
-import { semesterState } from "../../store/atom";
+import { scholarshipApplyState, semesterState } from "../../store/atom";
 import { activityState } from "../../store/atom";
 // import { getActivitiesBySemCate } from "./TagMenu";
 import { useRecoilState } from "recoil";
@@ -33,6 +33,16 @@ import {
 } from "../../api/mileage";
 import { Container } from "@mui/material";
 import styles from "../../style/mileage.module.css";
+import { applyScholarship } from "../../api/mileage";
+import { Button } from "@mui/material";
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { blue, red } from "@mui/material/colors";
+import { SettingsApplicationsRounded } from "@mui/icons-material";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 export default function MileageTables() {
@@ -40,6 +50,9 @@ export default function MileageTables() {
   const [allActivity, setAllActivities] = React.useState([]);
   const semester = useRecoilValue(semesterState);
   const [mileageActivities, setActivities] = useRecoilState(activityState);
+  // const [applied, setApplied] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [applied, setApplied] = useRecoilState(scholarshipApplyState);
 
   // console.log(mileageActivities);
   // const getCategories = async () => {
@@ -75,6 +88,21 @@ export default function MileageTables() {
       });
     }
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const applyScholar = () => {
+    console.log("신청 완료");
+    setOpen(true);
+  };
+
+  const confirmScholar = (semester) => {
+    applyScholarship(semester);
+    setApplied(true);
+  };
+
   useEffect(() => {
     const fetchCate = async () => {
       const cate = await getCategories();
@@ -92,8 +120,8 @@ export default function MileageTables() {
 
   return (
     <Container>
-      <div className="root">
-        <div className="paper">
+      <div className={styles.root}>
+        <div className={styles.paper}>
           <TableContainer
             sx={{ marginLeft: 10, width: "90%", minWidth: 900 }}
             component={Paper}
@@ -238,7 +266,7 @@ export default function MileageTables() {
         </div>
         {/* ))} */}
         <NavigatorToTop></NavigatorToTop>
-        <Link
+        {/* <Link
           href="/"
           variant="body2"
           sx={{
@@ -249,7 +277,33 @@ export default function MileageTables() {
             },
           }}
           rel="noopener noreferrer"
-        >
+        > */}
+        {applied ? (
+          <Button disabled onClick={applyScholar}>
+            <Fab
+              className={styles.disabled_apply_button}
+              variant="extended"
+              size="medium"
+              color="primary"
+              aria-label="add"
+            >
+              신청 완료
+            </Fab>
+          </Button>
+        ) : (
+          <Button onClick={() => applyScholar(semester)}>
+            <Fab
+              className={styles.apply_button}
+              variant="extended"
+              size="medium"
+              color="primary"
+              aria-label="add"
+            >
+              장학금 신청
+            </Fab>
+          </Button>
+        )}
+        {/* <Button onClick={() => applyScholar(semester)}>
           <Fab
             className={styles.apply_button}
             variant="extended"
@@ -259,8 +313,41 @@ export default function MileageTables() {
           >
             장학금 신청
           </Fab>
-        </Link>
+        </Button> */}
+        {/* </Link> */}
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{ fontSize: 20, width: 300, textAlign: "center" }}
+        >
+          {`장학금 신청하시겠습니까? `}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus sx={{ color: red[500] }}>
+            취소
+          </Button>
+          <Button
+            onClick={() => {
+              handleClose();
+              confirmScholar("2022-2");
+            }}
+            sx={{ color: blue[900] }}
+          >
+            신청
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
+
+//onClick={applyScholar(semester)}

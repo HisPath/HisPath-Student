@@ -69,19 +69,19 @@ export default function ATagMenu() {
         anchor="left"
       >
         <List>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
-          <ListItem></ListItem>
+          <ListItem />
+          <ListItem />
+          <ListItem />
           {[
-            ["수상", "add/tech"],
-            ["기술", "add/tech"],
-            ["학력", "add/tech"],
-            ["링크", "add/tech"],
-            ["경력", "add/tech"],
-            ["자격증", "add/tech"],
-            ["외국어", "add/tech"],
-            ["기타", "add/tech"],
+            ["필터제거"],
+            ["수상"],
+            ["기술"],
+            ["학력"],
+            ["링크"],
+            ["경력"],
+            ["자격증"],
+            ["외국어"],
+            ["기타"],
           ].map((text) => (
             <ListItem key={text[0]} onClick={() => changeSections(text[0])}>
               <ListItemButton>

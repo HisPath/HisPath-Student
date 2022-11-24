@@ -33,7 +33,7 @@ export default function NavigatorToTop() {
         },
       }}
     >
-      <NavigationIcon sx={{ color: "white" }} />
+      <NavigationIcon className={styles.navigateIcon} sx={{ color: "white" }} />
     </Fab>
   );
 }

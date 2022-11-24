@@ -63,3 +63,13 @@
   display: flex;
   justify-content: center;
 }
+.navigateIcon {
+  margin-right: 0 !important;
+}
+.disabled_apply_button {
+  background-color: grey !important;
+  position: fixed !important;
+  bottom: 50px;
+  right: 50px;
+  height: 48px;
+}
