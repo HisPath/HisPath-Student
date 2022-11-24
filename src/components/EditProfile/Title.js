@@ -5,7 +5,6 @@ import AWS from "aws-sdk";
 import { updateInfo } from "../../api/editprofile";
 
 export default function Title({ info, getInfo }) {
-  console.log(info);
   const updateInformation = async (profile) => {
     await updateInfo(profile, info);
     getInfo();
