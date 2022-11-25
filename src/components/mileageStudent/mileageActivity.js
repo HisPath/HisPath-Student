@@ -1,9 +1,4 @@
 import { Fab } from "@mui/material";
-import Link from "@mui/material/Link";
-import SemesterSelect from "./semesterSelect";
-
-import Tags from "./Tag";
-
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,19 +7,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
 import NavigatorToTop from "./NavigatorToTop";
-import axios from "axios";
 import { useEffect } from "react";
-import { LocalActivityOutlined } from "@mui/icons-material";
-import { Box } from "@mui/system";
-import { Padding } from "@mui/icons-material";
 import { useRecoilValue } from "recoil";
 import { scholarshipApplyState, semesterState } from "../../store/atom";
 import { activityState } from "../../store/atom";
-// import { getActivitiesBySemCate } from "./TagMenu";
 import { useRecoilState } from "recoil";
-import { Chip } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import {
   getActivities,
@@ -32,49 +20,21 @@ import {
   getActivitiesBySemCate,
 } from "../../api/mileage";
 import { Container } from "@mui/material";
-import styles from "../../style/mileage.module.css";
 import { applyScholarship } from "../../api/mileage";
 import { Button } from "@mui/material";
-
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { blue, red } from "@mui/material/colors";
-import { SettingsApplicationsRounded } from "@mui/icons-material";
 
-const lightColor = "rgba(255, 255, 255, 0.7)";
 export default function MileageTables() {
   const [categories, setCategories] = React.useState([]);
-  const [allActivity, setAllActivities] = React.useState([]);
   const semester = useRecoilValue(semesterState);
   const [mileageActivities, setActivities] = useRecoilState(activityState);
-  // const [applied, setApplied] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [applied, setApplied] = useRecoilState(scholarshipApplyState);
-
-  // console.log(mileageActivities);
-  // const getCategories = async () => {
-  //   const category = await axios.get(
-  //     `${process.env.REACT_APP_SERVER}/categories`
-  //   );
-  //   setCategories(category.data);
-  // };
-
-  // const getAllActivities = async () => {
-  //   const activities = await axios.get(
-  //     `${process.env.REACT_APP_SERVER}/mileage/semester?semester=${semester}`
-  //   );
-  //   setAllActivities(activities.data);
-  // };
-
-  // const getActivities = async () => {
-  //   const activity = await axios.get(
-  //     `${process.env.REACT_APP_SERVER}/studentmileage/1`
-  //   );
-  //   setActivities(activity.data.activities);
-  // };
 
   const changeSections = (category) => {
     if (!category) {
@@ -82,9 +42,6 @@ export default function MileageTables() {
     } else {
       getActivitiesBySemCate(category, semester).then((data) => {
         setActivities(data);
-        // console.log(category);
-        console.log(semester);
-        // console.log(data);
       });
     }
   };
@@ -109,203 +66,182 @@ export default function MileageTables() {
       setCategories(cate);
     };
     fetchCate();
-
     changeSections("ALL");
   }, []);
 
   useEffect(() => {
-    // getAllActivities();
     changeSections("ALL");
   }, [semester]);
 
   return (
-    <Container>
-      <div className={styles.root}>
-        <div className={styles.paper}>
-          <TableContainer
-            sx={{ marginLeft: 10, width: "90%", minWidth: 900 }}
-            component={Paper}
-            // style={{ maxHeight: 500 }}
-          >
-            <Table
-              sx={{
-                border: `1px solid #e6e6e6`,
-              }}
-              aria-label="simple table"
-              stickyHeader
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ width: "20%" }}>카테고리</TableCell>
-                  <TableCell sx={{ width: "20%" }}>학기</TableCell>
-                  <TableCell sx={{ width: "20%" }}>항목명</TableCell>
-                  <TableCell sx={{ width: "20%" }} align="center">
-                    참여여부
-                  </TableCell>
-                  <TableCell sx={{ width: "20%" }}>비고</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {semester === "ALL" ? (
-                  <>
-                    {categories.map((m) => (
-                      // <div id={m.categoryId}>
-                      <>
-                        {/* <Typography color={"grey"} sx={{ marginLeft: 10 }}>
-                        {/* {m.name} */}
-                        {/* </Typography> */}
-                        {mileageActivities.map((activity) =>
-                          activity.category === m.name ? (
-                            <TableRow
-                              key={activity.id}
-                              sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                },
-                              }}
-                            >
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                sx={{ textOverflow: "ellipsis", width: "20%" }}
-                              >
-                                {activity.category}
-                              </TableCell>
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                sx={{ textOverflow: "ellipsis", width: "20%" }}
-                              >
-                                {activity.semester}
-                              </TableCell>
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                sx={{ textOverflow: "ellipsis", width: "20%" }}
-                              >
-                                {activity.name}
-                              </TableCell>
-                              <TableCell
-                                sx={{
-                                  textOverflow: "ellipsis",
-                                  width: "20%",
-                                }}
-                                align="center"
-                              >
-                                {activity.participated && <DoneIcon />}
-                              </TableCell>
-                              <TableCell>{activity.remark}</TableCell>
-                            </TableRow>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    {categories.map((m) => (
-                      // <div id={m.categoryId}>
-                      //   <Typography color={"grey"} sx={{ marginLeft: 10 }}>
-                      //     {/* {m.name} */}
-                      //   </Typography>
-                      <>
-                        {mileageActivities.map((activity) => {
-                          // console.log(m, activity, semester);
-                          return activity.category === m.name &&
-                            activity.semester === semester ? (
-                            <TableRow
-                              key={activity.id}
-                              sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                },
-                              }}
-                            >
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                sx={{ textOverflow: "ellipsis" }}
-                              >
-                                {activity.category}
-                              </TableCell>
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                sx={{ textOverflow: "ellipsis" }}
-                              >
-                                {activity.semester}
-                              </TableCell>
-                              <TableCell
-                                sx={{
-                                  textOverflow: "ellipsis",
-                                }}
-                              >
-                                {activity.name}
-                              </TableCell>
-                              <TableCell
-                                sx={{ textOverflow: "ellipsis" }}
-                                align="center"
-                              >
-                                {activity.participated && <DoneIcon />}
-                              </TableCell>
-                              <TableCell>{activity.remark}</TableCell>
-                            </TableRow>
-                          ) : (
-                            ""
-                          );
-                        })}
-                      </>
-                    ))}
-                  </>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-        {/* ))} */}
-        <NavigatorToTop></NavigatorToTop>
-        {/* <Link
-          href="/"
-          variant="body2"
+    <Container
+      sx={{
+        width: "100%",
+        paddingBottom: "100px",
+        display: "flex",
+        justifyContent: "center",
+        marginBottom: "50px",
+        marginTop: "50px",
+      }}
+    >
+      <TableContainer sx={{ width: "90%", minWidth: 900 }} component={Paper}>
+        <Table
           sx={{
-            textDecoration: "none",
-            color: lightColor,
-            "&:hover": {
-              color: "common.white",
-            },
+            border: `1px solid #e6e6e6`,
           }}
-          rel="noopener noreferrer"
-        > */}
-        {applied ? (
-          <Button disabled onClick={applyScholar}>
-            <Fab
-              className={styles.disabled_apply_button}
-              variant="extended"
-              size="medium"
-              color="primary"
-              aria-label="add"
-            >
-              신청 완료
-            </Fab>
-          </Button>
-        ) : (
-          <Button onClick={() => applyScholar(semester)}>
-            <Fab
-              className={styles.apply_button}
-              variant="extended"
-              size="medium"
-              color="primary"
-              aria-label="add"
-            >
-              장학금 신청
-            </Fab>
-          </Button>
-        )}
-        {/* <Button onClick={() => applyScholar(semester)}>
+          aria-label="simple table"
+          stickyHeader
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ width: "20%" }}>카테고리</TableCell>
+              <TableCell sx={{ width: "20%" }}>학기</TableCell>
+              <TableCell sx={{ width: "20%" }}>항목명</TableCell>
+              <TableCell sx={{ width: "20%" }} align="center">
+                참여여부
+              </TableCell>
+              <TableCell sx={{ width: "20%" }}>비고</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {semester === "ALL" ? (
+              <>
+                {categories.map((m) => (
+                  <>
+                    {mileageActivities.map((activity) =>
+                      activity.category === m.name ? (
+                        <TableRow
+                          key={activity.id}
+                          sx={{
+                            "&:last-child td, &:last-child th": {
+                              border: 0,
+                            },
+                          }}
+                        >
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            sx={{ textOverflow: "ellipsis", width: "20%" }}
+                          >
+                            {activity.category}
+                          </TableCell>
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            sx={{ textOverflow: "ellipsis", width: "20%" }}
+                          >
+                            {activity.semester}
+                          </TableCell>
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            sx={{ textOverflow: "ellipsis", width: "20%" }}
+                          >
+                            {activity.name}
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              textOverflow: "ellipsis",
+                              width: "20%",
+                            }}
+                            align="center"
+                          >
+                            {activity.participated && <DoneIcon />}
+                          </TableCell>
+                          <TableCell>{activity.remark}</TableCell>
+                        </TableRow>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </>
+                ))}
+              </>
+            ) : (
+              <>
+                {categories.map((m) => (
+                  <>
+                    {mileageActivities.map((activity) => {
+                      return activity.category === m.name &&
+                        activity.semester === semester ? (
+                        <TableRow
+                          key={activity.id}
+                          sx={{
+                            "&:last-child td, &:last-child th": {
+                              border: 0,
+                            },
+                          }}
+                        >
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            sx={{ textOverflow: "ellipsis" }}
+                          >
+                            {activity.category}
+                          </TableCell>
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            sx={{ textOverflow: "ellipsis" }}
+                          >
+                            {activity.semester}
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            {activity.name}
+                          </TableCell>
+                          <TableCell
+                            sx={{ textOverflow: "ellipsis" }}
+                            align="center"
+                          >
+                            {activity.participated && <DoneIcon />}
+                          </TableCell>
+                          <TableCell>{activity.remark}</TableCell>
+                        </TableRow>
+                      ) : (
+                        ""
+                      );
+                    })}
+                  </>
+                ))}
+              </>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <NavigatorToTop></NavigatorToTop>
+
+      {applied ? (
+        <Button disabled onClick={applyScholar}>
           <Fab
-            className={styles.apply_button}
+            sx={{
+              backgroundColor: "grey !important",
+              position: "fixed !important",
+              bottom: "50px",
+              right: "50px",
+              height: "48px",
+            }}
+            variant="extended"
+            size="medium"
+            color="primary"
+            aria-label="add"
+          >
+            신청 완료
+          </Fab>
+        </Button>
+      ) : (
+        <Button onClick={() => applyScholar(semester)}>
+          <Fab
+            sx={{
+              position: "fixed !important",
+              bottom: "50px",
+              right: "50px",
+              height: "48px",
+            }}
             variant="extended"
             size="medium"
             color="primary"
@@ -313,9 +249,9 @@ export default function MileageTables() {
           >
             장학금 신청
           </Fab>
-        </Button> */}
-        {/* </Link> */}
-      </div>
+        </Button>
+      )}
+
       <Dialog
         open={open}
         onClose={handleClose}

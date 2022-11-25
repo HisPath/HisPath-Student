@@ -15,7 +15,7 @@ export default function ChartMixed() {
   const getChartData = (semester) => {
     getChartPopularity(semester).then((data) => {
       setDatas(data);
-      // console.log(datas);
+      console.log(datas);
     });
   };
 
