@@ -35,7 +35,6 @@ export default function ActivityDetail() {
   const listActivity = async () => {
     const activity = await getActivity(activityId);
     setActivity(activity);
-    console.log(activity.data);
     const json = JSON.parse(activity.data);
     setJsonList(json);
   };

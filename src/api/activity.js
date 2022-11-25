@@ -87,3 +87,13 @@ export const deleteActivity = async (activityId) => {
     }
   );
 };
+
+export const getChart = async (semester) => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_SERVER}/chart/activities?semester=${semester}`,
+    {
+      headers: { Authorization: localStorage.getItem("TOKEN") },
+    }
+  );
+  return response.data;
+};

@@ -46,6 +46,12 @@ export default function ActivityTab() {
     setValue(newValue);
   };
 
+  const [semester, setSemester] = useState("2022-2");
+
+  const semChange = (data) => {
+    setSemester(data);
+  };
+
   return (
     <>
       <Paper sx={{ width: "100%", mb: 2, mt: 2, ml: 2 }}>
@@ -86,13 +92,17 @@ export default function ActivityTab() {
                 {...a11yProps(1)}
               />
             </Tabs>
-            {value === 0 ? <SelectAndSearch /> : <SelectAndSearch />}
+            {value === 0 ? (
+              <SelectAndSearch semChange={semChange} />
+            ) : (
+              <SelectAndSearch semChange={semChange} />
+            )}
           </Box>
           <TabPanel value={value} index={0}>
             <ActivityList />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <ChartTab />
+            <ChartTab semester={semester} />
           </TabPanel>
         </Box>
       </Paper>
