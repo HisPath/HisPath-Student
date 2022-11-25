@@ -6,7 +6,7 @@ import RadarChart from "./RadarChart";
 
 const ChartTab = ({ semester }) => {
   return (
-    <Box overflow={"auto"} maxHeight="calc(78vh)" maxWidth={"calc(80vw)"}>
+    <Box overflow={"auto"} maxHeight="calc(80vh)" maxWidth={"calc(80vw)"}>
       <Box m={1} mt={3} display={"flex"} justifyContent={"space-evenly"}>
         <Card dir="ltr">
           <CardHeader title="활동 분포" />

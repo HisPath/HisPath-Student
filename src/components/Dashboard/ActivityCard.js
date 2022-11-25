@@ -5,19 +5,61 @@ export default function ActivityCard({ activity }) {
   return (
     <>
       <Card sx={{ mt: 3, width: 1 }}>
-        <Box
-          sx={
-            {
-              // backgroundColor: "#dacdff",
-              // height: "calc(20vh)",
-            }
-          }
-        >
-          <img
+        <Box>
+          {/* <img
             src={
               "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_15.jpg"
             }
-          />
+          /> */}
+          {activity.section === "수상" ? (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_18.jpg"
+              }
+            />
+          ) : activity.section === "기술" ? (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_5.jpg"
+              }
+            />
+          ) : activity.section === "학력" ? (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_9.jpg"
+              }
+            />
+          ) : activity.section === "링크" ? (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_10.jpg"
+              }
+            />
+          ) : activity.section === "경력" ? (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_11.jpg"
+              }
+            />
+          ) : activity.section === "자격증" ? (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_15.jpg"
+              }
+            />
+          ) : activity.section === "외국어" ? (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_19.jpg"
+              }
+            />
+          ) : (
+            <img
+              src={
+                "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_21.jpg"
+              }
+            />
+          )}
         </Box>
         <CardContent
           sx={{
