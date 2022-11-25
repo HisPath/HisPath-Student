@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
@@ -16,6 +16,8 @@ import CategoryModal from "./CategoryModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { green } from "@mui/material/colors";
 import { getInfo, postResume } from "../../api/resume";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 function Post({ refresh }) {
   const [info, setInfo] = useState([]);
@@ -59,6 +61,20 @@ function Post({ refresh }) {
   };
   const onInvalid = () => {
     enqueueSnackbar("모든 칸을 채워 주세요.", { variant: "error" });
+  };
+  const printRef = useRef();
+  const handleDownloadPdf = async () => {
+    const element = printRef.current;
+    const canvas = await html2canvas(element, { scale: 4 });
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`${watch("title")}.pdf`);
   };
   return (
     <Box sx={{ position: "fixed", width: 1, height: 1, top: 0 }}>
@@ -104,6 +120,7 @@ function Post({ refresh }) {
                 <Button variant="contained" type="submit">
                   저장
                 </Button>
+                <Button onClick={handleDownloadPdf}>PDF 다운로드</Button>
               </Box>
             </Box>
             <Divider />
@@ -159,7 +176,7 @@ function Post({ refresh }) {
               <Avatar
                 alt={info.name}
                 src={info.profile}
-                sx={{ width: 100, height: 100, mb: 3 }}
+                sx={{ width: 150, height: 150, mb: 3 }}
               />
               <Box
                 sx={{
@@ -174,7 +191,7 @@ function Post({ refresh }) {
                 <Typography fontWeight={600}>{info.email}</Typography>
               </Box>
             </Box>
-            <Box sx={{ p: 5, width: 1 }}>
+            <Box ref={printRef} sx={{ p: 5, width: 1 }}>
               <Typography variant="h4" component="h1" mb={3}>
                 {watch("title")}
               </Typography>
