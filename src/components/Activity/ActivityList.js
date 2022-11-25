@@ -19,8 +19,6 @@ export default function ActivityList() {
   const [rowsPerPage, setRowsPerPage] = React.useState(7);
   const activities = useRecoilValue(activityState);
 
-  // console.log(activities);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

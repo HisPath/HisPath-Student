@@ -279,7 +279,6 @@ export default function ActivityAdd({ getActivities }) {
 
   const onRemove = (removeId) => {
     _.remove(jsonData, function (n) {
-      console.log(n);
       if (n.id === removeId) {
         return true;
       }

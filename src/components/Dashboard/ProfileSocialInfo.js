@@ -5,7 +5,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkIcon from "@mui/icons-material/Link";
 import { getInfo } from "../../api/dashboard";
 import { useEffect, useState } from "react";
-import Iconify from "../iconify/Iconify";
 import Label from "../../components/label";
 import { yellow } from "@mui/material/colors";
 
@@ -20,14 +19,6 @@ export default function ProfileSocialInfo() {
   useEffect(() => {
     getDashboardInfo();
   }, []);
-
-  const StyledIcon = styled(Iconify)(({ theme }) => ({
-    width: 20,
-    height: 20,
-    marginTop: 1,
-    flexShrink: 0,
-    marginRight: 16,
-  }));
 
   return (
     <Card>

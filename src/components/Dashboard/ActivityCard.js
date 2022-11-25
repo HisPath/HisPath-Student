@@ -43,18 +43,6 @@ export default function ActivityCard({ activity }) {
             {activity.name}
           </TextMaxLine>
           {/* </Link> */}
-          {/* <InputBase
-            multiline
-            fullWidth
-            // rows={4}
-            value={html(notice.content)}
-            sx={{
-              p: 1,
-              mb: 1,
-              borderRadius: 1,
-            }}
-          /> */}
-          {/* <HtmlToString /> */}
         </CardContent>
       </Card>
     </>

@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../api/activity";
 import { activityState } from "../../store/atom";
 
-export default function SelectAndSearch() {
+export default function SelectAndSearch({ semChange }) {
   const [semesters, setSemesters] = useState([]);
   const setActivities = useSetRecoilState(activityState);
   useEffect(() => {
@@ -17,6 +17,7 @@ export default function SelectAndSearch() {
     });
   }, []);
   const changeSemesters = (event) => {
+    semChange(event.target.value);
     if (!event.target.value)
       getActivities().then((data) => setActivities(data));
     else
@@ -44,18 +45,6 @@ export default function SelectAndSearch() {
           ))}
         </Select>
       </FormControl>
-      {/* <TextField
-          placeholder="Search"
-          id="outlined-size-small"
-          size="small"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        /> */}
     </>
   );
 }
