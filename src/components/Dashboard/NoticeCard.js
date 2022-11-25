@@ -1,30 +1,30 @@
-import { Card, Typography, CardContent, Box } from '@mui/material';
-import TextMaxLine from '../../components/text-max-line';
+import { Card, Typography, CardContent, Box } from "@mui/material";
+import TextMaxLine from "../../components/text-max-line";
+
+const colors = ["#fff3aa", "#ffd0a8", "#ffb1b1", "#d9d1ff", "#b7efff"];
 
 export default function NoticeCard({ notice }) {
-  function HtmlToString() {
-    return <div dangerouslySetInnerHTML={{ __html: notice.content }}></div>;
-  }
-
   return (
     <>
       <Card sx={{ mt: 3, width: 1 }}>
         <Box
-          sx={
-            {
-              // backgroundColor: "#dacdff",
-              // height: "calc(20vh)",
-            }
-          }
+          sx={{
+            height: "calc(10vh)",
+            backgroundColor: colors[notice.noticeId % 5],
+          }}
         >
-          <img src={'https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_18.jpg'} />
+          {/* <img
+            src={
+              "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_18.jpg"
+            }
+          /> */}
         </Box>
         <CardContent
           sx={{
             pt: 2,
             // width: 1,
-            maxHeight: 'calc(40vh)',
-            overflow: 'scroll',
+            maxHeight: "calc(40vh)",
+            overflow: "scroll",
           }}
         >
           <Typography
@@ -32,14 +32,14 @@ export default function NoticeCard({ notice }) {
             variant="caption"
             component="div"
             sx={{
-              color: 'text.disabled',
+              color: "text.disabled",
             }}
           >
             {notice.regDate}
           </Typography>
 
           {/* <Link to={`/notice/${notice.notice.noticeId}`}> */}
-          <TextMaxLine variant={'h5'} line={2} persistent>
+          <TextMaxLine variant={"h5"} line={2} persistent>
             {notice.title}
           </TextMaxLine>
         </CardContent>

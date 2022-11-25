@@ -37,7 +37,7 @@ export default function SelectAndSearch({ semChange }) {
           onChange={changeSemesters}
           displayEmpty
         >
-          <MenuItem value="ALL">ALL</MenuItem>
+          {/* <MenuItem value="ALL">ALL</MenuItem> */}
           {semesters.map((semester) => (
             <MenuItem value={semester.semester} key={semester.semester}>
               {semester.semester}

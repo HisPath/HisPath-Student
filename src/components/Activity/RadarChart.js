@@ -6,8 +6,6 @@ import Chart, { useChart } from "../chart";
 //API
 import { getChart } from "../../api/activity";
 import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { semesterState } from "../../store/atom";
 import { useState } from "react";
 
 export default function RadarChart({ semester }) {

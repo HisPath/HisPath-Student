@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import ForceNotice from "../components/Dashboard/ForceNotice.js";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { getActivities, getActivity } from "../api/activity.js";
 import ActivityCard from "../components/Dashboard/ActivityCard.js";
 import ResumeCard from "../components/Dashboard/ResumeCard.js";
 
@@ -102,8 +101,11 @@ export default function Dashboard() {
                   <Tabs
                     value={value}
                     onChange={handleChange}
-                    textColor={"secondary"}
-                    indicatorColor={"secondary"}
+                    // textColor={"#fc7f03"}
+                    // indicatorColor={"primary"}
+                    TabIndicatorProps={{
+                      style: { background: "#fc7f03" },
+                    }}
                     // aria-label="icon position tabs example"
                   >
                     <Tab
@@ -113,6 +115,7 @@ export default function Dashboard() {
                         pr: 1,
                         fontWeight: 800,
                         fontSize: "1.3rem",
+                        // color: "#fc7f03",
                       }}
                       label="Notice"
                       {...a11yProps(0)}
@@ -124,6 +127,7 @@ export default function Dashboard() {
                         pr: 1,
                         fontWeight: 800,
                         fontSize: "1.3rem",
+                        // color: "#00AB55",
                       }}
                       label="Activity"
                       {...a11yProps(1)}
@@ -135,6 +139,7 @@ export default function Dashboard() {
                         pr: 1,
                         fontWeight: 800,
                         fontSize: "1.3rem",
+                        // color: "#27279F",
                       }}
                       label="Resume"
                       {...a11yProps(2)}
