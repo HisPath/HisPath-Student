@@ -17,7 +17,6 @@ export default function ChartLine() {
     getChartTimeline(semester).then((data) => {
       setDatas(data);
     });
-    console.log(datas);
   };
 
   const getSem = () => {

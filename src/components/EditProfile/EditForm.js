@@ -43,7 +43,7 @@ export default function EditForm({ watch, register, majors }) {
           fontWeight={600}
           color="secondary.dark"
         >
-          {Math.floor(watch("semester") / 2)}학년 {watch("semester")}학기
+          {Math.ceil(watch("semester") / 2)}학년 {watch("semester")}학기
         </Typography>
       </Box>
       <Typography mt={1} mb={1} fontSize={"1.5rem"} fontWeight={600}>

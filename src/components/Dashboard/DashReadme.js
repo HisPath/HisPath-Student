@@ -1,15 +1,14 @@
-import { Card, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import { Card } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { getInfo } from "../../api/dashboard";
 import Label from "../../components/label";
 
 export default function DashReadme() {
-  const [info, setInfo] = React.useState([]);
+  const [info, setInfo] = useState([]);
 
   const getInformation = async () => {
     const info = await getInfo();
-    console.log(info.data);
     setInfo(info.data);
   };
 

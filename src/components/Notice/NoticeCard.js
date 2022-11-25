@@ -7,18 +7,20 @@ import Iconify from '../iconify';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 
+const colors = ['#fff3aa', '#ffd0a8', '#ffb1b1', '#d9d1ff', '#b7efff'];
+
 function NoticeCard({ notice }) {
   return (
     <Card sx={{ textAlign: 'center' }} onClick={() => window.open(`/notice/${notice.id}`, '_self')}>
       <Box
         sx={{
           position: 'relative',
-          width: 'inherit',
-          height: 'inherit',
-          backgroundColor: 'primary',
+          width: 'auto',
+          height: '15%',
+          backgroundColor: colors[notice.id % 5],
         }}
       >
-        <Image src={NoticeImg} ratio="16/9" />
+        {/* <Image src={NoticeImg} ratio="16/9" /> */}
       </Box>
       <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" sx={{ ml: 4.5, mr: 4.5, mb: 4.5 }}>
         <Typography
@@ -40,7 +42,7 @@ function NoticeCard({ notice }) {
             display: '-webkit-box',
             overflow: 'hidden',
             WebkitBoxOrient: 'vertical',
-            WebkitLineClamp: 5,
+            WebkitLineClamp: 2,
             color: 'text.disabled',
           }}
           variant="body2"
@@ -60,7 +62,7 @@ function NoticeCard({ notice }) {
         </Typography> */}
 
       <Divider sx={{ borderStyle: 'dashed' }} />
-      <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" sx={{ py: 2 }}>
+      <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" sx={{ pt: 2, pb: 6 }}>
         <div>
           <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
             등록일

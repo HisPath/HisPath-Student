@@ -4,15 +4,12 @@ import { useTheme } from "@mui/material/styles";
 import Chart, { useChart } from "../chart";
 
 //API
-import { getChartPopularity } from "../../api/chart";
+import { getChart } from "../../api/activity";
 import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { semesterState } from "../../store/atom";
 import { useState } from "react";
 
-export default function ChartRadarBar() {
+export default function RadarChart({ semester }) {
   const theme = useTheme();
-  const semester = useRecoilValue(semesterState);
   const [datas, setDatas] = useState([]);
   const [studentAverage, setStudentAverage] = useState([]);
   const [totalAverage, setTotalAverage] = useState([]);
@@ -28,27 +25,20 @@ export default function ChartRadarBar() {
     },
   ];
   const getChartData = (semester) => {
-    getChartPopularity(semester).then((data) => {
+    getChart(semester).then((data) => {
       setDatas(data);
     });
   };
   const getTotalAveragePerCate = () => {
-    setTotalAverage(
-      datas.map((item) => (item.averageCnt / item.totalCategoryCnt) * 100)
-    );
-    // console.log(totalAverage);
+    setTotalAverage(datas.map((item) => item.avgCnt));
   };
 
   const getStuAveragePerCate = () => {
-    setStudentAverage(
-      datas.map((item) => (item.myCnt / item.totalCategoryCnt) * 100)
-    );
-    // console.log(studentAverage);
+    setStudentAverage(datas.map((item) => item.myCnt));
   };
 
   useEffect(() => {
     getChartData(semester);
-    console.log(datas);
   }, [semester]);
 
   useEffect(() => {
@@ -68,12 +58,12 @@ export default function ChartRadarBar() {
       horizontalAlign: "center",
     },
 
-    yaxis: {
-      max: 100,
-      min: 0,
-    },
+    // yaxis: {
+    //   max: 30,
+    //   min: 0,
+    // },
     xaxis: {
-      categories: datas.map((item) => item.categoryName),
+      categories: datas.map((item) => item.section),
       labels: {
         style: {
           colors: [

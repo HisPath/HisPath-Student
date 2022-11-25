@@ -1,10 +1,8 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-
 import Box from "@mui/material/Box";
 
 function TabPanel(props) {
@@ -57,7 +55,6 @@ export default function BasicTabs() {
         >
           <Tab label="마일리지 활동조회" {...a11yProps(0)} />
           <Tab label="마일리지 활동신청" {...a11yProps(1)} />
-          {/* <Tab label="Item Three" {...a11yProps(2)} /> */}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}></TabPanel>

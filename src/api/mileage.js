@@ -12,7 +12,7 @@ export const applyMyActivity = async (id) => {
 };
 
 export const getMyActivitiesBySemCate = async (section, semester) => {
-  if (section == "필터제거") {
+  if (section == "전체") {
     const response = await axios.get(
       `${
         process.env.REACT_APP_SERVER
@@ -64,6 +64,15 @@ export const getSemesters = async () => {
 };
 
 export const getActivitiesBySemCate = async (category, semester) => {
+  if (category == "전체") {
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER}/student-allmactivities/?semester=${semester}&category=ALL`,
+      {
+        headers: { Authorization: localStorage.getItem("TOKEN") },
+      }
+    );
+    return response.data;
+  }
   const response = await axios.get(
     `${process.env.REACT_APP_SERVER}/student-allmactivities/?semester=${semester}&category=${category}`,
     {

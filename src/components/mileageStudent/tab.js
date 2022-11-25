@@ -1,10 +1,8 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-
 import Box from "@mui/material/Box";
 import MileageTables from "./mileageActivity";
 import ActivityTables from "./Activity";
@@ -100,13 +98,9 @@ export default function BasicTabs() {
                   label="차트"
                   {...a11yProps(2)}
                 />
-                {/* <span className="mileageStatus">
-              {value ? "" : "장학금 신청 완료"}
-            </span> */}
               </Tabs>
               {applied ? "장학금 신청 완료" : ""}
               <SemesterSelect
-                // setSemesters={setSemesters}
                 sx={{
                   minWidth: 120,
                   backgroundColor: "white",
@@ -125,7 +119,6 @@ export default function BasicTabs() {
           <Box sx={{ display: "flex" }}>
             <TagMenu />
             <MileageTables></MileageTables>
-            {/* <InvoiceListPage></InvoiceListPage> */}
           </Box>
         </TabPanel>
         <TabPanel value={value} index={1}>
@@ -137,31 +130,6 @@ export default function BasicTabs() {
         <TabPanel value={value} index={2}>
           <MileageChart></MileageChart>
         </TabPanel>
-
-        {/* <Link
-        href="/"
-        variant="body2"
-        sx={{
-          textDecoration: "none",
-          color: lightColor,
-          "&:hover": {
-            color: "common.white",
-          },
-        }}
-        rel="noopener noreferrer"
-        // target="_blank"
-      >
-        <Fab
-          className="apply_button"
-          variant="extended"
-          size="medium"
-          color="primary"
-          aria-label="add"
-        >
-          {value ? "마일리지 활동 신청" : "장학금 신청"}
-          장학금 신청
-        </Fab>
-      </Link> */}
       </Box>
     </Container>
   );

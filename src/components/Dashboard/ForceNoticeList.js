@@ -52,7 +52,6 @@ const GetfromLS = ({ notice, setId }) => {
           setId(notice.noticeId);
         }}
       />
-      <Checkbox disabled checked={state} />
     </ListItem>
   );
 };

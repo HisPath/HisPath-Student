@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import ForceNotice from "../components/Dashboard/ForceNotice.js";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import ActivityCard from "../components/Dashboard/ActivityCard.js";
+import ResumeCard from "../components/Dashboard/ResumeCard.js";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,14 +44,28 @@ function a11yProps(index) {
 
 export default function Dashboard() {
   const [notices, setNotices] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [resumes, setResumes] = useState([]);
 
   const getNotices = async () => {
     const notice = await getInfo();
     setNotices(notice.data.notice);
   };
 
+  const getActivities = async () => {
+    const activity = await getInfo();
+    setActivities(activity.data.activities);
+  };
+
+  const getResumes = async () => {
+    const resume = await getInfo();
+    setResumes(resume.data.resumes);
+  };
+
   useEffect(() => {
     getNotices();
+    getActivities();
+    getResumes();
   }, []);
 
   const [value, setValue] = useState(0);
@@ -85,8 +101,11 @@ export default function Dashboard() {
                   <Tabs
                     value={value}
                     onChange={handleChange}
-                    textColor={"secondary"}
-                    indicatorColor={"secondary"}
+                    // textColor={"#fc7f03"}
+                    // indicatorColor={"primary"}
+                    TabIndicatorProps={{
+                      style: { background: "#fc7f03" },
+                    }}
                     // aria-label="icon position tabs example"
                   >
                     <Tab
@@ -96,6 +115,7 @@ export default function Dashboard() {
                         pr: 1,
                         fontWeight: 800,
                         fontSize: "1.3rem",
+                        // color: "#fc7f03",
                       }}
                       label="Notice"
                       {...a11yProps(0)}
@@ -107,6 +127,7 @@ export default function Dashboard() {
                         pr: 1,
                         fontWeight: 800,
                         fontSize: "1.3rem",
+                        // color: "#00AB55",
                       }}
                       label="Activity"
                       {...a11yProps(1)}
@@ -118,6 +139,7 @@ export default function Dashboard() {
                         pr: 1,
                         fontWeight: 800,
                         fontSize: "1.3rem",
+                        // color: "#27279F",
                       }}
                       label="Resume"
                       {...a11yProps(2)}
@@ -156,12 +178,12 @@ export default function Dashboard() {
                       md: "repeat(3, 1fr)",
                     }}
                   >
-                    {notices.map((notice) => (
+                    {activities.map((activity) => (
                       <Link
-                        to={`/notice/${notice.noticeId}`}
+                        to={`/activity/detail/${activity.id}`}
                         style={{ textDecoration: "none", color: "black" }}
                       >
-                        <NoticeCard key={notice.noticeId} notice={notice} />
+                        <ActivityCard key={activity.id} activity={activity} />
                       </Link>
                     ))}
                   </Box>
@@ -177,12 +199,12 @@ export default function Dashboard() {
                       md: "repeat(3, 1fr)",
                     }}
                   >
-                    {notices.map((notice) => (
+                    {resumes.map((resume) => (
                       <Link
-                        to={`/notice/${notice.noticeId}`}
+                        to={`/resume/edit/${resume.id}`}
                         style={{ textDecoration: "none", color: "black" }}
                       >
-                        <NoticeCard key={notice.noticeId} notice={notice} />
+                        <ResumeCard key={resume.id} resume={resume} />
                       </Link>
                     ))}
                   </Box>

@@ -5,31 +5,18 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
 import TagIcon from "@mui/icons-material/Tag";
 import { getActivities, getActivitiesBySec } from "../../api/activity";
 import { activityState } from "../../store/atom";
 import { useSetRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
 import { semesterState } from "../../store/atom";
-import { CategoryRounded } from "@mui/icons-material";
-import { useEffect } from "react";
 import { getActivitiesBySemCate } from "../../api/mileage";
 
 const drawerWidth = 240;
 const style = {
   fontWeight: "bold",
 };
-
-// export const getActivitiesBySemCate = async (category, semester) => {
-//   const response = await axios.get(
-//     `${process.env.REACT_APP_SERVER}/student-allmactivities/18?semester=${semester}&category=${category}`
-//   );
-
-//   return response.data;
-// };
 
 export default function TagMenu() {
   const setActivities = useSetRecoilState(activityState);
@@ -65,6 +52,7 @@ export default function TagMenu() {
           <ListItem />
           <ListItem />
           {[
+            ["전체"],
             ["참여여부"],
             ["전공마일리지"],
             ["산학마일리지"],
@@ -78,7 +66,6 @@ export default function TagMenu() {
               <ListItemButton>
                 <TagIcon />
                 <ListItemText
-                  // onClick={changeSections}
                   sx={{ ml: 1 }}
                   primaryTypographyProps={{ style: style }}
                   primary={text[0]}

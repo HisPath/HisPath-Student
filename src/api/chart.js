@@ -21,6 +21,15 @@ export const getChartPopularity = async (semester, grade, department) => {
 };
 
 export const getChartRank = async (semester, grade, department) => {
+  if (semester === "ALL") {
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER}/chart/rank?semester=2022-2`,
+      {
+        headers: { Authorization: localStorage.getItem("TOKEN") },
+      }
+    );
+    return response.data;
+  }
   const response = await axios.get(
     `${process.env.REACT_APP_SERVER}/chart/rank?semester=${semester}`,
     {
