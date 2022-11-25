@@ -21,14 +21,23 @@ import Post from "./components/Notice/Post";
 import AboutUs from "./pages/AboutUs";
 import { useEffect, useState } from "react";
 import Page404 from "./pages/Page404";
+import { getInfo } from "./api/dashboard";
+import GuestLoginModal from "./components/Dashboard/GuestLoginModal";
 
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
+  const [isRegisted, setIsRegisted] = useState(false);
   useEffect(() => {
-    const token = localStorage.getItem("TOKEN");
-    if (token) {
-      setIsLogin(true);
-    }
+    const getUserStatus = async () => {
+      const token = localStorage.getItem("TOKEN");
+      await getInfo()
+        .then(() => setIsRegisted(true))
+        .catch(() => setIsRegisted(false));
+      if (token) {
+        setIsLogin(true);
+      }
+    };
+    getUserStatus();
   }, []);
   return (
     <BrowserRouter>
@@ -68,6 +77,7 @@ function Router() {
           <Route path="*" element={<AboutUs />} />
         )}
       </Routes>
+      <GuestLoginModal isLogin={isLogin} isRegisted={isRegisted} />
     </BrowserRouter>
   );
 }
