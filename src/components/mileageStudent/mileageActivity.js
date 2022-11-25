@@ -28,6 +28,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { blue, red } from "@mui/material/colors";
+import { useSnackbar } from "notistack";
 
 export default function MileageTables() {
   const [categories, setCategories] = React.useState([]);
@@ -35,6 +36,7 @@ export default function MileageTables() {
   const [mileageActivities, setActivities] = useRecoilState(activityState);
   const [open, setOpen] = React.useState(false);
   const [applied, setApplied] = useRecoilState(scholarshipApplyState);
+  const { enqueueSnackbar } = useSnackbar();
 
   const changeSections = (category) => {
     if (!category) {
@@ -51,13 +53,14 @@ export default function MileageTables() {
   };
 
   const applyScholar = () => {
-    console.log("신청 완료");
     setOpen(true);
   };
 
   const confirmScholar = (semester) => {
+    enqueueSnackbar("신청 완료되었습니다.", { variant: "success" });
     applyScholarship(semester);
     setApplied(true);
+    // setApplied(false);
   };
 
   useEffect(() => {
