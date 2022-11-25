@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Grid, Container, CardHeader, CardContent } from "@mui/material";
+import styles from "../../style/mileage.module.css";
 
 import {
   ChartRadialBar,
@@ -29,7 +30,7 @@ export default function MileageChart() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} md={6} sx={{ marginBottom: "20px" }}>
+          <Grid item xs={12} md={6}>
             <Card dir="ltr">
               <CardHeader title="내 마일리지 총점 순위" />
               <CardContent
