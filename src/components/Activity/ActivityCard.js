@@ -1,6 +1,5 @@
 import { Card, Typography, CardContent, Box, Chip } from "@mui/material";
 import TextMaxLine from "../../components/text-max-line";
-import { Link } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
   return (
@@ -183,30 +182,9 @@ export default function ActivityCard({ activity }) {
               />
             )}
           </Box>
-
-          <Link
-            to={`/activity/detail/${activity.id}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <TextMaxLine variant={"h5"} line={2} persistent>
-              {activity.name}
-            </TextMaxLine>
-          </Link>
-          {/* <Typography persistent>{activity.remark}</Typography> */}
-          {/* <IconButton onClick={() => deleteActivityFromList(activity.id)}>
-            <DeleteIcon />
-          </IconButton> */}
-          {/* <InputBase
-                multiline
-                fullWidth
-                // rows={4}
-                value={html(notice.content)}
-                sx={{
-                  p: 1,
-                  mb: 1,
-                  borderRadius: 1,
-                }}
-              /> */}
+          <TextMaxLine variant={"h5"} line={2} persistent>
+            {activity.name}
+          </TextMaxLine>
         </CardContent>
       </Card>
     </>

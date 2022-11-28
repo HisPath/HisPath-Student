@@ -5,16 +5,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
 import TagIcon from "@mui/icons-material/Tag";
 import { getActivities, getActivitiesBySec } from "../../api/activity";
 import { myActivityState } from "../../store/atom";
 import { useSetRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
 import { semesterState } from "../../store/atom";
-import { CategoryRounded } from "@mui/icons-material";
 import { useEffect } from "react";
 import { getMyActivitiesBySemCate } from "../../api/mileage";
 
@@ -22,14 +18,6 @@ const drawerWidth = 240;
 const style = {
   fontWeight: "bold",
 };
-
-// export const getMyActivitiesBySemCate = async (section, semester) => {
-//   const response = await axios.get(
-//     `${process.env.REACT_APP_SERVER}/student-activities/status?semester=${semester}&section=${section}`
-//   );
-
-//   return response.data;
-// };
 
 export default function ATagMenu() {
   const setActivities = useSetRecoilState(myActivityState);
@@ -41,16 +29,11 @@ export default function ATagMenu() {
     } else {
       getMyActivitiesBySemCate(section, semester).then((data) => {
         setActivities(data);
-        // console.log("section : " + section);
-        // console.log("semester : " + semester);
       });
     }
   };
 
   useEffect(() => {
-    // getActivities();
-
-    // getAllActivities();
     changeSections("ALL");
   }, []);
   return (
@@ -73,7 +56,7 @@ export default function ATagMenu() {
           <ListItem />
           <ListItem />
           {[
-            ["필터제거"],
+            ["전체"],
             ["수상"],
             ["기술"],
             ["학력"],
@@ -87,7 +70,6 @@ export default function ATagMenu() {
               <ListItemButton>
                 <TagIcon />
                 <ListItemText
-                  // onClick={changeSections}
                   sx={{ ml: 1 }}
                   primaryTypographyProps={{ style: style }}
                   primary={text[0]}

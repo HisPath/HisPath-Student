@@ -48,10 +48,7 @@ export default function ChartRadarBar() {
 
   useEffect(() => {
     getChartData(semester);
-  }, []);
-
-  useEffect(() => {
-    getChartData(semester);
+    console.log(datas);
   }, [semester]);
 
   useEffect(() => {

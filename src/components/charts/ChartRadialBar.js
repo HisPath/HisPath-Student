@@ -7,7 +7,6 @@ import Chart, { useChart } from "../chart";
 import { useState } from "react";
 // API
 import { getChartRank } from "../../api/chart";
-import { ConstructionOutlined } from "@mui/icons-material";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { semesterState } from "../../store/atom";
@@ -20,34 +19,47 @@ export default function ChartRadialBar() {
   const [totalAverage, setTotalAverage] = useState([]);
   const [stuValue, setStuValue] = useState([]);
   const [totalValue, setTotalValue] = useState([]);
-  // const [totalValue, setTotalValue] = useState([]);
-  const series = [totalAverage, studentAverage];
   const [myPoint, setMypoint] = useState([]);
+  const [aTotalW, setATotalW] = useState([]);
+  const [mTotalW, setMTotalW] = useState([]);
+
+  const series = [totalAverage, studentAverage];
 
   const getChartData = (semester) => {
     getChartRank(semester).then((data) => {
       setDatas(data);
-      // console.log(datas);
     });
+  };
+
+  const getATotalWeight = () => {
+    setATotalW(Math.round(datas.avgTotalWeight));
+  };
+
+  const getMTotalWeight = () => {
+    setMTotalW(Math.round(datas.myTotalWeight));
   };
 
   const getTotalAverage = () => {
     setTotalAverage(
-      Math.floor((datas.avgTotalWeight / datas.maxTotalWeight) * 100)
+      Math.round(
+        (Math.round(datas.avgTotalWeight) / Math.round(datas.maxTotalWeight)) *
+          100
+      )
     );
   };
 
   const getStuAverage = () => {
     setStudentAverage(
-      Math.floor((datas.myTotalWeight / datas.maxTotalWeight) * 100)
+      Math.round(
+        (Math.round(datas.myTotalWeight) / Math.round(datas.maxTotalWeight)) *
+          100
+      )
     );
   };
 
   const calValue = () => {
-    // const v = 100 - studentAverage;
-    // setStuValue(v);
-    setStuValue(100 - studentAverage);
-    setTotalValue(100 - totalAverage);
+    setStuValue(100 - studentAverage + 1);
+    setTotalValue(100 - totalAverage + 1);
   };
 
   const getMyPoint = () => {
@@ -56,36 +68,21 @@ export default function ChartRadialBar() {
 
   useEffect(() => {
     getChartData(semester);
-  }, []);
-
-  useEffect(() => {
-    getChartData(semester);
-    getMyPoint();
-    calValue();
-    // console.log(semester);
-  }, [semester]);
+  }, [semester, totalAverage]);
 
   useEffect(() => {
     getTotalAverage();
     getStuAverage();
-    calValue();
     getMyPoint();
+    getATotalWeight();
+    getMTotalWeight();
+    calValue();
   }, [datas]);
 
   const chartOptions = useChart({
     labels: [
-      "전체 학생 평균 마일리지 총점(" +
-        Math.floor(datas.avgTotalWeight) +
-        "점 상위" +
-        totalValue +
-        "%)",
-      // `전체 학생 평균 마일리지 총점(60)`,
-      "내 마일리지 총점(" +
-        Math.floor(datas.myTotalWeight) +
-        "점 상위" +
-        stuValue +
-        "%)",
-      // "내 마일리지 총점(상위 10%)",
+      "전체 학생 평균 마일리지 총점(" + aTotalW + "점 상위" + totalValue + "%)",
+      "내 마일리지 총점(" + mTotalW + "점 상위" + stuValue + "%)",
     ],
     fill: {
       type: "gradient",

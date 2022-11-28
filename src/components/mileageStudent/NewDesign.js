@@ -1,5 +1,3 @@
-// import { Helmet } from "react-helmet-async";
-// @mui
 import {
   Box,
   Card,
@@ -15,8 +13,6 @@ import {
   ChartsRadarBar,
   ChartRadialBar,
 } from "../../components/charts";
-
-// ----------------------------------------------------------------------
 
 export default function DemoChartsPage() {
   return (

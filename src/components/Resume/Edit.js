@@ -14,7 +14,7 @@ import { useSnackbar } from "notistack";
 import CategoryFieldArray from "./CategoryFieldArray";
 import CategoryModal from "./CategoryModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { green } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import {
   deleteResume,
   getInfo,
@@ -23,6 +23,7 @@ import {
 } from "../../api/resume";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import userImg from "../../assets/user.png";
 
 function Edit({ refresh }) {
   const { resumeId } = useParams();
@@ -180,14 +181,16 @@ function Edit({ refresh }) {
             width: 1,
             display: "flex",
             justifyContent: "center",
-            backgroundColor: green[100],
+            backgroundColor: grey[200],
             p: 4,
           }}
         >
           <Box
+            ref={printRef}
             sx={{
               width: 720,
               backgroundColor: "background.paper",
+              boxShadow: 2,
               height: 1,
               borderRadius: 1,
               overflow: "auto",
@@ -202,15 +205,15 @@ function Edit({ refresh }) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: green[800],
-                color: "white",
+                borderRight: 1,
+                borderColor: "divider",
                 p: 5,
                 width: 220,
               }}
             >
               <Avatar
                 alt={info.name}
-                src={info.profile}
+                src={userImg}
                 sx={{ width: 150, height: 150, mb: 3 }}
               />
               <Box
@@ -226,7 +229,7 @@ function Edit({ refresh }) {
                 <Typography fontWeight={600}>{info.email}</Typography>
               </Box>
             </Box>
-            <Box ref={printRef} sx={{ p: 5, width: 1 }}>
+            <Box sx={{ p: 5, width: 1 }}>
               <Typography variant="h4" component="h1" mb={3}>
                 {watch("title")}
               </Typography>

@@ -24,12 +24,15 @@ import { Box } from "@mui/material";
 
 function MileageStudent() {
   return (
-    // <div className="outline">
-    //   {/* <Header></Header> */}
-    //   <Tab></Tab>
-    // </div>
-    // sungjin 왔다감
-    <Box className="outline" sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+        width: "100%",
+        margin: "0 auto",
+        backgroundColor: "white",
+        flexDirection: "column",
+      }}
+    >
       <Tab />
     </Box>
   );

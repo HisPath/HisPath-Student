@@ -270,7 +270,7 @@ export default function ActivityAdd({ getActivities }) {
     });
 
     formData.data = JSON.stringify(final);
-    addActivity(formData, "학력");
+    addActivity(formData, "교육");
     window.location.reload();
     // getActivities();
     handleCloseAdd();
@@ -409,7 +409,7 @@ export default function ActivityAdd({ getActivities }) {
         <Box sx={style}>
           <Box display="flex" justifyContent="space-between">
             <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 1 }}>
-              학력 추가
+              교육 추가
             </Typography>
           </Box>
           <Alert severity="info" sx={{ mb: 1 }}>

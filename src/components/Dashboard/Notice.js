@@ -1,10 +1,10 @@
-import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Box, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getInfo } from "../../api/dashboard";
+import { useNavigate } from "react-router-dom";
 
 const noticeWidth = "28rem";
 
@@ -18,7 +18,8 @@ const style = {
 };
 
 export default function Notice() {
-  const [notices, setNotices] = React.useState([]);
+  const navigate = useNavigate();
+  const [notices, setNotices] = useState([]);
 
   const getNotices = async () => {
     const notice = await getInfo();
@@ -51,7 +52,7 @@ export default function Notice() {
               primary={notice.title}
               secondary={notice.pubDate}
               onClick={() => {
-                window.open(`/notice/${notice.noticeId}`, "_self");
+                navigate(`/notice/${notice.noticeId}`);
               }}
             />
           </ListItem>

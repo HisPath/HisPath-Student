@@ -2,13 +2,12 @@ import {
   Box,
   Button,
   Chip,
-  IconButton,
   InputLabel,
   Paper,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getActivity, deleteActivity } from "../../api/activity";
 import Label from "../../components/label";
 
@@ -24,7 +23,7 @@ const data = {
 
 export default function ActivityDetail() {
   const { activityId } = useParams();
-
+  const navigate = useNavigate();
   const [newImgFile, setNewImgFile] = useState(data.newImgFile);
   const [newImgDir, setNewImgDir] = useState(data.newImgDir);
   const [dateState, setDateState] = useState(true);
@@ -41,11 +40,10 @@ export default function ActivityDetail() {
 
   useEffect(() => {
     listActivity();
-  }, []);
+  }, [activity]);
 
   const deleteActivityFromList = async (activityId) => {
     await deleteActivity(activityId);
-    window.location.reload();
   };
 
   return (
@@ -134,7 +132,10 @@ export default function ActivityDetail() {
                     {item.type === "image" ? (
                       <>
                         <InputLabel sx={{ mt: 1 }}>{item.field}</InputLabel>
-                        <img src={item.data}></img>
+                        <img
+                          style={{ width: "calc(20vw)" }}
+                          src={item.data}
+                        ></img>
                       </>
                     ) : (
                       <>
@@ -200,7 +201,8 @@ export default function ActivityDetail() {
                 sx={{ fontWeight: "600" }}
                 onClick={() => {
                   deleteActivityFromList(activity.id);
-                  window.history.back();
+                  navigate("/activity");
+                  // window.history.back();
                 }}
               >
                 삭제

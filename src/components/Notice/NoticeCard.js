@@ -1,49 +1,58 @@
-import React from 'react';
-import parse from 'html-react-parser';
-import { Box, Card, Divider, Typography } from '@mui/material';
-import NoticeImg from '../../assets/noticeImg.jpeg';
-import Image from '../image';
-import Iconify from '../iconify';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutline';
+import React from "react";
+import parse from "html-react-parser";
+import { Box, Card, Divider, Typography } from "@mui/material";
+import NoticeImg from "../../assets/noticeImg.jpeg";
+import Image from "../image";
+import Iconify from "../iconify";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/DeleteOutline";
+import { useNavigate } from "react-router-dom";
 
-const colors = ['#fff3aa', '#ffd0a8', '#ffb1b1', '#d9d1ff', '#b7efff'];
+const colors = ["#fff3aa", "#ffd0a8", "#ffb1b1", "#d9d1ff", "#b7efff"];
 
 function NoticeCard({ notice }) {
+  const navigate = useNavigate();
   return (
-    <Card sx={{ textAlign: 'center' }} onClick={() => window.open(`/notice/${notice.id}`, '_self')}>
+    <Card
+      sx={{ textAlign: "center" }}
+      onClick={() => navigate(`/notice/${notice.id}`)}
+    >
       <Box
         sx={{
-          position: 'relative',
-          width: 'auto',
-          height: '15%',
+          position: "relative",
+          width: "auto",
+          height: "15%",
           backgroundColor: colors[notice.id % 5],
         }}
       >
         {/* <Image src={NoticeImg} ratio="16/9" /> */}
       </Box>
-      <Box display="grid" gridTemplateColumns="repeat(1, 1fr)" sx={{ ml: 4.5, mr: 4.5, mb: 4.5 }}>
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(1, 1fr)"
+        sx={{ ml: 4.5, mr: 4.5, mb: 4.5 }}
+      >
         <Typography
           variant="subtitle1"
           sx={{
-            display: '-webkit-box',
-            overflow: 'hidden',
-            WebkitBoxOrient: 'vertical',
+            display: "-webkit-box",
+            overflow: "hidden",
+            WebkitBoxOrient: "vertical",
             WebkitLineClamp: 1,
             mt: 6,
             mb: 0.5,
-            color: 'black',
+            color: "black",
           }}
         >
           {notice.title}
         </Typography>
         <Typography
           sx={{
-            display: '-webkit-box',
-            overflow: 'hidden',
-            WebkitBoxOrient: 'vertical',
+            display: "-webkit-box",
+            overflow: "hidden",
+            WebkitBoxOrient: "vertical",
             WebkitLineClamp: 2,
-            color: 'text.disabled',
+            color: "text.disabled",
           }}
           variant="body2"
         >
@@ -61,10 +70,18 @@ function NoticeCard({ notice }) {
           {major.studentCnt}
         </Typography> */}
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
-      <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" sx={{ pt: 2, pb: 6 }}>
+      <Divider sx={{ borderStyle: "dashed" }} />
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(3, 1fr)"
+        sx={{ pt: 2, pb: 6 }}
+      >
         <div>
-          <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
+          <Typography
+            variant="caption"
+            component="div"
+            sx={{ mb: 0.75, color: "text.disabled" }}
+          >
             등록일
           </Typography>
           <Typography variant="caption" component="div" sx={{ mb: 0.75 }}>
@@ -72,7 +89,11 @@ function NoticeCard({ notice }) {
           </Typography>
         </div>
         <div>
-          <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
+          <Typography
+            variant="caption"
+            component="div"
+            sx={{ mb: 0.75, color: "text.disabled" }}
+          >
             작성자
           </Typography>
           <Typography variant="caption" component="div" sx={{ mb: 0.75 }}>
@@ -80,7 +101,11 @@ function NoticeCard({ notice }) {
           </Typography>
         </div>
         <div>
-          <Typography variant="caption" component="div" sx={{ mb: 0.75, color: 'text.disabled' }}>
+          <Typography
+            variant="caption"
+            component="div"
+            sx={{ mb: 0.75, color: "text.disabled" }}
+          >
             조회수
           </Typography>
           <Typography variant="caption" component="div" sx={{ mb: 0.75 }}>
