@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -17,6 +16,7 @@ import AddLang from "./Add/AddLang";
 import AddPrize from "./Add/AddPrize";
 import AddTech from "./Add/AddTech";
 import ActivityAdd from "./ActivityAdd";
+import { useState } from "react";
 
 const drawerWidth = 240;
 const style = {
@@ -26,14 +26,18 @@ const style = {
 
 export default function TagMenu() {
   const setActivities = useSetRecoilState(activityState);
+  const [sec, setSec] = useState("");
 
   const changeSections = (value) => {
     if (!value) {
       getActivities().then((data) => setActivities(data));
+      setSec("");
     } else {
       getActivitiesBySec(value).then((data) => setActivities(data));
+      setSec(value);
     }
   };
+
   return (
     <Box sx={{ display: "flex" }} border="none">
       <Drawer
@@ -52,73 +56,128 @@ export default function TagMenu() {
         anchor="left"
       >
         <List sx={{ pt: "0", pb: "0" }}>
-          <ListItem
-            key={"전체"}
-            onClick={() => changeSections()}
-            sx={
-              {
-                // backgroundColor: "#fff8e1",
-              }
-            }
-          >
-            <ListItemButton>
-              <TagIcon />
-              <ListItemText
-                sx={{ ml: 1 }}
-                primaryTypographyProps={{ style: style }}
-                primary={"전체"}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            key={"# 마일리지"}
-            onClick={() => changeSections("마일리지")}
-            sx={
-              {
-                // backgroundColor: "#fffde7"
-              }
-            }
-          >
-            <ListItemButton>
-              <TagIcon />
-              <ListItemText
-                sx={{ ml: 1 }}
-                onClick={changeSections}
-                primaryTypographyProps={{ style: style }}
-                primary={"마일리지"}
-              />
-            </ListItemButton>
-          </ListItem>
+          {sec === "" ? (
+            <>
+              <ListItem
+                key={"전체"}
+                onClick={() => changeSections()}
+                sx={{
+                  backgroundColor: "rgb(232, 245, 233)",
+                }}
+              >
+                <ListItemButton>
+                  <TagIcon />
+                  <ListItemText
+                    sx={{ ml: 1 }}
+                    primaryTypographyProps={{ style: style }}
+                    primary={"전체"}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </>
+          ) : (
+            <>
+              <ListItem key={"전체"} onClick={() => changeSections()}>
+                <ListItemButton>
+                  <TagIcon />
+                  <ListItemText
+                    sx={{ ml: 1 }}
+                    primaryTypographyProps={{ style: style }}
+                    primary={"전체"}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </>
+          )}
+          {sec === "마일리지" ? (
+            <>
+              {" "}
+              <ListItem
+                key={"# 마일리지"}
+                onClick={() => changeSections("마일리지")}
+                sx={{
+                  backgroundColor: "rgb(232, 245, 233)",
+                }}
+              >
+                <ListItemButton>
+                  <TagIcon />
+                  <ListItemText
+                    sx={{ ml: 1 }}
+                    onClick={changeSections}
+                    primaryTypographyProps={{ style: style }}
+                    primary={"마일리지"}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </>
+          ) : (
+            <>
+              {" "}
+              <ListItem
+                key={"# 마일리지"}
+                onClick={() => changeSections("마일리지")}
+              >
+                <ListItemButton>
+                  <TagIcon />
+                  <ListItemText
+                    sx={{ ml: 1 }}
+                    onClick={changeSections}
+                    primaryTypographyProps={{ style: style }}
+                    primary={"마일리지"}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </>
+          )}
+
           {[
             ["수상", "add/prize", <AddPrize />, "#f9fbe7"],
             ["기술", "add/tech", <AddTech />, "#f1f8e9"],
-            ["학력", "add/edu", <AddEdu />, "#e8f5e9"],
+            ["교육", "add/edu", <AddEdu />, "#e8f5e9"],
             ["링크", "add/blog", <AddBlog />, "#e0f2f1"],
-            ["경력", "add/intern", <AddIntern />, "#e0f7fa"],
+            ["경험", "add/intern", <AddIntern />, "#e0f7fa"],
             ["자격증", "add/cert", <AddCert />, "#e1f5fe"],
             ["외국어", "add/lang", <AddLang />, "#e3f2fd"],
             ["기타", "add", <ActivityAdd />, "#e8eaf6"],
-          ].map((text) => (
-            <ListItem
-              key={text[0]}
-              onClick={() => changeSections(text[0])}
-              // sx={{ backgroundColor: text[3] }}
-            >
-              <ListItemButton>
-                <TagIcon />
-                <ListItemText
-                  onClick={changeSections}
-                  sx={{ ml: 1 }}
-                  primaryTypographyProps={{ style: style }}
-                  primary={text[0]}
-                />
-              </ListItemButton>
-              {text[2]}
-              {/* <Link to={text[1]} style={{ textDecoration: "none" }}>
-                <AddIcon fontSize="sm" color="secondary" />
-              </Link> */}
-            </ListItem>
-          ))}
+          ].map((text) =>
+            sec === text[0] ? (
+              <>
+                <ListItem
+                  key={text[0]}
+                  onClick={() => changeSections(text[0])}
+                  sx={{
+                    backgroundColor: "rgb(232, 245, 233)",
+                  }}
+                >
+                  <ListItemButton>
+                    <TagIcon />
+                    <ListItemText
+                      onClick={changeSections}
+                      sx={{ ml: 1 }}
+                      primaryTypographyProps={{ style: style }}
+                      primary={text[0]}
+                    />
+                  </ListItemButton>
+                  {text[2]}
+                </ListItem>
+              </>
+            ) : (
+              <>
+                <ListItem key={text[0]} onClick={() => changeSections(text[0])}>
+                  <ListItemButton>
+                    <TagIcon />
+                    <ListItemText
+                      onClick={changeSections}
+                      sx={{ ml: 1 }}
+                      primaryTypographyProps={{ style: style }}
+                      primary={text[0]}
+                    />
+                  </ListItemButton>
+                  {text[2]}
+                </ListItem>
+              </>
+            )
+          )}
         </List>
       </Drawer>
     </Box>

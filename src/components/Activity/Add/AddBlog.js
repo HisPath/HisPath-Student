@@ -23,11 +23,14 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { getSemesters } from "../../../api/activity";
+import { getActivities, getSemesters } from "../../../api/activity";
 import { useSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import _ from "lodash";
 import { addActivity } from "../../../api/activity";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { activityState } from "../../../store/atom";
 
 const style = {
   position: "absolute",
@@ -203,7 +206,8 @@ function DateInput({ id, name, addData }) {
   );
 }
 
-export default function ActivityAdd({ getActivities }) {
+export default function AddBlog() {
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [textField, setTextField] = useState([]);
   // const [imageField, setImageField] = useState([]);
@@ -271,9 +275,9 @@ export default function ActivityAdd({ getActivities }) {
 
     formData.data = JSON.stringify(final);
     addActivity(formData, "링크");
-    window.location.reload();
-    // getActivities();
     handleCloseAdd();
+    navigate("/activity");
+    window.location.reload();
     enqueueSnackbar("추가되었습니다.", { variant: "success" });
   };
 

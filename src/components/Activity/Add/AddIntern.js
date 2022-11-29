@@ -270,7 +270,7 @@ export default function ActivityAdd({ getActivities }) {
     });
 
     formData.data = JSON.stringify(final);
-    addActivity(formData, "경력");
+    addActivity(formData, "경험");
     window.location.reload();
     // getActivities();
     handleCloseAdd();
@@ -409,11 +409,11 @@ export default function ActivityAdd({ getActivities }) {
         <Box sx={style}>
           <Box display="flex" justifyContent="space-between">
             <Typography sx={{ fontWeight: "600", fontSize: "1.1rem", pb: 1 }}>
-              경력 추가
+              경험 추가
             </Typography>
           </Box>
           <Alert severity="info" sx={{ mb: 1 }}>
-            경력을 자유롭게 기입해주세요!
+            경험을 자유롭게 기입해주세요!
           </Alert>
           <Box maxHeight={450} overflow="auto" pb={1}>
             <InputLabel sx={{ mt: 1 }}>학기</InputLabel>

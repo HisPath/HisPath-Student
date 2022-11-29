@@ -1,4 +1,5 @@
 import { Card, Typography, CardContent, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 import TextMaxLine from "../../components/text-max-line";
 
 export default function ActivityCard({ activity }) {
@@ -11,6 +12,7 @@ export default function ActivityCard({ activity }) {
               "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_15.jpg"
             }
           /> */}
+
           {activity.section === "수상" ? (
             <img
               src={
@@ -80,11 +82,9 @@ export default function ActivityCard({ activity }) {
             {activity.semester}
           </Typography>
 
-          {/* <Link to={`/notice/${notice.notice.noticeId}`}> */}
-          <TextMaxLine variant={"h5"} line={2} persistent>
+          <TextMaxLine variant={"h5"} line={2}>
             {activity.name}
           </TextMaxLine>
-          {/* </Link> */}
         </CardContent>
       </Card>
     </>

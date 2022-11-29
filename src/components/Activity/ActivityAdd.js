@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
@@ -210,7 +210,7 @@ function DateInput({ id, name, addData }) {
   );
 }
 
-export default function ActivityAdd({ getActivities }) {
+export default function ActivityAdd({}) {
   const { enqueueSnackbar } = useSnackbar();
   const [textField, setTextField] = useState([]);
   // const [imageField, setImageField] = useState([]);
@@ -272,7 +272,6 @@ export default function ActivityAdd({ getActivities }) {
     formData.data = JSON.stringify(final);
     addActivity(formData, "기타");
     window.location.reload();
-    // getActivities();
     handleCloseAdd();
     enqueueSnackbar("추가되었습니다.", { variant: "success" });
   };
