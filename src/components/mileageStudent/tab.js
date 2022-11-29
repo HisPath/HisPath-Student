@@ -99,7 +99,7 @@ export default function BasicTabs() {
                   {...a11yProps(2)}
                 />
               </Tabs>
-              {applied ? "장학금 신청 완료" : ""}
+              {!applied ? "장학금 신청 완료" : ""}
               <SemesterSelect
                 sx={{
                   minWidth: 120,
