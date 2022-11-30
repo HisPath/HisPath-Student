@@ -12,44 +12,43 @@ export default function ActivityCard({ activity }) {
               "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_15.jpg"
             }
           /> */}
-
-          {activity.section === "수상" ? (
+          {activity.participant.section === "REWARD" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_18.jpg"
               }
             />
-          ) : activity.section === "기술" ? (
+          ) : activity.participant.section === "SKILL" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_5.jpg"
               }
             />
-          ) : activity.section === "학력" ? (
+          ) : activity.participant.section === "EDUCATION" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_9.jpg"
               }
             />
-          ) : activity.section === "링크" ? (
+          ) : activity.participant.section === "LINK" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_10.jpg"
               }
             />
-          ) : activity.section === "경력" ? (
+          ) : activity.participant.section === "EXPERIENCE" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_11.jpg"
               }
             />
-          ) : activity.section === "자격증" ? (
+          ) : activity.participant.section === "CERTIFICATE" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_15.jpg"
               }
             />
-          ) : activity.section === "외국어" ? (
+          ) : activity.participant.section === "LANGUAGE" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_19.jpg"
