@@ -18,7 +18,7 @@ export default function ActivityCard({ activity }) {
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_5.jpg"
               }
             />
-          ) : activity.section === "학력" ? (
+          ) : activity.section === "교육" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_9.jpg"
@@ -30,7 +30,7 @@ export default function ActivityCard({ activity }) {
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_10.jpg"
               }
             />
-          ) : activity.section === "경력" ? (
+          ) : activity.section === "경험" ? (
             <img
               src={
                 "https://api-dev-minimal-v4.vercel.app/assets/images/covers/cover_11.jpg"
