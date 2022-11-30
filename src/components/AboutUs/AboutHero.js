@@ -47,7 +47,7 @@ export default function AboutHero() {
   return (
     <>
       <StyledRoot>
-        <Container>
+        <Container component={MotionContainer}>
           <StyledContent>
             <TextAnimate
               text="Who"
