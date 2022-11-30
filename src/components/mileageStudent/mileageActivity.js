@@ -59,8 +59,8 @@ export default function MileageTables() {
   const confirmScholar = (semester) => {
     enqueueSnackbar("신청 완료되었습니다.", { variant: "success" });
     applyScholarship(semester);
-    setApplied(true);
-    // setApplied(false);
+    // setApplied(true);
+    setApplied(false);
   };
 
   useEffect(() => {
@@ -218,7 +218,7 @@ export default function MileageTables() {
 
       <NavigatorToTop></NavigatorToTop>
 
-      {applied ? (
+      {!applied ? (
         <Button disabled onClick={applyScholar}>
           <Fab
             sx={{
