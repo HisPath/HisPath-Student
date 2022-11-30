@@ -431,7 +431,7 @@ export default function ActivityAdd({ getActivities }) {
                 ))}
               </Select>
             </FormControl>
-            <InputLabel sx={{ mt: 1 }}>회사명</InputLabel>
+            <InputLabel sx={{ mt: 1 }}>제목</InputLabel>
             <TextField
               color="secondary"
               InputProps={{ disableUnderline: true }}
