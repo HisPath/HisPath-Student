@@ -7,15 +7,15 @@ import AboutTestimonials from "../components/AboutUs/AboutTestimonials";
 import { Box } from "@mui/system";
 
 export default function AboutUs() {
-  const googleLoginHandler = () => {
-    const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_CLIENT}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
-    window.location.href = GOOGLE_LOGIN_URL;
-  };
-  return (
-    <>
-      <AboutHero />
+    const googleLoginHandler = () => {
+        const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_CLIENT}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+        window.location.href = GOOGLE_LOGIN_URL;
+    };
+    return (
+        <>
+            <AboutHero />
 
-      {/* <Box
+            {/* <Box
         onClick={googleLoginHandler}
         display="flex"
         justifyContent="flex-end"
@@ -49,18 +49,15 @@ export default function AboutUs() {
         </Button>
       </Box> */}
 
-      <AboutWhat />
+            <AboutWhat />
 
-      <AboutVision />
+            <AboutVision />
 
-      <Divider
-        orientation="vertical"
-        sx={{ my: 10, mx: "auto", width: 2, height: 40 }}
-      />
+            <Divider orientation="vertical" sx={{ my: 10, mx: "auto", width: 2, height: 40 }} />
 
-      {/* <AboutTeam /> */}
+            {/* <AboutTeam /> */}
 
-      <AboutTestimonials />
-    </>
-  );
+            {/* <AboutTestimonials /> */}
+        </>
+    );
 }
