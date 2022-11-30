@@ -30,23 +30,25 @@ export default function AboutVision() {
             position: "absolute",
           }}
         >
-          <Typography
-            color={"#fff"}
-            sx={{ fontSize: "2.5rem", fontWeight: 900 }}
-          >
-            Handong Global University
-          </Typography>
+          <m.div variants={varFade().in}>
+            <Typography
+              color={"#fff"}
+              sx={{ fontSize: "2.5rem", fontWeight: 900 }}
+            >
+              Handong Global University
+            </Typography>
+          </m.div>
         </Stack>
       </Box>
 
-      <Box>
+      <m.div variants={varFade().inUp}>
         <Typography
           variant="h3"
           sx={{ textAlign: "center", maxWidth: 800, mx: "auto" }}
         >
           Our vision is to provide the best possible resume.
         </Typography>
-      </Box>
+      </m.div>
     </Container>
   );
 }

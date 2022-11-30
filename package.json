@@ -20,7 +20,7 @@
     "axios": "^1.1.2",
     "chart.js": "^3.9.1",
     "date-fns": "^2.29.3",
-    "framer-motion": "^7.6.7",
+    "framer-motion": "^7.5.3",
     "html-react-parser": "^3.0.4",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",

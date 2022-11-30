@@ -4,6 +4,7 @@ import { SnackbarProvider } from "notistack";
 import { useEffect, useState } from "react";
 import Router from "./Router";
 import ThemeProvider from "./theme";
+import { MotionLazyContainer } from "./components/animate";
 
 function App() {
   const params = new URLSearchParams(window.location.search);
@@ -25,24 +26,26 @@ function App() {
     }
   }, []);
   return (
-    <ThemeProvider>
-      <SnackbarProvider
-        maxSnack={3}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      >
-        <CssBaseline />
-        <GlobalStyles
-          styles={{
-            button: { whiteSpace: "nowrap" },
-            a: {
-              textDecoration: "none",
-              color: "inherit",
-            },
-          }}
-        />
-        <Router />
-      </SnackbarProvider>
-    </ThemeProvider>
+    <MotionLazyContainer>
+      <ThemeProvider>
+        <SnackbarProvider
+          maxSnack={3}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        >
+          <CssBaseline />
+          <GlobalStyles
+            styles={{
+              button: { whiteSpace: "nowrap" },
+              a: {
+                textDecoration: "none",
+                color: "inherit",
+              },
+            }}
+          />
+          <Router />
+        </SnackbarProvider>
+      </ThemeProvider>
+    </MotionLazyContainer>
   );
 }
 
