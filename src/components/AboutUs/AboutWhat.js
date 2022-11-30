@@ -41,7 +41,7 @@ export default function AboutWhat() {
 
   return (
     <StyledRoot>
-      <Container>
+      <Container component={MotionViewport}>
         <Grid container spacing={3}>
           {isDesktop && (
             <Grid item xs={12} md={6} lg={7} sx={{ pr: { md: 7 } }}>

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 // @mui
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import {
@@ -95,7 +95,7 @@ export default function AboutTestimonials() {
         >
           <Grid item xs={10} md={4}>
             <Box sx={{ maxWidth: { md: 360 } }}>
-              <motion.div variants={varFade().inUp}>
+              <m.div variants={varFade().inUp}>
                 <Typography
                   component="p"
                   variant="overline"
@@ -103,29 +103,29 @@ export default function AboutTestimonials() {
                 >
                   Testimonials
                 </Typography>
-              </motion.div>
+              </m.div>
 
-              <motion.div variants={varFade().inUp}>
+              <m.div variants={varFade().inUp}>
                 <Typography variant="h2" sx={{ mb: 3, color: "common.white" }}>
                   Who love <br />
                   my work
                 </Typography>
-              </motion.div>
+              </m.div>
 
-              <motion.div variants={varFade().inUp}>
+              <m.div variants={varFade().inUp}>
                 <Typography sx={{ color: "common.white" }}>
                   Our goal is to create a product and service that you’re
                   satisfied with and use it every day. This is why we’re
                   constantly working on our services to make it better every day
                   and really listen to what our users has to say.
                 </Typography>
-              </motion.div>
+              </m.div>
 
               {!isDesktop && (
                 <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
-                  <motion.div variants={varFade().inUp}>
+                  <m.div variants={varFade().inUp}>
                     <TestimonialLink />
-                  </motion.div>
+                  </m.div>
                 </Box>
               )}
             </Box>
@@ -144,17 +144,17 @@ export default function AboutTestimonials() {
             <Grid container spacing={isDesktop ? 3 : 0} alignItems="center">
               <Grid item xs={12} md={6}>
                 {TESTIMONIALS.slice(0, 3).map((testimonial) => (
-                  <motion.div key={testimonial.name} variants={varFade().inUp}>
+                  <m.div key={testimonial.name} variants={varFade().inUp}>
                     <TestimonialCard testimonial={testimonial} />
-                  </motion.div>
+                  </m.div>
                 ))}
               </Grid>
 
               <Grid item xs={12} md={6}>
                 {TESTIMONIALS.slice(3, 6).map((testimonial) => (
-                  <motion.div key={testimonial.name} variants={varFade().inUp}>
+                  <m.div key={testimonial.name} variants={varFade().inUp}>
                     <TestimonialCard testimonial={testimonial} />
-                  </motion.div>
+                  </m.div>
                 ))}
               </Grid>
             </Grid>
@@ -163,9 +163,9 @@ export default function AboutTestimonials() {
 
         {isDesktop && (
           <Box sx={{ bottom: 60, position: "absolute" }}>
-            <motion.div variants={varFade().inLeft}>
+            <m.div variants={varFade().inLeft}>
               <TestimonialLink />
-            </motion.div>
+            </m.div>
           </Box>
         )}
       </Container>
