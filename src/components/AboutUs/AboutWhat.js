@@ -78,10 +78,15 @@ export default function AboutWhat() {
                                 <br />
                                 <br /> 2️⃣ &nbsp; <b>포트폴리오 관리 및 이력서 작성 기능</b> 한번에 제공합니다.
                                 <br />
-                                <br /> 3️⃣ &nbsp; 다양한 차트를 통해 학생, 학생 활동, 장학금 내역 등 <b>데이터 조회의 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;편의성 및 분석을 제공</b>
+                                <br /> 3️⃣ &nbsp; 다양한 차트를 통해 학생, 학생 활동, 장학금 내역 등{" "}
+                                <b>
+                                    데이터 조회의 <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;편의성 및 분석을 제공
+                                </b>
                                 합니다.
                                 <br />
-                                <br /> 4️⃣ &nbsp; 관리자, 전공, 학부, 학생 활동 참여 등 <b>다양한 정보 관리에 편의성</b>을 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제공합니다.
+                                <br /> 4️⃣ &nbsp; 관리자, 전공, 학부, 학생 활동 참여 등 <b>다양한 정보 관리에 편의성</b>을 <br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제공합니다.
                                 <br />
                                 <br /> 5️⃣ &nbsp; 학생들의 <b>포트폴리오 관리에 편리함</b>을 제공합니다. 🤟
                             </Typography>
